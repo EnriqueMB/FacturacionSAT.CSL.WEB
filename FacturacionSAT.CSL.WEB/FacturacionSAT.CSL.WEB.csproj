@@ -50,6 +50,10 @@
     <Reference Include="dotless.Core, Version=1.4.0.0, Culture=neutral, PublicKeyToken=96b446c9e63eae34, processorArchitecture=MSIL">
       <HintPath>..\packages\dotless.1.4.0.0\lib\dotless.Core.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.ApplicationBlocks.Data, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\proyectos\dll\Microsoft.ApplicationBlocks.Data.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -318,6 +322,7 @@
     <Content Include="Content\img\jquery\ui-icons_ffd27a_256x240.png" />
     <Content Include="Content\img\jquery\ui-icons_ffffff_256x240.png" />
     <Content Include="Content\img\loaders\default.gif" />
+    <Content Include="Content\img\logo.png" />
     <Content Include="Content\img\logo%402x.png" />
     <Content Include="Content\img\logo-grey%402x.png" />
     <Content Include="Content\img\logo-grey.png" />
@@ -325,7 +330,6 @@
     <Content Include="Content\img\logo-small-grey%402x.png" />
     <Content Include="Content\img\logo-small-grey.png" />
     <Content Include="Content\img\logo-small.png" />
-    <Content Include="Content\img\logo.png" />
     <Content Include="Content\img\logoa.png" />
     <Content Include="Content\img\owl\AjaxLoader.gif" />
     <Content Include="Content\img\owl\grabbing.png" />
@@ -912,6 +916,10 @@
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_LayoutLogin.cshtml" />
     <Content Include="Areas\Admin\Views\Account\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminFactura\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminFactura\Add.cshtml" />
+    <Content Include="Areas\Admin\Views\CFDIDatosPac\Index.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -934,6 +942,8 @@
     <Compile Include="App_Start\TokenModule.cs" />
     <Compile Include="App_Start\TokenProcessor.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Areas\Admin\Controllers\AdminFacturaController.cs" />
+    <Compile Include="Areas\Admin\Controllers\CFDIDatosPacController.cs" />
     <Compile Include="Controllers\CFDIDatosConseptosController.cs" />
     <Compile Include="Controllers\FacturaController.cs" />
     <Compile Include="Areas\Admin\Controllers\AccountController.cs" />
@@ -944,7 +954,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AuxSQLModel.cs" />
     <Compile Include="Models\CFDIDatosPacModels.cs" />
+    <Compile Include="Models\ComboModel.cs" />
+    <Compile Include="Models\Datos\ComboDatos.cs" />
     <Compile Include="Models\UsuarioModels.cs" />
     <Compile Include="Models\ViewModel\CFDIDatosConceptosModels.cs" />
     <Compile Include="Models\ViewModel\FacturaViewModel.cs" />
@@ -1000,6 +1013,8 @@
     <Content Include="Views\Home\Facturacion.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\CFDIDatosConseptos\Index.cshtml" />
+    <Content Include="Views\Factura\Add.cshtml" />
+    <Content Include="Views\Factura\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1010,7 +1025,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Models\" />
-    <Folder Include="Views\Factura\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

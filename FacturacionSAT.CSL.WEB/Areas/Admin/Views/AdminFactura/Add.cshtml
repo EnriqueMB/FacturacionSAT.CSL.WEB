@@ -1,0 +1,92 @@
+﻿@model FacturacionSAT.CSL.WEB.Models.ViewModel.FacturacionViewModel
+@{
+    ViewBag.Title = "Nueva factura";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@section featured{
+
+
+    <div class="panel panel-default tabs">
+        <form action="@Url.Content("~/Facturacion/Save")" method="post">
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active">
+                    <a href="#general" aria-controls="detalles" role="tab" data-toggle="tab">Datos generales</a>
+                </li>
+                <li role="presentation">
+                    <a href="#conceptos" aria-controls="conceptos" role="tab" data-toggle="tab" >Conceptos</a>
+                </li>
+            </ul>
+
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active" id="general">
+                    <div class="row">
+                        <div class="col-md-4">
+                            @Html.LabelFor(d => d.Serie)
+                            @Html.TextBoxFor(d => d.Serie, "", new { @class = "form-control" })
+
+                            @Html.LabelFor(d => d.Folio)
+                            @Html.TextBoxFor(d => d.Folio, "", new { @class = "form-control" })
+
+                            @Html.LabelFor(d => d.Fecha)
+                            @Html.TextBoxFor(d => d.Fecha, "", new { @class = "form-control" })
+                        </div>
+                        <div class="col-md-4">
+                            @Html.LabelFor(d => d.FormaDePago)
+                            @Html.TextBoxFor(d => d.FormaDePago, "", new { @class = "form-control" })
+
+                            @Html.LabelFor(d => d.TipoDePago)
+                            @Html.TextBoxFor(d => d.TipoDePago, "", new { @class = "form-control" })
+
+                            @Html.LabelFor(d => d.UsoCFDI)
+                            @Html.TextBoxFor(d => d.UsoCFDI, "", new { @class = "form-control" })
+                        </div>
+                        <div class="col-md-4">
+                            @Html.LabelFor(d => d.Moneda)
+                            @Html.TextBoxFor(d => d.Moneda, "", new { @class = "form-control" })
+
+                            @Html.LabelFor(d => d.RegimenFiscal)
+                            @Html.TextBoxFor(d => d.RegimenFiscal, "", new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <br />
+                    <h5>Datos del cliente</h5>
+                    <div class="row">
+                        <div class="col-md-4">
+                            @Html.LabelFor(d => d.RFCCliente)
+                            @Html.TextBoxFor(d => d.RFCCliente, "", new { @class = "form-control" })
+                        </div>
+                        <div class="col-md-4">
+                            @Html.LabelFor(d => d.RazonSocial)
+                            @Html.TextBoxFor(d => d.RazonSocial, "", new { @class = "form-control" })
+                        </div>
+                    </div>
+
+
+                </div>
+                <div role="tabpanel" class="tab-pane" id="conceptos">
+                    <div class="row">
+                    </div>
+                </div>
+            </div>
+
+            <hr />
+            <div class="row">
+                <div class="col-md-6">
+                    @Html.LabelFor(d => d.ClavePrivada)
+                    @Html.TextBoxFor(d => d.ClavePrivada, "", new { @class = "form-control" })
+                </div>
+                <div style="text-align:right " class="col-md-6">
+                    <br />
+                    <input type="submit" value="Timbrar" class="btn btn-primary" />
+                </div>
+            </div>
+        </form>
+    </div>
+}
+
+@section script{
+
+}
