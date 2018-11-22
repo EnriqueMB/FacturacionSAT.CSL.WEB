@@ -4,9 +4,12 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-@section featured{
+@section css
+{
+}
 
-
+@section featured
+{
     <div class="row">
         <div class="col-md-12">
             <div class="well well-sm">
@@ -28,6 +31,14 @@
                             @Html.TextBoxFor(m => m.CodigoBarra, "", new { @class = "form-control" })
                             @Html.ValidationMessage("CodigoBarra", new { @class = "text-danger" })
                         </div>
+
+                        <!-- Text input-->
+                        <div class="control-group">
+                            @Html.LabelFor(m => m.Id_emisor)
+                            @Html.DropDownListFor(m => m.Id_emisor, new SelectList(Model.ListaEmisores, "Id", "Value"), new { @class = "form-control", data_live_search = "true", data_style = "form-control" })
+                            @Html.ValidationMessage("Id_emisor", new { @class = "text-danger" })
+                        </div>
+                        <br />
                         <!-- Button -->
                         <div class="control-group">
                             <label class="control-label" for="send"></label>
@@ -40,7 +51,6 @@
             </div>
         </div>
     </div>
-
 }
 
 @section script{
