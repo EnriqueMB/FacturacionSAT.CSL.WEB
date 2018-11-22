@@ -13,5 +13,10 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
         {
             return View();
         }
+
+        public ActionResult Prueba()
+        {
+            return View();
+        }
     }
 }
