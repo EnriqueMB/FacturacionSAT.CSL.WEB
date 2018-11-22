@@ -23,6 +23,7 @@ namespace FacturacionSAT.CSL.WEB.Controllers
         [HttpPost]
         public ActionResult Facturacion(FormCollection collection)
         {
+            string nombre = collection["name"].ToString();
             return View();
         }
     }
