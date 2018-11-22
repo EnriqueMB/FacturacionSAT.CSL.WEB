@@ -1,0 +1,61 @@
+﻿@model FacturacionSAT.CSL.WEB.Models.UsuarioModels
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutLogin.cshtml";
+}
+
+@section featured
+{
+
+    <div class="login-container lightmode">
+
+        <div class="login-box animated fadeInDown">
+            <div class="login-logo">
+
+            </div>
+            <div class="login-body">
+                <div class="login-title"><strong>Bienvenido</strong> Iniciar Sesión</div>
+                @using (Html.BeginForm("Index", "Account", FormMethod.Post, new { @class = "form-horizontal" }))
+                {
+                    @Html.AntiForgeryToken();
+                    @Html.ValidationSummary(true);
+                    @*<form action="index.html" class="form-horizontal" method="post">*@
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            @Html.TextBoxFor(model => model.user, new { @class = "form-control", placeholder = "Usuario" })
+                            @Html.ValidationMessageFor(model => model.user)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            @Html.PasswordFor(model => model.Password, new { @class = "form-control", placeholder = "Contraseña" })
+                            @Html.ValidationMessageFor(model => model.Password)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-6">
+                            @Html.CheckBoxFor(model => model.RememberMe, new { @class = "check" })
+                            @Html.Label("Recordar", new { @class = "check" })
+                        </div>
+                        <div class="col-md-6">
+                            <button type="submit" class="btn btn-info btn-block">Iniciar Sesión</button>
+                        </div>
+                    </div>
+                    <div class="login-subtitle">
+                        Olvidaste tu Contraseña? <p>Dar Click <a href="@Url.Action("GetPassword", "Account")" class="" id="forget-password"> Aqui </a>Para resetear tu Contraseña</p>
+                    </div>
+                    @*</form>*@
+                }
+            </div>
+            <div class="login-footer">
+                <div class="pull-left">
+                    @DateTime.Now.Year &copy;Administrador Viajes Aury.
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,18 @@
+﻿<!DOCTYPE html>
+<html lang="en" class="body-full-height">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Viajes Aury</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+    <link href="@Url.Content("~/Content/css/theme-default.css")" rel="stylesheet" type="text/css" />
+    <link rel="shortcut icon" href="@Url.Content("~/" + "favicon.png")" />
+</head>
+<body>
+    @RenderSection("featured", required: false)
+    <script type="text/javascript" src="@Url.Content("~/Content/js/plugins/jquery/jquery.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/js/plugins/jquery/jquery-ui.min.js")"></script>
+    @RenderSection("script", required: false)
+</body>
+</html>
