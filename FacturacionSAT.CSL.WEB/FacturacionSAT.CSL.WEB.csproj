@@ -934,6 +934,7 @@
     <Compile Include="App_Start\TokenModule.cs" />
     <Compile Include="App_Start\TokenProcessor.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\CFDIDatosConseptosController.cs" />
     <Compile Include="Controllers\FacturaController.cs" />
     <Compile Include="Areas\Admin\Controllers\AccountController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeAdminController.cs" />
@@ -945,6 +946,7 @@
     </Compile>
     <Compile Include="Models\CFDIDatosPacModels.cs" />
     <Compile Include="Models\UsuarioModels.cs" />
+    <Compile Include="Models\ViewModel\CFDIDatosConceptosModels.cs" />
     <Compile Include="Models\ViewModel\FacturaViewModel.cs" />
     <Compile Include="Models\ViewModel\IndexFacturaViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -997,6 +999,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Facturacion.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <Content Include="Views\CFDIDatosConseptos\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
