@@ -1,6 +1,7 @@
 ﻿@model FacturacionSAT.CSL.WEB.Models.ViewModel.IndexFacturaViewModel
 @{
     ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
 @section featured{
@@ -9,7 +10,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="well well-sm">
-                @using (Html.BeginForm("Index", "Factura", FormMethod.Post, new { @class = "form-horizontal", id = "form-dg", autocomplete = "off", @enctype = "multipart/form-data" }))
+                @using (Html.BeginForm("Index", "AdminFactura", FormMethod.Post, new { @class = "form-horizontal", id = "form-dg", autocomplete = "off", @enctype = "multipart/form-data" }))
                 {
                     @Html.AntiForgeryToken()
                     <fieldset>
@@ -39,6 +40,7 @@
             </div>
         </div>
     </div>
+
 }
 
 @section script{
