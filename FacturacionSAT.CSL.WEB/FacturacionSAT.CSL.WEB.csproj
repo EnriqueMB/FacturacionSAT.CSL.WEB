@@ -955,6 +955,7 @@
     <Compile Include="Models\CFDIDatosPacModels.cs" />
     <Compile Include="Models\ComboModel.cs" />
     <Compile Include="Models\Datos\ComboDatos.cs" />
+    <Compile Include="Models\Datos\UsuarioDatos.cs" />
     <Compile Include="Models\UsuarioModels.cs" />
     <Compile Include="Models\ViewModel\FacturaViewModel.cs" />
     <Compile Include="Models\ViewModel\IndexFacturaViewModel.cs" />

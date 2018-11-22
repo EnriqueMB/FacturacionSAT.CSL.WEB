@@ -2,6 +2,7 @@
 using FacturacionSAT.CSL.WEB.Models;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -13,6 +14,7 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
     [InitializeSimpleMembership]
     public class AccountController : Controller
     {
+        string Conexion = ConfigurationManager.AppSettings.Get("strConnection");
         // GET: Areas/Account
         [AllowAnonymous]
         public ActionResult Index()
@@ -22,10 +24,10 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
                 FormsAuthentication.SignOut();
                 if (User.Identity.IsAuthenticated)
                 {
-                    //UsuarioModels usuario = new UsuarioModels();
-                    //_Usuario_Datos UsuarioDatos = new _Usuario_Datos();
-                    //usuario.conexion = Conexion;
-                    //usuario.cuenta = User.Identity.Name;
+                    UsuarioModels usuario = new UsuarioModels();
+                    _Usuario_Datos UsuarioDatos = new _Usuario_Datos();
+                    usuario.Conexion = Conexion;
+                    usuario.Id_Usuario = User.Identity.Name;
 
                     int TipoUsario = 1;//UsuarioDatos.ObtenerTipoUsuarioByUserName(usuario);
                     if (TipoUsario == 1)
