@@ -1,0 +1,94 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <style>
+        .header {
+            color: #36A0FF;
+            font-size: 27px;
+            padding: 10px;
+        }
+
+        .bigicon {
+            font-size: 35px;
+            color: #36A0FF;
+        }
+    </style>
+    <meta name="viewport" content="width=device-width" />
+    <title>Facturacion</title>
+</head>
+<body>
+    <div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="well well-sm">
+                        <form class="form-horizontal">
+                            <fieldset>
+                                <!-- Form Name -->
+                                <legend>FACTURACIÓN</legend>
+                                <!-- Text input-->
+                                <div class="control-group">
+                                    <label class="control-label" for="name">RFC o Cliente</label>
+                                    <div class="controls">
+                                        <input id="name" name="name" type="text" placeholder="AAAA010101AA0" class="input-xlarge" required="">
+                                    </div>
+                                </div>
+                                <!-- Text input-->
+                                <div class="control-group">
+                                    <label class="control-label" for="last">Código Postal</label>
+                                    <div class="controls">
+                                        <input id="last" name="last" type="text" placeholder="Código Postal" class="input-xlarge" required="">
+
+                                    </div>
+                                </div>
+                                <!-- Text input-->
+                                <div class="control-group">
+                                    <label class="control-label" for="phone">Número del Ticket</label>
+                                    <div class="controls">
+                                        <input id="phone" name="phone" type="text" placeholder="# del Ticket" class="input-xlarge" required="">
+
+                                    </div>
+                                </div>
+                                <!-- Text input-->
+                                <div class="control-group">
+                                    <label class="control-label" for="mail">Correo Electrónico</label>
+                                    <div class="controls">
+                                        <input id="mail" name="mail" type="text" placeholder="" class="input-xlarge" required="">
+
+                                    </div>
+                                </div>
+                                <!-- Text input-->
+                                <div class="control-group">
+                                    <label class="control-label" for="email">Confirmar correo</label>
+                                    <div class="controls">
+                                        <input id="email" name="email" type="text" placeholder="" class="input-xlarge" required="">
+
+                                    </div>
+                                </div>
+                               
+                                <!-- Button -->
+                                <div class="control-group">
+                                    <label class="control-label" for="send"></label>
+                                    <div class="controls">
+                                        <button id="send" name="send" class="btn btn-primary">Guardar y Enviar</button>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
