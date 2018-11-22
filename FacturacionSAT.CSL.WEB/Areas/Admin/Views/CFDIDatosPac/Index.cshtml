@@ -1,0 +1,89 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@section featured{
+    <h2>Index Pac</h2>
+    <!-- PAGE CONTENT WRAPPER -->
+    <div class="page-content-wrap">
+        <div class="row">
+            <div class="col-md-12">
+                <!-- START DEFAULT DATATABLE -->
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"></h3>
+                        <ul class="panel-controls">
+                            <li><a href="#" class="btn btn-default btnCrear"><span class="fa fa-plus"></span> Nuevo Almacén</a></li>
+                            <li><a href="#" class="panel-collapse exsa"><span class="fa fa-angle-down"></span></a></li>
+                            <li><a href="#" class="panel-fullscreen exsa"><span class="fa fa-expand"></span></a></li>
+                        </ul>
+                    </div>
+                    <div class="panel-body">
+                        <div class="table-responsive">
+                            <div class="panel-body">
+                                <div class="table-responsive">
+                                    <table class="table datatable">
+                                        <thead>
+                                            <tr>
+                                                <th>Sucursal</th>
+                                                <th>Descripción</th>
+                                                <th>Clave</th>
+                                                <th>Acción</th>
+                                                <th>Clave</th>
+                                                <th>Acción</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr id="#">
+                                                <td>asdsad</td>
+                                                <td>asdsda</td>
+                                                <td>asdasd</td>
+                                                <td>asdsad</td>
+                                                <td>asdsda</td>
+                                                <td>asdasd</td>
+                                                <td style="text-align:center;">
+                                                    <div class="visible-md visible-lg hidden-sm hidden-xs">
+                                                        <a title="Editar" href="#" class="btn btn-yellow tooltips" data-placement="top" data-original-title="Edit"><i class="fa fa-edit"></i></a>
+                                                        <a title="Eliminar" id="#" data-hrefa="#" onClick="delete_row('#');" class="btn btn-danger tooltips" data-placement="top" data-original-title="Eliminar"><i class="fa fa-trash-o"></i></a>
+                                                    </div>
+                                                    <div class="visible-xs visible-sm hidden-md hidden-lg">
+                                                        <div class="btn-group">
+                                                            <a class="btn btn-danger dropdown-toggle btn-sm" data-toggle="dropdown" href="#">
+                                                                <i class="fa fa-cog"></i> <span class="caret"></span>
+                                                            </a>
+                                                            <ul role="menu" class="dropdown-menu pull-right dropdown-dark">
+                                                                <li>
+                                                                    <a role="menuitem" tabindex="-1" href="#">
+                                                                        <i class="fa fa-edit"></i> Editar
+                                                                    </a>
+                                                                </li>
+                                                                <li>
+                                                                    <a role="menuitem" tabindex="-1" id="#" data-hrefa="#" onClick="delete_row('#');">
+                                                                        <i class="fa fa-trash-o"></i> Eliminar
+                                                                    </a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- END DEFAULT DATATABLE -->
+            </div>
+        </div>
+    </div>
+    <!-- PAGE CONTENT WRAPPER -->
+   
+}
+
+
+
