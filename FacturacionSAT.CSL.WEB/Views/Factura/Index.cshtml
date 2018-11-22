@@ -1,0 +1,39 @@
+﻿@model FacturacionSAT.CSL.WEB.Models.ViewModel.IndexFacturaViewModel
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="well well-sm">
+            @using (Html.BeginForm("Index", "Factura", FormMethod.Post, new { @class = "form-horizontal", id = "form-dg", autocomplete = "off", @enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+                <fieldset>
+                    <!-- Form Name -->
+                    <legend>FACTURACIÓN</legend>
+                    <!-- Text input-->
+                    <div class="control-group">
+                        @Html.LabelFor(m => m.RFCReceptor)
+                        @Html.TextBoxFor(m => m.RFCReceptor, "", new { @class = "form-control" })
+                        @Html.ValidationMessage("RFCReceptor", new { @class="text-danger"})
+                    </div>
+                    <!-- Text input-->
+                    <div class="control-group">
+                        @Html.LabelFor(m => m.CodigoBarra)
+                        @Html.TextBoxFor(m => m.CodigoBarra, "", new { @class = "form-control" })
+                        @Html.ValidationMessage("CodigoBarra", new { @class = "text-danger" })
+                    </div>
+                    <!-- Button -->
+                    <div class="control-group">
+                        <label class="control-label" for="send"></label>
+                        <div class="controls">
+                            <button id="send" name="send" class="btn btn-primary">Enviar</button>
+                        </div>
+                    </div>
+                </fieldset>
+            }
+        </div>
+    </div>
+</div>
+
