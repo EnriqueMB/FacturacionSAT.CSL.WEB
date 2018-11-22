@@ -1,0 +1,8 @@
+﻿.input-validation-error {
+    color: #ff004d !important;
+    font-weight: bold !important;
+}
+
+input.input-validation-error {
+    border: 1px solid #e80c4d !important;
+}
