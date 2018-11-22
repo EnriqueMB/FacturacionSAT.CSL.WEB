@@ -13,5 +13,18 @@ namespace FacturacionSAT.CSL.WEB.Controllers
         {
             return View();
         }
+
+        [HttpGet]
+        public ActionResult Facturacion()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Facturacion(FormCollection collection)
+        {
+            string nombre = collection["name"].ToString();
+            return View();
+        }
     }
 }
