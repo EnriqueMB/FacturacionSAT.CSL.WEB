@@ -28,8 +28,8 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
                     UsuarioModels usuario = new UsuarioModels();
                     UsuarioDatos UsuarioD = new UsuarioDatos();
                     usuario.Conexion = Conexion;
-                    int.TryParse(User.Identity.Name, out int tipousuario);
-                    usuario.Id_Usuario = tipousuario;
+                    int.TryParse(User.Identity.Name, out int UsuarioL);
+                    usuario.Id_Usuario = UsuarioL;
                     int TipoUsario = UsuarioD.ObtenerTipoUsuarioByUserName(usuario);
                     if (TipoUsario == 3)
                     {
@@ -54,62 +54,35 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
         {
             FormsAuthentication.SetAuthCookie("1", model.RememberMe);
             return RedirectToAction("Index", "HomeAdmin", new { Area = "Admin" });
-            //LoginDatos UD = new LoginDatos();
-            //model.conexion = Conexion;
-            //model = UD.ValidarUsuario(model);
-            //if (model.opcion == 1)
+            //UsuarioDatos DatosU = new UsuarioDatos();
+            //model.Conexion = Conexion;
+            //model = DatosU.ValidarUsuario(model);
+            //if (model.Opcion == 1)
             //{
             //    FormsAuthentication.SignOut();
-            //    _Usuario_Datos usuario_datos = new _Usuario_Datos();
-            //    UsuarioModels usuario = new UsuarioModels();
-            //    //usuario.conexion = Conexion;
-            //    //usuario.cuenta = model.id_usuario;
-            //    int TipoUsario = usuario_datos.ObtenerTipoUsuarioByUserName(usuario);
-            //    System.Web.HttpContext.Current.Session["SessionTipoUsuario"] = TipoUsario;
-            //    FormsAuthentication.SetAuthCookie(model.id_usuario, model.RememberMe);
-            //    HttpCookie authCookie = FormsAuthentication.GetAuthCookie(model.id_usuario, model.RememberMe);
-            //    FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(authCookie.Value);
-            //    List<string> listaPermiso = new List<string>();
-            //    foreach (var item in model.ListaPermisos)
+            //    if (model.Id_TipoUsuario != 3)
             //    {
-            //        listaPermiso.Add(item.NombreUrl);
+            //        int TipoUsario = DatosU.ObtenerTipoUsuarioByUserName(model);
+            //        System.Web.HttpContext.Current.Session["SessionTipoUsuario"] = TipoUsario;
+            //        model.Id_TipoUsuario = TipoUsario;
             //    }
-            //    System.Web.HttpContext.Current.Session["SessionListaPermiso"] = listaPermiso;
-            //    System.Web.HttpContext.Current.Session["NombreUsuario"] = model.nombreCompleto;
-            //    if (TipoUsario == 1)
+            //    FormsAuthentication.SetAuthCookie(model.Id_Usuario.ToString(), model.RememberMe);
+            //    HttpCookie authCookie = FormsAuthentication.GetAuthCookie(model.Id_Usuario.ToString(), model.RememberMe);
+            //    FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(authCookie.Value);
+            //    if (model.Id_TipoUsuario == 3)
             //    {
             //        return RedirectToAction("Index", "HomeAdmin", new { Area = "Admin" });
             //    }
-            //    //else if (id_tipoUsuario == "1")
-            //    //{
-            //    //    return RedirectToAction("Index", "HomeProfesor", new { Area = "Profesor" });
-            //    //}
             //    else
             //    {
-            //        ModelState.AddModelError("", "No tienes permisos");
+            //        ModelState.AddModelError("", "El usuario no tiene permiso para entrar el sistema facturación");
             //        Session.Abandon();
             //        Session.Clear();
             //        Session.RemoveAll();
             //        return View(model);
             //    }
             //}
-            //else if (model.opcion == 2)
-            //{
-            //    ModelState.AddModelError("", "Usuario no existe");
-            //    Session.Abandon();
-            //    Session.Clear();
-            //    Session.RemoveAll();
-            //    return View(model);
-            //}
-            //else if (model.opcion == 3)
-            //{
-            //    ModelState.AddModelError("", "Error de Contraseña");
-            //    Session.Abandon();
-            //    Session.Clear();
-            //    Session.RemoveAll();
-            //    return View(model);
-            //}
-            //else if (model.opcion == 4)
+            //else if (model.Opcion == 4)
             //{
             //    ModelState.AddModelError("", "El usuario tiene que ser de tipo. Administrador");
             //    Session.Abandon();
@@ -117,9 +90,25 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
             //    Session.RemoveAll();
             //    return View(model);
             //}
+            //else if (model.Opcion == 2)
+            //{
+            //    ModelState.AddModelError("", "Usuario no existe");
+            //    Session.Abandon();
+            //    Session.Clear();
+            //    Session.RemoveAll();
+            //    return View(model);
+            //}
+            //else if (model.Opcion == 9)
+            //{
+            //    ModelState.AddModelError("", "El password es incorrecto");
+            //    Session.Abandon();
+            //    Session.Clear();
+            //    Session.RemoveAll();
+            //    return View(model);
+            //}
             //else
             //{
-            //    ModelState.AddModelError("", "El usuario o contraseña son incorrectos!!.");
+            //    ModelState.AddModelError("", "Contacte a soporte técnico.");
             //    Session.Abandon();
             //    Session.Clear();
             //    Session.RemoveAll();
