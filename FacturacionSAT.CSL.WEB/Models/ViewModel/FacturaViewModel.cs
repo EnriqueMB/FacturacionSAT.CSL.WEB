@@ -55,12 +55,14 @@ namespace FacturacionSAT.CSL.WEB.Models.ViewModel
         public string Sucursal { get; set; }
 
         [Display(Name = "Forma de pago")]
+        [Required(AllowEmptyStrings = false)]
         public string FormaDePago { get; set; }
         public string sFormaDePago { get; set; }
 
-        [Display(Name = "Tipo de pago")]
-        public string TipoDePago { get; set; }
-        public string sTipoDePago { get; set; }
+        [Display(Name = "Método de pago")]
+        [Required(AllowEmptyStrings = false)]
+        public string MetodoDePago { get; set; }
+        public string sMetodoDePago { get; set; }
 
         [Display(Name = "Moneda")]
         public string Moneda { get; set; }
