@@ -1,7 +1,9 @@
 ﻿using FacturacionSAT.CSL.WEB.Filters;
 using FacturacionSAT.CSL.WEB.Models;
+using FacturacionSAT.CSL.WEB.Models.Datos;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -13,6 +15,7 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
     [InitializeSimpleMembership]
     public class AccountController : Controller
     {
+        string Conexion = ConfigurationManager.AppSettings.Get("strConnection");
         // GET: Areas/Account
         [AllowAnonymous]
         public ActionResult Index()
@@ -22,17 +25,16 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
                 FormsAuthentication.SignOut();
                 if (User.Identity.IsAuthenticated)
                 {
-                    //UsuarioModels usuario = new UsuarioModels();
-                    //_Usuario_Datos UsuarioDatos = new _Usuario_Datos();
-                    //usuario.conexion = Conexion;
-                    //usuario.cuenta = User.Identity.Name;
-
-                    int TipoUsario = 1;//UsuarioDatos.ObtenerTipoUsuarioByUserName(usuario);
-                    if (TipoUsario == 1)
+                    UsuarioModels usuario = new UsuarioModels();
+                    UsuarioDatos UsuarioD = new UsuarioDatos();
+                    usuario.Conexion = Conexion;
+                    int.TryParse(User.Identity.Name, out int tipousuario);
+                    usuario.Id_Usuario = tipousuario;
+                    int TipoUsario = UsuarioD.ObtenerTipoUsuarioByUserName(usuario);
+                    if (TipoUsario == 3)
                     {
                         return RedirectToAction("Index", "HomeAdmin", new { Area = "Admin" });
                     }
-                   
                     else
                         return RedirectToAction("LogOff", "Account");
                 }
