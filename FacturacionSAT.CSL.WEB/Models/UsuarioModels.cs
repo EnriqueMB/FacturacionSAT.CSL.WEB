@@ -7,7 +7,7 @@ namespace FacturacionSAT.CSL.WEB.Models
 {
     public class UsuarioModels
     {
-        public string Id_Usuario { get; set; }
+        public int Id_Usuario { get; set; }
         public string user { get; set; }
         public string Password { get; set; }
         public bool RememberMe { get; set; }
