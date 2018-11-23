@@ -5,6 +5,15 @@
 
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 
+    bool Success = true;
+    string Mensaje = string.Empty;
+
+    if (ViewBag.Success != null)
+    {
+        Success = (bool)ViewBag.Success;
+        Mensaje = (string)ViewBag.Mensaje;
+    }
+
 }
 
 @section css
@@ -57,6 +66,13 @@
 }
 
 @section script{
-
+    <script>
+        $(document).ready(function (){
+            @if(!Success)
+            {
+                <text>alert("@Mensaje"); </text>
+            }
+        })
+    </script>
 }
 

@@ -75,8 +75,8 @@
                                     <h5>Datos del cliente</h5>
                                     <div class="row">
                                         <div class="col-md-4">
-                                            @Html.LabelFor(d => d.RFCCliente)
-                                            @Html.TextBoxFor(d => d.RFCCliente, "", new { @class = "form-control" })
+                                            @Html.LabelFor(d => d.RFCReceptor)
+                                            @Html.TextBoxFor(d => d.RFCReceptor, "", new { @class = "form-control" })
                                         </div>
                                         <div class="col-md-4">
                                             @Html.LabelFor(d => d.RazonSocial)
@@ -103,7 +103,11 @@
                                     <div class="row">
                                         <div class="col-md-4">
                                             <label>Clave producto/servicio</label>
-                                            @Html.TextBox("claveProducto", "", new { @class = "form-control" })
+                                            @Html.TextBox("ClaveProducto", "", new { @class = "form-control" })
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label>Clave unidad de medida</label>
+                                            @Html.TextBox("ClaveUnidad", "", new { @class = "form-control" })
                                         </div>
                                     </div>
                                     
@@ -117,8 +121,7 @@
                     </div>
                 </div>
 
-                                <hr />
-                                @*<div class="row">
+                @*<div class="row">
                     <div class="col-md-6">
                         @Html.LabelFor(d => d.ClavePrivada)
                         @Html.TextBoxFor(d => d.ClavePrivada, "", new { @class = "form-control" })
@@ -136,13 +139,29 @@
     <script src="~/Scripts/jquery-ui-1.12.1.js"></script>
     <script>
         $(document).ready(function () {
-            $("#claveProducto").autocomplete({
+            $("#ClaveProducto").autocomplete({
                 source: function (request, response) {
                     $.ajax({
                         url: "@Url.Content("~/Admin/Json/ProductoServicio")",
                         type: "POST",
                         dataType: "json",
                         data: { prodServBuscar: request.term },
+                        success: function (data) {
+                            response($.map(data, function (item) {
+                                return { label: item.Value, value: item.Value };
+                            }))
+                        }
+                    })
+                }
+            })
+
+            $("#ClaveUnidad").autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        url: "@Url.Content("~/Admin/Json/UnidadMedida")",
+                        type: "POST",
+                        dataType: "json",
+                        data: { unidadMedidaBuscar: request.term },
                         success: function (data) {
                             response($.map(data, function (item) {
                                 return { label: item.Value, value: item.Value };
