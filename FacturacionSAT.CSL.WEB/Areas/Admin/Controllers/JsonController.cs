@@ -36,5 +36,19 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
 
             return Json(Lista, JsonRequestBehavior.AllowGet);
         }
+
+        [HttpPost]
+        public ActionResult CFDI_Conceptos()
+        {
+            List<ComboModel> Lista = new List<ComboModel>();
+            JsonDatos oJsonDatos = new JsonDatos();
+            AuxSQLModel oAuxSQLModel = new AuxSQLModel();
+            oAuxSQLModel.Conexion = Conexion;
+            oAuxSQLModel.Mensaje = oJsonDatos.DatatableIndexConceptos(oAuxSQLModel);
+
+            return Content(oAuxSQLModel.Mensaje, "application/json");
+
+           // return Json(oAuxSQLModel.Mensaje, JsonRequestBehavior.AllowGet);
+        }
     }
 }

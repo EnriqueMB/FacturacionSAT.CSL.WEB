@@ -954,7 +954,8 @@
     <Content Include="Areas\Admin\Views\AdminFactura\Index.cshtml" />
     <Content Include="Areas\Admin\Views\AdminFactura\Add.cshtml" />
     <Content Include="Areas\Admin\Views\CFDIDatosPac\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\CFDIDatosConseptos\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\CFDIDatosConceptos\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\CFDIDatosConceptos\Edit.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -984,9 +985,8 @@
     <Compile Include="App_Start\TokenProcessor.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminFacturaController.cs" />
-    <Compile Include="Areas\Admin\Controllers\CFDIDatosConseptosController.cs" />
+    <Compile Include="Areas\Admin\Controllers\CFDIDatosConceptosController.cs" />
     <Compile Include="Areas\Admin\Controllers\CFDIDatosPacController.cs" />
-    <Compile Include="Controllers\CFDIDatosConseptosController.cs" />
     <Compile Include="Areas\Admin\Controllers\JsonController.cs" />
     <Compile Include="Controllers\FacturaController.cs" />
     <Compile Include="Areas\Admin\Controllers\AccountController.cs" />
@@ -1011,6 +1011,7 @@
     <Compile Include="Models\ViewModel\FacturaViewModel.cs" />
     <Compile Include="Models\ViewModel\IndexFacturaViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SystemHelper\SystemHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />

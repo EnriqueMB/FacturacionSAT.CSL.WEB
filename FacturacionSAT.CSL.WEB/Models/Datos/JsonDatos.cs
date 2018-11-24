@@ -58,5 +58,22 @@ namespace FacturacionSAT.CSL.WEB.Models.Datos
                 throw ex;
             }
         }
+
+        public string DatatableIndexConceptos(AuxSQLModel oAuxSQLModel)
+        {
+            try
+            {
+                SqlDataReader dr = null;
+                dr = SqlHelper.ExecuteReader(oAuxSQLModel.Conexion, "[dbo].[CFDIDatosConceptos_Consulta_sp]");
+                string datatable = SystemHelper.SystemHelper.SqlReaderToJson(dr);
+
+                dr.Close();
+                return datatable;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }
