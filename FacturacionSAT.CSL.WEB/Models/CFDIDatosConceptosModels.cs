@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace FacturacionSAT.CSL.WEB.Models.ViewModel
+namespace FacturacionSAT.CSL.WEB.Models
 {
     public class CFDIDatosConceptosModels
     {
         public CFDIDatosConceptosModels()
         {
-            ID_cfdiDatosConseptos = string.Empty;
+            Id_cfdiDatosConceptos = string.Empty;
             Descripcion = string.Empty;
             Id_cfdiTipoProducto = string.Empty;
             Id_cfdiDivision = string.Empty;
@@ -18,13 +18,16 @@ namespace FacturacionSAT.CSL.WEB.Models.ViewModel
             Id_cfdiClaveProdServDetalle = string.Empty;
             Id_cfdiClaveUnidad = string.Empty;
             Id_usuario = string.Empty;
-        }
-        private string _ID_cfdiDatosConseptos;
 
-        public string ID_cfdiDatosConseptos
+        }
+
+
+       private string _Id_cfdiDatosConceptos;
+
+        public string Id_cfdiDatosConceptos
         {
-            get { return _ID_cfdiDatosConseptos; }
-            set { _ID_cfdiDatosConseptos = value; }
+            get { return _Id_cfdiDatosConceptos; }
+            set { _Id_cfdiDatosConceptos = value; }
         }
 
         private string _Descripcion;
@@ -34,6 +37,7 @@ namespace FacturacionSAT.CSL.WEB.Models.ViewModel
             get { return _Descripcion; }
             set { _Descripcion = value; }
         }
+
         private string _Id_cfdiTipoProducto;
 
         public string Id_cfdiTipoProducto
@@ -41,7 +45,6 @@ namespace FacturacionSAT.CSL.WEB.Models.ViewModel
             get { return _Id_cfdiTipoProducto; }
             set { _Id_cfdiTipoProducto = value; }
         }
-
         private string _Id_cfdiDivision;
 
         public string Id_cfdiDivision
@@ -49,6 +52,7 @@ namespace FacturacionSAT.CSL.WEB.Models.ViewModel
             get { return _Id_cfdiDivision; }
             set { _Id_cfdiDivision = value; }
         }
+
         private string _Id_cfdiGrupo;
 
         public string Id_cfdiGrupo
@@ -63,7 +67,6 @@ namespace FacturacionSAT.CSL.WEB.Models.ViewModel
             get { return _Id_cfdiClase; }
             set { _Id_cfdiClase = value; }
         }
-
         private string _Id_cfdiClaveProdServDetalle;
 
         public string Id_cfdiClaveProdServDetalle
@@ -71,7 +74,6 @@ namespace FacturacionSAT.CSL.WEB.Models.ViewModel
             get { return _Id_cfdiClaveProdServDetalle; }
             set { _Id_cfdiClaveProdServDetalle = value; }
         }
-
         private string _Id_cfdiClaveUnidad;
 
         public string Id_cfdiClaveUnidad
@@ -87,10 +89,6 @@ namespace FacturacionSAT.CSL.WEB.Models.ViewModel
             set { _Id_usuario = value; }
         }
 
-
-
-
-
-
     }
-}
+    }
+
