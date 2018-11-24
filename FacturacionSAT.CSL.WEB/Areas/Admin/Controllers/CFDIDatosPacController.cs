@@ -98,5 +98,98 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
                 return View(productos);
             }
         }
+
+        [HttpGet]
+        public ActionResult UpdateCFDIPac(string id_datosPac)
+        {
+            try
+            {
+                Token.SaveToken();
+                CFDIDatosPacModels CFDIModel = new CFDIDatosPacModels();
+                CFDIPacDatos CFDIDatos = new CFDIPacDatos();
+                CFDIModel.Id_cfdiDatosPac = id_datosPac;
+                CFDIModel.Conexion = Conexion;
+                return View(CFDIModel);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        [HttpPost]
+        public ActionResult UpdateCFDIPac(int id, CFDIDatosPacModels productos)
+        {
+            
+                CFDIPacDatos CFDIDatos = new CFDIPacDatos();
+                try
+                {
+                    if (Token.IsTokenValid())
+                    {
+                        if (ModelState.IsValid)
+                        {
+                            productos.Conexion = Conexion;
+                            productos.Id_usuario = User.Identity.Name;
+                            productos.Opcion = 2;
+                            productos = CFDIDatos.InsertCFDIPac(productos);
+
+                            if (productos.Completado == true)
+                            {
+                                TempData["typemessage"] = "1";
+                                TempData["message"] = "El registro se guardo correctamente.";
+                                Token.ResetToken();
+                                return RedirectToAction("Index");
+                            }
+                            else
+                            {
+                                TempData["typemessage"] = "2";
+                                TempData["message"] = "Ocurrió un error al guardar el registro.";
+                                return View(productos);
+                            }
+                        }
+                        else
+                        {                            
+                            return View(productos);
+                        }
+
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index");
+                    }
+                }
+                catch (Exception ex)
+                {
+
+                    throw ex;
+                }        
+        }
+
+        [HttpGet]
+        public ActionResult DeleteCFDIPac(string id)
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult DeleteCFDIPac(string id, FormCollection collection)
+        {
+            try
+            {
+                CFDIDatosPacModels CFDIModel = new CFDIDatosPacModels();
+                CFDIPacDatos CFDIDatos = new CFDIPacDatos();
+                //AuxSQLModel oAuxSQLModel = new AuxSQLModel();
+                CFDIModel.Conexion = Conexion;
+                CFDIModel.Opcion = 3;
+                CFDIModel.Id_cfdiDatosPac = id;
+                CFDIModel.Id_usuario = User.Identity.Name;
+                CFDIModel = CFDIDatos.DeleteCFDIDatosPac(CFDIModel);
+
+                return Json("");
+            }
+            catch
+            {
+                CFDIDatosPacModels CFDIModel = new CFDIDatosPacModels();
+                return View();
+            }
+        }
     }
 }

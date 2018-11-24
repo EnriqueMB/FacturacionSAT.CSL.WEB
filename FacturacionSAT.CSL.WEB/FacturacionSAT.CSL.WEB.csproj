@@ -961,6 +961,7 @@
     <Content Include="Areas\Admin\Views\CFDIDatosPac\CreateCFDIPac.cshtml" />
     <!--=======-->
     <Content Include="Areas\Admin\Views\CFDIDatosConseptos\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\CFDIDatosPac\UpdateCFDIPac.cshtml" />
     <!-->>>>>>> 20dc6b70ee4a003db4d84e5a9b915af4f0f8ebe7-->
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />

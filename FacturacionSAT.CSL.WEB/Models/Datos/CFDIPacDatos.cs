@@ -64,5 +64,51 @@ namespace FacturacionSAT.CSL.WEB.Models.Datos
                 throw ex;
             }
         }
+        //public CFDIDatosPacModels UpdateCFDIDatosPac(CFDIDatosPacModels datos)
+        //{
+        //    try
+        //    {
+        //        object[] parametros = { datos.Id_cfdiDatosPac,datos.Opcion};
+        //        SqlDataReader dr = null;
+        //        dr = SqlHelper.ExecuteReader(datos.Conexion, "dbo.abc_CFDIDatosPac", parametros);
+        //        while (dr.Read())
+        //        {
+        //            datos.Descripcion = !dr.IsDBNull(dr.GetOrdinal("")) ? dr.GetString(dr.GetOrdinal("")) : string.Empty;
+
+        //        }
+        //        dr.Close();
+        //        return datos;
+        //    }
+        //    catch (Exception ex)
+        //    {
+
+        //        throw ex;
+        //    }
+        //}
+        public CFDIDatosPacModels DeleteCFDIDatosPac(CFDIDatosPacModels datos)
+        {
+            try
+            {
+                object[] parametros =
+                {
+                  datos.Opcion,datos.Id_cfdiDatosPac,datos.Descripcion,datos.UserPac,datos.PasswordPac,datos.UserPacTest,datos.PasswordPacTest,datos.Predeterminado, datos.Id_usuario
+                };
+                object Resultado = SqlHelper.ExecuteScalar(datos.Conexion, "dbo.abc_CFDIDatosPac", parametros);
+                datos.Id_usuario = Resultado.ToString();
+                if (!string.IsNullOrEmpty(datos.Id_usuario))
+                {
+                    datos.Completado = true;
+                }
+                else
+                {
+                    datos.Completado = false;
+                }
+                return datos;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }
