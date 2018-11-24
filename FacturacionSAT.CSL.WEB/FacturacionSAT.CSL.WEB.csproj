@@ -54,11 +54,7 @@
       <HintPath>..\packages\dotless.1.4.0.0\lib\dotless.Core.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.ApplicationBlocks.Data">
-      <!--<<<<<<< HEAD-->
-      <HintPath>..\..\..\..\..\..\..\DLL\Microsoft.ApplicationBlocks.Data.dll</HintPath>
-      <!--=======-->
       <HintPath>..\..\..\..\..\..\..\Dll\Microsoft.ApplicationBlocks.Data.dll</HintPath>
-      <!-->>>>>>> 20dc6b70ee4a003db4d84e5a9b915af4f0f8ebe7-->
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.ScriptManager.jQuery.UI.Combined, Version=1.8.20.1, Culture=neutral, processorArchitecture=MSIL">
@@ -958,6 +954,7 @@
     <Content Include="Areas\Admin\Views\AdminFactura\Index.cshtml" />
     <Content Include="Areas\Admin\Views\AdminFactura\Add.cshtml" />
     <Content Include="Areas\Admin\Views\CFDIDatosPac\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\CFDIDatosConseptos\Index.cshtml" />
     <!--<<<<<<< HEAD-->
     <Content Include="Areas\Admin\Views\CFDIDatosPac\CreateCFDIPac.cshtml" />
     <!--=======-->
@@ -994,6 +991,7 @@
     <Compile Include="Areas\Admin\Controllers\AdminFacturaController.cs" />
     <Compile Include="Areas\Admin\Controllers\CFDIDatosConseptosController.cs" />
     <Compile Include="Areas\Admin\Controllers\CFDIDatosPacController.cs" />
+    <Compile Include="Controllers\CFDIDatosConseptosController.cs" />
     <Compile Include="Areas\Admin\Controllers\JsonController.cs" />
     <Compile Include="Controllers\FacturaController.cs" />
     <Compile Include="Areas\Admin\Controllers\AccountController.cs" />
@@ -1008,6 +1006,7 @@
     <Compile Include="Models\CFDIDatosConceptosModels.cs" />
     <Compile Include="Models\CFDIDatosPacModels.cs" />
     <Compile Include="Models\ComboModel.cs" />
+    <Compile Include="Models\Datos\CFDIConceptosDatos.cs" />
     <!--<<<<<<< HEAD-->
     <Compile Include="Models\Datos\CFDIPacDatos.cs" />
     <!--=======-->
