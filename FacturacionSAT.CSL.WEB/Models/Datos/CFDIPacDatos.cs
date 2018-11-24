@@ -64,6 +64,33 @@ namespace FacturacionSAT.CSL.WEB.Models.Datos
                 throw ex;
             }
         }
+
+        public CFDIDatosPacModels GetCFDIPacDetail(CFDIDatosPacModels datos)
+        {
+            try
+            {
+                object[] parametros = { datos.Id_cfdiDatosPac };
+                SqlDataReader dr = null;
+                dr = SqlHelper.ExecuteReader(datos.Conexion, "dbo.CFDIDatosPacDetalle_sp", parametros);
+                while (dr.Read())
+                {
+                    datos.Id_cfdiDatosPac = !dr.IsDBNull(dr.GetOrdinal("id_cfdiDatosPac")) ? dr.GetString(dr.GetOrdinal("id_cfdiDatosPac")) : string.Empty;
+                    datos.Descripcion = !dr.IsDBNull(dr.GetOrdinal("descripcion")) ? dr.GetString(dr.GetOrdinal("descripcion")) : string.Empty;
+                    datos.UserPac = !dr.IsDBNull(dr.GetOrdinal("userPac")) ? dr.GetString(dr.GetOrdinal("userPac")) : string.Empty;
+                    datos.PasswordPac = !dr.IsDBNull(dr.GetOrdinal("passwordPac")) ? dr.GetString(dr.GetOrdinal("passwordPac")) : string.Empty;
+                    datos.UserPacTest = !dr.IsDBNull(dr.GetOrdinal("userPacTest")) ? dr.GetString(dr.GetOrdinal("userPacTest")) : string.Empty;
+                    datos.PasswordPacTest = !dr.IsDBNull(dr.GetOrdinal("passwordPacTest")) ? dr.GetString(dr.GetOrdinal("passwordPacTest")) : string.Empty;
+                    datos.Predeterminado = !dr.IsDBNull(dr.GetOrdinal("predeterminado")) ? dr.GetBoolean(dr.GetOrdinal("predeterminado")) : false;
+                }
+                dr.Close();
+                return datos;
+            }
+
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
         //public CFDIDatosPacModels UpdateCFDIDatosPac(CFDIDatosPacModels datos)
         //{
         //    try
