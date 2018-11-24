@@ -986,7 +986,6 @@
     <Compile Include="Areas\Admin\Controllers\AdminFacturaController.cs" />
     <Compile Include="Areas\Admin\Controllers\CFDIDatosConseptosController.cs" />
     <Compile Include="Areas\Admin\Controllers\CFDIDatosPacController.cs" />
-    <Compile Include="Controllers\CFDIDatosConseptosController.cs" />
     <Compile Include="Areas\Admin\Controllers\JsonController.cs" />
     <Compile Include="Controllers\FacturaController.cs" />
     <Compile Include="Areas\Admin\Controllers\AccountController.cs" />
