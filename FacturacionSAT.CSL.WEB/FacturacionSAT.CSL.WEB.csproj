@@ -954,6 +954,7 @@
     <Content Include="Areas\Admin\Views\AdminFactura\Index.cshtml" />
     <Content Include="Areas\Admin\Views\AdminFactura\Add.cshtml" />
     <Content Include="Areas\Admin\Views\CFDIDatosPac\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\CFDIDatosConseptos\Index.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -983,6 +984,7 @@
     <Compile Include="App_Start\TokenProcessor.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminFacturaController.cs" />
+    <Compile Include="Areas\Admin\Controllers\CFDIDatosConseptosController.cs" />
     <Compile Include="Areas\Admin\Controllers\CFDIDatosPacController.cs" />
     <Compile Include="Controllers\CFDIDatosConseptosController.cs" />
     <Compile Include="Areas\Admin\Controllers\JsonController.cs" />
@@ -996,15 +998,16 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AuxSQLModel.cs" />
+    <Compile Include="Models\CFDIDatosConceptosModels.cs" />
     <Compile Include="Models\CFDIDatosPacModels.cs" />
     <Compile Include="Models\ComboModel.cs" />
+    <Compile Include="Models\Datos\CFDIConceptosDatos.cs" />
     <Compile Include="Models\Datos\ComboDatos.cs" />
     <Compile Include="Models\Datos\FacturaDatos.cs" />
     <Compile Include="Models\Datos\JsonDatos.cs" />
     <Compile Include="Models\Datos\UsuarioDatos.cs" />
     <Compile Include="Models\Error.cs" />
     <Compile Include="Models\UsuarioModels.cs" />
-    <Compile Include="Models\ViewModel\CFDIDatosConceptosModels.cs" />
     <Compile Include="Models\ViewModel\FacturaViewModel.cs" />
     <Compile Include="Models\ViewModel\IndexFacturaViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -1057,7 +1060,6 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Facturacion.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
-    <Content Include="Views\CFDIDatosConseptos\Index.cshtml" />
     <Content Include="Views\Factura\Add.cshtml" />
     <Content Include="Views\Factura\Index.cshtml" />
     <None Include="Web.Debug.config">
