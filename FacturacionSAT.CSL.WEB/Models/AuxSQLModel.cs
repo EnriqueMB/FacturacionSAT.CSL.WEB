@@ -9,5 +9,7 @@ namespace FacturacionSAT.CSL.WEB.Models
     {
         public string Conexion { get; set; }
         public string Id_usuario { get; set; }
+        public bool Success { get; set; }
+        public string Mensaje { get; set; }
     }
 }

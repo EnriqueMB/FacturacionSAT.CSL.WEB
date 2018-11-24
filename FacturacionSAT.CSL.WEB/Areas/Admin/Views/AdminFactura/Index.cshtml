@@ -1,7 +1,19 @@
 ﻿@model FacturacionSAT.CSL.WEB.Models.ViewModel.IndexFacturaViewModel
 @{
     ViewBag.Title = "Index";
+    SelectList ListaEmisores = new SelectList(ViewBag.ListaEmisores, "Id", "Value");
+
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+
+    bool Success = true;
+    string Mensaje = string.Empty;
+
+    if (ViewBag.Success != null)
+    {
+        Success = (bool)ViewBag.Success;
+        Mensaje = (string)ViewBag.Mensaje;
+    }
+
 }
 
 @section css
@@ -35,7 +47,7 @@
                         <!-- Text input-->
                         <div class="control-group">
                             @Html.LabelFor(m => m.Id_emisor)
-                            @Html.DropDownListFor(m => m.Id_emisor, new SelectList(Model.ListaEmisores, "Id", "Value"), new { @class = "form-control", data_live_search = "true", data_style = "form-control" })
+                            @Html.DropDownListFor(m => m.Id_emisor, ListaEmisores, new { @class = "form-control" })
                             @Html.ValidationMessage("Id_emisor", new { @class = "text-danger" })
                         </div>
                         <br />
@@ -54,6 +66,13 @@
 }
 
 @section script{
-
+    <script>
+        $(document).ready(function (){
+            @if(!Success)
+            {
+                <text>alert("@Mensaje"); </text>
+            }
+        })
+    </script>
 }
 

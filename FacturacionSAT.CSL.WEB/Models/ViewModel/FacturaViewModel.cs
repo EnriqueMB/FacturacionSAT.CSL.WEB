@@ -55,12 +55,14 @@ namespace FacturacionSAT.CSL.WEB.Models.ViewModel
         public string Sucursal { get; set; }
 
         [Display(Name = "Forma de pago")]
+        [Required(AllowEmptyStrings = false)]
         public string FormaDePago { get; set; }
         public string sFormaDePago { get; set; }
 
-        [Display(Name = "Tipo de pago")]
-        public string TipoDePago { get; set; }
-        public string sTipoDePago { get; set; }
+        [Display(Name = "Método de pago")]
+        [Required(AllowEmptyStrings = false)]
+        public string MetodoDePago { get; set; }
+        public string sMetodoDePago { get; set; }
 
         [Display(Name = "Moneda")]
         public string Moneda { get; set; }
@@ -163,7 +165,7 @@ namespace FacturacionSAT.CSL.WEB.Models.ViewModel
         [Display(Name = "RFC")]
         [RegularExpression(@"^[A-Za-zÑñ&]{3,4}[0-9]{2}[0-1][0-9][0-3][0-9][A-Za-z0-9]{2}[0-9Aa]$", ErrorMessage = "El RFC no es válido")]
         [Required]
-        public string RFCCliente { get; set; }
+        public string RFCReceptor { get; set; }
 
         [Display(Name = "Razón social")]
         public string RazonSocial { get; set; }
