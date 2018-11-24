@@ -73,7 +73,7 @@
                                         <td style="text-align:center;">
                                             <div class="visible-md visible-lg hidden-sm hidden-xs">
                                                 <a title="Editar" href="@Url.Action("UpdateCFDIPac","CFDIDatosPac")" class="btn btn-yellow tooltips" data-placement="top" data-original-title="Edit"><i class="fa fa-edit"></i></a>
-                                                <a title="Eliminar" id="delete-@item.Id_cfdiDatosPac" data-hrefa="@Url.Action("DeleteCFDIPac", "CFDIDatosPac", new { id =  item.Id_cfdiDatosPac })" onClick="delete_row('@item.Id_cfdiDatosPac');" class="btn btn-danger tooltips" data-placement="top" data-original-title="Eliminar"><i class="fa fa-trash-o"></i></a>
+                                                <a title="Eliminar" id="delete-@item.Id_cfdiDatosPac" data-hrefa="@Url.Action("DeleteCFDIPac", "CFDIDatosPac", new { id =  item.Id_cfdiDatosPac, id2 = item.Predeterminado})" onClick="delete_row('@item.Id_cfdiDatosPac');" class="btn btn-danger tooltips" data-placement="top" data-original-title="Eliminar"><i class="fa fa-trash-o"></i></a>
                                             </div>
                                             <div class="visible-xs visible-sm hidden-md hidden-lg">
                                                 <div class="btn-group">
@@ -87,7 +87,7 @@
                                                             </a>
                                                         </li>
                                                         <li>
-                                                            <a role="menuitem" tabindex="-1" id="delete-@item.Id_cfdiDatosPac" data-hrefa="@Url.Action("DeleteCFDIPac", "CFDIDatosPac", new { id = item.Id_cfdiDatosPac })" onClick="delete_row('@item.Id_cfdiDatosPac');">
+                                                            <a role="menuitem" tabindex="-1" id="delete-@item.Id_cfdiDatosPac" data-hrefa="@Url.Action("DeleteCFDIPac", "CFDIDatosPac", new { id = item.Id_cfdiDatosPac, predeterminado = item.Predeterminado})" onClick="delete_row('@item.Id_cfdiDatosPac');">
                                                                 <i class="fa fa-trash-o"></i> Eliminar
                                                             </a>
                                                         </li>

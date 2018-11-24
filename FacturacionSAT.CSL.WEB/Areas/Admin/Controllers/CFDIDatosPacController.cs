@@ -63,7 +63,7 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
                         productos.Conexion = Conexion;
                         productos.Id_usuario = User.Identity.Name;
                         productos.Opcion = 1;
-                        productos = CFDIDatos.InsertCFDIPac(productos);
+                        productos = CFDIDatos.ABCCFDIPac(productos);
 
                         if (productos.Completado == true)
                         {
@@ -100,14 +100,14 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        public ActionResult UpdateCFDIPac(string id_datosPac)
+        public ActionResult UpdateCFDIPac(string id)
         {
             try
             {
                 Token.SaveToken();
                 CFDIDatosPacModels CFDIModel = new CFDIDatosPacModels();
                 CFDIPacDatos CFDIDatos = new CFDIPacDatos();
-                CFDIModel.Id_cfdiDatosPac = id_datosPac;
+                CFDIModel.Id_cfdiDatosPac = id;
                 CFDIModel.Conexion = Conexion;
                 return View(CFDIModel);
             }
@@ -130,7 +130,7 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
                             productos.Conexion = Conexion;
                             productos.Id_usuario = User.Identity.Name;
                             productos.Opcion = 2;
-                            productos = CFDIDatos.InsertCFDIPac(productos);
+                            productos = CFDIDatos.ABCCFDIPac(productos);
 
                             if (productos.Completado == true)
                             {
@@ -165,12 +165,12 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        public ActionResult DeleteCFDIPac(string id)
+        public ActionResult DeleteCFDIPac(string id, bool id2 )
         {
             return View();
         }
         [HttpPost]
-        public ActionResult DeleteCFDIPac(string id, FormCollection collection)
+        public ActionResult DeleteCFDIPac(string id, bool id2, FormCollection collection)
         {
             try
             {
@@ -180,8 +180,9 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
                 CFDIModel.Conexion = Conexion;
                 CFDIModel.Opcion = 3;
                 CFDIModel.Id_cfdiDatosPac = id;
+                CFDIModel.Predeterminado = id2;
                 CFDIModel.Id_usuario = User.Identity.Name;
-                CFDIModel = CFDIDatos.DeleteCFDIDatosPac(CFDIModel);
+                CFDIModel = CFDIDatos.ABCCFDIPac(CFDIModel);
 
                 return Json("");
             }
