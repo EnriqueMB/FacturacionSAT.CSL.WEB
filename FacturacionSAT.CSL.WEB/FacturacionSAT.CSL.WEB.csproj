@@ -991,7 +991,6 @@
     <Compile Include="Areas\Admin\Controllers\AdminFacturaController.cs" />
     <Compile Include="Areas\Admin\Controllers\CFDIDatosConseptosController.cs" />
     <Compile Include="Areas\Admin\Controllers\CFDIDatosPacController.cs" />
-    <Compile Include="Controllers\CFDIDatosConseptosController.cs" />
     <Compile Include="Areas\Admin\Controllers\JsonController.cs" />
     <Compile Include="Controllers\FacturaController.cs" />
     <Compile Include="Areas\Admin\Controllers\AccountController.cs" />
@@ -1006,7 +1005,6 @@
     <Compile Include="Models\CFDIDatosConceptosModels.cs" />
     <Compile Include="Models\CFDIDatosPacModels.cs" />
     <Compile Include="Models\ComboModel.cs" />
-    <Compile Include="Models\Datos\CFDIConceptosDatos.cs" />
     <!--<<<<<<< HEAD-->
     <Compile Include="Models\Datos\CFDIPacDatos.cs" />
     <!--=======-->
