@@ -120,8 +120,8 @@ namespace FacturacionSAT.CSL.WEB.Models
         }
 
         public string Conexion { get; set; }
-        public string Resultado { get; set; }
-        public string Opcion { get; set; }
+        public int Resultado { get; set; }
+        public int Opcion { get; set; }
         public string IDUsuario { get; set; }
     }
 }
