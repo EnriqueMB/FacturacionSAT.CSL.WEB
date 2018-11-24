@@ -996,8 +996,10 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AuxSQLModel.cs" />
+    <Compile Include="Models\CFDIDatosEmisor.cs" />
     <Compile Include="Models\CFDIDatosPacModels.cs" />
     <Compile Include="Models\ComboModel.cs" />
+    <Compile Include="Models\Datos\CFDIDatosEmisorDatos.cs" />
     <Compile Include="Models\Datos\ComboDatos.cs" />
     <Compile Include="Models\Datos\JsonDatos.cs" />
     <Compile Include="Models\Datos\UsuarioDatos.cs" />
