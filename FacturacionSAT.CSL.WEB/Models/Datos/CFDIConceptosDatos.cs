@@ -11,7 +11,7 @@ namespace FacturacionSAT.CSL.WEB.Models.Datos
 {
     public class CFDIConceptosDatos
     {
-        public List<CFDIDatosConceptosModels> CFDIConseptos(AuxSQLModel oAuxSQLModel)
+        public List<CFDIDatosConceptosModels> CFDIConceptos(AuxSQLModel oAuxSQLModel)
         {
             try
             {

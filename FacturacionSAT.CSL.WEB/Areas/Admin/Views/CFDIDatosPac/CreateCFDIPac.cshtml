@@ -1,0 +1,148 @@
+﻿@model FacturacionSAT.CSL.WEB.Models.CFDIDatosPacModels
+@{
+    ViewBag.Title = "CreateCFDIPac";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+@section featured{
+
+    @{
+        var message = TempData["message"] ?? string.Empty;
+        var typemessage = TempData["typemessage"] ?? string.Empty;
+    }
+    <div class="row">
+        <div id="Error" class="progress-bar progress-bar-striped active errorCSL" style="display:none; width:100%">
+            <h3></h3>
+        </div>
+        <div id="Success" class="progress-bar progress-bar-striped active successCSL" style="display:none; width:100%">
+            <h3></h3>
+        </div>
+        <div class="col-md-12">
+            @*<form class="form-horizontal">*@
+            @{ Html.EnableClientValidation(false); }
+            @using (Html.BeginForm("CreateCFDIPac", "CFDIDatosPac", FormMethod.Post, new { id = "form-catalm", @class = "form-horizontal", autocomplete = "off" }))
+            {
+
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(false, "Hay errores en la captura de información:", new { @class = "text-danger" }) //Server
+                <div id="validation_summary" class="field_error "></div> //JS
+
+                @Html.HiddenFor(model => model.Id_cfdiDatosPac)
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><strong>Crear</strong> CFDIPac</h3>
+                        <ul class="panel-controls">
+                            <li><a href="#" class="panel-remove exsa"><span class="fa fa-times"></span></a></li>
+                        </ul>
+                    </div>
+                    <div class="panel-body">
+                        <div class="col-md-12">
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-12 col-xs-12 control-label text-center">Descripcion</label>
+                                    <div class="col-md-12 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
+                                            @*<input type="text" class="form-control" />*@
+                                            @Html.TextBoxFor(model => model.Descripcion, new { id = "Descripcion", @class = "form-control" })
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.Descripcion)
+                                        <span class="help-block">Ingrese una Descripcion</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-12 control-label text-center">User Pac</label>
+                                    <div class="col-md-12 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
+                                            @*<input type="text" class="form-control" />*@
+                                            @Html.TextBoxFor(model => model.UserPac, new { id = "UserPac", @class = "form-control" })
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.UserPac)
+                                        <span class="help-block">Clave Usuario Pac</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-12 control-label text-center">Password Pac</label>
+                                    <div class="col-md-12 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><span class="fa fa-unlock-alt"></span></span>
+                                            @*<input type="password" class="form-control" />*@
+                                            @Html.PasswordFor(model => model.PasswordPac, new { id = "PasswordPac", @class = "form-control" })
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.PasswordPac)
+                                        <span class="help-block">Ingrese Contraseña Pac</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-12 control-label text-center">User Pac Test</label>
+                                    <div class="col-md-12 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
+                                            @*<input type="text" class="form-control" />*@
+                                            @Html.TextBoxFor(model => model.UserPacTest, new { id = "UserPacTest", @class = "form-control" })
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.UserPacTest)
+                                        <span class="help-block">Ingrese Usuario Pac Test</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-12 control-label text-center">Password Pac Test</label>
+                                    <div class="col-md-12 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><span class="fa fa-unlock-alt"></span></span>
+                                            @*<input type="password" class="form-control" />*@
+                                            @Html.PasswordFor(model => model.PasswordPacTest, new { id = "PasswordPacTest", @class = "form-control" })
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.PasswordPacTest)
+                                        <span class="help-block">Ingrese contraseña Pact Test</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-6 control-label">¿Es Predeterminado?</label>
+                                    <div class="text-center col-md-9">
+                                        @Html.CheckBoxFor(model => model.Predeterminado)
+                                    </div>
+                                </div>
+                            </div>                           
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <input type="submit" value="Guardar" class="btn btn-primary pull-right">
+                        <a href="@Url.Action("Index","CFDIDatosPac")" class="btn btn-danger"><i class="icon-prev"></i>Cancelar</a>
+                    </div>
+                </div>
+                @*</form>*@
+            }
+        </div>
+    </div>
+    <script>
+        var message = '@message';
+        var typemessage = '@typemessage';
+    </script>
+}
+@section script{
+    <script type="text/javascript" src="@Url.Content("~/Content/js/mensajeDeError.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/js/plugins/jquery-validation/jquery.validate.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/js/validaciones/additionals.js")"></script>
+    <script>
+        jQuery(document).ready(function () {
+
+            Mensaje(message, typemessage);
+
+        });
+    </script>
+}
