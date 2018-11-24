@@ -50,9 +50,8 @@
     <Reference Include="dotless.Core, Version=1.4.0.0, Culture=neutral, PublicKeyToken=96b446c9e63eae34, processorArchitecture=MSIL">
       <HintPath>..\packages\dotless.1.4.0.0\lib\dotless.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.ApplicationBlocks.Data, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\proyectos\dll\Microsoft.ApplicationBlocks.Data.dll</HintPath>
+    <Reference Include="Microsoft.ApplicationBlocks.Data">
+      <HintPath>..\..\..\..\..\..\..\DLL\Microsoft.ApplicationBlocks.Data.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
@@ -920,6 +919,7 @@
     <Content Include="Areas\Admin\Views\AdminFactura\Index.cshtml" />
     <Content Include="Areas\Admin\Views\AdminFactura\Add.cshtml" />
     <Content Include="Areas\Admin\Views\CFDIDatosPac\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\CFDIDatosPac\CreateCFDIPac.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -956,6 +956,7 @@
     <Compile Include="Models\AuxSQLModel.cs" />
     <Compile Include="Models\CFDIDatosPacModels.cs" />
     <Compile Include="Models\ComboModel.cs" />
+    <Compile Include="Models\Datos\CFDIPacDatos.cs" />
     <Compile Include="Models\Datos\ComboDatos.cs" />
     <Compile Include="Models\UsuarioModels.cs" />
     <Compile Include="Models\ViewModel\FacturaViewModel.cs" />
