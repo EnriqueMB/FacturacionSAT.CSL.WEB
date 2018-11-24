@@ -956,6 +956,12 @@
     <Content Include="Areas\Admin\Views\CFDIDatosPac\Index.cshtml" />
     <Content Include="Areas\Admin\Views\CFDIDatosConceptos\Index.cshtml" />
     <Content Include="Areas\Admin\Views\CFDIDatosConceptos\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\CFDIDatosConseptos\Index.cshtml" />
+    <!--<<<<<<< HEAD-->
+    <Content Include="Areas\Admin\Views\CFDIDatosPac\CreateCFDIPac.cshtml" />
+    <!--=======-->
+    <Content Include="Areas\Admin\Views\CFDIDatosConseptos\Index.cshtml" />
+    <!-->>>>>>> 20dc6b70ee4a003db4d84e5a9b915af4f0f8ebe7-->
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -1001,7 +1007,11 @@
     <Compile Include="Models\CFDIDatosConceptosModels.cs" />
     <Compile Include="Models\CFDIDatosPacModels.cs" />
     <Compile Include="Models\ComboModel.cs" />
+    <!--<<<<<<< HEAD-->
+    <Compile Include="Models\Datos\CFDIPacDatos.cs" />
+    <!--=======-->
     <Compile Include="Models\Datos\CFDIConceptosDatos.cs" />
+    <!-->>>>>>> 20dc6b70ee4a003db4d84e5a9b915af4f0f8ebe7-->
     <Compile Include="Models\Datos\ComboDatos.cs" />
     <Compile Include="Models\Datos\FacturaDatos.cs" />
     <Compile Include="Models\Datos\JsonDatos.cs" />

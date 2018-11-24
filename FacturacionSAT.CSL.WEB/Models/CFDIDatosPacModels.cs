@@ -9,17 +9,31 @@ namespace FacturacionSAT.CSL.WEB.Models
     {
         public CFDIDatosPacModels()
         {
-            Id_cfdiDatosPac = 0;
+            Opcion = 0;
+            Id_cfdiDatosPac = string.Empty;
             Descripcion = string.Empty;
             UserPac = string.Empty;
             PasswordPac = string.Empty;
             UserPacTest = string.Empty;
             PasswordPacTest = string.Empty;
             Predeterminado = false;
+            Completado = false;
+            this.Conexion = string.Empty;
+            this.ListaCFDIPac = new List<CFDIDatosPacModels>();
+            Id_usuario = string.Empty;
         }
 
-        private int _Id_cfdiDatosPac;
-        public int Id_cfdiDatosPac
+        public string Id_usuario { get; set; }
+
+        private int _Opcion;
+        public int Opcion
+        {
+            get { return _Opcion; }
+            set { _Opcion = value; }
+        }
+
+        private string _Id_cfdiDatosPac;
+        public string Id_cfdiDatosPac
         {
             get { return _Id_cfdiDatosPac; }
             set { _Id_cfdiDatosPac = value; }
@@ -66,5 +80,15 @@ namespace FacturacionSAT.CSL.WEB.Models
             get { return _Predeterminado; }
             set { _Predeterminado = value; }
         }
+
+        private List<CFDIDatosPacModels> _ListaCFDIPac;
+        public List<CFDIDatosPacModels> ListaCFDIPac
+        {
+            get { return _ListaCFDIPac; }
+            set { _ListaCFDIPac = value; }
+        }
+
+        public string Conexion { get; set; }
+        public bool Completado { get; set; }
     }
 }

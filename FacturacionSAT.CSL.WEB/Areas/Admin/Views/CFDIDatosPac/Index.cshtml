@@ -1,11 +1,24 @@
-﻿
+﻿@model FacturacionSAT.CSL.WEB.Models.CFDIDatosPacModels
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
 @section featured{
-    <h2>Index Pac</h2>
+    @{
+        var message = TempData["message"] ?? string.Empty;
+        var typemessage = TempData["typemessage"] ?? string.Empty;
+    }
+    <div id="Error" class="progress-bar progress-bar-striped active errorCSL" style="display:none; width:100%">
+        <h3></h3>
+    </div>
+    <div id="Success" class="progress-bar progress-bar-striped active successCSL" style="display:none; width:100%">
+        <h3></h3>
+    </div>
+    <div class="page-title">
+        <h2><span class="fa fa-arrow-circle-o-left"></span>CFDIPAC</h2>
+    </div>
+    <!-- END PAGE TITLE -->
     <!-- PAGE CONTENT WRAPPER -->
     <div class="page-content-wrap">
         <div class="row">
@@ -15,65 +28,77 @@
                     <div class="panel-heading">
                         <h3 class="panel-title"></h3>
                         <ul class="panel-controls">
-                            <li><a href="#" class="btn btn-default btnCrear"><span class="fa fa-plus"></span> Nuevo Almacén</a></li>
+                            <li><a href="@Url.Action("CreateCFDIPac","CFDIDatosPac")" class="btn btn-default btnCrear"><span class="fa fa-plus"></span> Nuevo</a></li>
                             <li><a href="#" class="panel-collapse exsa"><span class="fa fa-angle-down"></span></a></li>
                             <li><a href="#" class="panel-fullscreen exsa"><span class="fa fa-expand"></span></a></li>
                         </ul>
                     </div>
                     <div class="panel-body">
                         <div class="table-responsive">
-                            <div class="panel-body">
-                                <div class="table-responsive">
-                                    <table class="table datatable">
-                                        <thead>
-                                            <tr>
-                                                <th>Sucursal</th>
-                                                <th>Descripción</th>
-                                                <th>Clave</th>
-                                                <th>Acción</th>
-                                                <th>Clave</th>
-                                                <th>Acción</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr id="#">
-                                                <td>asdsad</td>
-                                                <td>asdsda</td>
-                                                <td>asdasd</td>
-                                                <td>asdsad</td>
-                                                <td>asdsda</td>
-                                                <td>asdasd</td>
-                                                <td style="text-align:center;">
-                                                    <div class="visible-md visible-lg hidden-sm hidden-xs">
-                                                        <a title="Editar" href="#" class="btn btn-yellow tooltips" data-placement="top" data-original-title="Edit"><i class="fa fa-edit"></i></a>
-                                                        <a title="Eliminar" id="#" data-hrefa="#" onClick="delete_row('#');" class="btn btn-danger tooltips" data-placement="top" data-original-title="Eliminar"><i class="fa fa-trash-o"></i></a>
-                                                    </div>
-                                                    <div class="visible-xs visible-sm hidden-md hidden-lg">
-                                                        <div class="btn-group">
-                                                            <a class="btn btn-danger dropdown-toggle btn-sm" data-toggle="dropdown" href="#">
-                                                                <i class="fa fa-cog"></i> <span class="caret"></span>
-                                                            </a>
-                                                            <ul role="menu" class="dropdown-menu pull-right dropdown-dark">
-                                                                <li>
-                                                                    <a role="menuitem" tabindex="-1" href="#">
-                                                                        <i class="fa fa-edit"></i> Editar
-                                                                    </a>
-                                                                </li>
-                                                                <li>
-                                                                    <a role="menuitem" tabindex="-1" id="#" data-hrefa="#" onClick="delete_row('#');">
-                                                                        <i class="fa fa-trash-o"></i> Eliminar
-                                                                    </a>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                            </tr>
+                            <table class="table datatable">
+                                <thead>
+                                    <tr>
+                                        @*<th>Id_cfdiDatosPac</th>*@
+                                        <th>Descripcion</th>
+                                        <th>UserPac</th>
+                                        @*<th>PasswordPac</th>*@
+                                        <th>UserPacTest</th>
+                                        @*<th>PasswordPacTest</th>*@
+                                        <th>Predeterminado</th>
+                                        <th></th>
 
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                   @foreach (var item in Model.ListaCFDIPac)
+                                    {
+                                        <tr >
+                                        @*<td>@item.Id_cfdiDatosPac</td>*@
+                                        <td>@item.Descripcion</td>
+                                        <td>@item.UserPac</td>
+                                        @*<td>@item.PasswordPac</td>*@
+                                        <td>@item.UserPacTest</td>
+                                        @*<td>@item.PasswordPacTest</td>*@
+                                        <td>
+                                            @if (item.Predeterminado == true)
+                                            {
+                                                @*<label class="label-success tooltips">SI</label>*@
+                                                <span class="badge badge-warning">SI</span>
+                                            }
+                                            else
+                                            {
+                                                <span class="badge badge-danger">NO</span>
+                                            }
+                                        </td>
+                                        <td style="text-align:center;">
+                                            <div class="visible-md visible-lg hidden-sm hidden-xs">
+                                                <a title="Editar" href="@Url.Action("Edit", "CFDIDatosPac", new { id = item.Id_cfdiDatosPac})" class="btn btn-yellow tooltips" data-placement="top" data-original-title="Edit"><i class="fa fa-edit"></i></a>
+                                                <a title="Eliminar" id="delete-@item.Id_cfdiDatosPac" data-hrefa="@Url.Action("Delete", "CFDIDatosPac", new { id =  item.Id_cfdiDatosPac })" onClick="delete_row('@item.Id_cfdiDatosPac');" class="btn btn-danger tooltips" data-placement="top" data-original-title="Eliminar"><i class="fa fa-trash-o"></i></a>
+                                            </div>
+                                            <div class="visible-xs visible-sm hidden-md hidden-lg">
+                                                <div class="btn-group">
+                                                    <a class="btn btn-danger dropdown-toggle btn-sm" data-toggle="dropdown" href="#">
+                                                        <i class="fa fa-cog"></i> <span class="caret"></span>
+                                                    </a>
+                                                    <ul role="menu" class="dropdown-menu pull-right dropdown-dark">
+                                                        <li>
+                                                            <a role="menuitem" tabindex="-1" href="@Url.Action("Edit", "CFDIDatosPac", new { id = item.Id_cfdiDatosPac})">
+                                                                <i class="fa fa-edit"></i> Editar
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a role="menuitem" tabindex="-1" id="delete-@item.Id_cfdiDatosPac" data-hrefa="@Url.Action("Delete", "CFDIDatosPac", new { id = item.Id_cfdiDatosPac })" onClick="delete_row('@item.Id_cfdiDatosPac');">
+                                                                <i class="fa fa-trash-o"></i> Eliminar
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                        }
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
@@ -82,7 +107,38 @@
         </div>
     </div>
     <!-- PAGE CONTENT WRAPPER -->
-   
+    <div class="message-box animated fadeIn" data-sound="alert" id="mb-remove-row">
+        <div class="mb-container">
+            <div class="mb-middle">
+                <div class="mb-title"><span class="fa fa-times"></span> Eliminar <strong>Registro</strong> ?</div>
+                <div class="mb-content">
+                    <p>¿Seguro que quieres eliminar esta fila?</p>
+                    <p>Presione "sí" si está seguro.</p>
+                </div>
+                <div class="mb-footer">
+                    <div class="pull-right">
+                        <button class="btn btn-success btn-lg mb-control-yes">Si</button>
+                        <button class="btn btn-default btn-lg mb-control-close">No</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+    var message = '@message';
+    var typemessage = '@typemessage';
+    </script>
+}
+@section script
+{
+    <script type="text/javascript" src="@Url.Content("~/Content/js/demo_tables.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/js/plugins/datatables/jquery.dataTables.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/js/mensajeDeError.js")"></script>
+    <script>
+        jQuery(document).ready(function () {
+            Mensaje(message, typemessage);
+        });
+    </script>
 }
 
 
