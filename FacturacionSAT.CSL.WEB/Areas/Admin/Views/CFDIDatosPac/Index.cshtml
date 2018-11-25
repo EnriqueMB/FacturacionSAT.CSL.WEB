@@ -16,7 +16,7 @@
         <h3></h3>
     </div>
     <div class="page-title">
-        <h2><span class="fa fa-arrow-circle-o-left"></span>CFDIPAC</h2>
+        <h2><span class="fa fa-arrow-circle-o-left"></span><strong>CFDIPAC</strong> </h2>
     </div>
     <!-- END PAGE TITLE -->
     <!-- PAGE CONTENT WRAPPER -->
@@ -45,14 +45,14 @@
                                         <th>UserPacTest</th>
                                         @*<th>PasswordPacTest</th>*@
                                         <th>Predeterminado</th>
-                                        <th></th>
+                                        <th>Accion</th>
 
                                     </tr>
                                 </thead>
                                 <tbody>
                                    @foreach (var item in Model.ListaCFDIPac)
                                     {
-                                        <tr >
+                                        <tr @item.Id_cfdiDatosPac>
                                         @*<td>@item.Id_cfdiDatosPac</td>*@
                                         <td>@item.Descripcion</td>
                                         <td>@item.UserPac</td>
@@ -72,8 +72,8 @@
                                         </td>
                                         <td style="text-align:center;">
                                             <div class="visible-md visible-lg hidden-sm hidden-xs">
-                                                <a title="Editar" href="@Url.Action("Edit", "CFDIDatosPac", new { id = item.Id_cfdiDatosPac})" class="btn btn-yellow tooltips" data-placement="top" data-original-title="Edit"><i class="fa fa-edit"></i></a>
-                                                <a title="Eliminar" id="delete-@item.Id_cfdiDatosPac" data-hrefa="@Url.Action("Delete", "CFDIDatosPac", new { id =  item.Id_cfdiDatosPac })" onClick="delete_row('@item.Id_cfdiDatosPac');" class="btn btn-danger tooltips" data-placement="top" data-original-title="Eliminar"><i class="fa fa-trash-o"></i></a>
+                                                <a title="Editar" href="@Url.Action("UpdateCFDIPac","CFDIDatosPac",new { id = item.Id_cfdiDatosPac })" class="btn btn-yellow tooltips" data-placement="top" data-original-title="Edit"><i class="fa fa-edit"></i></a>
+                                                <a title="Eliminar" id="delete-@item.Id_cfdiDatosPac" data-hrefa="@Url.Action("DeleteCFDIPac", "CFDIDatosPac", new { id = item.Id_cfdiDatosPac })" onClick="delete_row('@item.Id_cfdiDatosPac');" class="btn btn-danger tooltips" data-placement="top" data-original-title="Eliminar"><i class="fa fa-trash-o"></i></a>
                                             </div>
                                             <div class="visible-xs visible-sm hidden-md hidden-lg">
                                                 <div class="btn-group">
@@ -87,7 +87,7 @@
                                                             </a>
                                                         </li>
                                                         <li>
-                                                            <a role="menuitem" tabindex="-1" id="delete-@item.Id_cfdiDatosPac" data-hrefa="@Url.Action("Delete", "CFDIDatosPac", new { id = item.Id_cfdiDatosPac })" onClick="delete_row('@item.Id_cfdiDatosPac');">
+                                                            <a role="menuitem" tabindex="-1" id="delete-@item.Id_cfdiDatosPac" data-hrefa="@Url.Action("DeleteCFDIPac", "CFDIDatosPac", new { id = item.Id_cfdiDatosPac})" onClick="delete_row('@item.Id_cfdiDatosPac');">
                                                                 <i class="fa fa-trash-o"></i> Eliminar
                                                             </a>
                                                         </li>
