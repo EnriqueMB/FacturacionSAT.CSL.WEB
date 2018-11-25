@@ -18,12 +18,14 @@ namespace FacturacionSAT.CSL.WEB.Models
             Id_cfdiClaveProdServDetalle = string.Empty;
             Id_cfdiClaveUnidad = string.Empty;
             Id_usuario = string.Empty;
+            Conexion = string.Empty;
             tipoProducto = new CFDIConceptosTipoProductoModels();
             this._ListaTipoProducto = new List<CFDIConceptosTipoProductoModels>();
         }
 
+        public string Conexion { get; set; }
 
-       private string _Id_cfdiDatosConceptos;
+        private string _Id_cfdiDatosConceptos;
 
         public string Id_cfdiDatosConceptos
         {

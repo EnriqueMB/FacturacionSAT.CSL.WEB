@@ -92,8 +92,8 @@
                         <div class="form-group">
                             <label class="col-md-2 col-xs-12 control-label"><span>* </span> Tipo producto</label>
                             <div class="col-md-6 col-xs-12">
-                                @Html.DropDownListFor(model => model.tipoProducto.Id_cfdiTipoProducto, new SelectList(Model.tipoProducto._ListaTipoProducto, "id_cfdiTipoProducto", "tipoProducto"), new { id = "Id_cfdiTipoProducto", @class = "form-control select", data_live_search = "true" })
-                                @Html.ValidationMessageFor(model => model.tipoProducto.Id_cfdiTipoProducto)
+                                @Html.DropDownListFor(model => model.Id_cfdiTipoProducto, new SelectList(Model.ListaTipoProducto, "Id_cfdiTipoProducto", "TipoProducto"), new { id = "Id_cfdiTipoProducto", @class = "form-control select", data_live_search = "true" })
+                                @Html.ValidationMessageFor(model => model.Id_cfdiTipoProducto)
                             </div>
                         </div>
                     </div>
@@ -116,19 +116,19 @@
     </script>
 }
 @section script{
-    <script type="text/javascript" src="@Url.Content("~/Content/js/plugins/bootstrap/bootstrap-datepicker.js")"></script>
+    @*<script type="text/javascript" src="@Url.Content("~/Content/js/plugins/bootstrap/bootstrap-datepicker.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Content/js/plugins/bootstrap/bootstrap-file-input.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Content/js/plugins/bootstrap/bootstrap-select.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Content/js/plugins/tagsinput/jquery.tagsinput.min.js")"></script>
-    <script type="text/javascript" src="@Url.Content("~/Content/js/demo_tables.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/js/demo_tables.js")"></script>*@
     <script type="text/javascript" src="@Url.Content("~/Content/js/mensajeDeError.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Content/js/plugins/jquery-validation/jquery.validate.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Content/js/validaciones/additionals.js")"></script>
-    <script type="text/javascript" src="@Url.Content("~/Content/js/Usuario.js")"></script>
+    @*<script type="text/javascript" src="@Url.Content("~/Content/js/Usuario.js")"></script>*@
     <script>
         jQuery(document).ready(function () {
             Mensaje(message, typemessage);
-            Usuario.init();
+            //Usuario.init();
         });
     </script>
 }

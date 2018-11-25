@@ -52,8 +52,10 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
                 Token.SaveToken();
                 CFDIDatosConceptosModels Model = new CFDIDatosConceptosModels();
                 ComboDatos listTipoPoduc = new ComboDatos();
-                
-                Model.ListaTipoProducto = listTipoPoduc.ListaTipoProducto(oAuxSQLModel);
+                Model.Conexion = Conexion;               
+                Model.ListaTipoProducto = listTipoPoduc.ListaTipoProducto(Model);
+                var ListTipoProduct = new SelectList(Model.ListaTipoProducto, " Id_cfdiTipoProducto", "TipoProducto");
+                ViewData["cmbTipoProducto"] = ListTipoProduct;
                 return View(Model);
                
             }

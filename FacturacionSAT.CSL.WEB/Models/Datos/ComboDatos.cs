@@ -57,10 +57,10 @@ namespace FacturacionSAT.CSL.WEB.Models.Datos
             }
         }
 
-        internal List<CFDIConceptosTipoProductoModels> ListaTipoProducto(object oAuxSQLModel)
-        {
-            throw new NotImplementedException();
-        }
+        //internal List<CFDIConceptosTipoProductoModels> ListaTipoProducto(object oAuxSQLModel)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
         public List<ComboModel> ListaMetodoPagoDetalle(AuxSQLModel oAuxSQLModel)
         {
@@ -135,19 +135,19 @@ namespace FacturacionSAT.CSL.WEB.Models.Datos
             }
         }
 
-        public List<CFDIDatosConceptosModels> ListaTipoProducto(AuxSQLModel oAuxSQLModel)
+        public List<CFDIConceptosTipoProductoModels> ListaTipoProducto(CFDIDatosConceptosModels datos)
         {
             try
             {
-                List<CFDIDatosConceptosModels> lista = new List<CFDIDatosConceptosModels>();
-                CFDIDatosConceptosModels item;
+                List<CFDIConceptosTipoProductoModels> lista = new List<CFDIConceptosTipoProductoModels>();
+                CFDIConceptosTipoProductoModels item;
                 SqlDataReader dr = null;
-                dr = SqlHelper.ExecuteReader(oAuxSQLModel.Conexion, "[dbo].[CFDIDatosConceptosTipoProduc_Combo_sp]");
+                dr = SqlHelper.ExecuteReader(datos.Conexion, "[dbo].[CFDIDatosConceptosTipoProduc_Combo_sp]");
                 while (dr.Read())
                 {
-                    item = new CFDIDatosConceptosModels();
-                    item.tipoProducto.Id_cfdiTipoProducto = !dr.IsDBNull(dr.GetOrdinal("id_cfdiTipoProducto")) ? dr.GetString(dr.GetOrdinal("id_cfdiTipoProducto")) : string.Empty;
-                    item.tipoProducto.TipoProducto = !dr.IsDBNull(dr.GetOrdinal("tipoProducto")) ? dr.GetString(dr.GetOrdinal("tipoProducto")) : string.Empty;
+                    item = new CFDIConceptosTipoProductoModels();
+                    item.Id_cfdiTipoProducto = !dr.IsDBNull(dr.GetOrdinal("id_cfdiTipoProducto")) ? dr.GetString(dr.GetOrdinal("id_cfdiTipoProducto")) : string.Empty;
+                    item.TipoProducto = !dr.IsDBNull(dr.GetOrdinal("tipoProducto")) ? dr.GetString(dr.GetOrdinal("tipoProducto")) : string.Empty;
                     lista.Add(item);
                 }
                 dr.Close();
