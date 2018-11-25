@@ -57,6 +57,11 @@ namespace FacturacionSAT.CSL.WEB.Models.Datos
             }
         }
 
+        internal List<CFDIConceptosTipoProductoModels> ListaTipoProducto(object oAuxSQLModel)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<ComboModel> ListaMetodoPagoDetalle(AuxSQLModel oAuxSQLModel)
         {
             try
@@ -119,6 +124,30 @@ namespace FacturacionSAT.CSL.WEB.Models.Datos
                     item = new ComboModel();
                     item.Id = !dr.IsDBNull(dr.GetOrdinal("id")) ? dr.GetString(dr.GetOrdinal("id")) : string.Empty;
                     item.Value = !dr.IsDBNull(dr.GetOrdinal("descripcion")) ? dr.GetString(dr.GetOrdinal("descripcion")) : string.Empty;
+                    lista.Add(item);
+                }
+                dr.Close();
+                return lista;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public List<CFDIDatosConceptosModels> ListaTipoProducto(AuxSQLModel oAuxSQLModel)
+        {
+            try
+            {
+                List<CFDIDatosConceptosModels> lista = new List<CFDIDatosConceptosModels>();
+                CFDIDatosConceptosModels item;
+                SqlDataReader dr = null;
+                dr = SqlHelper.ExecuteReader(oAuxSQLModel.Conexion, "[dbo].[CFDIDatosConceptosTipoProduc_Combo_sp]");
+                while (dr.Read())
+                {
+                    item = new CFDIDatosConceptosModels();
+                    item.tipoProducto.Id_cfdiTipoProducto = !dr.IsDBNull(dr.GetOrdinal("id_cfdiTipoProducto")) ? dr.GetString(dr.GetOrdinal("id_cfdiTipoProducto")) : string.Empty;
+                    item.tipoProducto.TipoProducto = !dr.IsDBNull(dr.GetOrdinal("tipoProducto")) ? dr.GetString(dr.GetOrdinal("tipoProducto")) : string.Empty;
                     lista.Add(item);
                 }
                 dr.Close();

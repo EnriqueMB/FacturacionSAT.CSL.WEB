@@ -18,7 +18,8 @@ namespace FacturacionSAT.CSL.WEB.Models
             Id_cfdiClaveProdServDetalle = string.Empty;
             Id_cfdiClaveUnidad = string.Empty;
             Id_usuario = string.Empty;
-
+            tipoProducto = new CFDIConceptosTipoProductoModels();
+            this._ListaTipoProducto = new List<CFDIConceptosTipoProductoModels>();
         }
 
 
@@ -87,6 +88,21 @@ namespace FacturacionSAT.CSL.WEB.Models
         {
             get { return _Id_usuario; }
             set { _Id_usuario = value; }
+        }
+
+        private CFDIConceptosTipoProductoModels _tipoProducto;
+
+        public CFDIConceptosTipoProductoModels tipoProducto
+        {
+            get { return _tipoProducto; }
+            set { _tipoProducto = value; }
+        }
+        private List<CFDIConceptosTipoProductoModels> _ListaTipoProducto;
+
+        public List<CFDIConceptosTipoProductoModels> ListaTipoProducto
+        {
+            get { return _ListaTipoProducto; }
+            set { _ListaTipoProducto = value; }
         }
 
     }

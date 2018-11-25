@@ -17,7 +17,7 @@
         <h3></h3>
     </div>
     <div class="page-title">
-        <h2><span class="fa fa-arrow-circle-o-left"></span> CFDIDAtosConseptos </h2>
+        <h2><span class="fa fa-arrow-circle-o-left"></span> CFDIDatosConseptos </h2>
     </div>
     <!-- END PAGE TITLE -->
     <!-- PAGE CONTENT WRAPPER -->
@@ -29,7 +29,7 @@
                     <div class="panel-heading">
                         <h3 class="panel-title"></h3>
                         <ul class="panel-controls">
-                            <li><a href="@Url.Action("","")" class="btn btn-default btnCrear"><span class="fa fa-plus"></span> Nuevo</a></li>
+                            <li><a href="@Url.Action("Crear","CFDIDatosConceptos")" class="btn btn-default btnCrear"><span class="fa fa-plus"></span> Nuevo</a></li>
                             <li><a href="#" class="panel-collapse exsa"><span class="fa fa-angle-down"></span></a></li>
                             <li><a href="#" class="panel-fullscreen exsa"><span class="fa fa-expand"></span></a></li>
                         </ul>
@@ -42,6 +42,10 @@
                                         <th>Id_cfdiDatosconceptos</th>
                                         <th>Descripcion</th>
                                         <th>Tipo de producto</th>
+                                        <th>Division</th>
+                                        <th>Grupo</th>
+                                        <th>Clase</th>
+                                        <th>Unidad</th>
                                         <th></th>
                                     </tr>
                                 </thead>
@@ -104,6 +108,10 @@
                     { "data": "id_cfdiDatosConceptos" },
                     { "data": "descripcion" },
                     { "data": "tipoProducto" },
+                    { "data": "division" },
+                    { "data": "grupo" },
+                    { "data": "clase" },
+                    { "data": "unidad" },
                     {
                         "data": null,
                         "render": function (data, type, full) {
