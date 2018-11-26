@@ -40,8 +40,8 @@
                 <div class="col-md-12">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label class="col-md-3 control-label text-left">Clave Producto</label>
-                            <div class="col-md-9 col-xs-12">
+                            <label class="col-md-12 control-label text-left">Clave Producto</label>
+                            <div class="col-md-12 col-xs-12">
                                 <div class="input-group">
                                     <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
                                     @Html.TextBoxFor(model => model.Id_cfdiClaveProdServDetalle, new { id = "id_cfdiDatosConceptos", @class = "form-control" })
@@ -55,8 +55,8 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label class="col-md-3 control-label text-left">Clave unidad</label>
-                            <div class="col-md-9 col-xs-12">
+                            <label class="col-md-12 control-label text-left">Clave unidad</label>
+                            <div class="col-md-12 col-xs-12">
                                 <div class="input-group">
                                     <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
                                     @Html.TextBoxFor(model => model.Id_cfdiClaveUnidad, new { id = "id_cfdiDatosConceptos", @class = "form-control" })
@@ -73,19 +73,21 @@
                 <div class="col-md-12">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label class="col-md-2 col-xs-12 control-label"><span>* </span> Tipo producto</label>
-                            <div class="col-md-6 col-xs-12">
+                            <label class="col-md-12 col-xs-12 control-label"><span>* </span> Tipo producto</label>
+                            <div class="col-md-12 col-xs-12">
                                 @Html.DropDownListFor(model => model.Id_cfdiTipoProducto, new SelectList(Model.ListaTipoProducto, "Id_cfdiTipoProducto", "TipoProducto"), new { id = "Id_cfdiTipoProducto", @class = "form-control select", data_live_search = "true" })
                                 @Html.ValidationMessageFor(model => model.Id_cfdiTipoProducto)
+                                <span class="help-block">Seleccione un tipo producto</span>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label class="col-md-2 col-xs-12 control-label"><span>* </span> CFDIDivicio</label>
-                            <div class="col-md-6 col-xs-12">
+                            <label class="col-md-12 col-xs-12 control-label"><span>* </span> CFDIDivicion</label>
+                            <div class="col-md-12 col-xs-12">
                                 @Html.DropDownListFor(model => model.Id_cfdiDivision, new SelectList(Model.ListaDivicion, "Id_cfdiDivision", "Division"), new { id = "Id_cfdiDivision", @class = "form-control select", data_live_search = "true" })
                                 @Html.ValidationMessageFor(model => model.Id_cfdiDivision)
+                                <span class="help-block">Seleccione una divicion</span>
                             </div>
                         </div>
                     </div>
@@ -102,6 +104,20 @@
                 </div>
                 <div class="col-md-12">
                     <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-md-12 col-xs-12 control-label"><span>* </span> cfdiGrupo</label>
+                            <div class="col-md-12 col-xs-12">
+                                @Html.DropDownListFor(model => model.Id_cfdiGrupo, new SelectList(Model.ListaGrupo, "Id_cfdiGrupo", "Grupo"), new { id = "Id_cfdiGrupo", @class = "form-control select", data_live_search = "true" })
+                                @Html.ValidationMessageFor(model => model.Id_cfdiGrupo)
+                                <span class="help-block">Seleccione un grupo</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+
+                <div class="col-md-12">
+                    <div class="col-md-12">
                         <div class="form-group">
                             <label class="col-md-12 col-xs-12 control-label text-center">Descripcion</label>
                             <div class="col-md-12 col-xs-12">

@@ -181,6 +181,29 @@ namespace FacturacionSAT.CSL.WEB.Models.Datos
                 throw ex;
             }
         }
+        public List<CFDIConceptoGrupoModels> ListaGrupoConcepto(CFDIDatosConceptosModels datos)
+        {
+            try
+            {
+                List<CFDIConceptoGrupoModels> lista = new List<CFDIConceptoGrupoModels>();
+                CFDIConceptoGrupoModels item;
+                SqlDataReader dr = null;
+                dr = SqlHelper.ExecuteReader(datos.Conexion, "[dbo].[CFDIDatosConceptosGrupo_Combo_sp]");
+                while (dr.Read())
+                {
+                    item = new CFDIConceptoGrupoModels();
+                    item.Id_cfdiGrupo = !dr.IsDBNull(dr.GetOrdinal("id_cfdiGrupo")) ? dr.GetString(dr.GetOrdinal("id_cfdiGrupo")) : string.Empty;
+                    item.Grupo = !dr.IsDBNull(dr.GetOrdinal("grupo")) ? dr.GetString(dr.GetOrdinal("grupo")) : string.Empty;
+                    lista.Add(item);
+                }
+                dr.Close();
+                return lista;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
         public List<CFDIConceptoClaseModels> ListaCFDIClase(CFDIDatosConceptosModels datos)
         {
             try

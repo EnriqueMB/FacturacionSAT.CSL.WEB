@@ -55,15 +55,18 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
                 Model.Conexion = Conexion;               
                 Model.ListaTipoProducto = listTipoPoduc.ListaTipoProducto(Model);
                 Model.ListaDivicion = listTipoPoduc.ListaDivicionConcepto(Model);
+                Model.ListaGrupo = listTipoPoduc.ListaGrupoConcepto(Model);
                 Model.ListaClase = listTipoPoduc.ListaCFDIClase(Model);
 
                 var ListTipoProduct = new SelectList(Model.ListaTipoProducto, " Id_cfdiTipoProducto", "TipoProducto");
                 var ListDivicion = new SelectList(Model.ListaDivicion, " Id_cfdiDivision", "Division");
+                var ListGrupo = new SelectList(Model.ListaGrupo, " Id_cfdiGrupo", "Grupo");
                 var ListCFDIClase = new SelectList(Model.ListaClase, "Id_CfdiClase", "clase");
 
                 ViewData["cmbTipoProducto"] = ListTipoProduct;
                 ViewData["cmbDivicion"] = ListDivicion;
                 ViewData["cmbClase"] = ListCFDIClase;
+                ViewData["cmbGrupo"] = ListGrupo;
                 return View(Model);
                
             }
