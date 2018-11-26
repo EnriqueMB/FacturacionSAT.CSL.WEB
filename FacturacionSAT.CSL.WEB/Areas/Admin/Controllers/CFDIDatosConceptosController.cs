@@ -118,7 +118,7 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
                         Model.Id_usuario = User.Identity.Name;
                         Model.Opcion = 1;
                         //Model.Id_cfdiDatosConceptos = string.Empty;
-                        Model = ConceptoDatos.ABCCFDIconcepto(Model);
+                        Model = ConceptoDatos.ABCCFDIconceptos(Model);
                         //Si abc fue completado correctamente
                         if (Model.Completado == true)
                         {

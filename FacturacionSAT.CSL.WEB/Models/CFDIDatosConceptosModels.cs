@@ -163,10 +163,7 @@ namespace FacturacionSAT.CSL.WEB.Models
             get { return _ListaClaveunidad; }
             set { _ListaClaveunidad = value; }
         }
-
-
-
-        public bool Completado { get; set; }
+        
 
         private List<CFDIDatosConceptosModels> _ListaCFDIConceptos;
 
