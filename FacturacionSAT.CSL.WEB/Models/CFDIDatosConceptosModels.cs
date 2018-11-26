@@ -9,6 +9,7 @@ namespace FacturacionSAT.CSL.WEB.Models
     {
         public CFDIDatosConceptosModels()
         {
+            Opcion = 0;
             Id_cfdiDatosConceptos = string.Empty;
             Descripcion = string.Empty;
             Id_cfdiTipoProducto = string.Empty;
@@ -19,12 +20,23 @@ namespace FacturacionSAT.CSL.WEB.Models
             Id_cfdiClaveUnidad = string.Empty;
             Id_usuario = string.Empty;
             Conexion = string.Empty;
+            Completado = false;
             tipoProducto = new CFDIConceptosTipoProductoModels();
             this._ListaTipoProducto = new List<CFDIConceptosTipoProductoModels>();
             this._ListaDivicion = new List<CFDIConceptoDivicionModels>();
             this._ListaClase = new List<CFDIConceptoClaseModels>();
             this._ListaGrupo = new List<CFDIConceptoGrupoModels>();
+            this._ListaClaveProducto = new List<CFDIConceptosClaveProductoModels>();
+            this._ListaClaveunidad = new List<CFDIConceptoClaveUnidadModels>();
         }
+        private int _Opcion;
+
+        public int Opcion
+        {
+            get { return _Opcion; }
+            set { _Opcion = value; }
+        }
+
 
         public string Conexion { get; set; }
 
@@ -131,6 +143,24 @@ namespace FacturacionSAT.CSL.WEB.Models
             get { return _ListaClase; }
             set { _ListaClase = value; }
         }
+        private List<CFDIConceptosClaveProductoModels> _ListaClaveProducto;
+
+        public List<CFDIConceptosClaveProductoModels> ListaClaveProducto
+        {
+            get { return _ListaClaveProducto; }
+            set { _ListaClaveProducto = value; }
+        }
+        private List<CFDIConceptoClaveUnidadModels> _ListaClaveunidad;
+
+        public List<CFDIConceptoClaveUnidadModels> ListaClaveunidad
+        {
+            get { return _ListaClaveunidad; }
+            set { _ListaClaveunidad = value; }
+        }
+
+
+
+        public bool Completado { get; set; }
 
     }
     }

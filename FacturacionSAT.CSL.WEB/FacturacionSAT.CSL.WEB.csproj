@@ -1007,8 +1007,10 @@
     </Compile>
     <Compile Include="Models\AuxSQLModel.cs" />
     <Compile Include="Models\CFDIConceptoClaseModels.cs" />
+    <Compile Include="Models\CFDIConceptoClaveUnidadModels.cs" />
     <Compile Include="Models\CFDIConceptoDivicionModels.cs" />
     <Compile Include="Models\CFDIConceptoGrupoModels.cs" />
+    <Compile Include="Models\CFDIConceptosClaveProductoModels.cs" />
     <Compile Include="Models\CFDIConceptosTipoProductoModels.cs" />
     <Compile Include="Models\CFDIDatosConceptosModels.cs" />
     <Compile Include="Models\CFDIDatosEmisor.cs" />

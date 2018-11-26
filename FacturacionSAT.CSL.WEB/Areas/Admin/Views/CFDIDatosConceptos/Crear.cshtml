@@ -38,42 +38,29 @@
             <div class="panel-body">
 
                 <div class="col-md-12">
-                    <div class="col-md-6">
+                     <div class="col-md-6">
                         <div class="form-group">
-                            <label class="col-md-12 control-label text-left">Clave Producto</label>
+                            <label class="col-md-12 col-xs-12 control-label text-center">Clave producto</label>
                             <div class="col-md-12 col-xs-12">
-                                <div class="input-group">
-                                    <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
-                                    @Html.TextBoxFor(model => model.Id_cfdiClaveProdServDetalle, new { id = "id_cfdiDatosConceptos", @class = "form-control" })
-                                    @Html.ValidationMessageFor(model => model.Id_cfdiClaveProdServDetalle)
-                                </div>
-                                <span class="help-block">Ingrese una clave de producto</span>
-
+                                @Html.DropDownListFor(model => model.Id_cfdiClaveProdServDetalle, new SelectList(Model.ListaClaveProducto, "Id_cfdiClaveProdServDetalle", "Descripcion"), new { id = "Id_cfdiClaveProdServDetalle", @class = "form-control select", data_live_search = "true" })
+                                @Html.ValidationMessageFor(model => model.Id_cfdiTipoProducto)
+                                <span class="help-block">Seleccione un tipo producto</span>
                             </div>
-
+                        </div>
+                    </div>
+                   <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-md-12 col-xs-12 control-label text-center">Clave Unidad</label>
+                            <div class="col-md-12 col-xs-12">
+                                @Html.DropDownListFor(model => model.Id_cfdiClaveUnidad, new SelectList(Model.ListaClaveunidad, "Id_cfdiClaveUnidad", "Nombre"), new { id = "Id_cfdiClaveUnidad", @class = "form-control select", data_live_search = "true" })
+                                @Html.ValidationMessageFor(model => model.Id_cfdiClaveUnidad)
+                                <span class="help-block">Seleccione un tipo producto</span>
+                            </div>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label class="col-md-12 control-label text-left">Clave unidad</label>
-                            <div class="col-md-12 col-xs-12">
-                                <div class="input-group">
-                                    <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
-                                    @Html.TextBoxFor(model => model.Id_cfdiClaveUnidad, new { id = "id_cfdiDatosConceptos", @class = "form-control" })
-                                    @Html.ValidationMessageFor(model => model.Id_cfdiClaveUnidad)
-                                </div>
-                                <span class="help-block">Ingrese una clave de unidad</span>
-
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-12">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="col-md-12 col-xs-12 control-label"><span>* </span> Tipo producto</label>
+                            <label class="col-md-12 col-xs-12 control-label text-center">Tipo producto</label>
                             <div class="col-md-12 col-xs-12">
                                 @Html.DropDownListFor(model => model.Id_cfdiTipoProducto, new SelectList(Model.ListaTipoProducto, "Id_cfdiTipoProducto", "TipoProducto"), new { id = "Id_cfdiTipoProducto", @class = "form-control select", data_live_search = "true" })
                                 @Html.ValidationMessageFor(model => model.Id_cfdiTipoProducto)
@@ -83,7 +70,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label class="col-md-12 col-xs-12 control-label"><span>* </span> CFDIDivicion</label>
+                            <label class="col-md-12 col-xs-12 control-label text-center">CFDIDivicion</label>
                             <div class="col-md-12 col-xs-12">
                                 @Html.DropDownListFor(model => model.Id_cfdiDivision, new SelectList(Model.ListaDivicion, "Id_cfdiDivision", "Division"), new { id = "Id_cfdiDivision", @class = "form-control select", data_live_search = "true" })
                                 @Html.ValidationMessageFor(model => model.Id_cfdiDivision)
@@ -92,20 +79,9 @@
                         </div>
                     </div>
 
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label class="col-md-2 col-xs-12 control-label"><span>* </span> CFDIClase</label>
-                        <div class="col-md-6 col-xs-12">
-                            @Html.DropDownListFor(model => model.Id_cfdiClase, new SelectList(Model.ListaClase, "Id_CfdiClase", "clase"), new { id = "Id_CfdiClase", @class = "form-control select", data_live_search = "true" })
-                            @Html.ValidationMessageFor(model => model.Id_cfdiClase)
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-12">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label class="col-md-12 col-xs-12 control-label"><span>* </span> cfdiGrupo</label>
+                            <label class="col-md-12 col-xs-12 control-label text-center">cfdiGrupo</label>
                             <div class="col-md-12 col-xs-12">
                                 @Html.DropDownListFor(model => model.Id_cfdiGrupo, new SelectList(Model.ListaGrupo, "Id_cfdiGrupo", "Grupo"), new { id = "Id_cfdiGrupo", @class = "form-control select", data_live_search = "true" })
                                 @Html.ValidationMessageFor(model => model.Id_cfdiGrupo)
@@ -113,22 +89,29 @@
                             </div>
                         </div>
                     </div>
-                    
-                </div>
-
-                <div class="col-md-12">
-                    <div class="col-md-12">
+                    <div class="col-md-6">
                         <div class="form-group">
-                            <label class="col-md-12 col-xs-12 control-label text-center">Descripcion</label>
+                            <label class="col-md-12 col-xs-12 control-label text-center">CFDIClase</label>
+                            <div class="col-md-12 col-xs-12">
+                                @Html.DropDownListFor(model => model.Id_cfdiClase, new SelectList(Model.ListaClase, "Id_CfdiClase", "clase"), new { id = "Id_CfdiClase", @class = "form-control select", data_live_search = "true" })
+                                @Html.ValidationMessageFor(model => model.Id_cfdiClase)
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-md-12 control-label text-center">Descripcion</label>
                             <div class="col-md-12 col-xs-12">
                                 <div class="input-group">
                                     <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
-                                    @*@*<input type="text" class="form-control" />*@
                                     @Html.TextBoxFor(model => model.Descripcion, new { id = "Descripcion", @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.Descripcion)
                                 </div>
-                                @*@Html.ValidationMessageFor(model => model.Descripcion)*@
-                                <span class="help-block">Ingrese una Descripcion</span>
+                                <span class="help-block">Ingrese una descripcion</span>
+
                             </div>
+
                         </div>
                     </div>
 

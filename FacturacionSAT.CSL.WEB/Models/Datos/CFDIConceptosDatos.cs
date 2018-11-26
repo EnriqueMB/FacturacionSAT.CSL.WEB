@@ -11,41 +11,30 @@ namespace FacturacionSAT.CSL.WEB.Models.Datos
 {
     public class CFDIConceptosDatos
     {
-        public List<CFDIDatosConceptosModels> CFDIConceptos(AuxSQLModel oAuxSQLModel)
+        public CFDIDatosConceptosModels ABCCFDIconcepto(CFDIDatosConceptosModels datos)
         {
             try
             {
-                List<CFDIDatosConceptosModels> Lista = new List<CFDIDatosConceptosModels>();
-
-                CFDIDatosConceptosModels Item;
-
-                SqlDataReader dr = null;
-
-                dr = SqlHelper.ExecuteReader(oAuxSQLModel.Conexion, "CFDIDatosConceptos_Consulta_sp");
-                while (dr.Read())
+                object[] parametros =
                 {
-                    Item = new CFDIDatosConceptosModels();
+                   datos.Opcion,datos.Id_cfdiDatosConceptos,datos.Descripcion,datos.Id_cfdiTipoProducto,datos.Id_cfdiDivision,datos.Id_cfdiGrupo,datos.Id_cfdiClase,datos.Id_cfdiClaveProdServDetalle,datos.Id_cfdiClaveUnidad,datos.Id_usuario
+                    };
+                object aux = SqlHelper.ExecuteScalar(datos.Conexion, "abc_CFDIDatosConceptos", parametros);
+                datos.Id_cfdiDatosConceptos = aux.ToString();
 
-                    Item.Id_cfdiDatosConceptos = !dr.IsDBNull(dr.GetOrdinal("id_cfdiDatosConceptos")) ? dr.GetString(dr.GetOrdinal("id_cfdiDatosConceptos")) : string.Empty;
-                    Item.Descripcion = !dr.IsDBNull(dr.GetOrdinal("descripcion")) ? dr.GetString(dr.GetOrdinal("descripcion")) : string.Empty;
-                    Item.Id_cfdiTipoProducto = !dr.IsDBNull(dr.GetOrdinal("id_cfdiTipoProducto")) ? dr.GetString(dr.GetOrdinal("id_cfdiTipoProducto")) : string.Empty;
-                    Item.Id_cfdiDivision = !dr.IsDBNull(dr.GetOrdinal("id_cfdiDivision")) ? dr.GetString(dr.GetOrdinal("id_cfdiDivision")) : string.Empty;
-                    Item.Id_cfdiGrupo = !dr.IsDBNull(dr.GetOrdinal("id_cfdiGrupo")) ? dr.GetString(dr.GetOrdinal("id_cfdiGrupo")) : string.Empty;
-                    Item.Id_cfdiClase = !dr.IsDBNull(dr.GetOrdinal("id_cfdiClase")) ? dr.GetString(dr.GetOrdinal("id_cfdiClase")) : string.Empty;
-                    Item.Id_cfdiClaveProdServDetalle = !dr.IsDBNull(dr.GetOrdinal("id_cfdiClaveProdServDetalle")) ? dr.GetString(dr.GetOrdinal("id_cfdiClaveProdServDetalle")) : string.Empty;
-                    Item.Id_cfdiClaveUnidad = !dr.IsDBNull(dr.GetOrdinal("id_cfdiClaveUnidad")) ? dr.GetString(dr.GetOrdinal("id_cfdiClaveUnidad")) : string.Empty;
-                    Item.Id_usuario = !dr.IsDBNull(dr.GetOrdinal("id_usuario")) ? dr.GetString(dr.GetOrdinal("id_usuario")) : string.Empty;
-
-                    Lista.Add(Item);
-
+                if (!string.IsNullOrEmpty(datos.Id_cfdiDatosConceptos))
+                {
+                    datos.Completado = true;
                 }
-
-                dr.Close();
-                return Lista;
+                else
+                {
+                    datos.Completado = false;
+                }
+                return datos;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                throw ex;
             }
         }
 

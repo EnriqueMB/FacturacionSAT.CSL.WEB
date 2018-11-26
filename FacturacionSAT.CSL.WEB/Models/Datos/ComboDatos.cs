@@ -227,5 +227,51 @@ namespace FacturacionSAT.CSL.WEB.Models.Datos
                 throw ex;
             }
         }
+        public List<CFDIConceptosClaveProductoModels> ListaConceptoClaveProducto(CFDIDatosConceptosModels datos)
+        {
+            try
+            {
+                List<CFDIConceptosClaveProductoModels> lista = new List<CFDIConceptosClaveProductoModels>();
+                CFDIConceptosClaveProductoModels item;
+                SqlDataReader dr = null;
+                dr = SqlHelper.ExecuteReader(datos.Conexion, "[dbo].[CFDIDatosConceptosClaveProducto_Combo_sp]");
+                while (dr.Read())
+                {
+                    item = new CFDIConceptosClaveProductoModels();
+                    item.Id_cfdiClaveProdServDetalle = !dr.IsDBNull(dr.GetOrdinal("id_cfdiClaveProdServDetalle")) ? dr.GetString(dr.GetOrdinal("id_cfdiClaveProdServDetalle")) : string.Empty;
+                    item.Descripcion = !dr.IsDBNull(dr.GetOrdinal("descripcion")) ? dr.GetString(dr.GetOrdinal("descripcion")) : string.Empty;
+                    lista.Add(item);
+                }
+                dr.Close();
+                return lista;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public List<CFDIConceptoClaveUnidadModels> ListaConceptoClaveUnidad(CFDIDatosConceptosModels datos)
+        {
+            try
+            {
+                List<CFDIConceptoClaveUnidadModels> lista = new List<CFDIConceptoClaveUnidadModels>();
+                CFDIConceptoClaveUnidadModels item;
+                SqlDataReader dr = null;
+                dr = SqlHelper.ExecuteReader(datos.Conexion, "[dbo].[CFDIDatosConceptosClaveUnidad_Combo_sp]");
+                while (dr.Read())
+                {
+                    item = new CFDIConceptoClaveUnidadModels();
+                    item.Id_cfdiClaveUnidad = !dr.IsDBNull(dr.GetOrdinal("id_cfdiClaveUnidad")) ? dr.GetString(dr.GetOrdinal("id_cfdiClaveUnidad")) : string.Empty;
+                    item.Nombre = !dr.IsDBNull(dr.GetOrdinal("nombre")) ? dr.GetString(dr.GetOrdinal("nombre")) : string.Empty;
+                    lista.Add(item);
+                }
+                dr.Close();
+                return lista;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }
