@@ -91,7 +91,15 @@
                     </div>
 
                 </div>
-
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="col-md-2 col-xs-12 control-label"><span>* </span> CFDIClase</label>
+                        <div class="col-md-6 col-xs-12">
+                            @Html.DropDownListFor(model => model.Id_cfdiClase, new SelectList(Model.ListaClase, "Id_CfdiClase", "clase"), new { id = "Id_CfdiClase", @class = "form-control select", data_live_search = "true" })
+                            @Html.ValidationMessageFor(model => model.Id_cfdiClase)
+                        </div>
+                    </div>
+                </div>
                 <div class="col-md-12">
                     <div class="col-md-6">
                         <div class="form-group">

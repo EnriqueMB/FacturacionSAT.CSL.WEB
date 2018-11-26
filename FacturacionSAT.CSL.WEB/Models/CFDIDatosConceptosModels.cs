@@ -22,6 +22,7 @@ namespace FacturacionSAT.CSL.WEB.Models
             tipoProducto = new CFDIConceptosTipoProductoModels();
             this._ListaTipoProducto = new List<CFDIConceptosTipoProductoModels>();
             this._ListaDivicion = new List<CFDIConceptoDivicionModels>();
+            this._ListaClase = new List<CFDIConceptoClaseModels>();
         }
 
         public string Conexion { get; set; }
@@ -115,6 +116,12 @@ namespace FacturacionSAT.CSL.WEB.Models
             set { _ListaDivicion = value; }
         }
 
+        private List<CFDIConceptoClaseModels> _ListaClase;
+        public List<CFDIConceptoClaseModels> ListaClase
+        {
+            get { return _ListaClase; }
+            set { _ListaClase = value; }
+        }
 
     }
     }
