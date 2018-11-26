@@ -62,7 +62,8 @@ namespace FacturacionSAT.CSL.WEB.Models.Datos
                     Item = new CFDIDatosEmisor();
                     Item.IDCFDIDatosEmisor = !dr.IsDBNull(dr.GetOrdinal("id_cfdiDatosEmisor")) ? dr.GetString(dr.GetOrdinal("id_cfdiDatosEmisor")) : string.Empty;
                     Item.IDCFDITipoPersona = !dr.IsDBNull(dr.GetOrdinal("id_cfdiTipoPersona")) ? dr.GetString(dr.GetOrdinal("id_cfdiTipoPersona")) : string.Empty;
-                    
+                    Item.CFDITipoPersona.TipoPersona = !dr.IsDBNull(dr.GetOrdinal("tipoPersona")) ? dr.GetString(dr.GetOrdinal("tipoPersona")) : string.Empty;
+
                 }
                 return Lista;
             }

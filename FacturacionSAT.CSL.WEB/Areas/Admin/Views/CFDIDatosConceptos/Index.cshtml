@@ -1,15 +1,18 @@
-﻿
+﻿@model FacturacionSAT.CSL.WEB.Models.CFDIDatosConceptosModels
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 
-    var message = TempData["message"] ?? string.Empty;
-    var typemessage = TempData["typemessage"] ?? string.Empty;
-}
-@section css{
+    //var message = TempData["message"] ?? string.Empty;
+    //var typemessage = TempData["typemessage"] ?? string.Empty;
 
 }
+
 @section featured{
+    @{
+        var message = TempData["message"] ?? string.Empty;
+        var typemessage = TempData["typemessage"] ?? string.Empty;
+    }
     <div id="Error" class="progress-bar progress-bar-striped active errorCSL" style="display:none; width:100%">
         <h3></h3>
     </div>
@@ -17,7 +20,7 @@
         <h3></h3>
     </div>
     <div class="page-title">
-        <h2><span class="fa fa-arrow-circle-o-left"></span> CFDIDatosConseptos </h2>
+        <h2><span class="fa fa-arrow-circle-o-left"></span><strong>CFDICoceptos</strong> </h2>
     </div>
     <!-- END PAGE TITLE -->
     <!-- PAGE CONTENT WRAPPER -->
@@ -29,27 +32,63 @@
                     <div class="panel-heading">
                         <h3 class="panel-title"></h3>
                         <ul class="panel-controls">
-                            <li><a href="@Url.Action("Crear","CFDIDatosConceptos")" class="btn btn-default btnCrear"><span class="fa fa-plus"></span> Nuevo</a></li>
+                            <li><a href="@Url.Action("","")" class="btn btn-default btnCrear"><span class="fa fa-plus"></span> Nuevo</a></li>
                             <li><a href="#" class="panel-collapse exsa"><span class="fa fa-angle-down"></span></a></li>
                             <li><a href="#" class="panel-fullscreen exsa"><span class="fa fa-expand"></span></a></li>
                         </ul>
                     </div>
                     <div class="panel-body">
                         <div class="table-responsive">
-                            <table id="tblCFDI_Conceptos" class="table">
+                            <table class="table datatable">
                                 <thead>
-                                    <tr>
-                                        <th>Id_cfdiDatosconceptos</th>
+                                    <tr>                                     
                                         <th>Descripcion</th>
-                                        <th>Tipo de producto</th>
-                                        <th>Division</th>
+                                        <th>Tipo Producto</th>                                       
+                                        <th>Divicion</th>                                        
                                         <th>Grupo</th>
                                         <th>Clase</th>
                                         <th>Unidad</th>
-                                        <th></th>
+                                        <th>Accion</th>
                                     </tr>
                                 </thead>
-                                <tbody></tbody>
+                                <tbody>
+                                   @foreach (var item in Model.ListaCFDIConceptos)
+                                    {
+                                        <tr @item.Id_cfdiDatosConceptos>                                        
+                                        <td>@item.Descripcion</td>
+                                        <td>@item.tipoProducto.TipoProducto</td>
+                                        <td>@item.divicion.Division</td>
+                                        <td>@item.grupo.Grupo</td>
+                                        <td>@item.clase.clase</td>
+                                        <td>@item.servicioDetalle.Nombre</td>                                       
+                                        <td style="text-align:center;">
+                                            <div class="visible-md visible-lg hidden-sm hidden-xs">
+                                                <a title="Editar" href="@Url.Action("","CFDIDatosConceptos",new { id = item.Id_cfdiDatosConceptos})" class="btn btn-yellow tooltips" data-placement="top" data-original-title="Edit"><i class="fa fa-edit"></i></a>
+                                                <a title="Eliminar" id="delete-@item.Id_cfdiDatosConceptos" data-hrefa="@Url.Action("Delete", "CFDIDatosConceptos", new { id = item.Id_cfdiDatosConceptos })" onClick="delete_row('@item.Id_cfdiDatosConceptos');" class="btn btn-danger tooltips" data-placement="top" data-original-title="Eliminar"><i class="fa fa-trash-o"></i></a>
+                                            </div>
+                                            <div class="visible-xs visible-sm hidden-md hidden-lg">
+                                                <div class="btn-group">
+                                                    <a class="btn btn-danger dropdown-toggle btn-sm" data-toggle="dropdown" href="#">
+                                                        <i class="fa fa-cog"></i> <span class="caret"></span>
+                                                    </a>
+                                                    <ul role="menu" class="dropdown-menu pull-right dropdown-dark">
+                                                        <li>
+                                                            <a role="menuitem" tabindex="-1" href="@Url.Action("", "CFDIDatosConceptos", new { id = item.Id_cfdiDatosConceptos})">
+                                                                <i class="fa fa-edit"></i> Editar
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a role="menuitem" tabindex="-1" id="delete-@item.Id_cfdiDatosConceptos" data-hrefa="@Url.Action("Delete", "CFDIDatosConceptos", new { id = item.Id_cfdiDatosConceptos})" onClick="delete_row('@item.Id_cfdiDatosConceptos');">
+                                                                <i class="fa fa-trash-o"></i> Eliminar
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </td>
+                                      </tr>
+                                    }
+                                </tbody>
                             </table>
                         </div>
                     </div>
@@ -58,13 +97,13 @@
             </div>
         </div>
     </div>
-
-    <div class="message-box animated fadeIn" data-sound="alert" id="mb-eliminar">
+    <!-- PAGE CONTENT WRAPPER -->
+    <div class="message-box animated fadeIn" data-sound="alert" id="mb-remove-row">
         <div class="mb-container">
             <div class="mb-middle">
-                <div class="mb-title"><span class="fa fa-mail-forward"></span><strong>¿Seguro que desea eliminar este concepto?</strong></div>
+                <div class="mb-title"><span class="fa fa-times"></span> Eliminar <strong>Registro</strong> ?</div>
                 <div class="mb-content">
-                    <p>¿Desea eliminar esta concepto?</p>
+                    <p>¿Seguro que quieres eliminar esta fila?</p>
                     <p>Presione "sí" si está seguro.</p>
                 </div>
                 <div class="mb-footer">
@@ -76,107 +115,193 @@
             </div>
         </div>
     </div>
-
+    <script>
+    var message = '@message';
+    var typemessage = '@typemessage';
+    </script>
 }
-
-@section script{
+@section script
+{
     <script type="text/javascript" src="@Url.Content("~/Content/js/demo_tables.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Content/js/plugins/datatables/jquery.dataTables.min.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Content/js/mensajeDeError.js")"></script>
     <script>
         jQuery(document).ready(function () {
-            var message = '@message';
-            var typemessage = '@typemessage';
-
             Mensaje(message, typemessage);
-
-            var tblCFDI_Conceptos = $('#tblCFDI_Conceptos').DataTable({
-                "language": {
-                    "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
-                },
-                responsive: true,
-                "ajax": {
-                    "data": {
-
-                    },
-                    "url": "@Url.Content("~/Admin/Json/CFDI_Conceptos")",
-                    "type": "POST",
-                    "datatype": "json",
-                    "dataSrc": ''
-                },
-                "columns": [
-                    { "data": "id_cfdiDatosConceptos" },
-                    { "data": "descripcion" },
-                    { "data": "tipoProducto" },
-                    { "data": "division" },
-                    { "data": "grupo" },
-                    { "data": "clase" },
-                    { "data": "unidad" },
-                    {
-                        "data": null,
-                        "render": function (data, type, full) {
-
-                            return "<div class='visible-md visible-lg hidden-sm hidden-xs'>" +
-                                "<a data-href='@Url.Content("~/Admin/CFDIDatosConceptos/Edit/")' title='Editar' data-id='" + full["id_cfdiDatosConceptos"] + "' class='btn btn-yellow tooltips edit' data-placement='top' data-original-title='Edit'><i class='fa fa-edit'></i></a>" +
-                                "<a data-hrefa='@Url.Content("~/Admin/CFDIDatosConceptos/Delete/")' title='Eliminar' data-id='" + full["id_cfdiDatosConceptos"] + "' class='btn btn-danger tooltips delete' data-placement='top' data-original-title='Eliminar'><i class='fa fa-trash-o'></i></a>" +
-                                "</div>" +
-                                "<div class='visible-xs visible-sm hidden-md hidden-lg'>" +
-                                "<div class='btn-group'>" +
-                                "<a class='btn btn-danger dropdown-toggle btn-sm' data-toggle='dropdown' href='#'" +
-                                "<i class='fa fa-cog'></i> <span class='caret'></span>" +
-                                "</a>" +
-                                "<ul role='menu' class='dropdown-menu pull-right dropdown-dark'>" +
-                                "<li>" +
-                                "</a>" +
-                                "</li>" +
-
-                                "<li>" +
-                                "<a data-hrefa='@Url.Content("~/Admin/CFDIDatosConceptos/Edit/")' class='edit'  role='menuitem' tabindex='-1' data-id='" + full["id_cfdiDatosConceptos"] + "' >" +
-                                "<i class='fa fa-book'></i> Eventos y recepción" +
-                                "</a>" +
-                                "</li>" +
-
-                                "<li>" +
-                                "<a data-hrefa='@Url.Content("~/Admin/CFDIDatosConceptos/Delete/")'  class='delete' role='menuitem' tabindex='-1' data-id='" + full["id_cfdiDatosConceptos"] + "'>" +
-                                "<i class='fa fa-trash-o'></i> Eliminar" +
-                                "</a>" +
-                                "</li>" +
-
-                                "</ul>" +
-                                "</div>" +
-                                "</div>";
-                        }
-                    }
-                ],
-                "drawCallback": function (settings) {
-                    $(".edit").on("click", function () {
-                        var id = $(this).data("id");
-                        window.location.href = '/Admin/CFDIDatosConceptos/Edit?Id=' + id;
-                    });
-                    $(".delete").on("click", function () {
-                        var url = $(this).attr('data-hrefa');
-                        var id = $(this).attr('data-id');
-                        var box = $("#mb-eliminar");
-                        box.addClass("open");
-                        box.find(".mb-control-yes").on("click", function () {
-                            box.removeClass("open");
-                            $.ajax({
-                                url: url,
-                                data: { Id: id },
-                                type: 'POST',
-                                dataType: 'json',
-                                success: function (result) {
-                                    window.location.href = '/Admin/CFDIDatosConceptos/Index';
-                                },
-                                error: function (result) {
-                                    window.location.href = '/Admin/CFDIDatosConceptos/Index';
-                                }
-                            });
-                        });
-                    });
-                }
-            });
-
         });
     </script>
 }
+
+
+
+@*@section featured{
+        <div id="Error" class="progress-bar progress-bar-striped active errorCSL" style="display:none; width:100%">
+            <h3></h3>
+        </div>
+        <div id="Success" class="progress-bar progress-bar-striped active successCSL" style="display:none; width:100%">
+            <h3></h3>
+        </div>
+        <div class="page-title">
+            <h2><span class="fa fa-arrow-circle-o-left"></span> CFDIDatosConseptos </h2>
+        </div>
+        <!-- END PAGE TITLE -->
+        <!-- PAGE CONTENT WRAPPER -->
+        <div class="page-content-wrap">
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- START DEFAULT DATATABLE -->
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"></h3>
+                            <ul class="panel-controls">
+                                <li><a href="@Url.Action("Crear","CFDIDatosConceptos")" class="btn btn-default btnCrear"><span class="fa fa-plus"></span> Nuevo</a></li>
+                                <li><a href="#" class="panel-collapse exsa"><span class="fa fa-angle-down"></span></a></li>
+                                <li><a href="#" class="panel-fullscreen exsa"><span class="fa fa-expand"></span></a></li>
+                            </ul>
+                        </div>
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table id="tblCFDI_Conceptos" class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Id_cfdiDatosconceptos</th>
+                                            <th>Descripcion</th>
+                                            <th>Tipo de producto</th>
+                                            <th>Division</th>
+                                            <th>Grupo</th>
+                                            <th>Clase</th>
+                                            <th>Unidad</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END DEFAULT DATATABLE -->
+                </div>
+            </div>
+        </div>
+
+        <div class="message-box animated fadeIn" data-sound="alert" id="mb-eliminar">
+            <div class="mb-container">
+                <div class="mb-middle">
+                    <div class="mb-title"><span class="fa fa-mail-forward"></span><strong>¿Seguro que desea eliminar este concepto?</strong></div>
+                    <div class="mb-content">
+                        <p>¿Desea eliminar esta concepto?</p>
+                        <p>Presione "sí" si está seguro.</p>
+                    </div>
+                    <div class="mb-footer">
+                        <div class="pull-right">
+                            <button class="btn btn-success btn-lg mb-control-yes">Si</button>
+                            <button class="btn btn-default btn-lg mb-control-close">No</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    }
+
+    @section script{
+        <script type="text/javascript" src="@Url.Content("~/Content/js/demo_tables.js")"></script>
+        <script type="text/javascript" src="@Url.Content("~/Content/js/plugins/datatables/jquery.dataTables.min.js")"></script>
+        <script type="text/javascript" src="@Url.Content("~/Content/js/mensajeDeError.js")"></script>
+        <script>
+            jQuery(document).ready(function () {
+                var message = '@message';
+                var typemessage = '@typemessage';
+
+                Mensaje(message, typemessage);
+
+                var tblCFDI_Conceptos = $('#tblCFDI_Conceptos').DataTable({
+                    "language": {
+                        "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
+                    },
+                    responsive: true,
+                    "ajax": {
+                        "data": {
+
+                        },
+                        "url": "@Url.Content("~/Admin/Json/CFDI_Conceptos")",
+                        "type": "POST",
+                        "datatype": "json",
+                        "dataSrc": ''
+                    },
+                    "columns": [
+                        { "data": "id_cfdiDatosConceptos" },
+                        { "data": "descripcion" },
+                        { "data": "tipoProducto" },
+                        { "data": "division" },
+                        { "data": "grupo" },
+                        { "data": "clase" },
+                        { "data": "unidad" },
+                        {
+                            "data": null,
+                            "render": function (data, type, full) {
+
+                                return "<div class='visible-md visible-lg hidden-sm hidden-xs'>" +
+                                    "<a data-href='@Url.Content("~/Admin/CFDIDatosConceptos/Edit/")' title='Editar' data-id='" + full["id_cfdiDatosConceptos"] + "' class='btn btn-yellow tooltips edit' data-placement='top' data-original-title='Edit'><i class='fa fa-edit'></i></a>" +
+                                    "<a data-hrefa='@Url.Content("~/Admin/CFDIDatosConceptos/Delete/")' title='Eliminar' data-id='" + full["Id_cfdiDatosConceptos"] + "' class='btn btn-danger tooltips delete' data-placement='top' data-original-title='Eliminar'><i class='fa fa-trash-o'></i></a>" +
+                                    "</div>" +
+                                    "<div class='visible-xs visible-sm hidden-md hidden-lg'>" +
+                                    "<div class='btn-group'>" +
+                                    "<a class='btn btn-danger dropdown-toggle btn-sm' data-toggle='dropdown' href='#'" +
+                                    "<i class='fa fa-cog'></i> <span class='caret'></span>" +
+                                    "</a>" +
+                                    "<ul role='menu' class='dropdown-menu pull-right dropdown-dark'>" +
+                                    "<li>" +
+                                    "</a>" +
+                                    "</li>" +
+
+                                    "<li>" +
+                                    "<a data-hrefa='@Url.Content("~/Admin/CFDIDatosConceptos/Edit/")' class='edit'  role='menuitem' tabindex='-1' data-id='" + full["id_cfdiDatosConceptos"] + "' >" +
+                                    "<i class='fa fa-book'></i> Eventos y recepción" +
+                                    "</a>" +
+                                    "</li>" +
+
+                                    "<li>" +
+                                    "<a data-hrefa='@Url.Content("~/Admin/CFDIDatosConceptos/Delete/")'  class='delete' role='menuitem' tabindex='-1' data-id='" + full["Id_cfdiDatosConceptos"] + "'>" +
+                                    "<i class='fa fa-trash-o'></i> Eliminar" +
+                                    "</a>" +
+                                    "</li>" +
+
+                                    "</ul>" +
+                                    "</div>" +
+                                    "</div>";
+                            }
+                        }
+                    ],
+                    "drawCallback": function (settings) {
+                        $(".edit").on("click", function () {
+                            var id = $(this).data("id");
+                            window.location.href = '/Admin/CFDIDatosConceptos/Edit?Id=' + id;
+                        });
+                        $(".delete").on("click", function () {
+                            var url = $(this).attr('data-hrefa');
+                            var id = $(this).attr('data-id');
+                            var box = $("#mb-eliminar");
+                            box.addClass("open");
+                            box.find(".mb-control-yes").on("click", function () {
+                                box.removeClass("open");
+                                $.ajax({
+                                    url: url,
+                                    data: { Id: id },
+                                    type: 'POST',
+                                    dataType: 'json',
+                                    success: function (result) {
+                                        window.location.href = '/Admin/CFDIDatosConceptos/Index';
+                                    },
+                                    error: function (result) {
+                                        window.location.href = '/Admin/CFDIDatosConceptos/Index';
+                                    }
+                                });
+                            });
+                        });
+                    }
+                });
+
+            });
+        </script>
+    }*@

@@ -10,6 +10,7 @@ namespace FacturacionSAT.CSL.WEB.Models
         public CFDIDatosConceptosModels()
         {
             Opcion = 0;
+            Completado = false;
             Id_cfdiDatosConceptos = string.Empty;
             Descripcion = string.Empty;
             Id_cfdiTipoProducto = string.Empty;
@@ -22,21 +23,26 @@ namespace FacturacionSAT.CSL.WEB.Models
             Conexion = string.Empty;
             Completado = false;
             tipoProducto = new CFDIConceptosTipoProductoModels();
+            divicion = new CFDIConceptoDivicionModels();
+            grupo = new CFDIConceptoGrupoModels();
+            clase = new CFDIConceptoClaseModels();
+            servicioDetalle = new CFDIConceptoClaveUnidadModels(); 
             this._ListaTipoProducto = new List<CFDIConceptosTipoProductoModels>();
             this._ListaDivicion = new List<CFDIConceptoDivicionModels>();
             this._ListaClase = new List<CFDIConceptoClaseModels>();
             this._ListaGrupo = new List<CFDIConceptoGrupoModels>();
             this._ListaClaveProducto = new List<CFDIConceptosClaveProductoModels>();
             this._ListaClaveunidad = new List<CFDIConceptoClaveUnidadModels>();
+            this.ListaCFDIConceptos = new List<CFDIDatosConceptosModels>();
         }
         private int _Opcion;
 
-        public int Opcion
-        {
-            get { return _Opcion; }
-            set { _Opcion = value; }
-        }
-
+        public bool Completado { get; set; }
+        public int Opcion { get; set; }
+        public CFDIConceptoDivicionModels divicion { get; set; }
+        public CFDIConceptoGrupoModels grupo { get; set; }
+        public CFDIConceptoClaseModels clase { get; set; }
+        public CFDIConceptoClaveUnidadModels servicioDetalle { get; set; }
 
         public string Conexion { get; set; }
 
@@ -161,6 +167,14 @@ namespace FacturacionSAT.CSL.WEB.Models
 
 
         public bool Completado { get; set; }
+
+        private List<CFDIDatosConceptosModels> _ListaCFDIConceptos;
+
+        public List<CFDIDatosConceptosModels> ListaCFDIConceptos
+        {
+            get { return _ListaCFDIConceptos; }
+            set { _ListaCFDIConceptos = value; }
+        }
 
     }
     }
