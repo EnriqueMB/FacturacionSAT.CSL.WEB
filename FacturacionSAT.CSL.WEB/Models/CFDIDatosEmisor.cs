@@ -7,6 +7,11 @@ namespace FacturacionSAT.CSL.WEB.Models
 {
     public class CFDIDatosEmisor
     {
+        public CFDIDatosEmisor()
+        {
+
+        }
+
         private string _IDCFDIDatosEmisor;
 
         public string IDCFDIDatosEmisor
@@ -118,6 +123,15 @@ namespace FacturacionSAT.CSL.WEB.Models
             get { return _Imagen; }
             set { _Imagen = value; }
         }
+
+        private CFDITipoPersonaModels _CFDITipoPersona;
+
+        public CFDITipoPersonaModels CFDITipoPersona
+        {
+            get { return _CFDITipoPersona; }
+            set { _CFDITipoPersona = value; }
+        }
+
 
         public string Conexion { get; set; }
         public int Resultado { get; set; }
