@@ -36,23 +36,6 @@
                 </div>
             </div>
             <div class="panel-body">
-                <div class="col-md-12">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="col-md-12 col-xs-12 control-label text-center">Descripcion</label>
-                            <div class="col-md-12 col-xs-12">
-                                <div class="input-group">
-                                    <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
-                                    @*@*<input type="text" class="form-control" />*@
-                                    @Html.TextBoxFor(model => model.Descripcion, new { id = "Descripcion", @class = "form-control" })
-                                </div>
-                                @*@Html.ValidationMessageFor(model => model.Descripcion)*@
-                                <span class="help-block">Ingrese una Descripcion</span>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
 
                 <div class="col-md-12">
                     <div class="col-md-6">
@@ -94,6 +77,33 @@
                             <div class="col-md-6 col-xs-12">
                                 @Html.DropDownListFor(model => model.Id_cfdiTipoProducto, new SelectList(Model.ListaTipoProducto, "Id_cfdiTipoProducto", "TipoProducto"), new { id = "Id_cfdiTipoProducto", @class = "form-control select", data_live_search = "true" })
                                 @Html.ValidationMessageFor(model => model.Id_cfdiTipoProducto)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-md-2 col-xs-12 control-label"><span>* </span> CFDIDivicio</label>
+                            <div class="col-md-6 col-xs-12">
+                                @Html.DropDownListFor(model => model.Id_cfdiDivision, new SelectList(Model.ListaDivicion, "Id_cfdiDivision", "Division"), new { id = "Id_cfdiDivision", @class = "form-control select", data_live_search = "true" })
+                                @Html.ValidationMessageFor(model => model.Id_cfdiDivision)
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-md-12">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-md-12 col-xs-12 control-label text-center">Descripcion</label>
+                            <div class="col-md-12 col-xs-12">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
+                                    @*@*<input type="text" class="form-control" />*@
+                                    @Html.TextBoxFor(model => model.Descripcion, new { id = "Descripcion", @class = "form-control" })
+                                </div>
+                                @*@Html.ValidationMessageFor(model => model.Descripcion)*@
+                                <span class="help-block">Ingrese una Descripcion</span>
                             </div>
                         </div>
                     </div>

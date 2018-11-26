@@ -1006,6 +1006,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AuxSQLModel.cs" />
+    <Compile Include="Models\CFDIConceptoDivicionModels.cs" />
+    <Compile Include="Models\CFDIConceptoGrupoModels.cs" />
     <Compile Include="Models\CFDIConceptosTipoProductoModels.cs" />
     <Compile Include="Models\CFDIDatosConceptosModels.cs" />
     <Compile Include="Models\CFDIDatosEmisor.cs" />

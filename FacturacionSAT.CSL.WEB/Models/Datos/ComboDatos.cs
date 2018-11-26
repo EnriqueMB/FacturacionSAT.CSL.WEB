@@ -158,5 +158,28 @@ namespace FacturacionSAT.CSL.WEB.Models.Datos
                 throw ex;
             }
         }
+        public List<CFDIConceptoDivicionModels> ListaDivicionConcepto(CFDIDatosConceptosModels datos)
+        {
+            try
+            {
+                List<CFDIConceptoDivicionModels> lista = new List<CFDIConceptoDivicionModels>();
+                CFDIConceptoDivicionModels item;
+                SqlDataReader dr = null;
+                dr = SqlHelper.ExecuteReader(datos.Conexion, "[dbo].[CFDIDatosConceptosDivicion_Combo_sp]");
+                while (dr.Read())
+                {
+                    item = new CFDIConceptoDivicionModels();
+                    item.Id_cfdiDivision = !dr.IsDBNull(dr.GetOrdinal("id_cfdiDivision")) ? dr.GetString(dr.GetOrdinal("id_cfdiDivision")) : string.Empty;
+                    item.Division = !dr.IsDBNull(dr.GetOrdinal("division")) ? dr.GetString(dr.GetOrdinal("division")) : string.Empty;
+                    lista.Add(item);
+                }
+                dr.Close();
+                return lista;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }
