@@ -1017,6 +1017,7 @@
     <Compile Include="Models\CFDIDatosConceptosModels.cs" />
     <Compile Include="Models\CFDIDatosEmisor.cs" />
     <Compile Include="Models\CFDIDatosPacModels.cs" />
+    <Compile Include="Models\CFDIRegimenFiscalDetalleModels.cs" />
     <Compile Include="Models\CFDITipoPersonaModels.cs" />
     <Compile Include="Models\ComboModel.cs" />
     <!--<<<<<<< HEAD-->

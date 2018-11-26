@@ -9,7 +9,20 @@ namespace FacturacionSAT.CSL.WEB.Models
     {
         public CFDIDatosEmisor()
         {
-
+            _IDCFDIDatosEmisor = string.Empty;
+            _IDCFDIRegimenFiscalDetalle = string.Empty;
+            _IDCFDITipoPersona = string.Empty;
+            _RazonSocial = string.Empty;
+            _RFC = string.Empty;
+            _Direccion = string.Empty;
+            _CodigoPostal = string.Empty;
+            _Correo = string.Empty;
+            _Password = string.Empty;
+            _URLArchivoCER = string.Empty;
+            _URLArchivoKEY = string.Empty;
+            _Imagen = string.Empty;
+            _PasswordArchivoKEY = string.Empty;
+            _CFDITipoPersona = new CFDITipoPersonaModels();
         }
 
         private string _IDCFDIDatosEmisor;
