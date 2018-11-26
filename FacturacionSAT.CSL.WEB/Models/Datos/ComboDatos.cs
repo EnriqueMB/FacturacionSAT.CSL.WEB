@@ -57,6 +57,11 @@ namespace FacturacionSAT.CSL.WEB.Models.Datos
             }
         }
 
+        //internal List<CFDIConceptosTipoProductoModels> ListaTipoProducto(object oAuxSQLModel)
+        //{
+        //    throw new NotImplementedException();
+        //}
+
         public List<ComboModel> ListaMetodoPagoDetalle(AuxSQLModel oAuxSQLModel)
         {
             try
@@ -119,6 +124,99 @@ namespace FacturacionSAT.CSL.WEB.Models.Datos
                     item = new ComboModel();
                     item.Id = !dr.IsDBNull(dr.GetOrdinal("id")) ? dr.GetString(dr.GetOrdinal("id")) : string.Empty;
                     item.Value = !dr.IsDBNull(dr.GetOrdinal("descripcion")) ? dr.GetString(dr.GetOrdinal("descripcion")) : string.Empty;
+                    lista.Add(item);
+                }
+                dr.Close();
+                return lista;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public List<CFDIConceptosTipoProductoModels> ListaTipoProducto(CFDIDatosConceptosModels datos)
+        {
+            try
+            {
+                List<CFDIConceptosTipoProductoModels> lista = new List<CFDIConceptosTipoProductoModels>();
+                CFDIConceptosTipoProductoModels item;
+                SqlDataReader dr = null;
+                dr = SqlHelper.ExecuteReader(datos.Conexion, "[dbo].[CFDIDatosConceptosTipoProduc_Combo_sp]");
+                while (dr.Read())
+                {
+                    item = new CFDIConceptosTipoProductoModels();
+                    item.Id_cfdiTipoProducto = !dr.IsDBNull(dr.GetOrdinal("id_cfdiTipoProducto")) ? dr.GetString(dr.GetOrdinal("id_cfdiTipoProducto")) : string.Empty;
+                    item.TipoProducto = !dr.IsDBNull(dr.GetOrdinal("tipoProducto")) ? dr.GetString(dr.GetOrdinal("tipoProducto")) : string.Empty;
+                    lista.Add(item);
+                }
+                dr.Close();
+                return lista;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public List<CFDIConceptoDivicionModels> ListaDivicionConcepto(CFDIDatosConceptosModels datos)
+        {
+            try
+            {
+                List<CFDIConceptoDivicionModels> lista = new List<CFDIConceptoDivicionModels>();
+                CFDIConceptoDivicionModels item;
+                SqlDataReader dr = null;
+                dr = SqlHelper.ExecuteReader(datos.Conexion, "[dbo].[CFDIDatosConceptosDivicion_Combo_sp]");
+                while (dr.Read())
+                {
+                    item = new CFDIConceptoDivicionModels();
+                    item.Id_cfdiDivision = !dr.IsDBNull(dr.GetOrdinal("id_cfdiDivision")) ? dr.GetString(dr.GetOrdinal("id_cfdiDivision")) : string.Empty;
+                    item.Division = !dr.IsDBNull(dr.GetOrdinal("division")) ? dr.GetString(dr.GetOrdinal("division")) : string.Empty;
+                    lista.Add(item);
+                }
+                dr.Close();
+                return lista;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public List<CFDIConceptoGrupoModels> ListaGrupoConcepto(CFDIDatosConceptosModels datos)
+        {
+            try
+            {
+                List<CFDIConceptoGrupoModels> lista = new List<CFDIConceptoGrupoModels>();
+                CFDIConceptoGrupoModels item;
+                SqlDataReader dr = null;
+                dr = SqlHelper.ExecuteReader(datos.Conexion, "[dbo].[CFDIDatosConceptosGrupo_Combo_sp]");
+                while (dr.Read())
+                {
+                    item = new CFDIConceptoGrupoModels();
+                    item.Id_cfdiGrupo = !dr.IsDBNull(dr.GetOrdinal("id_cfdiGrupo")) ? dr.GetString(dr.GetOrdinal("id_cfdiGrupo")) : string.Empty;
+                    item.Grupo = !dr.IsDBNull(dr.GetOrdinal("grupo")) ? dr.GetString(dr.GetOrdinal("grupo")) : string.Empty;
+                    lista.Add(item);
+                }
+                dr.Close();
+                return lista;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public List<CFDIConceptoClaseModels> ListaCFDIClase(CFDIDatosConceptosModels datos)
+        {
+            try
+            {
+                List<CFDIConceptoClaseModels> lista = new List<CFDIConceptoClaseModels>();
+                CFDIConceptoClaseModels item;
+                SqlDataReader dr = null;
+                dr = SqlHelper.ExecuteReader(datos.Conexion, "[dbo].[CFDIDatosConceptosClase_Combo_sp]");
+                while (dr.Read())
+                {
+                    item = new CFDIConceptoClaseModels();
+                    item.Id_CfdiClase = !dr.IsDBNull(dr.GetOrdinal("id_cfdiClase")) ? dr.GetString(dr.GetOrdinal("id_cfdiClase")) : string.Empty;
+                    item.clase = !dr.IsDBNull(dr.GetOrdinal("clase")) ? dr.GetString(dr.GetOrdinal("clase")) : string.Empty;
                     lista.Add(item);
                 }
                 dr.Close();

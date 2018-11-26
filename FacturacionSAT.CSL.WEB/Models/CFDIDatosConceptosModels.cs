@@ -9,6 +9,8 @@ namespace FacturacionSAT.CSL.WEB.Models
     {
         public CFDIDatosConceptosModels()
         {
+            Opcion = 0;
+            Completado = false;
             Id_cfdiDatosConceptos = string.Empty;
             Descripcion = string.Empty;
             Id_cfdiTipoProducto = string.Empty;
@@ -18,11 +20,29 @@ namespace FacturacionSAT.CSL.WEB.Models
             Id_cfdiClaveProdServDetalle = string.Empty;
             Id_cfdiClaveUnidad = string.Empty;
             Id_usuario = string.Empty;
-
+            Conexion = string.Empty;
+            tipoProducto = new CFDIConceptosTipoProductoModels();
+            divicion = new CFDIConceptoDivicionModels();
+            grupo = new CFDIConceptoGrupoModels();
+            clase = new CFDIConceptoClaseModels();
+            servicioDetalle = new CFDIConceptoClaveUnidadModels(); 
+            this._ListaTipoProducto = new List<CFDIConceptosTipoProductoModels>();
+            this._ListaDivicion = new List<CFDIConceptoDivicionModels>();
+            this._ListaClase = new List<CFDIConceptoClaseModels>();
+            this._ListaGrupo = new List<CFDIConceptoGrupoModels>();
+            this.ListaCFDIConceptos = new List<CFDIDatosConceptosModels>();
         }
 
+        public bool Completado { get; set; }
+        public int Opcion { get; set; }
+        public CFDIConceptoDivicionModels divicion { get; set; }
+        public CFDIConceptoGrupoModels grupo { get; set; }
+        public CFDIConceptoClaseModels clase { get; set; }
+        public CFDIConceptoClaveUnidadModels servicioDetalle { get; set; }
 
-       private string _Id_cfdiDatosConceptos;
+        public string Conexion { get; set; }
+
+        private string _Id_cfdiDatosConceptos;
 
         public string Id_cfdiDatosConceptos
         {
@@ -87,6 +107,51 @@ namespace FacturacionSAT.CSL.WEB.Models
         {
             get { return _Id_usuario; }
             set { _Id_usuario = value; }
+        }
+
+        private CFDIConceptosTipoProductoModels _tipoProducto;
+
+        public CFDIConceptosTipoProductoModels tipoProducto
+        {
+            get { return _tipoProducto; }
+            set { _tipoProducto = value; }
+        }
+        private List<CFDIConceptosTipoProductoModels> _ListaTipoProducto;
+
+        public List<CFDIConceptosTipoProductoModels> ListaTipoProducto
+        {
+            get { return _ListaTipoProducto; }
+            set { _ListaTipoProducto = value; }
+        }
+        private List<CFDIConceptoDivicionModels> _ListaDivicion;
+
+        public List<CFDIConceptoDivicionModels> ListaDivicion
+        {
+            get { return _ListaDivicion; }
+            set { _ListaDivicion = value; }
+        }
+        private List<CFDIConceptoGrupoModels> _ListaGrupo;
+
+        public List<CFDIConceptoGrupoModels> ListaGrupo
+        {
+            get { return _ListaGrupo; }
+            set { _ListaGrupo = value; }
+        }
+
+
+        private List<CFDIConceptoClaseModels> _ListaClase;
+        public List<CFDIConceptoClaseModels> ListaClase
+        {
+            get { return _ListaClase; }
+            set { _ListaClase = value; }
+        }
+
+        private List<CFDIDatosConceptosModels> _ListaCFDIConceptos;
+
+        public List<CFDIDatosConceptosModels> ListaCFDIConceptos
+        {
+            get { return _ListaCFDIConceptos; }
+            set { _ListaCFDIConceptos = value; }
         }
 
     }
