@@ -14,12 +14,26 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
     {
         private TokenProcessor Token = TokenProcessor.GetInstance();
         string Conexion = ConfigurationManager.AppSettings.Get("strConnection");
-        private object oAuxSQLModel;
+       // private object oAuxSQLModel;
 
         // GET: Admin/CFDIDatosConceptos
         public ActionResult Index()
         {
-            return View();
+            try
+            {
+                CFDIDatosConceptosModels CFDIConcepto = new CFDIDatosConceptosModels();
+                CFDIConceptosDatos CFDIconcepto = new CFDIConceptosDatos();
+                AuxSQLModel oAuxSQLModel = new AuxSQLModel();
+                oAuxSQLModel.Conexion = Conexion;
+                CFDIConcepto.ListaCFDIConceptos = CFDIconcepto.CFDIConceptos(oAuxSQLModel);
+
+                return View(CFDIConcepto);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            //return View();
         }
 
         [HttpGet]
@@ -79,24 +93,33 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
                 return View(Model);
             }
         }
-        [HttpPost]
-        public ActionResult Delete(string Id)
+        [HttpGet]
+        public ActionResult Delete(string id)
+        {
+            return View();
+        }
+          
+        [HttpPost]     
+        public ActionResult Delete(string id, FormCollection collection)
         {
             try
             {
-                if (string.IsNullOrEmpty(Id))
-                {
-                    return RedirectToAction("Index");
-                }
-                else
-                {
-                    return RedirectToAction("Index");
-                }
-            }
-            catch (Exception)
-            {
+                CFDIDatosConceptosModels CFDIModelConcepto = new CFDIDatosConceptosModels();
+                CFDIConceptosDatos CFDIConcepto = new CFDIConceptosDatos();
+                //AuxSQLModel oAuxSQLModel = new AuxSQLModel();
+                CFDIModelConcepto.Conexion = Conexion;
+                CFDIModelConcepto.Opcion = 3;
+                CFDIModelConcepto.Id_cfdiDatosConceptos = id;
+                //CFDIModel.Predeterminado = id2;
+                CFDIModelConcepto.Id_usuario = User.Identity.Name;
+                CFDIModelConcepto = CFDIConcepto.ABCCFDIconceptos(CFDIModelConcepto);
 
-                throw;
+                return Json("");
+            }
+            catch
+            {
+                CFDIDatosConceptosModels CFDIModelConcepto = new CFDIDatosConceptosModels();
+                return View();
             }
         }
     }

@@ -982,7 +982,9 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <None Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\AuthConfig.cs" />
@@ -1007,6 +1009,7 @@
     </Compile>
     <Compile Include="Models\AuxSQLModel.cs" />
     <Compile Include="Models\CFDIConceptoClaseModels.cs" />
+    <Compile Include="Models\CFDIConceptoClaveUnidadModels.cs" />
     <Compile Include="Models\CFDIConceptoDivicionModels.cs" />
     <Compile Include="Models\CFDIConceptoGrupoModels.cs" />
     <Compile Include="Models\CFDIConceptosTipoProductoModels.cs" />
