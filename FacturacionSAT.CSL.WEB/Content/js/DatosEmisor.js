@@ -59,10 +59,12 @@
                 RazonSocial: { required: true },
                 RFC: { required: true, rfc: true },
                 Correo: { required: true, email: true },
+                Password: { required: true },
                 Direccion: { required: true, direccion: true, maxlength: 350 },
                 filename1: { validarImagen: true, ImagenRequerida: true },
                 filename2: { validarCER: true, imagenExtesionCERSat: true },
-                filename3: { validarKEY: true, imagenExtesionKEYSat: true }
+                filename3: { validarKEY: true, imagenExtesionKEYSat: true },
+                PasswordArchivoKEY: { required: true }
             },
             messages: {
                 IDCFDITIpoPersona: { required: "Seleccione un tipo de persona" },
@@ -70,10 +72,12 @@
                 RazonSocial: { required: "Ingrese la razón social del emisor" },
                 RFC: { required: "Ingrese el RFC del emisor", rfc: "Revise el formato de RFC es incorrecto XAXX010101000 " },
                 Correo: { required: "Ingrese el correo del emisor", email: "Revise el formato de correo es incorrecto EJEMPLO@DOMINIO.COM" },
+                Password: {required: "Ingrese el password del correo"},
                 Direccion: { required: "Ingrese la dirección del emisor.", direccion: "Revise el formato de texto es incorrecto.", maxlength: "La dirección solo admite máximo 350 caracteres." },
                 filename1: { validarImagen: "Seleccione una imagen.", ImagenRequerida: "Imagen. Solo archivos con formato PNG, JPG, JPEG y BMP." },
                 filename2: { validarCER: "Debe seleccionar el archivo .CER.", imagenExtesionCERSat: "Seleccionar un archivo con extensión .CER"},
-                filename3: { validarKEY: "Debe seleccionar el archivo .KEY.", imagenExtesionKEYSat: "Seleccionar un archivo con extención .KEY"}
+                filename3: { validarKEY: "Debe seleccionar el archivo .KEY.", imagenExtesionKEYSat: "Seleccionar un archivo con extención .KEY" },
+                PasswordArchivoKEY: { required: "Ingrese el password del archivo .KEY"}
             },
             invalidHandler: function (event, validator) { //display error alert on form submit
                 successHandler1.hide();
