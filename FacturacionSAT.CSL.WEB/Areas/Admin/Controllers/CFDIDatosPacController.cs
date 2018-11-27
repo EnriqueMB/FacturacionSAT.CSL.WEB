@@ -32,7 +32,10 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
                 throw ex;
             }
         }
-
+        public ActionResult Indxprueba()
+        {
+            return View();
+        }
         [HttpGet]
         public ActionResult CreateCFDIPac()
         {

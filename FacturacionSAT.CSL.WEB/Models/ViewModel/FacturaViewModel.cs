@@ -48,7 +48,6 @@ namespace FacturacionSAT.CSL.WEB.Models.ViewModel
         public string CondicionesDePago { get; set; }
 
         [Display(Name = "Clave privada")]
-        [Required]
         public string ClavePrivada { get; set; }
 
         [Display(Name = "Sucursal")]
@@ -85,13 +84,13 @@ namespace FacturacionSAT.CSL.WEB.Models.ViewModel
 
         [StringLength(25, ErrorMessage = "La serie ni puede superar 25 caracteres", MinimumLength = 1)]
         [Display(Name = "Serie")]
-        public int Serie { get; set; }
+        public string Serie { get; set; }
 
         public string sSerie { get; set; }
         public string NombreSerie { get; set; }
 
         [StringLength(40, ErrorMessage = "El folio no puede superar 40 caracteres", MinimumLength = 1)]
-        public int Folio { get; set; }
+        public string Folio { get; set; }
 
         [Display(Name = "Uso del CFDI")]
         public string UsoCFDI { get; set; }
