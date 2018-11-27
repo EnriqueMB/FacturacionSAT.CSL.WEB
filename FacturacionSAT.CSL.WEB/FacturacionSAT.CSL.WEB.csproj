@@ -129,6 +129,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\Admin\Views\CFDIDatosConceptos\ModalClaveUnidad.cshtml" />
+    <Content Include="Areas\Admin\Views\CFDIDatosConceptos\ModalClaveProducto.cshtml" />
     <None Include="Connected Services\SolucionFactible\configuration91.svcinfo" />
     <None Include="Connected Services\SolucionFactible\configuration.svcinfo" />
     <Content Include="Connected Services\SolucionFactible\FacturacionSAT.CSL.WEB.SolucionFactible.cancelarBase64Response.datasource">
@@ -984,6 +986,7 @@
     <Content Include="Content\themes\smoothness\jquery.ui.tabs.css" />
     <Content Include="Content\themes\smoothness\jquery.ui.theme.css" />
     <Content Include="Global.asax" />
+    <Content Include="SATTempXML\Factura-2018-11-26_05-41-45-p.m..xml" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
@@ -1006,6 +1009,8 @@
     <Content Include="Areas\Admin\Views\CFDIDatosEmisor\Create.cshtml" />
     <None Include="Connected Services\SolucionFactible\Timbrado.wsdl" />
     <Content Include="Areas\Admin\Views\CFDIDatosPac\Indxprueba.cshtml" />
+    <Content Include="SAT\CSD_Pruebas_CFDI_LAN7008173R5.cer" />
+    <Content Include="SAT\CSD_Pruebas_CFDI_LAN7008173R5.key" />
     <!-->>>>>>> 20dc6b70ee4a003db4d84e5a9b915af4f0f8ebe7-->
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -1025,6 +1030,42 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <None Include="Scripts\_references.js" />
+    <Content Include="SystemHelper\SAT\xslt33\AcreditamientoIEPS10.xslt" />
+    <Content Include="SystemHelper\SAT\xslt33\aerolineas.xslt" />
+    <Content Include="SystemHelper\SAT\xslt33\cadenaoriginal_3_3.xslt" />
+    <Content Include="SystemHelper\SAT\xslt33\certificadodedestruccion.xslt" />
+    <Content Include="SystemHelper\SAT\xslt33\cfdiregistrofiscal.xslt" />
+    <Content Include="SystemHelper\SAT\xslt33\ComercioExterior10.xslt" />
+    <Content Include="SystemHelper\SAT\xslt33\ComercioExterior11.xslt" />
+    <Content Include="SystemHelper\SAT\xslt33\consumodecombustibles.xslt" />
+    <Content Include="SystemHelper\SAT\xslt33\detallista.xslt" />
+    <Content Include="SystemHelper\SAT\xslt33\divisas.xslt" />
+    <Content Include="SystemHelper\SAT\xslt33\donat11.xslt" />
+    <Content Include="SystemHelper\SAT\xslt33\ecb.xslt" />
+    <Content Include="SystemHelper\SAT\xslt33\ecc.xslt" />
+    <Content Include="SystemHelper\SAT\xslt33\ecc11.xslt" />
+    <Content Include="SystemHelper\SAT\xslt33\iedu.xslt" />
+    <Content Include="SystemHelper\SAT\xslt33\implocal.xslt" />
+    <Content Include="SystemHelper\SAT\xslt33\ine10.xslt" />
+    <Content Include="SystemHelper\SAT\xslt33\ine11.xslt" />
+    <Content Include="SystemHelper\SAT\xslt33\leyendasFisc.xslt" />
+    <Content Include="SystemHelper\SAT\xslt33\nomina11.xslt" />
+    <Content Include="SystemHelper\SAT\xslt33\nomina12.xslt" />
+    <Content Include="SystemHelper\SAT\xslt33\notariospublicos.xslt" />
+    <Content Include="SystemHelper\SAT\xslt33\obrasarteantiguedades.xslt" />
+    <Content Include="SystemHelper\SAT\xslt33\pagoenespecie.xslt" />
+    <Content Include="SystemHelper\SAT\xslt33\Pagos10.xslt" />
+    <Content Include="SystemHelper\SAT\xslt33\pfic.xslt" />
+    <Content Include="SystemHelper\SAT\xslt33\psgecfd.xslt" />
+    <Content Include="SystemHelper\SAT\xslt33\renovacionysustitucionvehiculos.xslt" />
+    <Content Include="SystemHelper\SAT\xslt33\servicioparcialconstruccion.xslt" />
+    <Content Include="SystemHelper\SAT\xslt33\spei.xslt" />
+    <Content Include="SystemHelper\SAT\xslt33\terceros11.xslt" />
+    <Content Include="SystemHelper\SAT\xslt33\TuristaPasajeroExtranjero.xslt" />
+    <Content Include="SystemHelper\SAT\xslt33\utilerias.xslt" />
+    <Content Include="SystemHelper\SAT\xslt33\valesdedespensa.xslt" />
+    <Content Include="SystemHelper\SAT\xslt33\vehiculousado.xslt" />
+    <Content Include="SystemHelper\SAT\xslt33\ventavehiculos11.xslt" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -1069,6 +1110,7 @@
     <Compile Include="Models\CFDIRegimenFiscalDetalleModels.cs" />
     <Compile Include="Models\CFDITipoPersonaModels.cs" />
     <Compile Include="Models\ComboModel.cs" />
+    <Compile Include="Models\DataTableParameters.cs" />
     <!--<<<<<<< HEAD-->
     <Compile Include="Models\Datos\CFDIPacDatos.cs" />
     <!--=======-->

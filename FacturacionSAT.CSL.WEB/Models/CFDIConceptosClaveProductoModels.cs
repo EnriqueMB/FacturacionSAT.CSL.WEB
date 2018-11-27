@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -17,7 +18,8 @@ namespace FacturacionSAT.CSL.WEB.Models
         public List<CFDIConceptosClaveProductoModels> __ListaClaveProducto { get; set; }
 
         private string _Id_cfdiClaveProdServDetalle;
-
+        [Required]
+        [Display (Name ="Clave producto")]
         public string Id_cfdiClaveProdServDetalle
         {
             get { return _Id_cfdiClaveProdServDetalle; }

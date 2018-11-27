@@ -34,6 +34,8 @@ namespace FacturacionSAT.CSL.WEB.Models
             this._ListaClaveProducto = new List<CFDIConceptosClaveProductoModels>();
             this._ListaClaveunidad = new List<CFDIConceptoClaveUnidadModels>();
             this.ListaCFDIConceptos = new List<CFDIDatosConceptosModels>();
+            this.CFDI_ClaveUnidad = new CFDIConceptoClaveUnidadModels();
+            this.CFDI_Claveproducto = new CFDIConceptosClaveProductoModels();
         }
        // private int _Opcion;
 
@@ -43,6 +45,8 @@ namespace FacturacionSAT.CSL.WEB.Models
         public CFDIConceptoGrupoModels grupo { get; set; }
         public CFDIConceptoClaseModels clase { get; set; }
         public CFDIConceptoClaveUnidadModels servicioDetalle { get; set; }
+        public CFDIConceptoClaveUnidadModels CFDI_ClaveUnidad { get; set; }
+        public CFDIConceptosClaveProductoModels CFDI_Claveproducto { get; set; }
 
         public string Conexion { get; set; }
 

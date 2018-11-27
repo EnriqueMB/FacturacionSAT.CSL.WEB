@@ -5,6 +5,16 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
+@section css{
+    <link href="@Url.Content("~/Content/js/plugins/select.bootstrap.min.css")" rel="stylesheet" />
+    <style>
+        .form-control[disabled],
+        .form-control[readonly] {
+            color: #000 !important;
+        }
+    </style>
+}
+
 @section featured{
 
     @{
@@ -38,23 +48,31 @@
             <div class="panel-body">
 
                 <div class="col-md-12">
-                     <div class="col-md-6">
+                    <div class="col-md-6">
                         <div class="form-group">
                             <label class="col-md-12 col-xs-12 control-label text-center">Clave producto</label>
                             <div class="col-md-12 col-xs-12">
-                                @Html.DropDownListFor(model => model.Id_cfdiClaveProdServDetalle, new SelectList(Model.ListaClaveProducto, "Id_cfdiClaveProdServDetalle", "Descripcion"), new { id = "Id_cfdiClaveProdServDetalle", @class = "form-control select", data_live_search = "true" })
-                                @Html.ValidationMessageFor(model => model.Id_cfdiTipoProducto)
+                                @Html.TextBoxFor(m => m.CFDI_Claveproducto.Descripcion, "", new { @class = "form-control", @readonly = "true" })
+                                @Html.HiddenFor(m => m.CFDI_Claveproducto.Id_cfdiClaveProdServDetalle)
+                                <span class="input-group-btn">
+                                    <button id="btnClaveProducto" class="btn btn-default" type="button">Seleccionar</button>
+                                </span>
                                 <span class="help-block">Seleccione una clave producto</span>
+                                @Html.ValidationMessageFor(model => model.CFDI_Claveproducto.Id_cfdiClaveProdServDetalle)
                             </div>
                         </div>
                     </div>
-                   <div class="col-md-6">
+                    <div class="col-md-6">
                         <div class="form-group">
                             <label class="col-md-12 col-xs-12 control-label text-center">Clave Unidad</label>
                             <div class="col-md-12 col-xs-12">
-                                @Html.DropDownListFor(model => model.Id_cfdiClaveUnidadDetalle, new SelectList(Model.ListaClaveunidad, "Id_cfdiClaveUnidadDetalle", "Nombre"), new { id = "Id_cfdiClaveUnidadDetalle", @class = "form-control select", data_live_search = "true" })
-                                @Html.ValidationMessageFor(model => model.Id_cfdiClaveUnidadDetalle)
+                                @Html.TextBoxFor(m => m.CFDI_ClaveUnidad.Nombre, "", new { @class = "form-control", @readonly = "true" })
+                                @Html.HiddenFor(m => m.CFDI_ClaveUnidad.Id_cfdiClaveUnidadDetalle)
+                                <span class="input-group-btn">
+                                    <button id="btnClaveUnidad" class="btn btn-default" type="button">Seleccionar</button>
+                                </span>
                                 <span class="help-block">Seleccione una clave unidad</span>
+                                @Html.ValidationMessageFor(model => model.CFDI_ClaveUnidad.Id_cfdiClaveUnidadDetalle)
                             </div>
                         </div>
                     </div>
@@ -128,25 +146,174 @@
         }
     </div>
 
+    <div id="ModalClaveUnidad" class="modal fade" role="dialog" style="display:none" aria-hidden="true">
+        <div class="modal-dialog modal-lg" id="ContenidoModalClaveUnidad">
+
+        </div>
+    </div>
+
+    <div id="ModalClaveProducto" class="modal fade" role="dialog" style="display:none" aria-hidden="true">
+        <div class="modal-dialog modal-lg" id="ContenidoModalClaveProducto">
+
+        </div>
+    </div>
+
     <script>
         var message = '@message';
         var typemessage = '@typemessage';
     </script>
 }
 @section script{
-    @*<script type="text/javascript" src="@Url.Content("~/Content/js/plugins/bootstrap/bootstrap-datepicker.js")"></script>*@
-    <script type="text/javascript" src="@Url.Content("~/Content/js/plugins/bootstrap/bootstrap-file-input.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/js/plugins/datatables/jquery.dataTables.min.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Content/js/plugins/bootstrap/bootstrap-select.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Content/js/plugins/tagsinput/jquery.tagsinput.min.js")"></script>
-    @*<script type="text/javascript" src="@Url.Content("~/Content/js/demo_tables.js")"></script>*@
+    <script type="text/javascript" src="@Url.Content("~/Content/js/demo_tables.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Content/js/mensajeDeError.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Content/js/plugins/jquery-validation/jquery.validate.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Content/js/validaciones/additionals.js")"></script>
     @*<script type="text/javascript" src="@Url.Content("~/Content/js/Usuario.js")"></script>*@
+
     <script>
         jQuery(document).ready(function () {
             Mensaje(message, typemessage);
             //Usuario.init();
+            //Modal
+            $('#btnClaveUnidad').on('click', function () {
+                $("body").css("cursor", "progress");
+                //var id_tipo_proveedor = document.getElementById("Proveedor_IDTipoProveedor").value;
+
+                $.ajax({
+                    url: "@Url.Content("~/Admin/CFDIDatosConceptos/ModalClaveUnidad")",
+                    type: "POST",
+                    success: function (data) {
+                        $("body").css("cursor", "default");
+                        $('#ContenidoModalClaveUnidad').html(data);
+                        $('#ModalClaveUnidad').modal({ backdrop: 'static', keyboard: false });
+
+                        var dtClaveUnidad = $('#dtClaveUnidad').DataTable({
+                            language: {
+                                "url": "@Url.Content("~/Content/json/Spanish.json")"
+                            },
+                            processing: true,
+                            serverSide: true,
+                            ordering: false,
+                            columnDefs: [
+                                {
+                                    "targets": [0],
+                                    "visible": false,
+                                    "searchable": false
+                                }
+                            ],
+                            ajax: {
+                                type: "POST",
+                                contentType: "application/json",
+                                url: "@Url.Content("~/Admin/CFDIDatosConceptos/DataTableClaveUnidad") ",
+                                data: function (d) {
+                                    // note: d is created by datatable, the structure of d is the same with DataTableParameters model above
+                                    //console.log(JSON.stringify(d));
+                                    return JSON.stringify(d);
+                                }
+                            }
+                        });
+
+                        $('#dtClaveUnidad tbody').on('click', 'tr', function () {
+                            if ($(this).hasClass('selected')) {
+                                $(this).removeClass('selected');
+                            }
+                            else {
+                                dtClaveUnidad.$('tr.selected').removeClass('selected');
+                                $(this).addClass('selected');
+                            }
+                        });
+
+                        $('#btnGuardarClaveUnidad').click(function () {
+                            $('#ModalClaveUnidad').modal('hide');
+
+                            var row = dtClaveUnidad.row('.selected').data();
+
+                            if (row != null)
+                            {
+                                var idClaveUnidad = row[0];
+                                var nombreClave = row[1] + " " + row[2];
+
+                                $("#CFDI_ClaveUnidad_Nombre").val(nombreClave);
+                                $("#CFDI_ClaveUnidad_Id_cfdiClaveUnidadDetalle").val(idClaveUnidad);
+                            }
+
+                        });
+
+                    }
+                });
+            });
+
+            $('#btnClaveProducto').on('click', function () {
+                $("body").css("cursor", "progress");
+                //var id_tipo_proveedor = document.getElementById("Proveedor_IDTipoProveedor").value;
+
+                $.ajax({
+                    url: "@Url.Content("~/Admin/CFDIDatosConceptos/ModalClaveProducto")",
+                    type: "POST",
+                    success: function (data) {
+                        $("body").css("cursor", "default");
+                        $('#ContenidoModalClaveProducto').html(data);
+                        $('#ModalClaveProducto').modal({ backdrop: 'static', keyboard: false });
+
+                        var dtClaveProducto = $('#dtClaveProducto').DataTable({
+                            language: {
+                                "url": "@Url.Content("~/Content/json/Spanish.json")"
+                            },
+                            processing: true,
+                            serverSide: true,
+                            ordering: false,
+                            columnDefs: [
+                                {
+                                    "targets": [0],
+                                    "visible": false,
+                                    "searchable": false
+                                }
+                            ],
+                            ajax: {
+                                type: "POST",
+                                contentType: "application/json",
+                                url: "@Url.Content("~/Admin/CFDIDatosConceptos/DataTableClaveProducto") ",
+                                data: function (d) {
+                                    // note: d is created by datatable, the structure of d is the same with DataTableParameters model above
+                                    //console.log(JSON.stringify(d));
+                                    return JSON.stringify(d);
+                                }
+                            }
+                        });
+
+                        $('#dtClaveProducto tbody').on('click', 'tr', function () {
+                            if ($(this).hasClass('selected')) {
+                                $(this).removeClass('selected');
+                            }
+                            else {
+                                dtClaveProducto.$('tr.selected').removeClass('selected');
+                                $(this).addClass('selected');
+                            }
+                        });
+
+                        $('#btnGuardarClaveProducto').click(function () {
+                            $('#ModalClaveProducto').modal('hide');
+
+                            var row = dtClaveProducto.row('.selected').data();
+
+                            if (row != null)
+                            {
+                                var id = row[0];
+                                var nombre = row[1] + " " + row[2];
+
+                                $("#CFDI_Claveproducto_Descripcion").val(nombre);
+                                $("#CFDI_Claveproducto_Id_cfdiClaveProdServDetalle").val(id);
+                            }
+
+                        });
+
+                    }
+                });
+            });
+
         });
     </script>
 }
