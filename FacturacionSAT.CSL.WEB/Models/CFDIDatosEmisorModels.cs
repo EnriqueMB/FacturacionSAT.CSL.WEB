@@ -5,9 +5,9 @@ using System.Web;
 
 namespace FacturacionSAT.CSL.WEB.Models
 {
-    public class CFDIDatosEmisor
+    public class CFDIDatosEmisorModels
     {
-        public CFDIDatosEmisor()
+        public CFDIDatosEmisorModels()
         {
             _IDCFDIDatosEmisor = string.Empty;
             _IDCFDIRegimenFiscalDetalle = string.Empty;
@@ -23,6 +23,10 @@ namespace FacturacionSAT.CSL.WEB.Models
             _Imagen = string.Empty;
             _PasswordArchivoKEY = string.Empty;
             _CFDITipoPersona = new CFDITipoPersonaModels();
+            _ListaDatosEmisor = new List<CFDIDatosEmisorModels>();
+            _CFDIRegimenFiscalDetalle = new CFDIRegimenFiscalDetalleModels();
+            ListaTipoPersona = new List<CFDITipoPersonaModels>();
+            ListaRegimenFiscalDetalle = new List<CFDIRegimenFiscalDetalleModels>();
         }
 
         private string _IDCFDIDatosEmisor;
@@ -144,6 +148,39 @@ namespace FacturacionSAT.CSL.WEB.Models
             get { return _CFDITipoPersona; }
             set { _CFDITipoPersona = value; }
         }
+
+        private CFDIRegimenFiscalDetalleModels _CFDIRegimenFiscalDetalle;
+
+        public CFDIRegimenFiscalDetalleModels CFDIRegimenFiscalDetalle
+        {
+            get { return _CFDIRegimenFiscalDetalle; }
+            set { _CFDIRegimenFiscalDetalle = value; }
+        }
+
+        private List<CFDIDatosEmisorModels> _ListaDatosEmisor;
+
+        public List<CFDIDatosEmisorModels> ListaDatosEmisor
+        {
+            get { return _ListaDatosEmisor; }
+            set { _ListaDatosEmisor = value; }
+        }
+
+        private List<CFDITipoPersonaModels> _ListaTipoPersona;
+
+        public List<CFDITipoPersonaModels> ListaTipoPersona
+        {
+            get { return _ListaTipoPersona; }
+            set { _ListaTipoPersona = value; }
+        }
+
+        private List<CFDIRegimenFiscalDetalleModels> _ListaRegimenFiscalDetalle;
+
+        public List<CFDIRegimenFiscalDetalleModels> ListaRegimenFiscalDetalle
+        {
+            get { return _ListaRegimenFiscalDetalle; }
+            set { _ListaRegimenFiscalDetalle = value; }
+        }
+
 
 
         public string Conexion { get; set; }
