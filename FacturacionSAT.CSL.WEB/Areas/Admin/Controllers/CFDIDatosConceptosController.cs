@@ -41,20 +41,109 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
         {
             try
             {
-                if (string.IsNullOrEmpty(Id))
-                {
-                    return RedirectToAction("Index");
-                }
-                else
-                {
 
-                    return View();
-                }
+                Token.SaveToken();
+                CFDIDatosConceptosModels Model = new CFDIDatosConceptosModels();
+                ComboDatos listTipoPoduc = new ComboDatos();
+                CFDIConceptosDatos detalleEditDatos = new CFDIConceptosDatos();
+                
+                Model.Conexion = Conexion;
+                Model.Id_cfdiDatosConceptos = Id;
+                Model.ListaTipoProducto = listTipoPoduc.ListaTipoProducto(Model);
+                Model.ListaDivicion = listTipoPoduc.ListaDivicionConcepto(Model);
+                Model.ListaGrupo = listTipoPoduc.ListaGrupoConcepto(Model);
+                Model.ListaClase = listTipoPoduc.ListaCFDIClase(Model);
+                Model.ListaClaveProducto = listTipoPoduc.ListaConceptoClaveProducto(Model);
+                Model.ListaClaveunidad = listTipoPoduc.ListaConceptoClaveUnidad(Model);
+
+                //var ListTipoProduct = new SelectList(Model.ListaTipoProducto, "Id_cfdiTipoProducto", "TipoProducto");
+                //var ListDivicion = new SelectList(Model.ListaDivicion, "Id_cfdiDivision", "Division");
+                //var ListGrupo = new SelectList(Model.ListaGrupo, "Id_cfdiGrupo", "Grupo");
+                //var ListCFDIClase = new SelectList(Model.ListaClase, "Id_CfdiClase", "clase");
+                //var listaClaveProducto = new SelectList(Model.ListaClaveProducto, "Id_cfdiClaveProdServDetalle", "Descripcion");
+                //var listaClaveUnidad = new SelectList(Model.ListaClaveunidad, "id_cfdiClaveUnidadDetalle", "Nombre");
+
+                //ViewData["cmbTipoProducto"] = ListTipoProduct;
+                //ViewData["cmbDivicion"] = ListDivicion;
+                //ViewData["cmbClase"] = ListCFDIClase;
+                //ViewData["cmbGrupo"] = ListGrupo;
+                //ViewData["cmbclaveproducto"] = listaClaveProducto;
+                //ViewData["cmbclaveunidad"] = listaClaveUnidad;
+                Model = detalleEditDatos.GetCFDIConceptosEdit(Model);
+                //Model.ListaCFDIConceptos= detalleEditDatos.GetCFDIConceptosEdit(Model);
+
+                return View(Model);
+
             }
             catch (Exception)
             {
 
-                throw;
+                CFDIDatosConceptosModels Model = new CFDIDatosConceptosModels();
+                TempData["typemessage"] = "2";
+                TempData["message"] = "No se puede cargar la vista";
+                return View(Model);
+            }
+        }
+        [HttpPost]
+        public ActionResult Edit(string Id, CFDIDatosConceptosModels Model)
+            
+        {
+            
+            CFDIConceptosDatos editarDatos = new CFDIConceptosDatos();
+           
+            ComboDatos listTipoPoduc = new ComboDatos();
+            try
+            {
+                if (Token.IsTokenValid())
+                {
+                    if (ModelState.IsValid)
+                    {
+                        Model.Conexion = Conexion;
+                        Model.Opcion = 2;
+                        Model.Id_usuario = User.Identity.Name;
+                        Model.Id_cfdiDatosConceptos = Id;
+                        Model = editarDatos.ABCCFDIconceptos(Model);
+                        if (Model.Completado == true)
+                        {
+                            TempData["typemessage"] = "1";
+                            TempData["message"] = "El registro se guardo correctamente.";
+                            Token.ResetToken();
+                            return RedirectToAction("Index");
+                        }
+                        else
+                        {
+                            
+                            TempData["typemessage"] = "2";
+                            TempData["message"] = "Ocurrió un error al guardar el registro. Intente más tarde.";
+                            return View(Model);
+                        }
+                    }
+                    else
+                    {
+                        Model.Conexion = Conexion;
+                        
+                        Model.ListaTipoProducto = listTipoPoduc.ListaTipoProducto(Model);
+                        Model.ListaDivicion = listTipoPoduc.ListaDivicionConcepto(Model);
+                        Model.ListaGrupo = listTipoPoduc.ListaGrupoConcepto(Model);
+                        Model.ListaClase = listTipoPoduc.ListaCFDIClase(Model);
+                        Model.ListaClaveProducto = listTipoPoduc.ListaConceptoClaveProducto(Model);
+                        Model.ListaClaveunidad = listTipoPoduc.ListaConceptoClaveUnidad(Model);
+                        Model = editarDatos.GetCFDIConceptosEdit(Model);
+                       
+                        return View(Model);
+                    }
+                }
+                else
+                {
+                    return RedirectToAction("Index");
+                }
+            }
+            catch
+            {
+
+                TempData["typemessage"] = "2";
+                TempData["message"] = "No se pudo guardar los datos. Por favor contacte a soporte técnico.";
+                return View(Model);
             }
         }
         [HttpGet]
@@ -79,7 +168,7 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
                 var ListGrupo = new SelectList(Model.ListaGrupo, " Id_cfdiGrupo", "Grupo");
                 var ListCFDIClase = new SelectList(Model.ListaClase, "Id_CfdiClase", "clase");
                 var listaClaveProducto = new SelectList(Model.ListaClaveProducto, "Id_cfdiClaveProdServDetalle", "Descripcion");
-                var listaClaveUnidad = new SelectList(Model.ListaClaveunidad, "Id_cfdiClaveUnidad", "Nombre");
+                var listaClaveUnidad = new SelectList(Model.ListaClaveunidad, "id_cfdiClaveUnidadDetalle", "Nombre");
 
                 ViewData["cmbTipoProducto"] = ListTipoProduct;
                 ViewData["cmbDivicion"] = ListDivicion;

@@ -9,18 +9,21 @@ namespace FacturacionSAT.CSL.WEB.Models
     {
         public CFDIConceptoClaveUnidadModels()
         {
-            Id_cfdiClaveUnidad = string.Empty;
+            Id_cfdiClaveUnidadDetalle = string.Empty;
             Nombre = string.Empty;
             _ListaClaveunidad= new List<CFDIConceptoClaveUnidadModels>();
         }
         public List<CFDIConceptoClaveUnidadModels> _ListaClaveunidad { get; set; }
-        private string _Id_cfdiClaveUnidad;
 
-        public string Id_cfdiClaveUnidad
+
+        private string _Id_cfdiClaveUnidadDetalle;
+
+        public string Id_cfdiClaveUnidadDetalle
         {
-            get { return _Id_cfdiClaveUnidad; }
-            set { _Id_cfdiClaveUnidad = value; }
+            get { return _Id_cfdiClaveUnidadDetalle; }
+            set { _Id_cfdiClaveUnidadDetalle = value; }
         }
+
         private string _Nombre;
 
         public string Nombre
