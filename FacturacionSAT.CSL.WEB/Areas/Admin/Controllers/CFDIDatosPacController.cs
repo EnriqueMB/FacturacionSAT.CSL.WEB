@@ -109,6 +109,7 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
                 CFDIPacDatos CFDIDatos = new CFDIPacDatos();
                 CFDIModel.Id_cfdiDatosPac = id;
                 CFDIModel.Conexion = Conexion;
+                CFDIModel = CFDIDatos.GetCFDIPacDetail(CFDIModel);
                 return View(CFDIModel);
             }
             catch (Exception ex)
@@ -117,7 +118,7 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
             }
         }
         [HttpPost]
-        public ActionResult UpdateCFDIPac(int id, CFDIDatosPacModels productos)
+        public ActionResult UpdateCFDIPac(string id, CFDIDatosPacModels productos)
         {
             
                 CFDIPacDatos CFDIDatos = new CFDIPacDatos();
@@ -130,6 +131,7 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
                             productos.Conexion = Conexion;
                             productos.Id_usuario = User.Identity.Name;
                             productos.Opcion = 2;
+                            productos.Id_cfdiDatosPac = id;
                             productos = CFDIDatos.ABCCFDIPac(productos);
 
                             if (productos.Completado == true)
@@ -165,12 +167,12 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        public ActionResult DeleteCFDIPac(string id, bool id2 )
+        public ActionResult DeleteCFDIPac(string id)
         {
             return View();
         }
         [HttpPost]
-        public ActionResult DeleteCFDIPac(string id, bool id2, FormCollection collection)
+        public ActionResult DeleteCFDIPac(string id, FormCollection collection)
         {
             try
             {
@@ -180,10 +182,10 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
                 CFDIModel.Conexion = Conexion;
                 CFDIModel.Opcion = 3;
                 CFDIModel.Id_cfdiDatosPac = id;
-                CFDIModel.Predeterminado = id2;
+                //CFDIModel.Predeterminado = id2;
                 CFDIModel.Id_usuario = User.Identity.Name;
                 CFDIModel = CFDIDatos.ABCCFDIPac(CFDIModel);
-
+                
                 return Json("");
             }
             catch

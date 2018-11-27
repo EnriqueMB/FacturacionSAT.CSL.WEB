@@ -1001,6 +1001,9 @@
     <!--=======-->
     <Content Include="Areas\Admin\Views\CFDIDatosConseptos\Index.cshtml" />
     <Content Include="Areas\Admin\Views\CFDIDatosPac\UpdateCFDIPac.cshtml" />
+    <Content Include="Areas\Admin\Views\CFDIDatosConceptos\Crear.cshtml" />
+    <Content Include="Areas\Admin\Views\CFDIDatosEmisor\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\CFDIDatosEmisor\Create.cshtml" />
     <None Include="Connected Services\SolucionFactible\Timbrado.wsdl" />
     <!-->>>>>>> 20dc6b70ee4a003db4d84e5a9b915af4f0f8ebe7-->
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -1021,7 +1024,9 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <None Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\AuthConfig.cs" />
@@ -1033,6 +1038,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminFacturaController.cs" />
     <Compile Include="Areas\Admin\Controllers\CFDIDatosConceptosController.cs" />
+    <Compile Include="Areas\Admin\Controllers\CFDIDatosEmisorController.cs" />
     <Compile Include="Areas\Admin\Controllers\CFDIDatosPacController.cs" />
     <Compile Include="Areas\Admin\Controllers\JsonController.cs" />
     <Compile Include="Connected Services\SolucionFactible\Reference.cs">
@@ -1050,9 +1056,17 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AuxSQLModel.cs" />
+    <Compile Include="Models\CFDIConceptoClaseModels.cs" />
+    <Compile Include="Models\CFDIConceptoClaveUnidadModels.cs" />
+    <Compile Include="Models\CFDIConceptoDivicionModels.cs" />
+    <Compile Include="Models\CFDIConceptoGrupoModels.cs" />
+    <Compile Include="Models\CFDIConceptosClaveProductoModels.cs" />
+    <Compile Include="Models\CFDIConceptosTipoProductoModels.cs" />
     <Compile Include="Models\CFDIDatosConceptosModels.cs" />
-    <Compile Include="Models\CFDIDatosEmisor.cs" />
+    <Compile Include="Models\CFDIDatosEmisorModels.cs" />
     <Compile Include="Models\CFDIDatosPacModels.cs" />
+    <Compile Include="Models\CFDIRegimenFiscalDetalleModels.cs" />
+    <Compile Include="Models\CFDITipoPersonaModels.cs" />
     <Compile Include="Models\ComboModel.cs" />
     <!--<<<<<<< HEAD-->
     <Compile Include="Models\Datos\CFDIPacDatos.cs" />

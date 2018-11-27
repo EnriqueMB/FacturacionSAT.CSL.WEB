@@ -19,10 +19,11 @@
         </div>
         <div class="col-md-12">
             @{ Html.EnableClientValidation(false); }
-            @using (Html.BeginForm("CreateCFDIPac", "CFDIDatosPac", FormMethod.Post, new { id = "form-catalm", @class = "form-horizontal", autocomplete = "off" }))
+            @using (Html.BeginForm("UpdateCFDIPac", "CFDIDatosPac", FormMethod.Post, new { id = "form-catalm", @class = "form-horizontal", autocomplete = "off" }))
             {
 
                 @Html.AntiForgeryToken()
+                @Html.HiddenFor(model => model.Id_cfdiDatosPac)
                 @Html.ValidationSummary(false, "Hay errores en la captura de información:", new { @class = "text-danger" }) //Server
                 <div id="validation_summary" class="field_error "></div> //JS
 
@@ -73,10 +74,10 @@
                                     <div class="col-md-12 col-xs-12">
                                         <div class="input-group">
                                             <span class="input-group-addon"><span class="fa fa-unlock-alt"></span></span>
-                                            @*<input type="password" class="form-control" />*@
-                                            @Html.PasswordFor(model => model.PasswordPac, new { id = "PasswordPac", @class = "form-control" })
+                                            <input type="password" class="form-control" disabled/>
+                                            @*@Html.PasswordFor(model => model.PasswordPac, new { id = "PasswordPac", @class = "form-control" })*@
                                         </div>
-                                        @Html.ValidationMessageFor(model => model.PasswordPac)
+                                        @*@Html.ValidationMessageFor(model => model.PasswordPac)*@
                                         <span class="help-block">Ingrese Contraseña Pac</span>
                                     </div>
                                 </div>
@@ -102,10 +103,10 @@
                                     <div class="col-md-12 col-xs-12">
                                         <div class="input-group">
                                             <span class="input-group-addon"><span class="fa fa-unlock-alt"></span></span>
-                                            @*<input type="password" class="form-control" />*@
-                                            @Html.PasswordFor(model => model.PasswordPacTest, new { id = "PasswordPacTest", @class = "form-control" })
+                                            <input type="password" class="form-control" disabled/>
+                                            @*@Html.PasswordFor(model => model.PasswordPacTest, new { id = "PasswordPacTest", @class = "form-control " })*@
                                         </div>
-                                        @Html.ValidationMessageFor(model => model.PasswordPacTest)
+                                        @*@Html.ValidationMessageFor(model => model.PasswordPacTest)*@
                                         <span class="help-block">Ingrese contraseña Pact Test</span>
                                     </div>
                                 </div>
@@ -122,7 +123,7 @@
                         </div>
                     </div>
                     <div class="panel-footer">
-                        <input type="submit" value="Guardar" class="btn btn-primary pull-right">
+                        <input type="submit" value="Modificar" class="btn btn-primary pull-right">
                         <a href="@Url.Action("Index","CFDIDatosPac")" class="btn btn-danger"><i class="icon-prev"></i>Cancelar</a>
                     </div>
                 </div>
