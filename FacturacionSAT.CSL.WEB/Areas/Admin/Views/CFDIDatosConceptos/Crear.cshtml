@@ -44,7 +44,7 @@
                             <div class="col-md-12 col-xs-12">
                                 @Html.DropDownListFor(model => model.Id_cfdiClaveProdServDetalle, new SelectList(Model.ListaClaveProducto, "Id_cfdiClaveProdServDetalle", "Descripcion"), new { id = "Id_cfdiClaveProdServDetalle", @class = "form-control select", data_live_search = "true" })
                                 @Html.ValidationMessageFor(model => model.Id_cfdiTipoProducto)
-                                <span class="help-block">Seleccione un tipo producto</span>
+                                <span class="help-block">Seleccione una clave producto</span>
                             </div>
                         </div>
                     </div>
@@ -52,9 +52,9 @@
                         <div class="form-group">
                             <label class="col-md-12 col-xs-12 control-label text-center">Clave Unidad</label>
                             <div class="col-md-12 col-xs-12">
-                                @Html.DropDownListFor(model => model.Id_cfdiClaveUnidad, new SelectList(Model.ListaClaveunidad, "Id_cfdiClaveUnidad", "Nombre"), new { id = "Id_cfdiClaveUnidad", @class = "form-control select", data_live_search = "true" })
-                                @Html.ValidationMessageFor(model => model.Id_cfdiClaveUnidad)
-                                <span class="help-block">Seleccione un tipo producto</span>
+                                @Html.DropDownListFor(model => model.Id_cfdiClaveUnidadDetalle, new SelectList(Model.ListaClaveunidad, "Id_cfdiClaveUnidadDetalle", "Nombre"), new { id = "Id_cfdiClaveUnidadDetalle", @class = "form-control select", data_live_search = "true" })
+                                @Html.ValidationMessageFor(model => model.Id_cfdiClaveUnidadDetalle)
+                                <span class="help-block">Seleccione una clave unidad</span>
                             </div>
                         </div>
                     </div>
@@ -70,11 +70,11 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label class="col-md-12 col-xs-12 control-label text-center">CFDIDivicion</label>
+                            <label class="col-md-12 col-xs-12 control-label text-center">CFDIDivision</label>
                             <div class="col-md-12 col-xs-12">
                                 @Html.DropDownListFor(model => model.Id_cfdiDivision, new SelectList(Model.ListaDivicion, "Id_cfdiDivision", "Division"), new { id = "Id_cfdiDivision", @class = "form-control select", data_live_search = "true" })
                                 @Html.ValidationMessageFor(model => model.Id_cfdiDivision)
-                                <span class="help-block">Seleccione una divicion</span>
+                                <span class="help-block">Seleccione una division</span>
                             </div>
                         </div>
                     </div>
@@ -95,6 +95,7 @@
                             <div class="col-md-12 col-xs-12">
                                 @Html.DropDownListFor(model => model.Id_cfdiClase, new SelectList(Model.ListaClase, "Id_CfdiClase", "clase"), new { id = "Id_CfdiClase", @class = "form-control select", data_live_search = "true" })
                                 @Html.ValidationMessageFor(model => model.Id_cfdiClase)
+                                <span class="help-block">Seleccione una clase</span>
                             </div>
                         </div>
                     </div>
@@ -133,11 +134,11 @@
     </script>
 }
 @section script{
-    @*<script type="text/javascript" src="@Url.Content("~/Content/js/plugins/bootstrap/bootstrap-datepicker.js")"></script>
+    @*<script type="text/javascript" src="@Url.Content("~/Content/js/plugins/bootstrap/bootstrap-datepicker.js")"></script>*@
     <script type="text/javascript" src="@Url.Content("~/Content/js/plugins/bootstrap/bootstrap-file-input.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Content/js/plugins/bootstrap/bootstrap-select.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Content/js/plugins/tagsinput/jquery.tagsinput.min.js")"></script>
-    <script type="text/javascript" src="@Url.Content("~/Content/js/demo_tables.js")"></script>*@
+    @*<script type="text/javascript" src="@Url.Content("~/Content/js/demo_tables.js")"></script>*@
     <script type="text/javascript" src="@Url.Content("~/Content/js/mensajeDeError.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Content/js/plugins/jquery-validation/jquery.validate.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Content/js/validaciones/additionals.js")"></script>

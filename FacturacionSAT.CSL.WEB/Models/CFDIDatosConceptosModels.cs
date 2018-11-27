@@ -18,7 +18,7 @@ namespace FacturacionSAT.CSL.WEB.Models
             Id_cfdiGrupo = string.Empty;
             Id_cfdiClase = string.Empty;
             Id_cfdiClaveProdServDetalle = string.Empty;
-            Id_cfdiClaveUnidad = string.Empty;
+            Id_cfdiClaveUnidadDetalle = string.Empty;
             Id_usuario = string.Empty;
             Conexion = string.Empty;
             Completado = false;
@@ -35,7 +35,7 @@ namespace FacturacionSAT.CSL.WEB.Models
             this._ListaClaveunidad = new List<CFDIConceptoClaveUnidadModels>();
             this.ListaCFDIConceptos = new List<CFDIDatosConceptosModels>();
         }
-        private int _Opcion;
+       // private int _Opcion;
 
         public bool Completado { get; set; }
         public int Opcion { get; set; }
@@ -98,12 +98,12 @@ namespace FacturacionSAT.CSL.WEB.Models
             get { return _Id_cfdiClaveProdServDetalle; }
             set { _Id_cfdiClaveProdServDetalle = value; }
         }
-        private string _Id_cfdiClaveUnidad;
+        private string _Id_cfdiClaveUnidadDetalle;
 
-        public string Id_cfdiClaveUnidad
+        public string Id_cfdiClaveUnidadDetalle
         {
-            get { return _Id_cfdiClaveUnidad; }
-            set { _Id_cfdiClaveUnidad = value; }
+            get { return _Id_cfdiClaveUnidadDetalle; }
+            set { _Id_cfdiClaveUnidadDetalle = value; }
         }
         private string _Id_usuario;
 

@@ -261,7 +261,7 @@ namespace FacturacionSAT.CSL.WEB.Models.Datos
                 while (dr.Read())
                 {
                     item = new CFDIConceptoClaveUnidadModels();
-                    item.Id_cfdiClaveUnidad = !dr.IsDBNull(dr.GetOrdinal("id_cfdiClaveUnidad")) ? dr.GetString(dr.GetOrdinal("id_cfdiClaveUnidad")) : string.Empty;
+                    item.Id_cfdiClaveUnidadDetalle = !dr.IsDBNull(dr.GetOrdinal("id_cfdiClaveUnidadDetalle")) ? dr.GetString(dr.GetOrdinal("id_cfdiClaveUnidadDetalle")) : string.Empty;
                     item.Nombre = !dr.IsDBNull(dr.GetOrdinal("nombre")) ? dr.GetString(dr.GetOrdinal("nombre")) : string.Empty;
                     lista.Add(item);
                 }

@@ -16,7 +16,7 @@ namespace FacturacionSAT.CSL.WEB.Models.Datos
                 object aux = SqlHelper.ExecuteScalar(usuario.Conexion, "TipoUsuarioByUserName_Facturacion_Web", usuario.Id_Usuario);
                 return Convert.ToInt32(aux.ToString());
             }
-            catch (Exception ex)
+            catch (Exception) //ex)
             {
                 return 0;
             }

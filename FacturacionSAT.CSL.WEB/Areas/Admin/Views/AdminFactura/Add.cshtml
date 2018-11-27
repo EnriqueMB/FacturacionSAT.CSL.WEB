@@ -20,15 +20,15 @@
 {
     <div class="col-md-12">
         <div class="panel panel-default tabs">
-            <form action="@Url.Content("~/Facturacion/Save")" method="post">
+            <form action="@Url.Content("~/Admin/AdminFactura/Add")" method="post">
                 <!-- Nav tabs -->
                 <ul class="nav nav-tabs" role="tablist">
                     <li role="presentation" class="active">
-                        <a href="#general" aria-controls="detalles" role="tab" data-toggle="tab">Datos generales</a>
+                        <a href="#general" aria-controls="detalles" role="tab" data-toggle="tab">Factura</a>
                     </li>
-                    <li role="presentation">
+                    @*<li role="presentation">
                         <a href="#conceptos" aria-controls="conceptos" role="tab" data-toggle="tab">Conceptos</a>
-                    </li>
+                    </li>*@
                 </ul>
 
                 <!-- Tab panes -->
@@ -50,8 +50,8 @@
                                             @Html.LabelFor(d => d.Folio)
                                             @Html.TextBoxFor(d => d.Folio, "", new { @class = "form-control" })
 
-                                            @Html.LabelFor(d => d.Fecha)
-                                            @Html.TextBoxFor(d => d.Fecha, "", new { @class = "form-control" })
+                                            @*@Html.LabelFor(d => d.Fecha)
+                                            @Html.TextBoxFor(d => d.Fecha, "", new { @class = "form-control" })*@
                                         </div>
                                         <div class="col-md-4">
                                             @Html.LabelFor(d => d.FormaDePago)
@@ -83,15 +83,52 @@
                                             @Html.TextBoxFor(d => d.RazonSocial, "", new { @class = "form-control" })
                                         </div>
                                     </div>
+
+                                     <h5>Producto</h5>
+                                    @*<div class="row">
+                                        <table class="table datatable">
+                                            <thead>
+                                                <tr>
+                                                    <th> Cantidad </th>
+                                                    <th> Descripción </th>
+                                                    <th> Producto / Servicio </th>
+                                                    <th> Unidad de medida </th>
+                                                    <th> Precio unitario </th>
+                                                    <th> Nombre del impuesto </th>
+                                                    <th> Porcentaje del impuesto </th>
+                                                    <th> Importe del impuesto </th>
+                                                    <th> Total </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                               @foreach(var item in Model.Conceptos)
+                                               {
+                                                <tr>
+                                                    <td> @item.Cantidad  </td>
+                                                    <td> @item.Descripcion </td>
+                                                    <td> @item.ClaveProducto </td>
+                                                    <td> @item.ClaveUnidad </td>
+                                                    <td> @item.PrecioUnitario </td>
+                                                    <td> @item.Impuestos[0].Nombre  </td>
+                                                    <td> @item.Impuestos[0].Tasa</td>
+                                                    <td> @item.Impuestos[0].Importe  </td>
+                                                    <td> @(item.PrecioUnitario  + @item.Impuestos[0].Importe)</td>
+
+                                                </tr>
+                                               }
+                                            </tbody>
+                                        </table>
+                                    </div>*@
                                 </div>
                             </div>
 
                             <div class="panel-footer">
                                 <a id="regresar" href="@Url.Action("Index", "AdminFactura")" class="btn btn-danger"><i class="icon-prev"></i>Regresar</a>
+                                <input type="submit" class="btn btn-success" value="Generar factura"/>
                             </div>
                         </div>
                     </div>
-                    <div role="tabpanel" class="tab-pane" id="conceptos">
+                    @*<div role="tabpanel" class="tab-pane" id="conceptos">
 
                         <div class="panel panel-default">
                             <div class="panel-heading">
@@ -118,7 +155,7 @@
                                 <a id="regresar" href="@Url.Action("Index", "AdminFactura")" class="btn btn-danger"><i class="icon-prev"></i>Regresar</a>
                             </div>
                         </div>
-                    </div>
+                    </div>*@
                 </div>
 
                 @*<div class="row">

@@ -1,0 +1,63 @@
+﻿@model FacturacionSAT.CSL.WEB.Models.CFDIDatosPacModels
+@{
+    /**/
+
+    ViewBag.Title = "Indxprueba";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@section featured{
+    @*<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ShowHidePassword.aspx.cs" Inherits="JQueryShowHidePassword_Demo.ShowHidePassword" %>*@
+
+
+    <!DOCTYPE html>
+
+    <html>
+    <head runat="server">
+        <title>Mostrar u ocultar contraseña</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+       
+
+    </head>
+    <body>
+        <form id="form1" runat="server">
+            <div class="container">
+                <h2>Mostrar u ocultar contraseña</h2>
+                <div class="row">
+                    <div class="col-md-6">
+                        <p>Desplácese por el ojo para mostrar / ocultar la contraseña</p>
+                        <label>Contraseña</label>
+                        <div class="input-group">
+                            @*<asp:TextBox ID="txtPassword" TextMode="Password" runat="server" CssClass="form-control"></asp:TextBox>*@
+                            <input type="text" ID="txtPassword" class="form-control"/>
+                            <div class="input-group-append">
+                                <button id="show_password" class="btn btn-primary" type="button">
+                                    <span class="fa fa-eye-slash icon"></span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>                   
+                </div>
+            </div>
+
+        </form>
+        <script>
+            $(document).ready(function () {
+                $('#show_password').hover(function show() {
+                    //Cambiar el atributo a texto
+                    $('#txtPassword').attr('type', 'text');
+                    $('.icon').removeClass('fa fa-eye-slash').addClass('fa fa-eye');
+                },
+                    function () {
+                        //Cambiar el atributo a contraseña
+                        $('#txtPassword').attr('type', 'password');
+                        $('.icon').removeClass('fa fa-eye').addClass('fa fa-eye-slash');
+                    });
+            });
+        </script>
+    </body>
+</html>
+}
+

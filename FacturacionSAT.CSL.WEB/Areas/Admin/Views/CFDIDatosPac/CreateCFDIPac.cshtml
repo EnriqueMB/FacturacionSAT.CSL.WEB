@@ -74,6 +74,9 @@
                                             <span class="input-group-addon"><span class="fa fa-unlock-alt"></span></span>
                                             @*<input type="password" class="form-control" />*@
                                             @Html.PasswordFor(model => model.PasswordPac, new { id = "PasswordPac", @class = "form-control" })
+                                            <div class="input-group-addon">
+                                                <span id="show_password" class="fa fa-eye-slash icon" />
+                                            </div>
                                         </div>
                                         @Html.ValidationMessageFor(model => model.PasswordPac)
                                         <span class="help-block">Ingrese Contraseña Pac</span>
@@ -104,6 +107,9 @@
                                             <span class="input-group-addon"><span class="fa fa-unlock-alt"></span></span>
                                             @*<input type="password" class="form-control" />*@
                                             @Html.PasswordFor(model => model.PasswordPacTest, new { id = "PasswordPacTest", @class = "form-control" })
+                                            <div class="input-group-addon">
+                                                <span id="show_password1" class="fa fa-eye-slash icon" />
+                                            </div>
                                         </div>
                                         @Html.ValidationMessageFor(model => model.PasswordPacTest)
                                         <span class="help-block">Ingrese contraseña Pact Test</span>
@@ -143,7 +149,29 @@
         jQuery(document).ready(function () {
 
             Mensaje(message, typemessage);
+            $(document).ready(function () {
+                $('#show_password').hover(function show() {
+                    //Cambiar el atributo a texto
+                    $('#PasswordPac').attr('type', 'text');
+                    $('.icon').removeClass('fa fa-eye-slash').addClass('fa fa-eye');
+                },
+                    function () {
+                        //Cambiar el atributo a contraseña
+                        $('#PasswordPac').attr('type', 'password');
+                        $('.icon').removeClass('fa fa-eye').addClass('fa fa-eye-slash');
+                    });
 
+                $('#show_password1').hover(function show() {
+                    //Cambiar el atributo a texto
+                    $('#PasswordPacTest').attr('type', 'text');
+                    $('.icon').removeClass('fa fa-eye-slash').addClass('fa fa-eye');
+                },
+                    function () {
+                        //Cambiar el atributo a contraseña
+                        $('#PasswordPacTest').attr('type', 'password');
+                        $('.icon').removeClass('fa fa-eye').addClass('fa fa-eye-slash');
+                    });
+            });
         });
     </script>
 }
