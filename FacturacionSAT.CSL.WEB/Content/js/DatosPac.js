@@ -90,8 +90,7 @@
                     //Cambiar el atributo a contraseña
                     $('#PasswordPacTest').attr('type', 'password');
                     $('.icon1').removeClass('fa fa-eye').addClass('fa fa-eye-slash');
-                });
-       
+                });       
     }
 
     return {
@@ -100,5 +99,4 @@
             runPassword();
         }
     };
-
 }();
