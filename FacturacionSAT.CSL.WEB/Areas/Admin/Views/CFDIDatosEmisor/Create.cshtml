@@ -5,6 +5,13 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
+@section css
+{
+    <!--FILEINPUT-->
+    <link href="@Url.Content("~/Content/js/plugins/uploadFiles/fileinput.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/js/plugins/font-awesome.min.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/js/plugins/uploadFiles/theme.css")" rel="stylesheet" />
+}
 @section featured{
 
     @{
@@ -21,7 +28,7 @@
         <div class="col-md-12">
             @*<form class="form-horizontal">*@
             @{ Html.EnableClientValidation(false); }
-            @using (Html.BeginForm("Create", "CFDIDatosEmisor", FormMethod.Post, new { id = "form-Emisor", @class = "form-horizontal", autocomplete = "off" }))
+            @using (Html.BeginForm("Create", "CFDIDatosEmisor", FormMethod.Post, new { id = "form-Emisor", @class = "form-horizontal", autocomplete = "off", @enctype = "multipart/form-data" }))
             {
                 @Html.AntiForgeryToken()
 
@@ -41,7 +48,7 @@
                                     <label class="col-md-12 col-xs-12 control-label text-center">Tipo Persona</label>
                                     <div class="col-md-12 col-xs-12">
                                         @Html.DropDownListFor(model => model.IDCFDITipoPersona, new SelectList(Model.ListaTipoPersona, "IDCFDITIpoPersona", "TipoPersona"), new { id = "IDCFDITIpoPersona", @class = "form-control select", data_live_search = "true", data_style = "form-control" })
-                                        @Html.ValidationMessageFor(model => model.ListaTipoPersona)
+                                        @Html.ValidationMessageFor(model => model.IDCFDITipoPersona)
                                         <span class="help-block">Seleccione el tipo de persona del emisor</span>
                                     </div>
                                 </div>
@@ -51,7 +58,7 @@
                                     <label class="col-md-12 col-xs-12 control-label text-center">Regimen Fiscal</label>
                                     <div class="col-md-12 col-xs-12">
                                         @Html.DropDownListFor(model => model.IDCFDIReqgimenFiscalDetalle, new SelectList(Model.ListaRegimenFiscalDetalle, "IDCFDIRegimenFiscalDetalle", "C_RegimenFiscal"), new { id = "IDCFDIRegimenFiscalDetalle", @class = "form-control select", data_live_search = "true", data_style = "form-control" })
-                                        @Html.ValidationMessageFor(model => model.ListaRegimenFiscalDetalle)
+                                        @Html.ValidationMessageFor(model => model.IDCFDIReqgimenFiscalDetalle)
                                         <span class="help-block">Seleccione el regimen fiscal del emisor</span>
                                     </div>
                                 </div>
@@ -99,7 +106,20 @@
                             </div>
                         </div>
                         <div class="col-md-12">
-                            <div class="col-md-4">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="col-md-12 control-label text-center">Correo</label>
+                                    <div class="col-md-12 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
+                                            @Html.TextBoxFor(model => model.CodigoPostal, new { id = "CodigoPostal", @class = "form-control" })
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.CodigoPostal)
+                                        <span class="help-block">Ingrese el código postal del emisor</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label class="col-md-6 control-label">¿Es Predeterminado?</label>
                                     <div class="text-center col-md-9">
@@ -107,20 +127,20 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label class="col-md-12 control-label text-center">Correo</label>
                                     <div class="col-md-12 col-xs-12">
                                         <div class="input-group">
                                             <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
-                                            @Html.TextBoxFor(model => model.Correo, new { id = "Correo", @class = "form-control"})
+                                            @Html.TextBoxFor(model => model.Correo, new { id = "Correo", @class = "form-control" })
                                         </div>
                                         @Html.ValidationMessageFor(model => model.Correo)
                                         <span class="help-block">Ingrese el correo del emisor</span>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label class="col-md-12 control-label text-center">Password Correo Enviar</label>
                                     <div class="col-md-12 col-xs-12">
@@ -206,19 +226,21 @@
     </script>
 }
 @section script{
+    <script type="text/javascript" src="@Url.Content("~/Content/js/plugins/uploadFiles/fileinput.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/js/plugins/uploadFiles/es.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/js/plugins/uploadFiles/explorer-fa/theme.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Content/js/plugins/bootstrap/bootstrap-file-input.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Content/js/plugins/bootstrap/bootstrap-select.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Content/js/plugins/tagsinput/jquery.tagsinput.min.js")"></script>
-    <script type="text/javascript" src="@Url.Content("~/Content/js/demo_tables.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Content/js/mensajeDeError.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Content/js/plugins/jquery-validation/jquery.validate.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Content/js/validaciones/additionals.js")"></script>
     <script type="text/javascript" src="@Url.Content("/Content/js/DatosEmisor.js")"></script>
     <script>
-    jQuery(document).ready(function () {
-        Mensaje(message, typemessage);
-        DatosEmisor.init();
-    });
+        jQuery(document).ready(function () {
+            Mensaje(message, typemessage);
+            DatosEmisor.init();
+        });
     </script>
 }
 
