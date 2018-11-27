@@ -33,14 +33,6 @@ namespace FacturacionSAT.CSL.WEB.Models.Datos
                 };
                 object Aux = SqlHelper.ExecuteScalar(Datos.Conexion, "abc_CFDIDatosEmisor2", Parametros);
                 Datos.IDCFDIDatosEmisor = Aux.ToString();
-                if (!string.IsNullOrEmpty(Datos.IDCFDIDatosEmisor))
-                {
-                    Datos.Resultado = 1;
-                }
-                else
-                {
-                    Datos.Resultado = 0;
-                }
                 return Datos;
             }
             catch (Exception)
@@ -74,8 +66,8 @@ namespace FacturacionSAT.CSL.WEB.Models.Datos
                     Item.Correo = !dr.IsDBNull(dr.GetOrdinal("correo")) ? dr.GetString(dr.GetOrdinal("correo")) : string.Empty;
                     Item.URLArchivoCER = !dr.IsDBNull(dr.GetOrdinal("urlArchivoCER")) ? dr.GetString(dr.GetOrdinal("urlArchivoCER")) : string.Empty;
                     Item.URLArchivoKEY = !dr.IsDBNull(dr.GetOrdinal("urlArchivoKEY")) ? dr.GetString(dr.GetOrdinal("urlArchivoKEY")) : string.Empty;
-                    Item.PasswordArchivoKEY = "";
-                    Item.Password = !dr.IsDBNull(dr.GetOrdinal("password")) ? dr.GetString(dr.GetOrdinal("password")) : string.Empty;
+                    Item.PasswordArchivoKEY = !dr.IsDBNull(dr.GetOrdinal("PasswordArchivoKEY")) ? dr.GetString(dr.GetOrdinal("PasswordArchivoKEY")) : string.Empty;
+                    Item.Password = !dr.IsDBNull(dr.GetOrdinal("passwordCorreo")) ? dr.GetString(dr.GetOrdinal("passwordCorreo")) : string.Empty;
                     Item.Imagen = !dr.IsDBNull(dr.GetOrdinal("imagen")) ? dr.GetString(dr.GetOrdinal("imagen")) : string.Empty;
                     Lista.Add(Item);
                 }
@@ -112,8 +104,8 @@ namespace FacturacionSAT.CSL.WEB.Models.Datos
                     Datos.Correo = !dr.IsDBNull(dr.GetOrdinal("correo")) ? dr.GetString(dr.GetOrdinal("correo")) : string.Empty;
                     Datos.URLArchivoCER = !dr.IsDBNull(dr.GetOrdinal("urlArchivoCER")) ? dr.GetString(dr.GetOrdinal("urlArchivoCER")) : string.Empty;
                     Datos.URLArchivoKEY = !dr.IsDBNull(dr.GetOrdinal("urlArchivoKEY")) ? dr.GetString(dr.GetOrdinal("urlArchivoKEY")) : string.Empty;
-                    Datos.PasswordArchivoKEY = "";
-                    Datos.Password = !dr.IsDBNull(dr.GetOrdinal("password")) ? dr.GetString(dr.GetOrdinal("password")) : string.Empty;
+                    Datos.PasswordArchivoKEY = !dr.IsDBNull(dr.GetOrdinal("PasswordArchivoKEY")) ? dr.GetString(dr.GetOrdinal("PasswordArchivoKEY")) : string.Empty;
+                    Datos.Password = !dr.IsDBNull(dr.GetOrdinal("passwordCorreo")) ? dr.GetString(dr.GetOrdinal("passwordCorreo")) : string.Empty;
                     Datos.Imagen = !dr.IsDBNull(dr.GetOrdinal("imagen")) ? dr.GetString(dr.GetOrdinal("imagen")) : string.Empty;
                     break;
                 }

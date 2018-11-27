@@ -27,7 +27,7 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
                 DatosEmisor.ListaDatosEmisor = Datos.IndexCFDIDatosEmisor(DatosEmisor);
                 return View(DatosEmisor);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 CFDIDatosEmisorModels DatosEmisor = new CFDIDatosEmisorModels();
                 TempData["typemessage"] = "2";
@@ -55,67 +55,98 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
             }
         }
         [HttpPost]
-        public ActionResult Create(CFDIDatosEmisorModels Datos, HttpPostedFileBase file)
+        public ActionResult Create(CFDIDatosEmisorModels DatosAux, HttpPostedFileBase file)
         {
             try
             {
+                CFDIDatosEmisorDatos Datos = new CFDIDatosEmisorDatos();
                 if (Token.IsTokenValid())
                 {
                     if (ModelState.IsValid)
                     {
-                        HttpPostedFileBase bannerImage = Request.Files[0] as HttpPostedFileBase;
-                        if (!string.IsNullOrEmpty(bannerImage.FileName))
+                        DatosAux.Conexion = Conexion;
+                        DatosAux.Opcion = 1;
+                        DatosAux.IDUsuario = User.Identity.Name;
+                        DatosAux = Datos.AbcDatosEmisor(DatosAux);
+                        if (!string.IsNullOrEmpty(DatosAux.IDCFDIDatosEmisor))
                         {
-                            if (bannerImage != null && bannerImage.ContentLength > 0)
+                            HttpPostedFileBase bannerImage = Request.Files[0] as HttpPostedFileBase;
+                            if (!string.IsNullOrEmpty(bannerImage.FileName))
                             {
-                                string baseDir = Server.MapPath("~/SAT/SAT1/");
-                                string fileExtension = Path.GetExtension(bannerImage.FileName);
-                                string fileName = Datos.IDCFDIDatosEmisor + fileExtension;
-                                bannerImage.SaveAs(baseDir + bannerImage.FileName);
+                                if (bannerImage != null && bannerImage.ContentLength > 0)
+                                {
+                                    string baseDir = Server.MapPath("~/SAT/SAT1/");
+                                    string fileExtension = Path.GetExtension(bannerImage.FileName);
+                                    string fileName = DatosAux.IDCFDIDatosEmisor + fileExtension;
+                                    bannerImage.SaveAs(baseDir + fileName);
+                                    DatosAux.URLArchivoCER = "~/SAT/SAT1/" + fileName;
+                                }
+                            }
+                            HttpPostedFileBase bannerImage1 = Request.Files[1] as HttpPostedFileBase;
+                            if (!string.IsNullOrEmpty(bannerImage1.FileName))
+                            {
+                                if (bannerImage1 != null && bannerImage1.ContentLength > 0)
+                                {
+                                    string baseDir = Server.MapPath("~/SAT/SAT1/");
+                                    string fileExtension = Path.GetExtension(bannerImage1.FileName);
+                                    string fileName = DatosAux.IDCFDIDatosEmisor + fileExtension;
+                                    bannerImage1.SaveAs(baseDir + fileName);
+                                    DatosAux.URLArchivoKEY = "~/SAT/SAT1/" + fileName;
+                                }
+                            }
+                            HttpPostedFileBase bannerImage2 = Request.Files[2] as HttpPostedFileBase;
+                            if (!string.IsNullOrEmpty(bannerImage2.FileName))
+                            {
+                                if (bannerImage2 != null && bannerImage2.ContentLength > 0)
+                                {
+                                    string baseDir = Server.MapPath("~/SAT/SAT1/");
+                                    string fileExtension = Path.GetExtension(bannerImage2.FileName);
+                                    string fileName = DatosAux.IDCFDIDatosEmisor + fileExtension;
+                                    bannerImage2.SaveAs(baseDir + fileName);
+                                    DatosAux.Imagen = "~/SAT/SAT1/" + fileName;
+                                }
+                            }
+                            DatosAux.Opcion = 4;
+                            DatosAux = Datos.AbcDatosEmisor(DatosAux);
+                            if (!string.IsNullOrEmpty(DatosAux.IDCFDIDatosEmisor))
+                            {
+                                TempData["typemessage"] = "1";
+                                TempData["message"] = "Los datos se guardarón correctamente.";
+                                return RedirectToAction("Index");
+                            }
+                            else
+                            {
+                                DatosAux.ListaTipoPersona = Datos.ListaPersonaCMB(DatosAux);
+                                TempData["typemessage"] = "2";
+                                TempData["message"] = "Ocurrio un error al intentar guardar las los archivo con las extenciones. CER, KEY, IMG";
+                                return View(DatosAux);
                             }
                         }
-                        HttpPostedFileBase bannerImage1 = Request.Files[1] as HttpPostedFileBase;
-                        if (!string.IsNullOrEmpty(bannerImage1.FileName))
+                        else
                         {
-                            if (bannerImage1 != null && bannerImage1.ContentLength > 0)
-                            {
-                                string baseDir = Server.MapPath("~/SAT/SAT1/");
-                                string fileExtension = Path.GetExtension(bannerImage.FileName);
-                                string fileName = Datos.IDCFDIDatosEmisor + fileExtension;
-                                bannerImage1.SaveAs(baseDir + bannerImage1.FileName);
-                            }
+                            DatosAux.ListaTipoPersona = Datos.ListaPersonaCMB(DatosAux);
+                            TempData["typemessage"] = "2";
+                            TempData["message"] = "Ocurrio un error al intentar guardar los datos.";
+                            return View(DatosAux);
                         }
-                        HttpPostedFileBase bannerImage2 = Request.Files[2] as HttpPostedFileBase;
-                        if (!string.IsNullOrEmpty(bannerImage2.FileName))
-                        {
-                            if (bannerImage2 != null && bannerImage2.ContentLength > 0)
-                            {
-                                string baseDir = Server.MapPath("~/SAT/SAT1/");
-                                string fileExtension = Path.GetExtension(bannerImage.FileName);
-                                string fileName = Datos.IDCFDIDatosEmisor + fileExtension;
-                                Stream s = bannerImage.InputStream;
-                                Bitmap img = new Bitmap(s);
-                                img.Save(baseDir + fileName);
-                            }
-                        }
-                        return View(Datos);
                     }
                     else
                     {
+                        DatosAux.Conexion = Conexion;
+                        DatosAux.ListaTipoPersona = Datos.ListaPersonaCMB(DatosAux);
                         return View(Datos);
                     }
                 }
                 else
                 {
-                    return View(Datos);
+                    return RedirectToAction("Index");
                 }
             }
             catch (Exception ex)
             {
-                CFDIDatosEmisorModels DatosEmisor = new CFDIDatosEmisorModels();
                 TempData["typemessage"] = "2";
-                TempData["message"] = "No se puede cargar la vista";
-                return View(DatosEmisor);
+                TempData["message"] = "Ocurrio un error.Por favor contacte a soporte técnico";
+                return RedirectToAction("Index");
             }
         }
 
