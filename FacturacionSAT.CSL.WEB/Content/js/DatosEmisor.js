@@ -6,9 +6,8 @@
         var errorHandler1 = $('.errorHandler', form1);
         var successHandler1 = $('.successHandler', form1);
         $.validator.addMethod("validarImagen", function () {
-            console.log(document.getElementById("Imagen").value);
-            if (document.getElementById("Imagen").value === '') {
-                if ((document.getElementById("Imagen").value === ''))
+            if (document.getElementById("filename1").value === '') {
+                if ((document.getElementById("filename1").value === ''))
                     return false;
                 else
                     return true;
@@ -16,7 +15,27 @@
             else
                 return true;
         }, 'Debe seleccionar una imagen.');
-
+        $.validator.addMethod("validarCER", function () {
+            if (document.getElementById("filename2").value === '') {
+                if ((document.getElementById("filename2").value === ''))
+                    return false;
+                else
+                    return true;
+            }
+            else
+                return true;
+        }, 'Debe seleccionar el archivo .CER.');
+        $.validator.addMethod("validarKEY", function () {
+            console.log(document.getElementById("filename3").value);
+            if (document.getElementById("filename3").value === '') {
+                if ((document.getElementById("filename3").value === ''))
+                    return false;
+                else
+                    return true;
+            }
+            else
+                return true;
+        }, 'Debe seleccionar el archivo .KEY.');
         $('#form-Emisor').validate({
             errorElement: "span", // contain the error msg in a span tag
             errorClass: 'help-block color',
@@ -35,13 +54,26 @@
             },
             ignore: "",
             rules: {
-                Descripcion: { required: true, texto: true, maxlength: 300 },
-                ImagenB: { required: true }
+                IDCFDITIpoPersona: { required: true },
+                IDCFDIRegimenFiscalDetalle: { required: true },
+                RazonSocial: { required: true },
+                RFC: { required: true, rfc: true },
+                Correo: { required: true, email: true },
+                Direccion: { required: true, direccion: true, maxlength: 350 },
+                filename1: { validarImagen: true, ImagenRequerida: true },
+                filename2: { validarCER: true, imagenExtesionCERSat: true },
+                filename3: { validarKEY: true, imagenExtesionKEYSat: true }
             },
             messages: {
-                Descripcion: { required: "Ingrese el nombre del banco.", texto: "Ingrese un nombre del banco.", maxlength: "El nombre del banco admite máximo 300 caracteres." },
-                ImagenB: { required: "Seleccione una imagen del banco." }
-
+                IDCFDITIpoPersona: { required: "Seleccione un tipo de persona" },
+                IDCFDIRegimenFiscalDetalle: { required: "Seleccione un regimen fiscal" },
+                RazonSocial: { required: "Ingrese la razón social del emisor" },
+                RFC: { required: "Ingrese el RFC del emisor", rfc: "Revise el formato de RFC es incorrecto XAXX010101000 " },
+                Correo: { required: "Ingrese el correo del emisor", email: "Revise el formato de correo es incorrecto EJEMPLO@DOMINIO.COM" },
+                Direccion: { required: "Ingrese la dirección del emisor.", direccion: "Revise el formato de texto es incorrecto.", maxlength: "La dirección solo admite máximo 350 caracteres." },
+                filename1: { validarImagen: "Seleccione una imagen.", ImagenRequerida: "Imagen. Solo archivos con formato PNG, JPG, JPEG y BMP." },
+                filename2: { validarCER: "Debe seleccionar el archivo .CER.", imagenExtesionCERSat: "Seleccionar un archivo con extensión .CER"},
+                filename3: { validarKEY: "Debe seleccionar el archivo .KEY.", imagenExtesionKEYSat: "Seleccionar un archivo con extención .KEY"}
             },
             invalidHandler: function (event, validator) { //display error alert on form submit
                 successHandler1.hide();
@@ -100,13 +132,33 @@
     }
 
     var runPaswword = function () {
-        
+        $('#show_password').hover(function show() {
+            //Cambiar el atributo a texto
+            $('#Password').attr('type', 'text');
+            $('.icon').removeClass('fa fa-eye-slash').addClass('fa fa-eye');
+        },
+            function () {
+                //Cambiar el atributo a contraseña
+                $('#Password').attr('type', 'password');
+                $('.icon').removeClass('fa fa-eye').addClass('fa fa-eye-slash');
+            });
+        $('#show_password1').hover(function show() {
+            //Cambiar el atributo a texto
+            $('#PasswordArchivoKEY').attr('type', 'text');
+            $('.icon1').removeClass('fa fa-eye-slash').addClass('fa fa-eye');
+        },
+            function () {
+                //Cambiar el atributo a contraseña
+                $('#PasswordArchivoKEY').attr('type', 'password');
+                $('.icon1').removeClass('fa fa-eye').addClass('fa fa-eye-slash');
+            });
     }
     return {
         //main function to initiate template pages
         init: function () {
             runValidator1();
             runEvents();
+            runPaswword();
         }
     };
 }();

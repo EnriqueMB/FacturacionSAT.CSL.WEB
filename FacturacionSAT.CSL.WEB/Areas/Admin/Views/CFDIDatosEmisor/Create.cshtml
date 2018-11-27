@@ -113,11 +113,80 @@
                                     <div class="col-md-12 col-xs-12">
                                         <div class="input-group">
                                             <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
-                                            @Html.TextBoxFor(model => model.Correo, new { id = "Correo", @class = "form-control", @type = "email"})
+                                            @Html.TextBoxFor(model => model.Correo, new { id = "Correo", @class = "form-control"})
                                         </div>
                                         @Html.ValidationMessageFor(model => model.Correo)
                                         <span class="help-block">Ingrese el correo del emisor</span>
                                     </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="col-md-12 control-label text-center">Password Correo Enviar</label>
+                                    <div class="col-md-12 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><span class="fa fa-unlock-alt"></span></span>
+                                            @Html.PasswordFor(model => model.Password, new { id = "Password", @class = "form-control" })
+                                            <div class="input-group-addon">
+                                                <span id="show_password" class="fa fa-eye-slash icon" />
+                                            </div>
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.Password)
+                                        <span class="help-block">Ingrese Contraseña del correo </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="col-md-12 control-label text-center">Seleccionar .CER</label>
+                                    <div class="col-md-12 col-xs-12">
+                                        <div class="input-group">
+                                            <input type="file" class="fileinput btn-success" name="filename2" id="filename2" data-filename-placement="inside" title="Selecciones el archivo .CER" />
+                                        </div>
+                                    </div>
+                                    <span class="help-block">- </span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="col-md-12 control-label  text-center">Seleccionar .KEY</label>
+                                    <div class="col-md-12 col-xs-12">
+                                        <div class="input-group">
+                                            <input type="file" class="fileinput btn-success" name="filename3" id="filename3" data-filename-placement="inside" title="Selecciones el archivo .KEY" />
+                                        </div>
+                                    </div>
+                                    <span class="help-block">- </span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="col-md-12 control-label text-center">Ingrese el Password .KEY</label>
+                                    <div class="col-md-12 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><span class="fa fa-unlock-alt"></span></span>
+                                            @Html.PasswordFor(model => model.PasswordArchivoKEY, new { id = "PasswordArchivoKEY", @class = "form-control" })
+                                            <div class="input-group-addon">
+                                                <span id="show_password1" class="fa fa-eye-slash icon1" />
+                                            </div>
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.PasswordArchivoKEY)
+                                        <span class="help-block">Ingrese el Password del .KEY</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="col-md-12 control-label text-center">Seleccionar imagen</label>
+                                    <div class="col-md-12 col-xs-12">
+                                        <div class="input-group">
+                                            <input type="file" class="fileinput btn-success" name="filename1" id="filename1" data-filename-placement="inside" title="Selecciones la imagen" />
+                                        </div>
+                                    </div>
+                                    <span class="help-block">- </span>
                                 </div>
                             </div>
                         </div>
@@ -137,7 +206,6 @@
     </script>
 }
 @section script{
-    <script type="text/javascript" src="@Url.Content("~/Content/js/plugins/bootstrap/bootstrap-datepicker.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Content/js/plugins/bootstrap/bootstrap-file-input.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Content/js/plugins/bootstrap/bootstrap-select.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Content/js/plugins/tagsinput/jquery.tagsinput.min.js")"></script>
