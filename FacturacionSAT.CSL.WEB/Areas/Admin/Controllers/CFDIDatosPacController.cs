@@ -27,9 +27,12 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
 
                 return View(CFDIModel);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw ex;
+                CFDIDatosPacModels CFDIModel = new CFDIDatosPacModels();
+                TempData["typemessage"] = "2";
+                TempData["message"] = "Ocurrió un error al guardar el registro.";
+                return View(CFDIModel);
             }
         }
         public ActionResult Indxprueba()
@@ -47,9 +50,12 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
                 CFDIModel.Predeterminado = true;
                 return View(CFDIModel);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw ex;
+                CFDIDatosPacModels CFDIModel = new CFDIDatosPacModels();
+                TempData["typemessage"] = "2";
+                TempData["message"] = "Ocurrió un error al guardar el registro.";
+                return View(CFDIModel);
             }
         }
 
@@ -115,9 +121,12 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
                 CFDIModel = CFDIDatos.GetCFDIPacDetail(CFDIModel);
                 return View(CFDIModel);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw ex;
+                CFDIDatosPacModels CFDIModel = new CFDIDatosPacModels();
+                TempData["typemessage"] = "2";
+                TempData["message"] = "No se puede cargar la vista";
+                return View(CFDIModel);
             }
         }
         [HttpPost]
@@ -155,17 +164,16 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
                         {                            
                             return View(productos);
                         }
-
                     }
                     else
                     {
                         return RedirectToAction("Index");
                     }
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
-
-                    throw ex;
+                    TempData["message"] = "Ocurrió un error al guardar el registro.";
+                    return View(productos);
                 }        
         }
 
@@ -194,7 +202,9 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
             catch
             {
                 CFDIDatosPacModels CFDIModel = new CFDIDatosPacModels();
-                return View();
+                TempData["typemessage"] = "2";
+                TempData["message"] = "Ocurrió un error al guardar el registro.";
+                return View(CFDIModel);
             }
         }
     }
