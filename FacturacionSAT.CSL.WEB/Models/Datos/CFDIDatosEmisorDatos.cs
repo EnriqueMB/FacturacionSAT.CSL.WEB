@@ -150,5 +150,28 @@ namespace FacturacionSAT.CSL.WEB.Models.Datos
                 throw;
             }
         }
+
+        public List<CFDIRegimenFiscalDetalleModels> ListaRegimenFiscalDetalle(CFDIDatosEmisorModels Datos)
+        {
+            try
+            {
+                CFDIRegimenFiscalDetalleModels Item;
+                SqlDataReader dr = null;
+                dr = SqlHelper.ExecuteReader(Datos.Conexion, "CFDIRegimenFiscalDetalle_Combo_sp", Datos.IDCFDITipoPersona);
+                while (dr.Read())
+                {
+                    Item = new CFDIRegimenFiscalDetalleModels();
+                    Item.IDCFDIRegimenFiscalDetalle = !dr.IsDBNull(dr.GetOrdinal("id_cfdiRegimenFiscalDetalle")) ? dr.GetString(dr.GetOrdinal("id_cfdiRegimenFiscalDetalle")) : string.Empty;
+                    Item.C_RegimenFiscal = !dr.IsDBNull(dr.GetOrdinal("descripcion")) ? dr.GetString(dr.GetOrdinal("descripcion")) : string.Empty;
+                    Datos.ListaRegimenFiscalDetalle.Add(Item);
+                }
+                return Datos.ListaRegimenFiscalDetalle;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

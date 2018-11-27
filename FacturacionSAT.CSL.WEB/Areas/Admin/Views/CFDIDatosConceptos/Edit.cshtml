@@ -1,7 +1,147 @@
 ﻿
+@model FacturacionSAT.CSL.WEB.Models.CFDIDatosConceptosModels
+
 @{
     ViewBag.Title = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Edit</h2>
+@section featured{
 
+    @{
+        var message = TempData["message"] ?? string.Empty;
+        var typemessage = TempData["typemessage"] ?? string.Empty;
+    }
+    <div class="row">
+        <div id="Error" class="progress-bar progress-bar-striped active errorCSL" style="display:none; width:100%">
+            <h3></h3>
+        </div>
+        <div id="Success" class="progress-bar progress-bar-striped active successCSL" style="display:none; width:100%">
+            <h3></h3>
+        </div>
+
+        <div class="col-md-12">
+            @{ Html.EnableClientValidation(false); }
+            @*<form class="form-horizontal">*@
+            @using (Html.BeginForm("Edit", "CFDIDatosConceptos", FormMethod.Post, new { @class = "form-horizontal", id = "form-dg", autocomplete = "off" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(false, "Hay errores en la captura de información:", new { @class = "text-danger" }) //Server
+                <div id="validation_summary" class="field_error "></div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><strong>Editar</strong> Concepto Datos</h3>
+                        <ul class="panel-controls">
+                            @*<li><a href="#" class="panel-remove exsa"><span class="fa fa-times"></span></a></li>*@
+                        </ul>
+                    </div>
+                    <div class="panel-body">
+                        <div class="col-md-12">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-12 col-xs-12 control-label text-center">Clave producto</label>
+                                    <div class="col-md-12 col-xs-12">
+                                        @Html.DropDownListFor(model => model.Id_cfdiClaveProdServDetalle, new SelectList(Model.ListaClaveProducto, "Id_cfdiClaveProdServDetalle", "Descripcion"), new { id = "Id_cfdiClaveProdServDetalle", data_live_search = "true", @class = "form-control select"})
+                                        @Html.ValidationMessageFor(model => model.Id_cfdiTipoProducto)
+                                        <span class="help-block">Seleccione una clave producto</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-12 col-xs-12 control-label text-center">Clave Unidad</label>
+                                    <div class="col-md-12 col-xs-12">
+                                        @Html.DropDownListFor(model => model.Id_cfdiClaveUnidadDetalle, new SelectList(Model.ListaClaveunidad, "Id_cfdiClaveUnidadDetalle", "Nombre"), new { id = "Id_cfdiClaveUnidadDetalle", data_live_search = "true",  @class = "form-control select"})
+                                        @Html.ValidationMessageFor(model => model.Id_cfdiClaveUnidadDetalle)
+                                        <span class="help-block">Seleccione una clave unidad</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-12 col-xs-12 control-label text-center">Tipo producto</label>
+                                    <div class="col-md-12 col-xs-12">
+                                        @Html.DropDownListFor(model => model.Id_cfdiTipoProducto, new SelectList(Model.ListaTipoProducto, "Id_cfdiTipoProducto", "TipoProducto"), new { id = "Id_cfdiTipoProducto", @class = "form-control select", data_live_search = "true" })
+                                        @Html.ValidationMessageFor(model => model.Id_cfdiTipoProducto)
+                                        <span class="help-block">Seleccione un tipo producto</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-12 col-xs-12 control-label text-center">CFDIDivision</label>
+                                    <div class="col-md-12 col-xs-12">
+                                        @Html.DropDownListFor(model => model.Id_cfdiDivision, new SelectList(Model.ListaDivicion, "Id_cfdiDivision", "Division"), new { id = "Id_cfdiDivision", @class = "form-control select", data_live_search = "true" })
+                                        @Html.ValidationMessageFor(model => model.Id_cfdiDivision)
+                                        <span class="help-block">Seleccione una division</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-12 col-xs-12 control-label text-center">cfdiGrupo</label>
+                                    <div class="col-md-12 col-xs-12">
+                                        @Html.DropDownListFor(model => model.Id_cfdiGrupo, new SelectList(Model.ListaGrupo, "Id_cfdiGrupo", "Grupo"), new { id = "Id_cfdiGrupo", @class = "form-control select", data_live_search = "true" })
+                                        @Html.ValidationMessageFor(model => model.Id_cfdiGrupo)
+                                        <span class="help-block">Seleccione un grupo</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-12 col-xs-12 control-label text-center">CFDIClase</label>
+                                    <div class="col-md-12 col-xs-12">
+                                        @Html.DropDownListFor(model => model.Id_cfdiClase, new SelectList(Model.ListaClase, "Id_CfdiClase", "clase"), new { id = "Id_CfdiClase", @class = "form-control select", data_live_search = "true" })
+                                        @Html.ValidationMessageFor(model => model.Id_cfdiClase)
+                                        <span class="help-block">Seleccione una clase</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-12 control-label text-center">Descripcion</label>
+                                    <div class="col-md-12 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
+                                            @Html.TextBoxFor(model => model.Descripcion, new { id = "Descripcion", @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.Descripcion)
+                                        </div>
+                                        <span class="help-block">Ingrese una descripcion</span>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <input type="submit" value="Guardar" class="btn btn-primary pull-right">
+                        <a href="@Url.Action("Index", "CFDIDatosConceptos")" class="btn btn-danger"><i class="icon-prev"></i>Cancelar</a>
+                    </div>
+                </div>
+
+            }
+        </div>
+    </div>
+    <script>
+                var message = '@message';
+                var typemessage = '@typemessage';
+    </script>
+}
+@section script{
+    
+        <script type="text/javascript" src="@Url.Content("~/Content/js/plugins/bootstrap/bootstrap-file-input.js")"></script>
+        <script type="text/javascript" src="@Url.Content("~/Content/js/plugins/bootstrap/bootstrap-select.js")"></script>
+        <script type="text/javascript" src="@Url.Content("~/Content/js/plugins/tagsinput/jquery.tagsinput.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/js/mensajeDeError.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/js/plugins/jquery-validation/jquery.validate.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/js/validaciones/additionals.js")"></script>
+
+    @*<script type="text/javascript" src="@Url.Content("~/Content/js/Usuario.js")"></script>*@
+    <script>
+        jQuery(document).ready(function () {
+            Mensaje(message, typemessage);
+            //Usuario.init();
+        });
+    </script>
+}
