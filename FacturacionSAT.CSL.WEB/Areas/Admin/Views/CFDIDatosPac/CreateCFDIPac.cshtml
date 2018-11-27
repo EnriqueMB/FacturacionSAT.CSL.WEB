@@ -19,7 +19,7 @@
         <div class="col-md-12">
             @*<form class="form-horizontal">*@
             @{ Html.EnableClientValidation(false); }
-            @using (Html.BeginForm("CreateCFDIPac", "CFDIDatosPac", FormMethod.Post, new { id = "form-catalm", @class = "form-horizontal", autocomplete = "off" }))
+            @using (Html.BeginForm("CreateCFDIPac", "CFDIDatosPac", FormMethod.Post, new { id = "form-DatosPac", @class = "form-horizontal", autocomplete = "off" }))
             {
 
                 @Html.AntiForgeryToken()
@@ -108,7 +108,7 @@
                                             @*<input type="password" class="form-control" />*@
                                             @Html.PasswordFor(model => model.PasswordPacTest, new { id = "PasswordPacTest", @class = "form-control" })
                                             <div class="input-group-addon">
-                                                <span id="show_password1" class="fa fa-eye-slash icon" />
+                                                <span id="show_password1" class="fa fa-eye-slash icon1" />
                                             </div>
                                         </div>
                                         @Html.ValidationMessageFor(model => model.PasswordPacTest)
@@ -144,34 +144,14 @@
 @section script{
     <script type="text/javascript" src="@Url.Content("~/Content/js/mensajeDeError.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Content/js/plugins/jquery-validation/jquery.validate.js")"></script>
-    <script type="text/javascript" src="@Url.Content("~/Content/js/validaciones/additionals.js")"></script>    
+    <script type="text/javascript" src="@Url.Content("~/Content/js/validaciones/additionals.js")"></script>
+
+    <script type="text/javascript" src="@Url.Content("~/Content/js/DatosPac.js")"></script>
     <script>
         jQuery(document).ready(function () {
 
             Mensaje(message, typemessage);
-            $(document).ready(function () {
-                $('#show_password').hover(function show() {
-                    //Cambiar el atributo a texto
-                    $('#PasswordPac').attr('type', 'text');
-                    $('.icon').removeClass('fa fa-eye-slash').addClass('fa fa-eye');
-                },
-                    function () {
-                        //Cambiar el atributo a contraseña
-                        $('#PasswordPac').attr('type', 'password');
-                        $('.icon').removeClass('fa fa-eye').addClass('fa fa-eye-slash');
-                    });
-
-                $('#show_password1').hover(function show() {
-                    //Cambiar el atributo a texto
-                    $('#PasswordPacTest').attr('type', 'text');
-                    $('.icon').removeClass('fa fa-eye-slash').addClass('fa fa-eye');
-                },
-                    function () {
-                        //Cambiar el atributo a contraseña
-                        $('#PasswordPacTest').attr('type', 'password');
-                        $('.icon').removeClass('fa fa-eye').addClass('fa fa-eye-slash');
-                    });
-            });
+            DatosPac.init();
         });
     </script>
 }

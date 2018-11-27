@@ -105,7 +105,7 @@
                                             <span class="input-group-addon"><span class="fa fa-unlock-alt"></span></span>
                                             @Html.TextBoxFor(model => model.PasswordPacTest, new { id = "PasswordPacTest", @type = "password", @class = "form-control" })
                                             <div class="input-group-addon">                                             
-                                                <span id="show_password1" class="fa fa-eye-slash icon"/>                                                                                        
+                                                <span id="show_password1" class="fa fa-eye-slash icon1"/>                                                                                        
                                             </div>
                                         </div>
                                         <span class="help-block">Ingrese contraseña Pact Test</span>
@@ -144,30 +144,7 @@
     <script>
         jQuery(document).ready(function () {
             Mensaje(message, typemessage);
-            //// Cuando el checkbox cambie de estado.
-            //$('#show_password').on('change', function (event) {
-            //    // Si el checkbox esta "checkeado"
-            //    if ($('#show_password').is(':checked')) {
-            //        // Convertimos el input de contraseña a texto.
-            //        $('#PasswordPac').get(0).type = 'text';
-            //        // En caso contrario..
-            //    } else {
-            //        // Lo convertimos a contraseña.
-            //        $('#PasswordPac').get(0).type = 'password';
-            //    }
-            //});
-            //$('#show_password1').on('change', function (event) {
-            //    // Si el checkbox esta "checkeado"
-            //    if ($('#show_password1').is(':checked')) {
-            //        // Convertimos el input de contraseña a texto.
-            //        $('#PasswordPacTest').get(0).type = 'text';
-            //        // En caso contrario..
-            //    } else {
-            //        // Lo convertimos a contraseña.
-            //        $('#PasswordPacTest').get(0).type = 'password';
-            //    }
-            //});
-
+            
             $(document).ready(function () {
                 $('#show_password').hover(function show() {
                     //Cambiar el atributo a texto
@@ -183,12 +160,12 @@
                 $('#show_password1').hover(function show() {
                     //Cambiar el atributo a texto
                     $('#PasswordPacTest').attr('type', 'text');
-                    $('.icon').removeClass('fa fa-eye-slash').addClass('fa fa-eye');
+                    $('.icon1').removeClass('fa fa-eye-slash').addClass('fa fa-eye');
                 },
                     function () {
                         //Cambiar el atributo a contraseña
                         $('#PasswordPacTest').attr('type', 'password');
-                        $('.icon').removeClass('fa fa-eye').addClass('fa fa-eye-slash');
+                        $('.icon1').removeClass('fa fa-eye').addClass('fa fa-eye-slash');
                     });
             });
         });
