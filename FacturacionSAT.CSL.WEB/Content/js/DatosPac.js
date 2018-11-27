@@ -26,16 +26,16 @@
             rules: {
                 Descripcion: { required: true, descripcion: true },
                 UserPac: { required: true, texto: true},
-                PasswordPac: { required: true, maxlength:5},
+                PasswordPac: { required: true, minlength:3, maxlength:25},
                 UserPacTest: { required: true },
-                PasswordPacTest: { required: true, maxlength:5 },
+                PasswordPacTest: { required: true, minlength: 3, maxlength:25 }
             },
             messages: {
                 Descripcion: { required: "El Campo Descripción es Requerido", descripcion: "El formato de Descripción no Cumple con los Parametros"},
-                UserPac: { required: "El Campo UserPac es Requerido", texto:"Ingrese un nombre valido" },
-                PasswordPac: { required: "El Campo PasswordPac es Requerido", maxlength: "El campo PasswordPac solo admite 5  caracteres como minimo" },
-                UserPacTest: { required: "El Campo UserPacTest es Requerido" },
-                PasswordPacTest: { required: "El Campo PasswordPacTest es Requerido", maxlength: "El campo PasswordPacTest solo admite 5  caracteres como máximo" },
+                UserPac: { required: "El Campo UserPac es Requerido", texto:"Ingrese un UserPac valido" },
+                PasswordPac: { required: "El Campo PasswordPac es Requerido", minlength: "El campo PasswordPac solo admite 3  caracteres como Mínimo", maxlength: "El campo PasswordPac solo admite 25  caracteres como Máximo" },
+                UserPacTest: { required: "El Campo UserPacTest es Requerido", texto: "Ingrese un UserPacTest valido" },
+                PasswordPacTest: { required: "El Campo PasswordPacTest es Requerido", minlength: "El campo PasswordPacTest solo admite 3  caracteres como Mínimo", maxlength: "El campo PasswordPacTest solo admite 5  caracteres como Máximo" }
             },
             invalidHandler: function (event, validator) { //display error alert on form submit
                 successHandler1.hide();

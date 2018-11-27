@@ -16,8 +16,7 @@
         <div id="Success" class="progress-bar progress-bar-striped active successCSL" style="display:none; width:100%">
             <h3></h3>
         </div>
-        <div class="col-md-12">
-            @*<form class="form-horizontal">*@
+        <div class="col-md-12">           
             @{ Html.EnableClientValidation(false); }
             @using (Html.BeginForm("CreateCFDIPac", "CFDIDatosPac", FormMethod.Post, new { id = "form-DatosPac", @class = "form-horizontal", autocomplete = "off" }))
             {
@@ -41,8 +40,7 @@
                                     <label class="col-md-12 col-xs-12 control-label text-center">Descripcion</label>
                                     <div class="col-md-12 col-xs-12">
                                         <div class="input-group">
-                                            <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
-                                            @*<input type="text" class="form-control" />*@
+                                            <span class="input-group-addon"><span class="fa fa-pencil"></span></span>                                        
                                             @Html.TextBoxFor(model => model.Descripcion, new { id = "Descripcion", @class = "form-control" })
                                         </div>
                                         @Html.ValidationMessageFor(model => model.Descripcion)
@@ -56,8 +54,7 @@
                                     <label class="col-md-12 control-label text-center">User Pac</label>
                                     <div class="col-md-12 col-xs-12">
                                         <div class="input-group">
-                                            <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
-                                            @*<input type="text" class="form-control" />*@
+                                            <span class="input-group-addon"><span class="fa fa-pencil"></span></span>                                
                                             @Html.TextBoxFor(model => model.UserPac, new { id = "UserPac", @class = "form-control" })
                                         </div>
                                         @Html.ValidationMessageFor(model => model.UserPac)
@@ -71,8 +68,7 @@
                                     <label class="col-md-12 control-label text-center">Password Pac</label>
                                     <div class="col-md-12 col-xs-12">
                                         <div class="input-group">
-                                            <span class="input-group-addon"><span class="fa fa-unlock-alt"></span></span>
-                                            @*<input type="password" class="form-control" />*@
+                                            <span class="input-group-addon"><span class="fa fa-unlock-alt"></span></span>                        
                                             @Html.PasswordFor(model => model.PasswordPac, new { id = "PasswordPac", @class = "form-control" })
                                             <div class="input-group-addon">
                                                 <span id="show_password" class="fa fa-eye-slash icon" />
@@ -89,8 +85,7 @@
                                     <label class="col-md-12 control-label text-center">User Pac Test</label>
                                     <div class="col-md-12 col-xs-12">
                                         <div class="input-group">
-                                            <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
-                                            @*<input type="text" class="form-control" />*@
+                                            <span class="input-group-addon"><span class="fa fa-pencil"></span></span>                                           
                                             @Html.TextBoxFor(model => model.UserPacTest, new { id = "UserPacTest", @class = "form-control" })
                                         </div>
                                         @Html.ValidationMessageFor(model => model.UserPacTest)
@@ -104,8 +99,7 @@
                                     <label class="col-md-12 control-label text-center">Password Pac Test</label>
                                     <div class="col-md-12 col-xs-12">
                                         <div class="input-group">
-                                            <span class="input-group-addon"><span class="fa fa-unlock-alt"></span></span>
-                                            @*<input type="password" class="form-control" />*@
+                                            <span class="input-group-addon"><span class="fa fa-unlock-alt"></span></span>                                           
                                             @Html.PasswordFor(model => model.PasswordPacTest, new { id = "PasswordPacTest", @class = "form-control" })
                                             <div class="input-group-addon">
                                                 <span id="show_password1" class="fa fa-eye-slash icon1" />
@@ -131,9 +125,8 @@
                         <input type="submit" value="Guardar" class="btn btn-primary pull-right">
                         <a href="@Url.Action("Index","CFDIDatosPac")" class="btn btn-danger"><i class="icon-prev"></i>Cancelar</a>
                     </div>
-                </div>
-                @*</form>*@
-            }
+                </div>             
+             }
         </div>
     </div>
     <script>
