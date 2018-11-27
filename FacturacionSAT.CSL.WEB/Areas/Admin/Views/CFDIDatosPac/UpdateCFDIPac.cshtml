@@ -18,8 +18,8 @@
             <h3></h3>
         </div>
         <div class="col-md-12">
-            @{ Html.EnableClientValidation(false); }
-            @using (Html.BeginForm("UpdateCFDIPac", "CFDIDatosPac", FormMethod.Post, new { id = "form-catalm", @class = "form-horizontal", autocomplete = "off" }))
+            @{Html.EnableClientValidation(false); }
+            @using (Html.BeginForm("UpdateCFDIPac", "CFDIDatosPac", FormMethod.Post, new { id = "form-DatosPac", @class = "form-horizontal", autocomplete = "off" }))
             {
 
                 @Html.AntiForgeryToken()
@@ -27,7 +27,6 @@
                 @Html.ValidationSummary(false, "Hay errores en la captura de información:", new { @class = "text-danger" }) //Server
                 <div id="validation_summary" class="field_error "></div> //JS
 
-                @*@Html.HiddenFor(model => model.Id_cfdiDatosPac)*@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h3 class="panel-title"><strong>Editar</strong> CFDIPac</h3>
@@ -44,7 +43,6 @@
                                     <div class="col-md-12 col-xs-12">
                                         <div class="input-group">
                                             <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
-                                            @*<input type="text" class="form-control" />*@
                                             @Html.TextBoxFor(model => model.Descripcion, new { id = "Descripcion", @class = "form-control" })
                                         </div>
                                         @Html.ValidationMessageFor(model => model.Descripcion)
@@ -59,7 +57,6 @@
                                     <div class="col-md-12 col-xs-12">
                                         <div class="input-group">
                                             <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
-                                            @*<input type="text" class="form-control" />*@
                                             @Html.TextBoxFor(model => model.UserPac, new { id = "UserPac", @class = "form-control" })
                                         </div>
                                         @Html.ValidationMessageFor(model => model.UserPac)
@@ -73,12 +70,12 @@
                                     <label class="col-md-12 control-label text-center">Password Pac</label>
                                     <div class="col-md-12 col-xs-12">
                                         <div class="input-group">
-                                            <span class="input-group-addon"><span class="fa fa-unlock-alt"></span></span>                                           
+                                            <span class="input-group-addon"><span class="fa fa-unlock-alt"></span></span>
                                             @Html.TextBoxFor(model => model.PasswordPac, new { id = "PasswordPac", @type = "password", @class = "form-control" })
                                             <div class="input-group-addon">
                                                 <span id="show_password" class="fa fa-eye-slash icon" />
-                                            </div>                                          
-                                        </div>                                  
+                                            </div>
+                                        </div>
                                         <span class="help-block">Ingrese Contraseña Pac</span>
                                     </div>
                                 </div>
@@ -89,7 +86,7 @@
                                     <label class="col-md-12 control-label text-center">User Pac Test</label>
                                     <div class="col-md-12 col-xs-12">
                                         <div class="input-group">
-                                            <span class="input-group-addon"><span class="fa fa-pencil"></span></span>                                            
+                                            <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
                                             @Html.TextBoxFor(model => model.UserPacTest, new { id = "UserPacTest", @class = "form-control" })
                                         </div>
                                         @Html.ValidationMessageFor(model => model.UserPacTest)
@@ -104,8 +101,8 @@
                                         <div class="input-group">
                                             <span class="input-group-addon"><span class="fa fa-unlock-alt"></span></span>
                                             @Html.TextBoxFor(model => model.PasswordPacTest, new { id = "PasswordPacTest", @type = "password", @class = "form-control" })
-                                            <div class="input-group-addon">                                             
-                                                <span id="show_password1" class="fa fa-eye-slash icon"/>                                                                                        
+                                            <div class="input-group-addon">
+                                                <span id="show_password1" class="fa fa-eye-slash icon1" />
                                             </div>
                                         </div>
                                         <span class="help-block">Ingrese contraseña Pact Test</span>
@@ -115,7 +112,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="col-md-6 control-label">¿Es Predeterminado?</label>
-                                    <div class="text-center col-md-9">                                       
+                                    <div class="text-center col-md-9">
                                         @Html.CheckBoxFor(model => model.Predeterminado)
                                     </div>
                                 </div>
@@ -127,7 +124,6 @@
                         <a href="@Url.Action("Index","CFDIDatosPac")" class="btn btn-danger"><i class="icon-prev"></i>Cancelar</a>
                     </div>
                 </div>
-                @*</form>*@
             }
         </div>
     </div>
@@ -138,61 +134,17 @@
 }
 @section script
 {
-    <script type="text/javascript" src="@Url.Content("~/Content/js/demo_tables.js")"></script>
-    <script type="text/javascript" src="@Url.Content("~/Content/js/plugins/datatables/jquery.dataTables.min.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Content/js/mensajeDeError.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/js/plugins/jquery-validation/jquery.validate.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/js/validaciones/additionals.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/js/DatosPac.js")"></script>
     <script>
         jQuery(document).ready(function () {
+
             Mensaje(message, typemessage);
-            //// Cuando el checkbox cambie de estado.
-            //$('#show_password').on('change', function (event) {
-            //    // Si el checkbox esta "checkeado"
-            //    if ($('#show_password').is(':checked')) {
-            //        // Convertimos el input de contraseña a texto.
-            //        $('#PasswordPac').get(0).type = 'text';
-            //        // En caso contrario..
-            //    } else {
-            //        // Lo convertimos a contraseña.
-            //        $('#PasswordPac').get(0).type = 'password';
-            //    }
-            //});
-            //$('#show_password1').on('change', function (event) {
-            //    // Si el checkbox esta "checkeado"
-            //    if ($('#show_password1').is(':checked')) {
-            //        // Convertimos el input de contraseña a texto.
-            //        $('#PasswordPacTest').get(0).type = 'text';
-            //        // En caso contrario..
-            //    } else {
-            //        // Lo convertimos a contraseña.
-            //        $('#PasswordPacTest').get(0).type = 'password';
-            //    }
-            //});
-
-            $(document).ready(function () {
-                $('#show_password').hover(function show() {
-                    //Cambiar el atributo a texto
-                    $('#PasswordPac').attr('type', 'text');
-                    $('.icon').removeClass('fa fa-eye-slash').addClass('fa fa-eye');
-                },
-                    function () {
-                        //Cambiar el atributo a contraseña
-                        $('#PasswordPac').attr('type', 'password');
-                        $('.icon').removeClass('fa fa-eye').addClass('fa fa-eye-slash');
-                    });
-
-                $('#show_password1').hover(function show() {
-                    //Cambiar el atributo a texto
-                    $('#PasswordPacTest').attr('type', 'text');
-                    $('.icon').removeClass('fa fa-eye-slash').addClass('fa fa-eye');
-                },
-                    function () {
-                        //Cambiar el atributo a contraseña
-                        $('#PasswordPacTest').attr('type', 'password');
-                        $('.icon').removeClass('fa fa-eye').addClass('fa fa-eye-slash');
-                    });
-            });
+            DatosPac.init();
         });
-    </script>  
+    </script>
 }
 
 

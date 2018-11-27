@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -40,6 +41,8 @@ namespace FacturacionSAT.CSL.WEB.Models
         }
 
         private string _Descripcion;
+        [Required(ErrorMessage = "La Descripcion es requerida")]
+        [RegularExpression(@"^[A-Za-záéíóúñÁÉÍÓÚÑ0-9\(\)\-\,\.\;\:\s]*$", ErrorMessage = "Solo Letras y Números")]
         public string Descripcion
         {
             get { return _Descripcion; }
@@ -47,6 +50,8 @@ namespace FacturacionSAT.CSL.WEB.Models
         }
 
         private string _UserPac;
+        [Required(ErrorMessage = "El campo UserPac es requerido")]
+        [RegularExpression(@"^[A-Za-záéíóúñÁÉÍÓÚÑ0-9\(\)\-\,\.\;\:\s]*$", ErrorMessage = "Solo Letras y Números")]
         public string UserPac
         {
             get { return _UserPac; }
@@ -54,6 +59,9 @@ namespace FacturacionSAT.CSL.WEB.Models
         }
 
         private string _PasswordPac;
+        [Required(ErrorMessage = "La Campo PasswordPac es requerida")]
+        [DataType(DataType.Password)]
+        [StringLength(128, ErrorMessage = "El número de caracteres de {0} debe ser al menos {2} y un maximo de {1}.", MinimumLength = 1)]
         public string PasswordPac
         {
             get { return _PasswordPac; }
@@ -61,6 +69,7 @@ namespace FacturacionSAT.CSL.WEB.Models
         }
 
         private string _UserPacTest;
+        [Required(ErrorMessage = "El campo UserPacTest es requerido")]
         public string UserPacTest
         {
             get { return _UserPacTest; }
@@ -68,6 +77,9 @@ namespace FacturacionSAT.CSL.WEB.Models
         }
 
         private string _PasswordPacTest;
+        [Required(ErrorMessage = "La Campo PasswordPacTest es requerida")]
+        [DataType(DataType.Password)]
+        [StringLength(128, ErrorMessage = "El número de caracteres de {0} debe ser al menos {2} y un maximo de {1}.", MinimumLength = 1)]
         public string PasswordPacTest
         {
             get { return _PasswordPacTest; }

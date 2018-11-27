@@ -392,6 +392,8 @@
     <Content Include="Content\js\Bancos.js" />
     <Content Include="Content\js\CalAlmacen.js" />
     <Content Include="Content\js\Canvas.js" />
+    <Content Include="Content\js\DatosEmisor.js" />
+    <Content Include="Content\js\DatosPac.js" />
     <Content Include="Content\js\demo_charts_morris.js" />
     <Content Include="Content\js\demo_charts_nvd3.js" />
     <Content Include="Content\js\demo_charts_rickshaw.js" />
@@ -1073,6 +1075,7 @@
   <ItemGroup>
     <Compile Include="App_Start\AuthConfig.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\ClaseAux.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\TokenModule.cs" />
@@ -1194,6 +1197,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Areas\Admin\Views\Json\" />
+    <Folder Include="SAT\SAT1\" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />

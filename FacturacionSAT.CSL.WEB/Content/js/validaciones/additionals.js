@@ -1,4 +1,8 @@
-﻿$.validator.addMethod("descripcion", function (value, element) {
+﻿$.validator.addMethod("Correo", function (value, element) {
+    return this.optional(element) || /^[_A-Za-z0-9-.\\+]+(\\.[_A-Za-z0-9-.]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$/i.test(value);
+}, "invalid email");
+
+$.validator.addMethod("descripcion", function (value, element) {
     return this.optional(element) || /^[a-zA-ZñÑáéíóúÁÉÍÓÚ\,\w\s\.\-\#]*$/i.test(value);
 }, "invalid description");
 
@@ -254,3 +258,39 @@ $.validator.addMethod("numeroConComas", function (value, element, params) {
 $.validator.addMethod("horas24", function (value, element) {
     return this.optional(element) || /^([0-5][0-9])(:[0-5][0-9])$/i.test(value);
 }, "Por favor, seleccione una hora válida (hh:mm).");
+
+$.validator.addMethod("imagenExtesionCERSat", function (value, element, params) {
+    //Checamos que tenga un archivo el input file
+    if (element.value.length == 0) {
+        return false;
+    }
+    //Si hay obtenemos la extensión
+    var arrayString = element.value.split(".");
+    var longitud = arrayString.length;
+    var extension = arrayString[longitud - 1];
+
+    if (extension.localeCompare("cer") == 0) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}, 'Solo archivos con formato CER');
+
+$.validator.addMethod("imagenExtesionKEYSat", function (value, element, params) {
+    //Checamos que tenga un archivo el input file
+    if (element.value.length == 0) {
+        return false;
+    }
+    //Si hay obtenemos la extensión
+    var arrayString = element.value.split(".");
+    var longitud = arrayString.length;
+    var extension = arrayString[longitud - 1];
+
+    if (extension.localeCompare("key") == 0) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}, 'Solo archivos con formato KEY');
