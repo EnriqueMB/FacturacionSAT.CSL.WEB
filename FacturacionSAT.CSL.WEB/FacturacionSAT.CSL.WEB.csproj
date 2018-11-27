@@ -391,6 +391,7 @@
     <Content Include="Content\js\CalAlmacen.js" />
     <Content Include="Content\js\Canvas.js" />
     <Content Include="Content\js\DatosEmisor.js" />
+    <Content Include="Content\js\DatosPac.js" />
     <Content Include="Content\js\demo_charts_morris.js" />
     <Content Include="Content\js\demo_charts_nvd3.js" />
     <Content Include="Content\js\demo_charts_rickshaw.js" />
