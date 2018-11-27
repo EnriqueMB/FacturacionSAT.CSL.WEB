@@ -2,7 +2,7 @@
     "use strict";
     //Funcion para validad Nuevo CFDIDatosPac
     var runValidator1 = function () {
-        var form1 = $('form-DatosPac');
+        var form1 = $('#form-DatosPac');
         var errorHandler1 = $('.errorHandler', form1);
         var successHandler1 = $('.successHandler', form1);
 
@@ -24,18 +24,18 @@
             },
             ignore: "",
             rules: {
-                Descripcion: { require: true, descripcion: true },
-                UserPac: { require: true, texto: true},
-                PasswordPac: { require: true, maxlength:5 },
-                UserPacTest: { require: true },
-                PasswordPacTest: { require: true, maxlength:5 },
+                Descripcion: { required: true, descripcion: true },
+                UserPac: { required: true, texto: true},
+                PasswordPac: { required: true, maxlength:5},
+                UserPacTest: { required: true },
+                PasswordPacTest: { required: true, maxlength:5 },
             },
             messages: {
-                Descripcion: { required: "El Campo Descripcion es Requerido", descripcion:"El formato de Descripcion no Cumple con los Parametros"},
+                Descripcion: { required: "El Campo Descripción es Requerido", descripcion: "El formato de Descripción no Cumple con los Parametros"},
                 UserPac: { required: "El Campo UserPac es Requerido", texto:"Ingrese un nombre valido" },
-                PasswordPac: { required: "El Campo PasswordPac es Requerido" },
+                PasswordPac: { required: "El Campo PasswordPac es Requerido", maxlength: "El campo PasswordPac solo admite 5  caracteres como minimo" },
                 UserPacTest: { required: "El Campo UserPacTest es Requerido" },
-                PasswordPacTest: { required: "El Campo PasswordPacTest es Requerido", },
+                PasswordPacTest: { required: "El Campo PasswordPacTest es Requerido", maxlength: "El campo PasswordPacTest solo admite 5  caracteres como máximo" },
             },
             invalidHandler: function (event, validator) { //display error alert on form submit
                 successHandler1.hide();
