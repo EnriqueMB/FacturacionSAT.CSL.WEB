@@ -40,13 +40,35 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
             try
             {
                 CFDIDatosEmisorModels DatosEmisor = new CFDIDatosEmisorModels();
-
+                CFDIDatosEmisorDatos Datos = new CFDIDatosEmisorDatos();
+                DatosEmisor.Conexion = Conexion;
+                DatosEmisor.ListaTipoPersona = Datos.ListaPersonaCMB(DatosEmisor);
                 return View(DatosEmisor);
             }
             catch (Exception)
             {
 
                 throw;
+            }
+        }
+
+        [HttpPost]
+        public ActionResult ObtenerRegimenFiscalPersona(string IDTipoPersona)
+        {
+            try
+            {
+                CFDIDatosEmisorModels DatosEmisor = new CFDIDatosEmisorModels();
+                CFDIDatosEmisorDatos Datos = new CFDIDatosEmisorDatos();
+                DatosEmisor.Conexion = Conexion;
+                DatosEmisor.IDCFDITipoPersona = IDTipoPersona;
+                DatosEmisor.ListaRegimenFiscalDetalle = Datos.ListaRegimenFiscalDetalle(DatosEmisor);
+                return Content(DatosEmisor.ListaRegimenFiscalDetalle.ToJSON(), "application/json");
+            }
+            catch
+            {
+                TempData["typemessage"] = "2";
+                TempData["message"] = "Ocurrio un error. Por favor contacte a soporte técnico";
+                return Json("");
             }
         }
     }
