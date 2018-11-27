@@ -963,6 +963,8 @@
     <Content Include="Areas\Admin\Views\CFDIDatosConseptos\Index.cshtml" />
     <Content Include="Areas\Admin\Views\CFDIDatosPac\UpdateCFDIPac.cshtml" />
     <Content Include="Areas\Admin\Views\CFDIDatosConceptos\Crear.cshtml" />
+    <Content Include="Areas\Admin\Views\CFDIDatosEmisor\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\CFDIDatosEmisor\Create.cshtml" />
     <!-->>>>>>> 20dc6b70ee4a003db4d84e5a9b915af4f0f8ebe7-->
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -996,6 +998,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminFacturaController.cs" />
     <Compile Include="Areas\Admin\Controllers\CFDIDatosConceptosController.cs" />
+    <Compile Include="Areas\Admin\Controllers\CFDIDatosEmisorController.cs" />
     <Compile Include="Areas\Admin\Controllers\CFDIDatosPacController.cs" />
     <Compile Include="Areas\Admin\Controllers\JsonController.cs" />
     <Compile Include="Controllers\FacturaController.cs" />
@@ -1015,7 +1018,7 @@
     <Compile Include="Models\CFDIConceptosClaveProductoModels.cs" />
     <Compile Include="Models\CFDIConceptosTipoProductoModels.cs" />
     <Compile Include="Models\CFDIDatosConceptosModels.cs" />
-    <Compile Include="Models\CFDIDatosEmisor.cs" />
+    <Compile Include="Models\CFDIDatosEmisorModels.cs" />
     <Compile Include="Models\CFDIDatosPacModels.cs" />
     <Compile Include="Models\CFDIRegimenFiscalDetalleModels.cs" />
     <Compile Include="Models\CFDITipoPersonaModels.cs" />

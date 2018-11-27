@@ -22,6 +22,5 @@ namespace FacturacionSAT.CSL.WEB.Models
             get { return _TipoPersona; }
             set { _TipoPersona = value; }
         }
-
     }
 }
