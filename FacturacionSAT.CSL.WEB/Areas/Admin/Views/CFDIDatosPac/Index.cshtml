@@ -37,24 +37,26 @@
                         <div class="table-responsive">
                             <table class="table datatable">
                                 <thead>
-                                    <tr>                                       
+                                    <tr>
                                         <th>Descripcion</th>
-                                        <th>UserPac</th>                                       
-                                        <th>UserPacTest</th>                                 
+                                        <th>UserPac</th>
+                                        <th>UserPacTest</th>
                                         <th>Predeterminado</th>
+                                        @*<th>PasswordPac</th>
+                                            <th>PasswordPacTest</th>*@
                                         <th>Accion</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach (var item in Model.ListaCFDIPac)
-                                     {
-                                        <tr id="@item.Id_cfdiDatosPac">                                          
+                                    {
+                                        <tr id="@item.Id_cfdiDatosPac">
                                             <td>@item.Descripcion</td>
-                                            <td>@item.UserPac</td>                                           
-                                            <td>@item.UserPacTest</td>                                         
+                                            <td>@item.UserPac</td>
+                                            <td>@item.UserPacTest</td>
                                             <td>
                                                 @if (item.Predeterminado == true)
-                                                {                                                  
+                                                {
                                                     <span class="badge badge-warning">SI</span>
                                                 }
                                                 else
@@ -62,6 +64,8 @@
                                                     <span class="badge badge-danger">NO</span>
                                                 }
                                             </td>
+                                            @*<td>@item.PasswordPac</td>
+                                                <td>@item.PasswordPacTest</td>*@
                                             <td style="text-align:center;">
                                                 <div class="visible-md visible-lg hidden-sm hidden-xs">
                                                     <a title="Editar" href="@Url.Action("UpdateCFDIPac","CFDIDatosPac",new { id = item.Id_cfdiDatosPac })" class="btn btn-yellow tooltips" data-placement="top" data-original-title="Edit"><i class="fa fa-edit"></i></a>
@@ -88,7 +92,7 @@
                                                 </div>
                                             </td>
                                         </tr>
-                                     }   
+                                    }
                                 </tbody>
                             </table>
                         </div>
@@ -123,7 +127,8 @@
 }
 @section script
 {
-    <script type="text/javascript" src="@Url.Content("~/Content/js/demo_tables.js")"></script>
+    @*<script type="text/javascript" src="@Url.Content("~/Content/js/demo_tables.js")"></script>*@
+    <script type="text/javascript" src="@Url.Content("~/Content/js/demo_DatosPac.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Content/js/plugins/datatables/jquery.dataTables.min.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Content/js/mensajeDeError.js")"></script>
     <script>

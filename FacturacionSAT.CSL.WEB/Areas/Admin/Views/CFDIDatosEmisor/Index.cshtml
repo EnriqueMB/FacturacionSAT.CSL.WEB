@@ -62,7 +62,16 @@
                                             <td>@CFDIEmisor.CFDIRegimenFiscalDetalle.Descripcion</td>
                                             <td>@CFDIEmisor.Direccion</td>
                                             <td>@CFDIEmisor.CodigoPostal</td>
-                                            <td>@CFDIEmisor.Predeterminado</td>
+                                            <td>
+                                                @if(CFDIEmisor.Predeterminado == true)
+                                                {
+                                                    <span class="badge badge-warning">SI</span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="badge badge-danger">NO</span>
+                                                }
+                                            </td>
                                             <td>@CFDIEmisor.Correo</td>
                                             <td style="text-align:center;">
                                                 <div class="visible-md visible-lg hidden-sm hidden-xs">

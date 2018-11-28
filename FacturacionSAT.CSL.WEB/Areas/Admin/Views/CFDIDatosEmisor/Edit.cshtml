@@ -1,7 +1,7 @@
 ﻿@model FacturacionSAT.CSL.WEB.Models.CFDIDatosEmisorModels
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Edit";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
@@ -28,10 +28,10 @@
         <div class="col-md-12">
             @*<form class="form-horizontal">*@
             @{ Html.EnableClientValidation(false); }
-            @using (Html.BeginForm("Create", "CFDIDatosEmisor", FormMethod.Post, new { id = "form-Emisor", @class = "form-horizontal", autocomplete = "off", @enctype = "multipart/form-data" }))
+            @using (Html.BeginForm("Edit", "CFDIDatosEmisor", FormMethod.Post, new { id = "form-Emisor", @class = "form-horizontal", autocomplete = "off", @enctype = "multipart/form-data" }))
             {
                 @Html.AntiForgeryToken()
-
+                @Html.HiddenFor(model => model.IDCFDIDatosEmisor)
                 @Html.ValidationSummary(false, "Hay errores en la captura de información:", new { @class = "text-danger" }) //Server
                 <div id="validation_summary" class="field_error"></div> //JS
                 <div class="panel panel-default">
@@ -146,7 +146,7 @@
                                     <div class="col-md-12 col-xs-12">
                                         <div class="input-group">
                                             <span class="input-group-addon"><span class="fa fa-unlock-alt"></span></span>
-                                            @Html.PasswordFor(model => model.Password, new { id = "Password", @class = "form-control" })
+                                            @Html.TextBoxFor(model => model.Password, new { id = "Password", @type="password", @class = "form-control", autocomplete = "off" })
                                             <div class="input-group-addon">
                                                 <span id="show_password" class="fa fa-eye-slash icon" />
                                             </div>
@@ -186,7 +186,7 @@
                                     <div class="col-md-12 col-xs-12">
                                         <div class="input-group">
                                             <span class="input-group-addon"><span class="fa fa-unlock-alt"></span></span>
-                                            @Html.PasswordFor(model => model.PasswordArchivoKEY, new { id = "PasswordArchivoKEY", @class = "form-control" })
+                                            @Html.TextBoxFor(model => model.PasswordArchivoKEY, new { id = "PasswordArchivoKEY", @type = "password", @class = "form-control", autocomplete = "off" })
                                             <div class="input-group-addon">
                                                 <span id="show_password1" class="fa fa-eye-slash icon1" />
                                             </div>
@@ -226,6 +226,7 @@
     </script>
 }
 @section script{
+    <script type="text/javascript" src="@Url.Content("~/Content/js/plugins/bootstrap/bootstrap-datepicker.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Content/js/plugins/uploadFiles/fileinput.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Content/js/plugins/uploadFiles/es.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Content/js/plugins/uploadFiles/explorer-fa/theme.js")"></script>

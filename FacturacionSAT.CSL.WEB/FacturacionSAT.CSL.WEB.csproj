@@ -135,6 +135,7 @@
     <Content Include="Areas\Admin\Views\CFDIDatosConceptos\ModalClaveDivision.cshtml" />
     <Content Include="Areas\Admin\Views\CFDIDatosConceptos\ModalClaveGrupo.cshtml" />
     <Content Include="Areas\Admin\Views\CFDIDatosConceptos\ModalClaveClase.cshtml" />
+    <Content Include="Areas\Admin\Views\CFDIDatosEmisor\Edit.cshtml" />
     <None Include="Connected Services\SolucionFactible\configuration91.svcinfo" />
     <None Include="Connected Services\SolucionFactible\configuration.svcinfo" />
     <Content Include="Connected Services\SolucionFactible\FacturacionSAT.CSL.WEB.SolucionFactible.cancelarBase64Response.datasource">
@@ -402,6 +403,7 @@
     <Content Include="Content\js\demo_charts_nvd3.js" />
     <Content Include="Content\js\demo_charts_rickshaw.js" />
     <Content Include="Content\js\demo_dashboard.js" />
+    <Content Include="Content\js\demo_DatosPac.js" />
     <Content Include="Content\js\demo_icons.js" />
     <Content Include="Content\js\demo_maps.js" />
     <Content Include="Content\js\demo_tables.js" />
