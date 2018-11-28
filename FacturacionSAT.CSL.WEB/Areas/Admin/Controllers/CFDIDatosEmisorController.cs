@@ -35,7 +35,7 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
                 return View(DatosEmisor);
             }
         }
-
+        // GET: Admin/CFDIDatosEmisor/Create
         [HttpGet]
         public ActionResult Create()
         {
@@ -54,6 +54,7 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
                 throw;
             }
         }
+        // POST: Admin/CFDIDatosEmisor/Create(Model)
         [HttpPost]
         public ActionResult Create(CFDIDatosEmisorModels DatosAux, HttpPostedFileBase file)
         {
@@ -147,6 +148,26 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
                 TempData["typemessage"] = "2";
                 TempData["message"] = "Ocurrio un error.Por favor contacte a soporte técnico";
                 return RedirectToAction("Index");
+            }
+        }
+
+        //GET:Admi/CFDIDatosEmisor/Create/id
+        [HttpGet]
+        public ActionResult Edit(string id)
+        {
+            try
+            {
+                CFDIDatosEmisorModels DatosEmisor = new CFDIDatosEmisorModels();
+                CFDIDatosEmisorDatos Datos = new CFDIDatosEmisorDatos();
+                DatosEmisor.Conexion = Conexion;
+                DatosEmisor.IDCFDIDatosEmisor = id;
+                DatosEmisor.ListaTipoPersona = Datos.ListaPersonaCMB(DatosEmisor);
+                DatosEmisor = Datos.ObtenerDatosEmisorID(DatosEmisor);
+                return View();
+            }
+            catch (Exception)
+            { 
+                throw;
             }
         }
 
