@@ -135,6 +135,7 @@
     <Content Include="Areas\Admin\Views\CFDIDatosConceptos\ModalClaveDivision.cshtml" />
     <Content Include="Areas\Admin\Views\CFDIDatosConceptos\ModalClaveGrupo.cshtml" />
     <Content Include="Areas\Admin\Views\CFDIDatosConceptos\ModalClaveClase.cshtml" />
+    <Content Include="Areas\Admin\Views\CFDIDatosEmisor\Edit.cshtml" />
     <None Include="Connected Services\SolucionFactible\configuration91.svcinfo" />
     <None Include="Connected Services\SolucionFactible\configuration.svcinfo" />
     <Content Include="Connected Services\SolucionFactible\FacturacionSAT.CSL.WEB.SolucionFactible.cancelarBase64Response.datasource">

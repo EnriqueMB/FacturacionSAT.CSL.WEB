@@ -110,8 +110,8 @@
     };
 
     var runEvents = function () {
-        $("#IDCFDITIpoPersona").on("change", function () {
-            var IDTipoPersona = $("#IDCFDITIpoPersona").val();
+        $("#IDCFDITipoPersona").on("change", function () {
+            var IDTipoPersona = $("#IDCFDITipoPersona").val();
             GetRegimenFiscalX(IDTipoPersona);
         });
     }
@@ -161,8 +161,8 @@
         //main function to initiate template pages
         init: function () {
             runValidator1();
-            runEvents();
             runPaswword();
+            runEvents();
         }
     };
 }();

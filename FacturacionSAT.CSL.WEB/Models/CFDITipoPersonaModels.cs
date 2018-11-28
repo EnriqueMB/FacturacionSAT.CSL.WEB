@@ -9,7 +9,7 @@ namespace FacturacionSAT.CSL.WEB.Models
     {
         private string _IDCFDITipoPersona;
 
-        public string IDCFDITIpoPersona
+        public string IDCFDITipoPersona
         {
             get { return _IDCFDITipoPersona; }
             set { _IDCFDITipoPersona = value; }

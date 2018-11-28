@@ -129,7 +129,7 @@ namespace FacturacionSAT.CSL.WEB.Models.Datos
                 while (dr.Read())
                 {
                     Item = new CFDITipoPersonaModels();
-                    Item.IDCFDITIpoPersona = !dr.IsDBNull(dr.GetOrdinal("id_cfdiTipoPersona")) ? dr.GetString(dr.GetOrdinal("id_cfdiTipoPersona")) : string.Empty;
+                    Item.IDCFDITipoPersona = !dr.IsDBNull(dr.GetOrdinal("id_cfdiTipoPersona")) ? dr.GetString(dr.GetOrdinal("id_cfdiTipoPersona")) : string.Empty;
                     Item.TipoPersona = !dr.IsDBNull(dr.GetOrdinal("TipoPersona")) ? dr.GetString(dr.GetOrdinal("TipoPersona")) : string.Empty;
                     Datos.ListaTipoPersona.Add(Item);
                 }
