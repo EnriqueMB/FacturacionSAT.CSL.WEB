@@ -397,6 +397,7 @@
     <Content Include="Content\js\Bancos.js" />
     <Content Include="Content\js\CalAlmacen.js" />
     <Content Include="Content\js\Canvas.js" />
+    <Content Include="Content\js\ConceptoDatos.js" />
     <Content Include="Content\js\DatosEmisor.js" />
     <Content Include="Content\js\DatosPac.js" />
     <Content Include="Content\js\demo_charts_morris.js" />
