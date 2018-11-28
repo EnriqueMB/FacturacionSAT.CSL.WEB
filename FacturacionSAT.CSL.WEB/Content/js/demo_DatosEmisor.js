@@ -9,14 +9,22 @@
             type: 'POST',
             dataType: 'json',
             success: function (result) {
-                $("#" + row).hide("slow", function () {
-                    box.find(".mb-control-yes").prop('onclick', null).off('click');
-                    $("#" + row).remove();
-                    location.reload(true);
-                    //console.log(result);
-                    //if(result == 'true')
-                    Mensaje("Registro Eliminado Correctamente", "1");
-                });
+                if (result.IDCFDIDatosEmisor != "") {
+                    $("#" + row).hide("slow", function () {
+                        box.find(".mb-control-yes").prop('onclick', null).off('click');
+                        $("#" + row).remove();
+                        //location.reload(true);
+                        console.log(result);
+                        //if(result == 'true')
+                        Mensaje("Registro Eliminado Correctamente", "1");
+                    });
+                }
+                else {
+                    $('#Error').html('<h3>La Tabla CFDIDatosEmisor debe Contener por lo menos un Registro<h3>');
+                    $('#Error').css("display", "block");
+                    $('#Error').delay(400).slideDown(400).delay(2000).slideUp(400);
+                    $('#Error').css("display", "block");s
+                }
             },
             error: function () {
                 // $('#Error').html('<h3>Ocurrio un error al eliminar este registro<h3>');

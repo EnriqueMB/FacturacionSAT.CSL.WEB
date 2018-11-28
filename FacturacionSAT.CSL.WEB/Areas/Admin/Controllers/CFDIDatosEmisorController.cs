@@ -285,11 +285,7 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
                 DatosEmisor.Opcion = 3;
                 DatosEmisor.IDUsuario = User.Identity.Name;
                 DatosEmisor = Datos.AbcDatosEmisor(DatosEmisor);
-                if (DatosEmisor.IDCFDIDatosEmisor == "")
-                {
-                    return RedirectToAction("Index");
-                }
-                return Json("");
+                return Json(DatosEmisor);
             }
             catch (Exception)
             {
