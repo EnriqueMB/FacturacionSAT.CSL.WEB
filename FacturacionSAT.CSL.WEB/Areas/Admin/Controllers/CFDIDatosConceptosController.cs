@@ -44,17 +44,17 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
 
                 Token.SaveToken();
                 CFDIDatosConceptosModels Model = new CFDIDatosConceptosModels();
-                ComboDatos listTipoPoduc = new ComboDatos();
+                //ComboDatos listTipoPoduc = new ComboDatos();
                 CFDIConceptosDatos detalleEditDatos = new CFDIConceptosDatos();
                 
                 Model.Conexion = Conexion;
                 Model.Id_cfdiDatosConceptos = Id;
-                Model.ListaTipoProducto = listTipoPoduc.ListaTipoProducto(Model);
-                Model.ListaDivicion = listTipoPoduc.ListaDivicionConcepto(Model);
-                Model.ListaGrupo = listTipoPoduc.ListaGrupoConcepto(Model);
-                Model.ListaClase = listTipoPoduc.ListaCFDIClase(Model);
-                Model.ListaClaveProducto = listTipoPoduc.ListaConceptoClaveProducto(Model);
-                Model.ListaClaveunidad = listTipoPoduc.ListaConceptoClaveUnidad(Model);
+                //Model.ListaTipoProducto = listTipoPoduc.ListaTipoProducto(Model);
+                //Model.ListaDivicion = listTipoPoduc.ListaDivicionConcepto(Model);
+                //Model.ListaGrupo = listTipoPoduc.ListaGrupoConcepto(Model);
+                //Model.ListaClase = listTipoPoduc.ListaCFDIClase(Model);
+                //Model.ListaClaveProducto = listTipoPoduc.ListaConceptoClaveProducto(Model);
+                //Model.ListaClaveunidad = listTipoPoduc.ListaConceptoClaveUnidad(Model);
 
                 //var ListTipoProduct = new SelectList(Model.ListaTipoProducto, "Id_cfdiTipoProducto", "TipoProducto");
                 //var ListDivicion = new SelectList(Model.ListaDivicion, "Id_cfdiDivision", "Division");
