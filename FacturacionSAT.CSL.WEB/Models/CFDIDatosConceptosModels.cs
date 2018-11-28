@@ -22,11 +22,12 @@ namespace FacturacionSAT.CSL.WEB.Models
             Id_usuario = string.Empty;
             Conexion = string.Empty;
             Completado = false;
-            tipoProducto = new CFDIConceptosTipoProductoModels();
+            //tipoProducto = new CFDIConceptosTipoProductoModels();
             divicion = new CFDIConceptoDivicionModels();
             grupo = new CFDIConceptoGrupoModels();
             clase = new CFDIConceptoClaseModels();
-            servicioDetalle = new CFDIConceptoClaveUnidadModels(); 
+            servicioDetalle = new CFDIConceptoClaveUnidadModels();
+           
             this._ListaTipoProducto = new List<CFDIConceptosTipoProductoModels>();
             this._ListaDivicion = new List<CFDIConceptoDivicionModels>();
             this._ListaClase = new List<CFDIConceptoClaseModels>();
@@ -36,8 +37,13 @@ namespace FacturacionSAT.CSL.WEB.Models
             this.ListaCFDIConceptos = new List<CFDIDatosConceptosModels>();
             this.CFDI_ClaveUnidad = new CFDIConceptoClaveUnidadModels();
             this.CFDI_Claveproducto = new CFDIConceptosClaveProductoModels();
+            this.CFDI_TipoProducto = new CFDIConceptosTipoProductoModels();
+            this.CFDI_ClaveDivision = new CFDIConceptoDivicionModels();
+            this.CFDI_Grupo = new CFDIConceptoGrupoModels();
+            this.CFDI_Clase = new CFDIConceptoClaseModels();
+
         }
-       // private int _Opcion;
+        // private int _Opcion;
 
         public bool Completado { get; set; }
         public int Opcion { get; set; }
@@ -47,6 +53,10 @@ namespace FacturacionSAT.CSL.WEB.Models
         public CFDIConceptoClaveUnidadModels servicioDetalle { get; set; }
         public CFDIConceptoClaveUnidadModels CFDI_ClaveUnidad { get; set; }
         public CFDIConceptosClaveProductoModels CFDI_Claveproducto { get; set; }
+        public CFDIConceptosTipoProductoModels CFDI_TipoProducto { get; set; } 
+        public CFDIConceptoDivicionModels CFDI_ClaveDivision { get; set; }
+        public CFDIConceptoGrupoModels CFDI_Grupo { get; set; }
+        public CFDIConceptoClaseModels CFDI_Clase { get; set; }
 
         public string Conexion { get; set; }
 
