@@ -75,5 +75,135 @@ namespace FacturacionSAT.CSL.WEB.Models.Datos
                 throw ex;
             }
         }
+
+        public void Datatable_CFDIConceptos_get_ClaveUnidad(AuxSQLModel oAuxSQLModel, DataTableParameters oDataTableParameters)
+        {
+            try
+            {
+                SqlDataReader dr = null;
+                object[] parametros = { oDataTableParameters.Draw, oDataTableParameters.Search.Value, oDataTableParameters.Length, oDataTableParameters.Start };
+                dr = SqlHelper.ExecuteReader(oAuxSQLModel.Conexion, "[dbo].[spCSLDB_CFDIConceptos_get_ClaveUnidad]", parametros);
+                string resultado = string.Empty;
+
+                while (dr.Read())
+                {
+                    oAuxSQLModel.Mensaje = !dr.IsDBNull(dr.GetOrdinal("resultado")) ? dr.GetString(dr.GetOrdinal("resultado")) : string.Empty;
+                }
+
+                dr.Close();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public void Datatable_CFDIConceptos_get_ClaveProducto(AuxSQLModel oAuxSQLModel, DataTableParameters oDataTableParameters)
+        {
+            try
+            {
+                SqlDataReader dr = null;
+                object[] parametros = { oDataTableParameters.Draw, oDataTableParameters.Search.Value, oDataTableParameters.Length, oDataTableParameters.Start };
+                dr = SqlHelper.ExecuteReader(oAuxSQLModel.Conexion, "[dbo].[spCSLDB_CFDIConceptos_get_ClaveProducto]", parametros);
+                string resultado = string.Empty;
+
+                while (dr.Read())
+                {
+                    oAuxSQLModel.Mensaje = !dr.IsDBNull(dr.GetOrdinal("resultado")) ? dr.GetString(dr.GetOrdinal("resultado")) : string.Empty;
+                }
+
+                dr.Close();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public void Datatable_CFDIConceptos_get_TipoProducto(AuxSQLModel oAuxSQLModel, DataTableParameters oDataTableParameters)
+        {
+            try
+            {
+                SqlDataReader dr = null;
+                object[] parametros = { oDataTableParameters.Draw, oDataTableParameters.Search.Value, oDataTableParameters.Length, oDataTableParameters.Start };
+                dr = SqlHelper.ExecuteReader(oAuxSQLModel.Conexion, "[dbo].[spCSLDB_CFDIConceptos_get_TipoProducto]", parametros);
+                string resultado = string.Empty;
+
+                while (dr.Read())
+                {
+                    oAuxSQLModel.Mensaje = !dr.IsDBNull(dr.GetOrdinal("resultado")) ? dr.GetString(dr.GetOrdinal("resultado")) : string.Empty;
+                }
+
+                dr.Close();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public void Datatable_CFDIConceptos_get_ClaveDivision(AuxSQLModel oAuxSQLModel, DataTableParameters oDataTableParameters)
+        {
+            try
+            {
+                SqlDataReader dr = null;
+                object[] parametros = { oDataTableParameters.Draw, oDataTableParameters.Search.Value, oDataTableParameters.Length, oDataTableParameters.Start };
+                dr = SqlHelper.ExecuteReader(oAuxSQLModel.Conexion, "[dbo].[spCSLDB_CFDIConceptos_get_ClaveDivicion]", parametros);
+                string resultado = string.Empty;
+
+                while (dr.Read())
+                {
+                    oAuxSQLModel.Mensaje = !dr.IsDBNull(dr.GetOrdinal("resultado")) ? dr.GetString(dr.GetOrdinal("resultado")) : string.Empty;
+                }
+
+                dr.Close();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public void Datatable_CFDIConceptos_get_ClaveGrupo(AuxSQLModel oAuxSQLModel, DataTableParameters oDataTableParameters)
+        {
+            try
+            {
+                SqlDataReader dr = null;
+                object[] parametros = { oDataTableParameters.Draw, oDataTableParameters.Search.Value, oDataTableParameters.Length, oDataTableParameters.Start };
+                dr = SqlHelper.ExecuteReader(oAuxSQLModel.Conexion, "[dbo].[spCSLDB_CFDIConceptos_get_ClaveGrupo]", parametros);
+                string resultado = string.Empty;
+
+                while (dr.Read())
+                {
+                    oAuxSQLModel.Mensaje = !dr.IsDBNull(dr.GetOrdinal("resultado")) ? dr.GetString(dr.GetOrdinal("resultado")) : string.Empty;
+                }
+
+                dr.Close();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public void Datatable_CFDIConceptos_get_ClaveClase(AuxSQLModel oAuxSQLModel, DataTableParameters oDataTableParameters)
+        {
+            try
+            {
+                SqlDataReader dr = null;
+                object[] parametros = { oDataTableParameters.Draw, oDataTableParameters.Search.Value, oDataTableParameters.Length, oDataTableParameters.Start };
+                dr = SqlHelper.ExecuteReader(oAuxSQLModel.Conexion, "[dbo].[spCSLDB_CFDIConceptos_get_ClaveClase]", parametros);
+                string resultado = string.Empty;
+
+                while (dr.Read())
+                {
+                    oAuxSQLModel.Mensaje = !dr.IsDBNull(dr.GetOrdinal("resultado")) ? dr.GetString(dr.GetOrdinal("resultado")) : string.Empty;
+                }
+
+                dr.Close();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

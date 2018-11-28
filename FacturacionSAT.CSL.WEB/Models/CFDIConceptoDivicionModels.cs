@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -17,7 +18,8 @@ namespace FacturacionSAT.CSL.WEB.Models
         }
         public List<CFDIConceptoDivicionModels> _ListaDivicion { get; set; }
         private string _Id_cfdiDivision;
-
+        [Required]
+        [Display(Name = "division")]
         public string Id_cfdiDivision
         {
             get { return _Id_cfdiDivision; }

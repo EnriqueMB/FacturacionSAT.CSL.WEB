@@ -120,9 +120,12 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
                     string pathRootSATEmisorXML = Server.MapPath("~/SAT");
                     string pahtRootSATTempXML = Server.MapPath("~/SATTempXML");
 
-                    string getNameXML = string.Format("Factura-{0:yyyy-MM-dd_hh-mm-ss-tt}.xml", DateTime.Now);
+                    string getNameXML = string.Format("Factura-{0:yyyy-MM-dd_hh-mm-ss}.xml", DateTime.Now);
                     string pathXML = pahtRootSATTempXML + "\\" + getNameXML;
                     string pathCadenaOriginal = pathRootSystemHelperSAT + "\\xslt33\\cadenaoriginal_3_3.xslt";
+
+
+
 
                     bool result = GenerarXML(pathRootSATEmisorXML, pathXML, pathCadenaOriginal);
 

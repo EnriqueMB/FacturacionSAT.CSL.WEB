@@ -151,34 +151,12 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
         {
             try
             {
-
                 Token.SaveToken();
                 CFDIDatosConceptosModels Model = new CFDIDatosConceptosModels();
                 ComboDatos listTipoPoduc = new ComboDatos();
                 Model.Conexion = Conexion;
-                Model.ListaTipoProducto = listTipoPoduc.ListaTipoProducto(Model);
-                Model.ListaDivicion = listTipoPoduc.ListaDivicionConcepto(Model);
-                Model.ListaGrupo = listTipoPoduc.ListaGrupoConcepto(Model);
-                Model.ListaClase = listTipoPoduc.ListaCFDIClase(Model);
-                Model.ListaClaveProducto = listTipoPoduc.ListaConceptoClaveProducto(Model);
-                Model.ListaClaveunidad = listTipoPoduc.ListaConceptoClaveUnidad(Model);
-
-                var ListTipoProduct = new SelectList(Model.ListaTipoProducto, " Id_cfdiTipoProducto", "TipoProducto");
-                var ListDivicion = new SelectList(Model.ListaDivicion, " Id_cfdiDivision", "Division");
-                var ListGrupo = new SelectList(Model.ListaGrupo, " Id_cfdiGrupo", "Grupo");
-                var ListCFDIClase = new SelectList(Model.ListaClase, "Id_CfdiClase", "clase");
-                var listaClaveProducto = new SelectList(Model.ListaClaveProducto, "Id_cfdiClaveProdServDetalle", "Descripcion");
-                var listaClaveUnidad = new SelectList(Model.ListaClaveunidad, "id_cfdiClaveUnidadDetalle", "Nombre");
-
-                ViewData["cmbTipoProducto"] = ListTipoProduct;
-                ViewData["cmbDivicion"] = ListDivicion;
-                ViewData["cmbClase"] = ListCFDIClase;
-                ViewData["cmbGrupo"] = ListGrupo;
-                ViewData["cmbclaveproducto"] = listaClaveProducto;
-                ViewData["cmbclaveunidad"] = listaClaveUnidad;
 
                 return View(Model);
-
             }
             catch (Exception)
             {
@@ -220,26 +198,26 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
                         {
                             TempData["typemessage"] = "2";
                             TempData["message"] = "Ocurrió un error al guardar el registro.";
-                            Model.ListaTipoProducto = listTipoPoduc.ListaTipoProducto(Model);
-                            Model.ListaDivicion = listTipoPoduc.ListaDivicionConcepto(Model);
-                            Model.ListaGrupo = listTipoPoduc.ListaGrupoConcepto(Model);
-                            Model.ListaClase = listTipoPoduc.ListaCFDIClase(Model);
-                            Model.ListaClaveProducto = listTipoPoduc.ListaConceptoClaveProducto(Model);
-                            Model.ListaClaveunidad = listTipoPoduc.ListaConceptoClaveUnidad(Model);
+                            //Model.ListaTipoProducto = listTipoPoduc.ListaTipoProducto(Model);
+                            //Model.ListaDivicion = listTipoPoduc.ListaDivicionConcepto(Model);
+                            //Model.ListaGrupo = listTipoPoduc.ListaGrupoConcepto(Model);
+                            //Model.ListaClase = listTipoPoduc.ListaCFDIClase(Model);
+                            //Model.ListaClaveProducto = listTipoPoduc.ListaConceptoClaveProducto(Model);
+                            //Model.ListaClaveunidad = listTipoPoduc.ListaConceptoClaveUnidad(Model);
 
-                            var ListTipoProduct = new SelectList(Model.ListaTipoProducto, " Id_cfdiTipoProducto", "TipoProducto");
-                            var ListDivicion = new SelectList(Model.ListaDivicion, " Id_cfdiDivision", "Division");
-                            var ListGrupo = new SelectList(Model.ListaGrupo, " Id_cfdiGrupo", "Grupo");
-                            var ListCFDIClase = new SelectList(Model.ListaClase, "Id_CfdiClase", "clase");
-                            var listaClaveProducto = new SelectList(Model.ListaClaveProducto, "Id_cfdiClaveProdServDetalle", "Descripcion");
-                            var listaClaveUnidad = new SelectList(Model.ListaClaveunidad, "Id_cfdiClaveUnidad", "Nombre");
+                            //var ListTipoProduct = new SelectList(Model.ListaTipoProducto, " Id_cfdiTipoProducto", "TipoProducto");
+                            //var ListDivicion = new SelectList(Model.ListaDivicion, " Id_cfdiDivision", "Division");
+                            //var ListGrupo = new SelectList(Model.ListaGrupo, " Id_cfdiGrupo", "Grupo");
+                            //var ListCFDIClase = new SelectList(Model.ListaClase, "Id_CfdiClase", "clase");
+                            //var listaClaveProducto = new SelectList(Model.ListaClaveProducto, "Id_cfdiClaveProdServDetalle", "Descripcion");
+                            //var listaClaveUnidad = new SelectList(Model.ListaClaveunidad, "Id_cfdiClaveUnidad", "Nombre");
 
-                            ViewData["cmbTipoProducto"] = ListTipoProduct;
-                            ViewData["cmbDivicion"] = ListDivicion;
-                            ViewData["cmbClase"] = ListCFDIClase;
-                            ViewData["cmbGrupo"] = ListGrupo;
-                            ViewData["cmbclaveproducto"] = listaClaveProducto;
-                            ViewData["cmbclaveunidad"] = listaClaveUnidad;
+                            //ViewData["cmbTipoProducto"] = ListTipoProduct;
+                            //ViewData["cmbDivicion"] = ListDivicion;
+                            //ViewData["cmbClase"] = ListCFDIClase;
+                            //ViewData["cmbGrupo"] = ListGrupo;
+                            //ViewData["cmbclaveproducto"] = listaClaveProducto;
+                            //ViewData["cmbclaveunidad"] = listaClaveUnidad;
                             return View(Model);
                         }
                     }
@@ -325,5 +303,113 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
                 return View();
             }
         }
+
+        #region Modales
+        [HttpPost]
+        public ActionResult ModalClaveUnidad()
+        {
+            return PartialView("ModalClaveUnidad");
+        }
+
+        public ActionResult DataTableClaveUnidad(DataTableParameters dataTableParameters)
+        {
+
+            AuxSQLModel oAuxSQLModel = new AuxSQLModel();
+            oAuxSQLModel.Conexion = Conexion;
+
+            JsonDatos oJsonDatos = new JsonDatos();
+            oJsonDatos.Datatable_CFDIConceptos_get_ClaveUnidad(oAuxSQLModel, dataTableParameters);
+
+            return Content(oAuxSQLModel.Mensaje);
+        }
+
+        [HttpPost]
+        public ActionResult ModalClaveProducto()
+        {
+            return PartialView("ModalClaveProducto");
+        }
+
+        public ActionResult DataTableClaveProducto(DataTableParameters dataTableParameters)
+        {
+
+            AuxSQLModel oAuxSQLModel = new AuxSQLModel();
+            oAuxSQLModel.Conexion = Conexion;
+
+            JsonDatos oJsonDatos = new JsonDatos();
+            oJsonDatos.Datatable_CFDIConceptos_get_ClaveProducto(oAuxSQLModel, dataTableParameters);
+
+            return Content(oAuxSQLModel.Mensaje);
+        }
+
+
+        [HttpPost]
+        public ActionResult ModalTipoProducto()
+        {
+            return PartialView("ModalTipoProducto");
+        }
+
+        public ActionResult DataTableTipoProducto(DataTableParameters dataTableParameters)
+        {
+
+            AuxSQLModel oAuxSQLModel = new AuxSQLModel();
+            oAuxSQLModel.Conexion = Conexion;
+
+            JsonDatos oJsonDatos = new JsonDatos();
+            oJsonDatos.Datatable_CFDIConceptos_get_TipoProducto(oAuxSQLModel, dataTableParameters);
+
+            return Content(oAuxSQLModel.Mensaje);
+        }
+
+        public ActionResult ModalClaveDivision()
+        {
+            return PartialView("ModalClaveDivision");
+        }
+
+        public ActionResult DataTableClaveDivision(DataTableParameters dataTableParameters)
+        {
+
+            AuxSQLModel oAuxSQLModel = new AuxSQLModel();
+            oAuxSQLModel.Conexion = Conexion;
+
+            JsonDatos oJsonDatos = new JsonDatos();
+            oJsonDatos.Datatable_CFDIConceptos_get_ClaveDivision(oAuxSQLModel, dataTableParameters);
+
+            return Content(oAuxSQLModel.Mensaje);
+        }
+
+        public ActionResult ModalClaveGrupo()
+        {
+            return PartialView("ModalClaveGrupo");
+        }
+
+        public ActionResult DataTableClaveGrupo(DataTableParameters dataTableParameters)
+        {
+
+            AuxSQLModel oAuxSQLModel = new AuxSQLModel();
+            oAuxSQLModel.Conexion = Conexion;
+
+            JsonDatos oJsonDatos = new JsonDatos();
+            oJsonDatos.Datatable_CFDIConceptos_get_ClaveGrupo(oAuxSQLModel, dataTableParameters);
+
+            return Content(oAuxSQLModel.Mensaje);
+        }
+        public ActionResult ModalClaveClase()
+        {
+            return PartialView("ModalClaveClase");
+        }
+
+        public ActionResult DataTableClaveClase(DataTableParameters dataTableParameters)
+        {
+
+            AuxSQLModel oAuxSQLModel = new AuxSQLModel();
+            oAuxSQLModel.Conexion = Conexion;
+
+            JsonDatos oJsonDatos = new JsonDatos();
+            oJsonDatos.Datatable_CFDIConceptos_get_ClaveClase(oAuxSQLModel, dataTableParameters);
+
+            return Content(oAuxSQLModel.Mensaje);
+        }
+
+        #endregion
     }
 }
