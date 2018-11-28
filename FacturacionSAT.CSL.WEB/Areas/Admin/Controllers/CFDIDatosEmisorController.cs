@@ -163,7 +163,8 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
                 DatosEmisor.IDCFDIDatosEmisor = id;
                 DatosEmisor.ListaTipoPersona = Datos.ListaPersonaCMB(DatosEmisor);
                 DatosEmisor = Datos.ObtenerDatosEmisorID(DatosEmisor);
-                return View();
+                DatosEmisor.ListaRegimenFiscalDetalle = Datos.ListaRegimenFiscalDetalle(DatosEmisor);
+                return View(DatosEmisor);
             }
             catch (Exception)
             { 
