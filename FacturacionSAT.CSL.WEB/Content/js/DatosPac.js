@@ -64,9 +64,7 @@
                 form.submit();
                 //this.submit();
             }
-        });
-
-       
+        });       
     }
     var runPassword = function () {
       
