@@ -63,7 +63,7 @@
                                             <td>@CFDIEmisor.Direccion</td>
                                             <td>@CFDIEmisor.CodigoPostal</td>
                                             <td>
-                                                @if(CFDIEmisor.Predeterminado == true)
+                                                @if (CFDIEmisor.Predeterminado == true)
                                                 {
                                                     <span class="badge badge-warning">SI</span>
                                                 }
@@ -134,7 +134,8 @@
 }
 @section script
 {
-    <script type="text/javascript" src="@Url.Content("~/Content/js/demo_tables.js")"></script>
+    @*<script type="text/javascript" src="@Url.Content("~/Content/js/demo_tables.js")"></script>*@
+    <script type="text/javascript" src="@Url.Content("~/Content/js/demo_DatosEmisor.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Content/js/plugins/datatables/jquery.dataTables.min.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Content/js/mensajeDeError.js")"></script>
     <script>

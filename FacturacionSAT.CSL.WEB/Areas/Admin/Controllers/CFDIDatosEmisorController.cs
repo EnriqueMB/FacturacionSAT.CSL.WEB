@@ -268,7 +268,37 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
             }
         }
 
-
+        [HttpGet]
+        public ActionResult Delete(string id)
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Delete(string id, FormCollection collection)
+        {
+            try
+            {
+                CFDIDatosEmisorModels DatosEmisor = new CFDIDatosEmisorModels();
+                CFDIDatosEmisorDatos Datos = new CFDIDatosEmisorDatos();
+                DatosEmisor.Conexion = Conexion;
+                DatosEmisor.IDCFDIDatosEmisor = id;
+                DatosEmisor.Opcion = 3;
+                DatosEmisor.IDUsuario = User.Identity.Name;
+                DatosEmisor = Datos.AbcDatosEmisor(DatosEmisor);
+                if (DatosEmisor.IDCFDIDatosEmisor == "")
+                {
+                    return RedirectToAction("Index");
+                }
+                return Json("");
+            }
+            catch (Exception)
+            {
+                CFDIDatosEmisorModels DatosEmisor = new CFDIDatosEmisorModels();
+                TempData["typemessage"] = "2";
+                TempData["message"] = "Ocurrió un error al guardar el registro.";
+                return View(DatosEmisor);
+            }
+        }
         [HttpPost]
         public ActionResult ObtenerRegimenFiscalPersona(string IDTipoPersona)
         {
