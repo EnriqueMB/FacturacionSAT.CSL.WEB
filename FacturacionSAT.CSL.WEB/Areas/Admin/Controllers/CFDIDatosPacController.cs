@@ -178,7 +178,7 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        public ActionResult DeleteCFDIPac(string id, bool id2)
+        public ActionResult DeleteCFDIPac(string id)
         {
             return View();
         }
