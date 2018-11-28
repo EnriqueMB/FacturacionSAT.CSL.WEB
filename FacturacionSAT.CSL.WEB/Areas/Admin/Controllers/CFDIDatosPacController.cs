@@ -196,8 +196,13 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
                 //CFDIModel.Predeterminado = id2;
                 CFDIModel.Id_usuario = User.Identity.Name;
                 CFDIModel = CFDIDatos.ABCCFDIPac(CFDIModel);
-                                
-                return Json("");
+
+                if (CFDIModel.Id_cfdiDatosPac == "" )
+                {
+                    return RedirectToAction("Index");
+                }             
+
+                return Json("");               
             }
             catch
             {
