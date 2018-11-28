@@ -61,7 +61,7 @@ namespace FacturacionSAT.CSL.WEB.Models
         private string _PasswordPac;
         [Required(ErrorMessage = "La Campo PasswordPac es requerida")]
         [DataType(DataType.Password)]
-        [StringLength(128, ErrorMessage = "El número de caracteres de {0} debe ser al menos {2} y un maximo de {1}.", MinimumLength = 1)]
+        [StringLength(25, ErrorMessage = "El número de caracteres de {0} debe ser al menos {2} y un maximo de {1}.", MinimumLength = 1)]        
         public string PasswordPac
         {
             get { return _PasswordPac; }
@@ -79,7 +79,7 @@ namespace FacturacionSAT.CSL.WEB.Models
         private string _PasswordPacTest;
         [Required(ErrorMessage = "La Campo PasswordPacTest es requerida")]
         [DataType(DataType.Password)]
-        [StringLength(128, ErrorMessage = "El número de caracteres de {0} debe ser al menos {2} y un maximo de {1}.", MinimumLength = 1)]
+        [StringLength(25, ErrorMessage = "El número de caracteres de {0} debe ser al menos {2} y un maximo de {1}.", MinimumLength = 1)]
         public string PasswordPacTest
         {
             get { return _PasswordPacTest; }

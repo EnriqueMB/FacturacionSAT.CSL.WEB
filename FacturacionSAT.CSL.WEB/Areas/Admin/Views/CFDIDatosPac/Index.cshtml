@@ -37,11 +37,13 @@
                         <div class="table-responsive">
                             <table class="table datatable">
                                 <thead>
-                                    <tr>                                       
+                                    <tr>
                                         <th>Descripcion</th>
-                                        <th>UserPac</th>                                       
-                                        <th>UserPacTest</th>                                 
+                                        <th>UserPac</th>
+                                        <th>UserPacTest</th>
                                         <th>Predeterminado</th>
+                                        @*<th>PasswordPac</th>
+                                        <th>PasswordPacTest</th>*@
                                         <th>Accion</th>
                                     </tr>
                                 </thead>
@@ -62,9 +64,11 @@
                                                     <span class="badge badge-danger">NO</span>
                                                 }
                                             </td>
+                                            @*<td>@item.PasswordPac</td> 
+                                            <td>@item.PasswordPacTest</td>*@                                                                                     
                                             <td style="text-align:center;">
                                                 <div class="visible-md visible-lg hidden-sm hidden-xs">
-                                                    <a title="Editar" href="@Url.Action("UpdateCFDIPac","CFDIDatosPac",new { id = item.Id_cfdiDatosPac })" class="btn btn-yellow tooltips" data-placement="top" data-original-title="Edit"><i class="fa fa-edit"></i></a>
+                                                    <a title="Editar" href="@Url.Action("UpdateCFDIPac","CFDIDatosPac",new { id = item.Id_cfdiDatosPac })" class="btn btn-yellow tooltips" data-placement="top" data-original-title="Edit"><i class="fa fa-edit"></i></a>                                                    
                                                     <a title="Eliminar" id="delete-@item.Id_cfdiDatosPac" data-hrefa="@Url.Action("DeleteCFDIPac", "CFDIDatosPac", new { id = item.Id_cfdiDatosPac })" onClick="delete_row('@item.Id_cfdiDatosPac');" class="btn btn-danger tooltips" data-placement="top" data-original-title="Eliminar"><i class="fa fa-trash-o"></i></a>
                                                 </div>
                                                 <div class="visible-xs visible-sm hidden-md hidden-lg">

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -17,7 +18,8 @@ namespace FacturacionSAT.CSL.WEB.Models
         public  List<CFDIConceptoClaseModels> _ListaClase { get; set; }
 
         private string _Id_CfdiClase;
-
+        [Required]
+        [Display (Name ="Clase")]
         public string Id_CfdiClase
         {
             get { return _Id_CfdiClase; }

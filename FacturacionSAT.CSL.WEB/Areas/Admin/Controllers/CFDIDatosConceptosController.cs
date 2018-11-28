@@ -341,6 +341,75 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
             return Content(oAuxSQLModel.Mensaje);
         }
 
+
+        [HttpPost]
+        public ActionResult ModalTipoProducto()
+        {
+            return PartialView("ModalTipoProducto");
+        }
+
+        public ActionResult DataTableTipoProducto(DataTableParameters dataTableParameters)
+        {
+
+            AuxSQLModel oAuxSQLModel = new AuxSQLModel();
+            oAuxSQLModel.Conexion = Conexion;
+
+            JsonDatos oJsonDatos = new JsonDatos();
+            oJsonDatos.Datatable_CFDIConceptos_get_TipoProducto(oAuxSQLModel, dataTableParameters);
+
+            return Content(oAuxSQLModel.Mensaje);
+        }
+
+        public ActionResult ModalClaveDivision()
+        {
+            return PartialView("ModalClaveDivision");
+        }
+
+        public ActionResult DataTableClaveDivision(DataTableParameters dataTableParameters)
+        {
+
+            AuxSQLModel oAuxSQLModel = new AuxSQLModel();
+            oAuxSQLModel.Conexion = Conexion;
+
+            JsonDatos oJsonDatos = new JsonDatos();
+            oJsonDatos.Datatable_CFDIConceptos_get_ClaveDivision(oAuxSQLModel, dataTableParameters);
+
+            return Content(oAuxSQLModel.Mensaje);
+        }
+
+        public ActionResult ModalClaveGrupo()
+        {
+            return PartialView("ModalClaveGrupo");
+        }
+
+        public ActionResult DataTableClaveGrupo(DataTableParameters dataTableParameters)
+        {
+
+            AuxSQLModel oAuxSQLModel = new AuxSQLModel();
+            oAuxSQLModel.Conexion = Conexion;
+
+            JsonDatos oJsonDatos = new JsonDatos();
+            oJsonDatos.Datatable_CFDIConceptos_get_ClaveGrupo(oAuxSQLModel, dataTableParameters);
+
+            return Content(oAuxSQLModel.Mensaje);
+        }
+        public ActionResult ModalClaveClase()
+        {
+            return PartialView("ModalClaveClase");
+        }
+
+        public ActionResult DataTableClaveClase(DataTableParameters dataTableParameters)
+        {
+
+            AuxSQLModel oAuxSQLModel = new AuxSQLModel();
+            oAuxSQLModel.Conexion = Conexion;
+
+            JsonDatos oJsonDatos = new JsonDatos();
+            oJsonDatos.Datatable_CFDIConceptos_get_ClaveClase(oAuxSQLModel, dataTableParameters);
+
+            return Content(oAuxSQLModel.Mensaje);
+        }
+
         #endregion
     }
 }

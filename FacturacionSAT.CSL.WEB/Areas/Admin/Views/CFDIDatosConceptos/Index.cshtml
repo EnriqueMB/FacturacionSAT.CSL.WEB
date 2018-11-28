@@ -47,6 +47,7 @@
                                         <th>Divicion</th>                                        
                                         <th>Grupo</th>
                                         <th>Clase</th>
+                                        <th>Producto</th>
                                         <th>Unidad</th>
                                         <th>Accion</th>
                                     </tr>
@@ -54,13 +55,14 @@
                                 <tbody>
                                    @foreach (var item in Model.ListaCFDIConceptos)
                                     {
-                                        <tr id="@item.Id_cfdiDatosConceptos">                                        
+                                    <tr id="@item.Id_cfdiDatosConceptos">
                                         <td>@item.Descripcion</td>
-                                        <td>@item.tipoProducto.TipoProducto</td>
+                                        <td>@item.CFDI_TipoProducto.TipoProducto</td>
                                         <td>@item.divicion.Division</td>
                                         <td>@item.grupo.Grupo</td>
                                         <td>@item.clase.clase</td>
-                                        <td>@item.servicioDetalle.Nombre</td>                                       
+                                        <td>@item.CFDI_Claveproducto.Descripcion</td>
+                                        <td>@item.servicioDetalle.Nombre</td>
                                         <td style="text-align:center;">
                                             <div class="visible-md visible-lg hidden-sm hidden-xs">
                                                 <a title="Editar" href="@Url.Action("Edit","CFDIDatosConceptos",new { id = item.Id_cfdiDatosConceptos})" class="btn btn-yellow tooltips" data-placement="top" data-original-title="Edit"><i class="fa fa-edit"></i></a>
@@ -86,7 +88,7 @@
                                                 </div>
                                             </div>
                                         </td>
-                                      </tr>
+                                    </tr>
                                     }
                                 </tbody>
                             </table>

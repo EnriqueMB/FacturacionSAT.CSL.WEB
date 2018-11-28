@@ -131,6 +131,10 @@
   <ItemGroup>
     <Content Include="Areas\Admin\Views\CFDIDatosConceptos\ModalClaveUnidad.cshtml" />
     <Content Include="Areas\Admin\Views\CFDIDatosConceptos\ModalClaveProducto.cshtml" />
+    <Content Include="Areas\Admin\Views\CFDIDatosConceptos\ModalTipoProducto.cshtml" />
+    <Content Include="Areas\Admin\Views\CFDIDatosConceptos\ModalClaveDivision.cshtml" />
+    <Content Include="Areas\Admin\Views\CFDIDatosConceptos\ModalClaveGrupo.cshtml" />
+    <Content Include="Areas\Admin\Views\CFDIDatosConceptos\ModalClaveClase.cshtml" />
     <None Include="Connected Services\SolucionFactible\configuration91.svcinfo" />
     <None Include="Connected Services\SolucionFactible\configuration.svcinfo" />
     <Content Include="Connected Services\SolucionFactible\FacturacionSAT.CSL.WEB.SolucionFactible.cancelarBase64Response.datasource">
@@ -1000,11 +1004,9 @@
     <Content Include="Areas\Admin\Views\CFDIDatosPac\Index.cshtml" />
     <Content Include="Areas\Admin\Views\CFDIDatosConceptos\Index.cshtml" />
     <Content Include="Areas\Admin\Views\CFDIDatosConceptos\Edit.cshtml" />
-    <Content Include="Areas\Admin\Views\CFDIDatosConseptos\Index.cshtml" />
     <!--<<<<<<< HEAD-->
     <Content Include="Areas\Admin\Views\CFDIDatosPac\CreateCFDIPac.cshtml" />
     <!--=======-->
-    <Content Include="Areas\Admin\Views\CFDIDatosConseptos\Index.cshtml" />
     <Content Include="Areas\Admin\Views\CFDIDatosPac\UpdateCFDIPac.cshtml" />
     <Content Include="Areas\Admin\Views\CFDIDatosConceptos\Crear.cshtml" />
     <Content Include="Areas\Admin\Views\CFDIDatosEmisor\Index.cshtml" />
