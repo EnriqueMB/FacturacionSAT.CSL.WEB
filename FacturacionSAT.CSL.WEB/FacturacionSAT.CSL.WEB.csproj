@@ -1019,7 +1019,6 @@
     <Content Include="Areas\Admin\Views\CFDIDatosEmisor\Index.cshtml" />
     <Content Include="Areas\Admin\Views\CFDIDatosEmisor\Create.cshtml" />
     <None Include="Connected Services\SolucionFactible\Timbrado.wsdl" />
-    <Content Include="Areas\Admin\Views\CFDIDatosPac\Indxprueba.cshtml" />
     <Content Include="SAT\CSD_Pruebas_CFDI_LAN7008173R5.cer" />
     <Content Include="SAT\CSD_Pruebas_CFDI_LAN7008173R5.key" />
     <!-->>>>>>> 20dc6b70ee4a003db4d84e5a9b915af4f0f8ebe7-->
