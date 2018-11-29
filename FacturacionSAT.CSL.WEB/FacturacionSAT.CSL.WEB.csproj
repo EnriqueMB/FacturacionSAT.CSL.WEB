@@ -404,6 +404,7 @@
     <Content Include="Content\js\demo_charts_nvd3.js" />
     <Content Include="Content\js\demo_charts_rickshaw.js" />
     <Content Include="Content\js\demo_dashboard.js" />
+    <Content Include="Content\js\demo_DatosConcepto.js" />
     <Content Include="Content\js\demo_DatosEmisor.js" />
     <Content Include="Content\js\demo_DatosPac.js" />
     <Content Include="Content\js\demo_icons.js" />

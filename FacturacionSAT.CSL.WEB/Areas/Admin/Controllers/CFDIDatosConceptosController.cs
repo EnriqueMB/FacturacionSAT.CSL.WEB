@@ -114,7 +114,7 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
                         {
                             
                             TempData["typemessage"] = "2";
-                            TempData["message"] = "Ocurrió un error al guardar el registro. Este unico registro debe ser predeterminado.";
+                            TempData["message"] = "Ocurrió un error al guardar el registro. Por default el predeterminado tiene que estar activo.";
                             return View(Model);
                         }
                     }
@@ -142,7 +142,7 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
             {
 
                 TempData["typemessage"] = "2";
-                TempData["message"] = "No se pudo guardar los datos. Por favor contacte a soporte técnico.";
+                TempData["message"] = "No se pudo guardar los datos. Por default el predeterminado tiene que estar activo.";
                 return View(Model);
             }
         }
@@ -306,7 +306,7 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
             {
                 CFDIDatosConceptosModels CFDIModelConcepto = new CFDIDatosConceptosModels();
                 TempData["typemessage"] = "2";
-                TempData["message"] = "Ocurrió un error al guardar el registro.";
+                TempData["message"] = "Ocurrió un error al guardar el registro. No puede eliminar este registro cuando es predeterminado!";
                 return View(CFDIModelConcepto);
                
             }
