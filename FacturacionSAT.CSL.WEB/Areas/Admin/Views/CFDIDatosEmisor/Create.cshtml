@@ -49,7 +49,7 @@
                                     <div class="col-md-12 col-xs-12">
                                         @Html.DropDownListFor(model => model.IDCFDITipoPersona, new SelectList(Model.ListaTipoPersona, "IDCFDITipoPersona", "TipoPersona"), new { id = "IDCFDITipoPersona", @class = "form-control select", data_live_search = "true"})
                                         @Html.ValidationMessageFor(model => model.IDCFDITipoPersona)
-                                        <span class="help-block">Seleccione el tipo de persona del emisor</span>
+                                        <span class="help-block" style="margin-top: 10px;">Seleccione el tipo de persona del emisor</span>
                                     </div>
                                 </div>
                             </div>
@@ -59,7 +59,7 @@
                                     <div class="col-md-12 col-xs-12">
                                         @Html.DropDownListFor(model => model.IDCFDIRegimenFiscalDetalle, new SelectList(Model.ListaRegimenFiscalDetalle, "IDCFDIRegimenFiscalDetalle", "C_RegimenFiscal"), new { id = "IDCFDIRegimenFiscalDetalle", @class = "form-control select", data_live_search = "true"})
                                         @Html.ValidationMessageFor(model => model.IDCFDIRegimenFiscalDetalle)
-                                        <span class="help-block">Seleccione el regimen fiscal del emisor</span>
+                                        <span class="help-block" style="margin-top: 10px;">Seleccione el regimen fiscal del emisor</span>
                                     </div>
                                 </div>
                             </div>
