@@ -253,7 +253,7 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
                     {
                         DatosAux.Conexion = Conexion;
                         DatosAux.ListaTipoPersona = Datos.ListaPersonaCMB(DatosAux);
-                        return View(Datos);
+                        return View(DatosAux);
                     }
                 }
                 else
