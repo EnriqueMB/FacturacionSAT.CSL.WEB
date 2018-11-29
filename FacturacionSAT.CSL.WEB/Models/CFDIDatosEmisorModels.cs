@@ -1,5 +1,7 @@
-﻿using System;
+﻿using FacturacionSAT.CSL.WEB.Models.Validaciones;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -30,7 +32,7 @@ namespace FacturacionSAT.CSL.WEB.Models
         }
 
         private string _IDCFDIDatosEmisor;
-
+        
         public string IDCFDIDatosEmisor
         {
             get { return _IDCFDIDatosEmisor; }
@@ -38,7 +40,7 @@ namespace FacturacionSAT.CSL.WEB.Models
         }
 
         private string _IDCFDITipoPersona;
-
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Seleccione un tipo de persona.")]
         public string IDCFDITipoPersona
         {
             get { return _IDCFDITipoPersona; }
@@ -46,7 +48,10 @@ namespace FacturacionSAT.CSL.WEB.Models
         }
 
         private string _RazonSocial;
-
+        [Required(ErrorMessage = "Ingrese la razón social")]
+        [Display(Name = "Razón Social")]
+        [StringLength(350, ErrorMessage = "El número de caracteres de {0} debe ser al menos {2} y un maximo de {1}.", MinimumLength = 1)]
+        [Texto(ErrorMessage = "Solo Letras y número")]
         public string RazonSocial
         {
             get { return _RazonSocial; }
@@ -62,15 +67,18 @@ namespace FacturacionSAT.CSL.WEB.Models
         }
 
         private string _IDCFDIRegimenFiscalDetalle;
-
-        public string IDCFDIReqgimenFiscalDetalle
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Seleccione un regimen fiscal.")]
+        public string IDCFDIRegimenFiscalDetalle
         {
             get { return _IDCFDIRegimenFiscalDetalle; }
             set { _IDCFDIRegimenFiscalDetalle = value; }
         }
 
         private string _Direccion;
-
+        [Required(ErrorMessage = "Ingrese la dirección")]
+        [Display(Name = "Dirección")]
+        [StringLength(350, ErrorMessage = "El número de caracteres de {0} debe ser al menos {2} y un maximo de {1}.", MinimumLength = 1)]
+        [Direccion(ErrorMessage = "Solo Letras y número")]
         public string Direccion
         {
             get { return _Direccion; }
@@ -78,7 +86,10 @@ namespace FacturacionSAT.CSL.WEB.Models
         }
 
         private string _CodigoPostal;
-
+        [Required(ErrorMessage = "Ingrese el código postal")]
+        [Display(Name = "Código Postal")]
+        [StringLength(5, ErrorMessage = "El número de caracteres de {0} debe ser al menos {2} y un maximo de {1}.", MinimumLength = 1)]
+        [Texto(ErrorMessage = "Solo Letras y número")]
         public string CodigoPostal
         {
             get { return _CodigoPostal; }
@@ -94,7 +105,10 @@ namespace FacturacionSAT.CSL.WEB.Models
         }
 
         private string _Correo;
-
+        [Required(ErrorMessage = "Ingrese el correo electrónico")]
+        [Display(Name = "Correo Electrónico")]
+        [StringLength(100, ErrorMessage = "El número de caracteres de {0} debe ser al menos {2} y un maximo de {1}.", MinimumLength = 1)]
+        //[Correo(ErrorMessage = "Solo Letras y número")]
         public string Correo
         {
             get { return _Correo; }
@@ -102,7 +116,9 @@ namespace FacturacionSAT.CSL.WEB.Models
         }
 
         private string _Password;
-
+        [Required(ErrorMessage = "Ingrese el password del correo electrónico")]
+        [Display(Name = "Password Correo Electrónico")]
+        [StringLength(35, ErrorMessage = "El número de caracteres de {0} debe ser al menos {2} y un maximo de {1}.", MinimumLength = 1)]
         public string Password
         {
             get { return _Password; }
@@ -110,7 +126,6 @@ namespace FacturacionSAT.CSL.WEB.Models
         }
 
         private string _URLArchivoCER;
-
         public string URLArchivoCER
         {
             get { return _URLArchivoCER; }
@@ -118,7 +133,6 @@ namespace FacturacionSAT.CSL.WEB.Models
         }
 
         private string _URLArchivoKEY;
-
         public string URLArchivoKEY
         {
             get { return _URLArchivoKEY; }
@@ -126,7 +140,9 @@ namespace FacturacionSAT.CSL.WEB.Models
         }
 
         private string _PasswordArchivoKEY;
-
+        [Required(ErrorMessage = "Ingrese el password del archivo KEY")]
+        [Display(Name = "Password archivo KEY")]
+        [StringLength(35, ErrorMessage = "El número de caracteres de {0} debe ser al menos {2} y un maximo de {1}.", MinimumLength = 1)]
         public string PasswordArchivoKEY
         {
             get { return _PasswordArchivoKEY; }
@@ -134,7 +150,6 @@ namespace FacturacionSAT.CSL.WEB.Models
         }
 
         private string _Imagen;
-
         public string Imagen
         {
             get { return _Imagen; }

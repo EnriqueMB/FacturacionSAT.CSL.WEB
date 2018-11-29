@@ -53,7 +53,7 @@
                             <div class="form-group">
                                 <label class="col-md-12 col-xs-12 control-label text-center">Clave producto</label>
                                 <div class="col-md-12 col-xs-12">
-                                    @Html.TextBoxFor(m => m.CFDI_Claveproducto.Descripcion,  "", new {  @class = "form-control", @readonly = "true", autofocus = "autofocus" })
+                                    @Html.TextBoxFor(m => m.CFDI_Claveproducto.Descripcion, "", new { @class = "form-control", @readonly = "true" })
                                     @Html.HiddenFor(m => m.CFDI_Claveproducto.Id_cfdiClaveProdServDetalle)
                                     <span class="input-group-btn">
                                         <button id="btnClaveProducto" class="btn btn-default" type="button">Seleccionar</button>
@@ -67,7 +67,7 @@
                             <div class="form-group">
                                 <label class="col-md-12 col-xs-12 control-label text-center">Clave Unidad</label>
                                 <div class="col-md-12 col-xs-12">
-                                    @Html.TextBoxFor(m => m.CFDI_ClaveUnidad.Nombre, "", new { @class = "form-control", @readonly = "true", autofocus = "autofocus" })
+                                    @Html.TextBoxFor(m => m.CFDI_ClaveUnidad.Nombre, "", new { @class = "form-control", @readonly = "true"})
                                     @Html.HiddenFor(m => m.CFDI_ClaveUnidad.Id_cfdiClaveUnidadDetalle)
                                     <span class="input-group-btn">
                                         <button id="btnClaveUnidad" class="btn btn-default" type="button">Seleccionar</button>
@@ -220,7 +220,6 @@
     <script type="text/javascript" src="@Url.Content("~/Content/js/validaciones/additionals.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Content/js/ConceptoDatos.js")"></script>
     @*<script type="text/javascript" src="@Url.Content("~/Content/js/Usuario.js")"></script>*@
-
     <script>
         jQuery(document).ready(function () {
             Mensaje(message, typemessage);
