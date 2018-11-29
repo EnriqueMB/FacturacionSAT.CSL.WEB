@@ -20,6 +20,7 @@ namespace FacturacionSAT.CSL.WEB.Models
             Id_cfdiClase = string.Empty;
             Id_cfdiClaveProdServDetalle = string.Empty;
             Id_cfdiClaveUnidadDetalle = string.Empty;
+            Predeterminado = false;
             Id_usuario = string.Empty;
             Conexion = string.Empty;
             Completado = false;
@@ -121,6 +122,15 @@ namespace FacturacionSAT.CSL.WEB.Models
             get { return _Id_cfdiClaveUnidadDetalle; }
             set { _Id_cfdiClaveUnidadDetalle = value; }
         }
+
+        private bool _Predeterminado;
+
+        public bool Predeterminado
+        {
+            get { return _Predeterminado; }
+            set { _Predeterminado = value; }
+        }
+
         private string _Id_usuario;
 
         public string Id_usuario

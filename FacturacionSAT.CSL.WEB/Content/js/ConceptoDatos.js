@@ -24,14 +24,23 @@
             },
             ignore: "",
             rules: {
-                "CFDI_Claveproducto.Descripcion": { required: true }//,
-                //Nombre: { required: true, texto: true },
+                "CFDI_Claveproducto.Descripcion": { required: true },
+                "CFDI_ClaveUnidad.Nombre": { required: true },
+                "CFDI_TipoProducto.TipoProducto": { required: true },
+                "CFDI_ClaveDivision.Division": { required: true },
+                "CFDI_Grupo.Grupo": {required: true},
+                "CFDI_Clase.clase": {required: true},
+                "Descripcion": {required:true}
                
             },
             messages: {
-                "CFDI_Claveproducto.Descripcion": { required: "El Campo Clave Producto es Requerido"}//,
-                //Nombre: { required: "El Campo Clave unidad es requerido", texto: "Por favor seleccione una clave unidad" },
-                 
+                "CFDI_Claveproducto.Descripcion": { required: "El Campo Clave Producto es Requerido"},
+                "CFDI_ClaveUnidad.Nombre": { required: "El Campo Clave unidad es requerido"},
+                "CFDI_TipoProducto.TipoProducto": { required: "El Campo Tipo producto" },
+                "CFDI_ClaveDivision.Division": { required: "El Campo CFDI Division es requerido " },
+                "CFDI_Grupo.Grupo": { required: "El Campo CFDI Grupo es requerido" },
+                "CFDI_Clase.clase": { required: "El Campo CFDI Clase es requerido" },
+                "Descripcion": { required: "El Campo Descripcion es requerido" }
             },
             invalidHandler: function (event, validator) { //display error alert on form submit
                 successHandler1.hide();
