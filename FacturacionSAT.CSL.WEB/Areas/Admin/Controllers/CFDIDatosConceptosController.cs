@@ -7,9 +7,11 @@ using FacturacionSAT.CSL.WEB.Models.Datos;
 using FacturacionSAT.CSL.WEB.Models;
 using FacturacionSAT.CSL.WEB.App_Start;
 using System.Configuration;
+using FacturacionSAT.CSL.WEB.Filters;
 
 namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
 {
+    [Autorizado]
     public class CFDIDatosConceptosController : Controller
     {
         private TokenProcessor Token = TokenProcessor.GetInstance();

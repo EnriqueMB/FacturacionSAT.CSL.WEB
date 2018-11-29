@@ -62,6 +62,7 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
                 {
                     int TipoUsario = DatosU.ObtenerTipoUsuarioByUserName(model);
                     System.Web.HttpContext.Current.Session["SessionTipoUsuario"] = TipoUsario;
+                    System.Web.HttpContext.Current.Session["NombreUsuario"] = model.NombreCompleto;
                     model.Id_TipoUsuario = TipoUsario;
                 }
                 FormsAuthentication.SetAuthCookie(model.Id_Usuario.ToString(), model.RememberMe);

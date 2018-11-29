@@ -1,4 +1,5 @@
-﻿using FacturacionSAT.CSL.WEB.Models;
+﻿using FacturacionSAT.CSL.WEB.Filters;
+using FacturacionSAT.CSL.WEB.Models;
 using FacturacionSAT.CSL.WEB.Models.Datos;
 using FacturacionSAT.CSL.WEB.Models.ViewModel;
 using FacturacionSAT.CSL.WEB.SystemHelper;
@@ -15,6 +16,7 @@ using System.Xml.Serialization;
 
 namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
 {
+    [Autorizado]
     public class AdminFacturaController : Controller
     {
         private string Conexion = ConfigurationManager.AppSettings.Get("strConnection");
