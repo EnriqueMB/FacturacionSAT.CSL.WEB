@@ -9,9 +9,11 @@ using FacturacionSAT.CSL.WEB.Models;
 using FacturacionSAT.CSL.WEB.Models.Datos;
 using System.IO;
 using System.Drawing;
+using FacturacionSAT.CSL.WEB.Filters;
 
 namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
 {
+    [Autorizado]
     public class CFDIDatosEmisorController : Controller
     {
         private TokenProcessor Token = TokenProcessor.GetInstance();

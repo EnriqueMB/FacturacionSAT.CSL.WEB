@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 
@@ -19,6 +20,27 @@ namespace FacturacionSAT.CSL.WEB.Models.Datos
             catch (Exception) //ex)
             {
                 return 0;
+            }
+        }
+
+        public UsuarioModels ObtenerNombreUsuarioLogeado(UsuarioModels Datos)
+        {
+            try
+            {
+                object[] Parametros = { Datos.Id_Usuario, Datos.Id_TipoUsuario };
+                SqlDataReader dr = null;
+                dr = SqlHelper.ExecuteReader(Datos.Conexion, "[dbo].[NombreUsuarioLogeado_Facturacion_Web]", Parametros);
+                while (dr.Read())
+                {
+                    Datos.NombreCompleto = !dr.IsDBNull(dr.GetOrdinal("NombreCompleto")) ? dr.GetString(dr.GetOrdinal("NombreCompleto")) : string.Empty;
+                    break;
+                }
+                dr.Close();
+                return Datos;
+            }
+            catch (Exception)
+            {
+                throw;
             }
         }
 

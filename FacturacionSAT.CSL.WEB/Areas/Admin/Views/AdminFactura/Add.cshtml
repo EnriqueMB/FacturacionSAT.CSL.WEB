@@ -1,214 +1,190 @@
 ﻿@model FacturacionSAT.CSL.WEB.Models.ViewModel.FacturacionViewModel
 @{
     ViewBag.Title = "Nueva factura";
-    SelectList ListaFormaPago = new SelectList(ViewBag.ListaFormaPago, "Id", "Value");
-    SelectList ListaMetodoPago = new SelectList(ViewBag.ListaMetodoPago, "Id", "Value");
     SelectList ListaUsoCFDI = new SelectList(ViewBag.ListaUsoCFDI, "Id", "Value");
-    SelectList ListaMoneda = new SelectList(ViewBag.ListaMoneda, "Id", "Value");
-
-
-
 
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
 @section css{
     <link href="~/Content/themes/smoothness/jquery.ui.all.css" rel="stylesheet" />
+    <style>
+        .form-control[disabled],
+        .form-control[readonly] {
+            color: #000 !important;
+        }
+    </style>
 }
 
 @section featured
 {
     <div class="col-md-12">
-        <div class="panel panel-default tabs">
-            <form action="@Url.Content("~/Admin/AdminFactura/Add")" method="post">
-                @Html.HiddenFor(m=>m.Moneda)
+        <form action="@Url.Content("~/Admin/AdminFactura/Add")" method="post">
+            @Html.HiddenFor(d => d.TipoComprobanteDB)
+            @Html.HiddenFor(d => d.MonedaDB)
+            @Html.HiddenFor(d => d.Version)
+            @Html.HiddenFor(d => d.Subtotal)
+            @Html.HiddenFor(d => d.TotalDescuento)
+            @Html.HiddenFor(d => d.Total)
+            @Html.HiddenFor(d => d.LugarExpedicion)
 
-                <!-- Nav tabs -->
-                <ul class="nav nav-tabs" role="tablist">
-                    <li role="presentation" class="active">
-                        <a href="#general" aria-controls="detalles" role="tab" data-toggle="tab">Factura</a>
-                    </li>
-                    @*<li role="presentation">
-                        <a href="#conceptos" aria-controls="conceptos" role="tab" data-toggle="tab">Conceptos</a>
-                    </li>*@
-                </ul>
+            <div class="row">
+                <div class="col-md-4">
+                    @Html.LabelFor(d => d.Folio)
+                    @Html.TextBoxFor(d => d.Folio, "", new { @class = "form-control", @readonly = "true" })
+                    @Html.ValidationMessage("Folio", new { @class = "text-danger" })
 
-                <!-- Tab panes -->
-                <div class="tab-content">
-                    <div role="tabpanel" class="tab-pane active" id="general">
+                    @Html.LabelFor(d => d.TipoComprobante)
+                    @Html.TextBoxFor(d => d.sTipoComprobante, "", new { @class = "form-control", @readonly = "true" })
+                    @Html.ValidationMessage("TipoComprobante", new { @class = "text-danger" })
 
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h3 class="panel-title"><strong>Generales</strong></h3>
-                                <ul class="panel-controls"></ul>
-                            </div>
-                            <div class="panel-body">
-                                <div class="page-content-wrap">
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            @Html.LabelFor(d => d.Serie)
-                                            @Html.TextBoxFor(d => d.Serie, "", new { @class = "form-control" })
-
-                                            @Html.LabelFor(d => d.Folio)
-                                            @Html.TextBoxFor(d => d.Folio, "", new { @class = "form-control" })
-
-                                            @Html.LabelFor(d => d.Fecha)
-                                            @Html.TextBoxFor(d => d.Fecha, "", new { @class = "form-control" })
-                                        </div>
-                                        <div class="col-md-4">
-                                            @Html.LabelFor(d => d.FormaDePago)
-                                            @Html.DropDownListFor(d => d.FormaDePago, ListaFormaPago, new { @class = "form-control" })
-
-                                            @Html.LabelFor(d => d.MetodoDePago)
-                                            @Html.DropDownListFor(d => d.MetodoDePago, ListaMetodoPago, new { @class = "form-control" })
-
-                                            @Html.LabelFor(d => d.UsoCFDI)
-                                            @Html.DropDownListFor(d => d.UsoCFDI, ListaUsoCFDI, new { @class = "form-control" })
-                                        </div>
-                                        <div class="col-md-4">
-                                            @Html.LabelFor(d => d.Moneda)
-                                            @Html.DropDownListFor(d => d.Moneda, ListaMoneda, new { @class = "form-control" })
-
-                                            @Html.LabelFor(d => d.RegimenFiscal)
-                                            @Html.TextBoxFor(d => d.RegimenFiscal, "", new { @class = "form-control" })
-                                        </div>
-                                    </div>
-                                    <br />
-                                    <h5>Datos del cliente</h5>
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            @Html.LabelFor(d => d.RFCReceptor)
-                                            @Html.TextBoxFor(d => d.RFCReceptor, "", new { @class = "form-control" })
-                                        </div>
-                                        <div class="col-md-4">
-                                            @Html.LabelFor(d => d.RazonSocial)
-                                            @Html.TextBoxFor(d => d.RazonSocial, "", new { @class = "form-control" })
-                                        </div>
-                                    </div>
-
-                                     <h5>Productos / Servicios</h5>
-                                    <div class="row">
-                                        <table class="table datatable">
-                                            <thead>
-                                                <tr>
-                                                    <th> Cantidad </th>
-                                                    <th> Descripción </th>
-                                                    <th> Producto / Servicio </th>
-                                                    <th> Unidad de medida </th>
-                                                    <th> Precio unitario </th>
-                                                    <th> Nombre del impuesto </th>
-                                                    <th> Porcentaje del impuesto </th>
-                                                    <th> Importe del impuesto </th>
-                                                    <th> Total </th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                               @foreach(var item in Model.Conceptos)
-                                               {
-                                                <tr>
-                                                    <td> @item.Cantidad  </td>
-                                                    <td> @item.Descripcion </td>
-                                                    <td> @item.ClaveProducto </td>
-                                                    <td> @item.ClaveUnidad </td>
-                                                    <td> @item.PrecioUnitario </td>
-                                                    <td> @item.Impuestos[0].Nombre  </td>
-                                                    <td> @item.Impuestos[0].Tasa</td>
-                                                    <td> @item.Impuestos[0].Importe  </td>
-                                                    <td> @(item.PrecioUnitario  + @item.Impuestos[0].Importe)</td>
-
-                                                </tr>
-                                               }
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="panel-footer">
-                                <a id="regresar" href="@Url.Action("Index", "AdminFactura")" class="btn btn-danger"><i class="icon-prev"></i>Regresar</a>
-                                <input type="submit" class="btn btn-success" value="Generar factura"/>
-                            </div>
-                        </div>
-                    </div>
-                    @*<div role="tabpanel" class="tab-pane" id="conceptos">
-
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h3 class="panel-title"><strong>Generales</strong></h3>
-                                <ul class="panel-controls"></ul>
-                            </div>
-                            <div class="panel-body">
-                                <div class="page-content-wrap">
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <label>Clave producto/servicio</label>
-                                            @Html.TextBox("ClaveProducto", "", new { @class = "form-control" })
-                                        </div>
-                                        <div class="col-md-4">
-                                            <label>Clave unidad de medida</label>
-                                            @Html.TextBox("ClaveUnidad", "", new { @class = "form-control" })
-                                        </div>
-                                    </div>
-                                    
-                                </div>
-                            </div>
-
-                            <div class="panel-footer">
-                                <a id="regresar" href="@Url.Action("Index", "AdminFactura")" class="btn btn-danger"><i class="icon-prev"></i>Regresar</a>
-                            </div>
-                        </div>
-                    </div>*@
+                    @Html.LabelFor(d => d.UsoCFDI)
+                    @Html.DropDownListFor(d => d.UsoCFDI, ListaUsoCFDI, new { @class = "form-control" })
+                    @Html.ValidationMessage("UsoCFDI", new { @class = "text-danger" })
                 </div>
+                <div class="col-md-4">
+                    @Html.LabelFor(d => d.FormaDePago)
+                    @Html.TextBoxFor(d => d.FormaDePago, "", new { @class = "form-control", @readonly = "true" })
+                    @Html.ValidationMessage("FormaDePago", new { @class = "text-danger" })
 
-                @*<div class="row">
-                    <div class="col-md-6">
-                        @Html.LabelFor(d => d.ClavePrivada)
-                        @Html.TextBoxFor(d => d.ClavePrivada, "", new { @class = "form-control" })
-                    </div>
-                    <div style="text-align:right " class="col-md-6">
-                        <br />
-                        <input type="submit" value="Timbrar" class="btn btn-primary" />
-                    </div>
-                </div>*@
-</form>
-        </div>
+                    @Html.LabelFor(d => d.Fecha)
+                    @Html.TextBoxFor(d => d.Fecha, "{0:yyyy/MM/dd HH:mm:ss}", new { @class = "form-control", @readonly = "true" })
+                    @Html.ValidationMessage("Fecha", new { @class = "text-danger" })
+                </div>
+                <div class="col-md-4">
+                    @Html.LabelFor(d => d.Moneda)
+                    @Html.TextBoxFor(d => d.Moneda, "", new { @class = "form-control", @readonly = "true" })
+                    @Html.ValidationMessage("Moneda", new { @class = "text-danger" })
+
+                    @Html.LabelFor(d => d.RegimenFiscal)
+                    @Html.TextBoxFor(d => d.RegimenFiscal, "", new { @class = "form-control", @readonly = "true" })
+                    @Html.ValidationMessage("RegimenFiscal", new { @class = "text-danger" })
+                </div>
+            </div>
+            <br />
+            <hr />
+            <h5>Datos del cliente</h5>
+            <div class="row">
+                <div class="col-md-4">
+                    @Html.LabelFor(d => d.RFCReceptor)
+                    @Html.TextBoxFor(d => d.RFCReceptor, "", new { @class = "form-control", @readonly = "true" })
+                </div>
+                <div class="col-md-4">
+                    @Html.LabelFor(d => d.RazonSocial)
+                    @if (string.IsNullOrEmpty(Model.RazonSocial))
+                    {
+                        @Html.TextBoxFor(d => d.RazonSocial, "", new { @class = "form-control" })
+                    }
+                    else
+                    {
+                        @Html.TextBoxFor(d => d.RazonSocial, "", new { @class = "form-control", @readonly = "true" })
+                    }
+                </div>
+            </div>
+            <br />
+            <hr />
+            <h5>Productos / Servicios</h5>
+            <div class="row">
+                <table id="tblProdServ" class="table">
+                    <thead>
+                        <tr>
+                            <th> Cantidad </th>
+                            <th> Descripción </th>
+                            <th> Producto / Servicio </th>
+                            <th> Unidad de medida </th>
+                            <th> Precio unitario </th>
+                            <th> Nombre del impuesto </th>
+                            <th> Porcentaje del impuesto </th>
+                            <th> Importe del impuesto </th>
+                            <th> Total </th>
+                            <th> ClaveProductoDB </th>
+                            <th> ClaveUnidadDB </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Conceptos)
+                        {
+                            <tr>
+                                <td> @item.Cantidad  </td>
+                                <td> @item.Descripcion </td>
+                                <td> @item.ClaveProducto </td>
+                                <td> @item.ClaveUnidad </td>
+                                <td> @item.PrecioUnitario </td>
+                                <td> @item.Impuestos[0].Nombre  </td>
+                                <td> @item.Impuestos[0].Tasa</td>
+                                <td> @item.Impuestos[0].Importe  </td>
+                                <td> @(item.PrecioUnitario + @item.Impuestos[0].Importe)</td>
+                                <td> @item.ClaveProductoDB </td>
+                                <td> @item.ClaveUnidadDB </td>
+
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <br />
+            <hr />
+            <div style="text-align:right ">
+                <a id="regresar" href="@Url.Action("Index", "AdminFactura")" class="btn btn-danger"><i class="icon-prev"></i>Regresar</a>
+                <input type="submit" class="btn btn-success" value="Generar factura" />
+            </div>
+        </form>
     </div>
 }
 @section script{
-    <script src="~/Scripts/jquery-ui-1.12.1.js"></script>
-    <script>
-        $(document).ready(function () {
-            $("#ClaveProducto").autocomplete({
-                source: function (request, response) {
-                    $.ajax({
-                        url: "@Url.Content("~/Admin/Json/ProductoServicio")",
-                        type: "POST",
-                        dataType: "json",
-                        data: { prodServBuscar: request.term },
-                        success: function (data) {
-                            response($.map(data, function (item) {
-                                return { label: item.Value, value: item.Value };
-                            }))
-                        }
-                    })
-                }
-            })
+    <script type="text/javascript" src="@Url.Content("~/Content/js/plugins/datatables/jquery.dataTables.min.js")"></script>
+   <script>
+       var tblProdServ = $("#tblProdServ").DataTable({
+           "language": {
+               "url": "@Url.Content("~/Content/assets/json/Spanish.json")"
+           },
+           "columnDefs": [
+               {
+                   "targets": [0],
+                   render: function (data, type, row) {
+                       var value = row[0].replace(',', '.');
+                       return value;
+                   }
+               },
+               {
+                   "targets": [4],
+                   render: function (data, type, row) {
+                       var value = '$ ' + row[4].replace(',', '.');
+                       return value;
+                   }
+               },
+               {
+                   "targets": [6],
+                   render: function (data, type, row) {
+                       var value = row[6].replace(',', '.');
+                       return value;
+                   }
+               },
+               {
+                   "targets": [7],
+                   render: function (data, type, row) {
+                       var value = '$ ' + row[7].replace(',', '.') ;
+                        return value;
+                   }
+               },
+               {
+                   "targets": [8],
+                   render: $.fn.dataTable.render.number(',', '.', 2, '$')
 
-            $("#ClaveUnidad").autocomplete({
-                source: function (request, response) {
-                    $.ajax({
-                        url: "@Url.Content("~/Admin/Json/UnidadMedida")",
-                        type: "POST",
-                        dataType: "json",
-                        data: { unidadMedidaBuscar: request.term },
-                        success: function (data) {
-                            response($.map(data, function (item) {
-                                return { label: item.Value, value: item.Value };
-                            }))
-                        }
-                    })
-                }
-            })
-        })
+               },
+               {
+                   "targets": [9],
+                   "visible": false,
+                   "searchable": false
+               },
+               {
+                   "targets": [10],
+                   "visible": false,
+                   "searchable": false
+               }
+           ]
+
+
+       });
     </script>
 }
