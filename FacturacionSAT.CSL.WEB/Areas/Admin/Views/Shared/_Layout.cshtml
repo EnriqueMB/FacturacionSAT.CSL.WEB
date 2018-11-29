@@ -40,18 +40,18 @@
                         <div class="profile-data">
                             <div class="profile-data-name">VIAJES AURY FACTURACIÓN</div>
                             @*@{
-                                    HttpContext context = HttpContext.Current;
-                                    if (context != null && context.Session != null)
-                                    {
-                                        string NombreUsuario = (string)HttpContext.Current.Session["NombreUsuario"];
-                                        <div class="profile-data-name">@NombreUsuario</div>
-                                    }
-                                }*@
+                        HttpContext context = HttpContext.Current;
+                        if (context != null && context.Session != null)
+                        {
+                            string NombreUsuario = (string)HttpContext.Current.Session["NombreUsuario"];
+                            <div class="profile-data-name">@NombreUsuario</div>
+                        }
+                    }*@
                         </div>
                         @*<div class="profile-controls">
-                                <a href="pages-profile.html" class="profile-control-left"><span class="fa fa-info"></span></a>
-                                <a href="pages-messages.html" class="profile-control-right"><span class="fa fa-envelope"></span></a>
-                            </div>*@
+                    <a href="pages-profile.html" class="profile-control-left"><span class="fa fa-info"></span></a>
+                    <a href="pages-messages.html" class="profile-control-right"><span class="fa fa-envelope"></span></a>
+                </div>*@
                     </div>
                 </li>
                 <li class="xn-title">Menu</li>
@@ -63,6 +63,9 @@
                 </li>
                 <li>
                     <a href="@Url.Action("Index","CFDIDatosEmisor")"><span class="fa fa-desktop"></span> <span class="xn-text">DATOS EMISOR</span></a>
+                </li>
+                <li>
+                    <a href="@Url.Action("Index","CFDIFormaPago")"><span class="fa fa-desktop"></span> <span class="xn-text">FORMA DE PAGO</span></a>
                 </li>
             </ul>
             <!-- END X-NAVIGATION -->

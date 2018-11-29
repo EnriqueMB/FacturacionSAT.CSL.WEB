@@ -1,0 +1,115 @@
+﻿@model FacturacionSAT.CSL.WEB.Models.CFDIFormaPago_AuryModels
+@{
+                /**/
+
+                ViewBag.Title = "Index";
+                Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@section featured{
+    @{             
+      var message = TempData["message"] ?? string.Empty;
+      var typemessage = TempData["typemessage"] ?? string.Empty;
+    }
+    <div id="Error" class="progress-bar progress-bar-striped active errorCSL" style="display:none; width:100%">
+        <h3></h3>
+    </div>
+    <div id="Success" class="progress-bar progress-bar-striped active successCSL" style="display:none; width:100%">
+        <h3></h3>
+    </div>
+    <div class="page-title">
+        <h2><span class="fa fa-arrow-circle-o-left"></span> CFDI FORMA DE PAGO</h2>
+    </div>
+    <!-- END PAGE TITLE -->
+    <!-- PAGE CONTENT WRAPPER -->
+    <div class="page-content-wrap">
+        <div class="row">
+            <div class="col-md-12">
+                <!-- START DEFAULT DATATABLE -->
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"></h3>
+                        <ul class="panel-controls">
+                            <li><a href="#" class="btn btn-default btnCrear disabled"><span class="fa fa-plus"></span> Nuevo</a></li>
+                            <li><a href="#" class="panel-collapse exsa"><span class="fa fa-angle-down"></span></a></li>
+                            <li><a href="#" class="panel-fullscreen exsa"><span class="fa fa-expand"></span></a></li>
+                        </ul>
+                    </div>
+                    <div class="panel-body">
+                        <div class="table-responsive">
+                            <table class="table datatable">
+                                <thead>
+                                    <tr>
+                                        <th>Descripcion</th>
+                                        <th>Tipo de Pago</th>
+                                        <th>Opcion</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.ListaCFDIFP)
+                                    {
+                                        <tr id="@item.ID_FormaPago">
+                                            <td>@item.TipoPago</td>
+                                            <td>@item.TipoDePago.Descripcion</td>                                            
+                                            <td style="text-align:center;">
+                                                <div class="visible-md visible-lg hidden-sm hidden-xs">
+                                                    <a title="Editar" href="@Url.Action("UpdateCFDIFP", "CFDIFormaPago", new { id =item.ID_FormaPago})" class="btn btn-yellow tooltips" data-placement="top" data-original-title="Edit"><i class="fa fa-edit"></i></a>                                                  
+                                                </div>
+                                                <div class="visible-xs visible-sm hidden-md hidden-lg">
+                                                    <div class="btn-group">
+                                                        <a class="btn btn-danger dropdown-toggle btn-sm" data-toggle="dropdown" href="#">
+                                                            <i class="fa fa-cog"></i> <span class="caret"></span>
+                                                        </a>
+                                                        <ul role="menu" class="dropdown-menu pull-right dropdown-dark">
+                                                            <li>
+                                                                <a role="menuitem" tabindex="-1" href="@Url.Action("UpdateCFDIFP", "CFDIFormaPago", new { id = item.ID_FormaPago})">
+                                                                    <i class="fa fa-edit"></i> Editar
+                                                                </a>
+                                                            </li>                                                           
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                     }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!-- END DEFAULT DATATABLE -->
+            </div>
+        </div>
+    </div>
+    <!-- PAGE CONTENT WRAPPER -->
+    <div class="message-box animated fadeIn" data-sound="alert" id="mb-remove-row">
+        <div class="mb-container">
+            <div class="mb-middle">               
+                <div class="mb-footer">
+                    <div class="pull-right">
+                        <button class="btn btn-success btn-lg mb-control-yes">Si</button>
+                        <button class="btn btn-default btn-lg mb-control-close">No</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+    var message = '@message';
+    var typemessage = '@typemessage';
+    </script>
+}
+@section script
+{
+    @*<script type="text/javascript" src="@Url.Content("~/Content/js/demo_tables.js")"></script>*@
+    <script type="text/javascript" src="@Url.Content("~/Content/js/demo_DatosEmisor.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/js/plugins/datatables/jquery.dataTables.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/js/mensajeDeError.js")"></script>
+    <script>
+        jQuery(document).ready(function () {
+            Mensaje(message, typemessage);
+        });
+    </script>
+}
+
+

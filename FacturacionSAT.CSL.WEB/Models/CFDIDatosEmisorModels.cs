@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -30,7 +31,7 @@ namespace FacturacionSAT.CSL.WEB.Models
         }
 
         private string _IDCFDIDatosEmisor;
-
+        
         public string IDCFDIDatosEmisor
         {
             get { return _IDCFDIDatosEmisor; }
