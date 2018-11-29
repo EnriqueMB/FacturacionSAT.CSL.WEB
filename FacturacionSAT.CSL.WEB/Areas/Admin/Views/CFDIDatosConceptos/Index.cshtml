@@ -42,15 +42,15 @@
                             <table class="table datatable">
                                 <thead>
                                     <tr>
-                                        <th>Descripcion</th>
+                                        <th>Descripción</th>
                                         <th>Tipo Producto</th>
-                                        <th>Divicion</th>
+                                        <th>División</th>
                                         <th>Grupo</th>
                                         <th>Clase</th>
                                         <th>Producto</th>
                                         <th>Unidad</th>
                                         <th>Predeterminado</th>
-                                        <th>Accion</th>
+                                        <th>Acción</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -77,7 +77,7 @@
 
                                             <td style="text-align:center;">
                                                 <div class="visible-md visible-lg hidden-sm hidden-xs">
-                                                    <a title="Editar" href="@Url.Action("Edit","CFDIDatosConceptos",new { id = item.Id_cfdiDatosConceptos})" class="btn btn-yellow tooltips" data-placement="top" data-original-title="Edit"><i class="fa fa-edit"></i></a>
+                                                    <a title="Editar" href="@Url.Action("Edit","CFDIDatosConceptos",new { id = item.Id_cfdiDatosConceptos})" class="btn btn-yellow tooltips" data-placement="top" data-original-title="Editar"><i class="fa fa-edit"></i></a>
                                                     <a title="Eliminar" id="delete-@item.Id_cfdiDatosConceptos" data-hrefa="@Url.Action("Delete", "CFDIDatosConceptos", new { id = item.Id_cfdiDatosConceptos })" onClick="delete_row('@item.Id_cfdiDatosConceptos');" class="btn btn-danger tooltips" data-placement="top" data-original-title="Eliminar"><i class="fa fa-trash-o"></i></a>
                                                 </div>
                                                 <div class="visible-xs visible-sm hidden-md hidden-lg">

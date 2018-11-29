@@ -95,14 +95,14 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="col-md-12 col-xs-12 control-label text-center">CFDI Division</label>
+                                <label class="col-md-12 col-xs-12 control-label text-center">CFDI División</label>
                                 <div class="col-md-12 col-xs-12">
                                     @Html.TextBoxFor(m => m.CFDI_ClaveDivision.Division, "", new { @class = "form-control", @readonly = "true" })
                                     @Html.HiddenFor(m => m.CFDI_ClaveDivision.Id_cfdiDivision)
                                     <span class="input-group-btn">
                                         <button id="btnClaveDivision" class="btn btn-default" type="button">Seleccionar</button>
                                     </span>
-                                    <span class="help-block">Seleccione una division</span>
+                                    <span class="help-block">Seleccione una división</span>
                                     @Html.ValidationMessageFor(model => model.CFDI_ClaveDivision.Id_cfdiDivision)
                                 </div>
                             </div>
@@ -141,14 +141,14 @@
                     <div class="col-md-12">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="col-md-12 control-label text-center">Descripcion</label>
+                                <label class="col-md-12 control-label text-center">Descripción</label>
                                 <div class="col-md-12 col-xs-12">
                                     <div class="input-group">
                                         <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
                                         @Html.TextBoxFor(model => model.Descripcion, new { id = "Descripcion", @class = "form-control" })
                                     </div>
                                     @Html.ValidationMessageFor(model => model.Descripcion)
-                                    <span class="help-block">Ingrese una descripcion</span>
+                                    <span class="help-block">Ingrese una descripción</span>
                                 </div>
                             </div>
                         </div>
