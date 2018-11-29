@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -69,7 +70,8 @@ namespace FacturacionSAT.CSL.WEB.Models
         }
 
         private string _Descripcion;
-
+        [Required]
+        [Display (Name ="Descripcion")]
         public string Descripcion
         {
             get { return _Descripcion; }

@@ -172,6 +172,129 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
             }
         }
 
+        //POST:Admi/CFDIDatosEmisor/Create/id
+        [HttpPost]
+        public ActionResult Edit(CFDIDatosEmisorModels DatosAux)
+        {
+            try
+            {
+                CFDIDatosEmisorDatos Datos = new CFDIDatosEmisorDatos();
+                if (Token.IsTokenValid())
+                {
+                    if (ModelState.IsValid)
+                    {
+                        DatosAux.Conexion = Conexion;
+                        DatosAux.Opcion = 2;
+                        DatosAux.IDUsuario = User.Identity.Name;
+                        DatosAux = Datos.AbcDatosEmisor(DatosAux);
+                        if (!string.IsNullOrEmpty(DatosAux.IDCFDIDatosEmisor))
+                        {
+                            HttpPostedFileBase bannerImage = Request.Files[0] as HttpPostedFileBase;
+                            if (!string.IsNullOrEmpty(bannerImage.FileName))
+                            {
+                                if (bannerImage != null && bannerImage.ContentLength > 0)
+                                {
+                                    string baseDir = Server.MapPath("~/SAT/SAT1/");
+                                    string fileExtension = Path.GetExtension(bannerImage.FileName);
+                                    string fileName = DatosAux.IDCFDIDatosEmisor + fileExtension;
+                                    bannerImage.SaveAs(baseDir + fileName);
+                                    DatosAux.URLArchivoCER = "~/SAT/SAT1/" + fileName;
+                                }
+                            }
+                            HttpPostedFileBase bannerImage1 = Request.Files[1] as HttpPostedFileBase;
+                            if (!string.IsNullOrEmpty(bannerImage1.FileName))
+                            {
+                                if (bannerImage1 != null && bannerImage1.ContentLength > 0)
+                                {
+                                    string baseDir = Server.MapPath("~/SAT/SAT1/");
+                                    string fileExtension = Path.GetExtension(bannerImage1.FileName);
+                                    string fileName = DatosAux.IDCFDIDatosEmisor + fileExtension;
+                                    bannerImage1.SaveAs(baseDir + fileName);
+                                    DatosAux.URLArchivoKEY = "~/SAT/SAT1/" + fileName;
+                                }
+                            }
+                            HttpPostedFileBase bannerImage2 = Request.Files[2] as HttpPostedFileBase;
+                            if (!string.IsNullOrEmpty(bannerImage2.FileName))
+                            {
+                                if (bannerImage2 != null && bannerImage2.ContentLength > 0)
+                                {
+                                    string baseDir = Server.MapPath("~/SAT/SAT1/");
+                                    string fileExtension = Path.GetExtension(bannerImage2.FileName);
+                                    string fileName = DatosAux.IDCFDIDatosEmisor + fileExtension;
+                                    bannerImage2.SaveAs(baseDir + fileName);
+                                    DatosAux.Imagen = "~/SAT/SAT1/" + fileName;
+                                }
+                            }
+                            DatosAux.Opcion = 4;
+                            DatosAux = Datos.AbcDatosEmisor(DatosAux);
+                            if (!string.IsNullOrEmpty(DatosAux.IDCFDIDatosEmisor))
+                            {
+                                TempData["typemessage"] = "1";
+                                TempData["message"] = "Los datos se guardarón correctamente.";
+                                return RedirectToAction("Index");
+                            }
+                            else
+                            {
+                                DatosAux.ListaTipoPersona = Datos.ListaPersonaCMB(DatosAux);
+                                TempData["typemessage"] = "2";
+                                TempData["message"] = "Ocurrio un error al intentar guardar las los archivo con las extenciones. CER, KEY, IMG";
+                                return View(DatosAux);
+                            }
+                        }
+                        else
+                        {
+                            DatosAux.ListaTipoPersona = Datos.ListaPersonaCMB(DatosAux);
+                            TempData["typemessage"] = "2";
+                            TempData["message"] = "Ocurrio un error al intentar guardar los datos.";
+                            return View(DatosAux);
+                        }
+                    }
+                    else
+                    {
+                        DatosAux.Conexion = Conexion;
+                        DatosAux.ListaTipoPersona = Datos.ListaPersonaCMB(DatosAux);
+                        return View(DatosAux);
+                    }
+                }
+                else
+                {
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        [HttpGet]
+        public ActionResult Delete(string id)
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Delete(string id, FormCollection collection)
+        {
+            try
+            {
+                CFDIDatosEmisorModels DatosEmisor = new CFDIDatosEmisorModels();
+                CFDIDatosEmisorDatos Datos = new CFDIDatosEmisorDatos();
+                DatosEmisor.Conexion = Conexion;
+                DatosEmisor.IDCFDIDatosEmisor = id;
+                DatosEmisor.Opcion = 3;
+                DatosEmisor.IDUsuario = User.Identity.Name;
+                DatosEmisor = Datos.AbcDatosEmisor(DatosEmisor);
+                return Json(DatosEmisor);
+            }
+            catch (Exception)
+            {
+                CFDIDatosEmisorModels DatosEmisor = new CFDIDatosEmisorModels();
+                TempData["typemessage"] = "2";
+                TempData["message"] = "Ocurrió un error al guardar el registro.";
+                return View(DatosEmisor);
+            }
+        }
         [HttpPost]
         public ActionResult ObtenerRegimenFiscalPersona(string IDTipoPersona)
         {

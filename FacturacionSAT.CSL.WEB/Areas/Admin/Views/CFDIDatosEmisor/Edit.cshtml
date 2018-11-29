@@ -108,7 +108,7 @@
                         <div class="col-md-12">
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label class="col-md-12 control-label text-center">Correo</label>
+                                    <label class="col-md-12 control-label text-center">Código Postal</label>
                                     <div class="col-md-12 col-xs-12">
                                         <div class="input-group">
                                             <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
@@ -146,7 +146,7 @@
                                     <div class="col-md-12 col-xs-12">
                                         <div class="input-group">
                                             <span class="input-group-addon"><span class="fa fa-unlock-alt"></span></span>
-                                            @Html.PasswordFor(model => model.Password, new { id = "Password", @class = "form-control", autocomplete = "off" })
+                                            @Html.TextBoxFor(model => model.Password, new { id = "Password", @type="password", @class = "form-control", autocomplete = "off" })
                                             <div class="input-group-addon">
                                                 <span id="show_password" class="fa fa-eye-slash icon" />
                                             </div>
@@ -186,7 +186,7 @@
                                     <div class="col-md-12 col-xs-12">
                                         <div class="input-group">
                                             <span class="input-group-addon"><span class="fa fa-unlock-alt"></span></span>
-                                            @Html.PasswordFor(model => model.PasswordArchivoKEY, new { id = "PasswordArchivoKEY", @class = "form-control", autocomplete = "off" })
+                                            @Html.TextBoxFor(model => model.PasswordArchivoKEY, new { id = "PasswordArchivoKEY", @type = "password", @class = "form-control", autocomplete = "off" })
                                             <div class="input-group-addon">
                                                 <span id="show_password1" class="fa fa-eye-slash icon1" />
                                             </div>
@@ -240,7 +240,7 @@
     <script>
         jQuery(document).ready(function () {
             Mensaje(message, typemessage);
-            DatosEmisor.init();
+            DatosEmisor.init(2);
         });
     </script>
 }
