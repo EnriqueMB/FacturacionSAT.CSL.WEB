@@ -53,7 +53,7 @@
                             <div class="form-group">
                                 <label class="col-md-12 col-xs-12 control-label text-center">Clave producto</label>
                                 <div class="col-md-12 col-xs-12">
-                                    @Html.TextBoxFor(m => m.CFDI_Claveproducto.Descripcion, "", new { @class = "form-control", @readonly = "true" })
+                                    @Html.TextBoxFor(m => m.CFDI_Claveproducto.Descripcion, "", new { @class = "form-control", @readonly = "true", autofocus = "autofocus" })
                                     @Html.HiddenFor(m => m.CFDI_Claveproducto.Id_cfdiClaveProdServDetalle)
                                     <span class="input-group-btn">
                                         <button id="btnClaveProducto" class="btn btn-default" type="button">Seleccionar</button>
@@ -270,6 +270,7 @@
                             else {
                                 dtClaveUnidad.$('tr.selected').removeClass('selected');
                                 $(this).addClass('selected');
+                                $(this).focus('autofocus');
                             }
                         });
 
@@ -285,6 +286,7 @@
 
                                 $("#CFDI_ClaveUnidad_Nombre").val(nombreClave);
                                 $("#CFDI_ClaveUnidad_Id_cfdiClaveUnidadDetalle").val(idClaveUnidad);
+                                $("#CFDI_ClaveUnidad_Nombre").blur();
                             }
 
                         });
