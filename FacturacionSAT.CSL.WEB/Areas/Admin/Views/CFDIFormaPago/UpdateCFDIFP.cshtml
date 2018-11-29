@@ -1,0 +1,97 @@
+﻿@model FacturacionSAT.CSL.WEB.Models.CFDIFormaPago_AuryModels
+@{
+    /**/
+
+    ViewBag.Title = "UpdateCFDIFP";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@section featured{
+
+    @{
+        var message = TempData["message"] ?? string.Empty;
+        var typemessage = TempData["typemessage"] ?? string.Empty;
+    }
+    <div class="row">
+        <div id="Error" class="progress-bar progress-bar-striped active errorCSL" style="display:none; width:100%">
+            <h3></h3>
+        </div>
+        <div id="Success" class="progress-bar progress-bar-striped active successCSL" style="display:none; width:100%">
+            <h3></h3>
+        </div>
+        <div class="col-md-12">
+            @{Html.EnableClientValidation(false); }
+            @using (Html.BeginForm("UpdateCFDIFP", "CFDIFormaPago", FormMethod.Post, new { id = "form-FormaPago", @class = "form-horizontal", autocomplete = "off" }))
+            {
+
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(model => model.ID_FormaPago)
+                @Html.ValidationSummary(false, "Hay errores en la captura de información:", new { @class = "text-danger" }) //Server
+                <div id="validation_summary" class="field_error "></div> //JS
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><strong>Editar</strong> CFDIFormaPago</h3>
+                        <ul class="panel-controls">
+                            <li><a href="#" class="panel-remove exsa"><span class="fa fa-times"></span></a></li>
+                        </ul>
+                    </div>
+                    <div class="panel-body">
+                        <div class="col-md-12">
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-12 col-xs-12 control-label text-center">Descripcion de Pago</label>
+                                    <div class="col-md-12 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
+                                            @Html.TextBoxFor(model => model.TipoPago, new { id = "TipoPago", @class = "form-control", @readonly = "true" })
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.TipoPago)
+                                        <span class="help-block">Descripcion de Pago</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-12 col-xs-12 control-label text-center">Metodo de Pago</label>
+                                    <div class="col-md-12 col-xs-12">
+                                        @Html.DropDownListFor(model => model.TipoDePago.Id_cfdiFormaPagoDetalle, new SelectList(Model.ListaCFDIDetalleCMB, "Id_cfdiFormaPagoDetalle", "Descripcion"), new { id = "Id_cfdiFormaPagoDetalle", @class = "form-control ", data_live_search = "true" })
+                                        @Html.ValidationMessageFor(model => model.TipoDePago.Id_cfdiFormaPagoDetalle)
+                                        <span class="help-block">Metodo de Pago</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <input type="submit" value="Modificar" class="btn btn-primary pull-right">
+                        <a href="@Url.Action("Index","CFDIFormaPago")" class="btn btn-danger"><i class="icon-prev"></i>Cancelar</a>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+
+    <script>
+        var message = '@message';
+        var typemessage = '@typemessage';
+    </script>
+}
+@section script
+{
+    <script type="text/javascript" src="@Url.Content("~/Content/js/plugins/bootstrap/bootstrap-select.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/js/mensajeDeError.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/js/plugins/jquery-validation/jquery.validate.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/js/validaciones/additionals.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/js/FormaPago.js")"></script>
+    <script>
+        jQuery(document).ready(function () {
+            Mensaje(message, typemessage);
+            FormaPago.init();
+        });
+    </script>
+}
+
