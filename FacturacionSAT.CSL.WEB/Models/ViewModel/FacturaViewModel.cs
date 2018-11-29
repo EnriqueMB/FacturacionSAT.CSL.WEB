@@ -61,12 +61,12 @@ namespace FacturacionSAT.CSL.WEB.Models.ViewModel
         public string sFormaDePago { get; set; }
 
         [Display(Name = "Método de pago")]
-        [Required(AllowEmptyStrings = false)]
         public string MetodoDePago { get; set; }
         public string sMetodoDePago { get; set; }
 
         [Display(Name = "Moneda")]
         public string Moneda { get; set; }
+        public string MonedaDB { get; set; }
 
         [Display(Name = "Tipo de cambio")]
         public string TipoDeCambio { get; set; }
@@ -74,6 +74,8 @@ namespace FacturacionSAT.CSL.WEB.Models.ViewModel
         public string LugarExpedicion { get; set; }
 
         [Display(Name = "Fecha")]
+        [DataType(DataType.DateTime)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy/MM/dd HH:mm:ss}")]
         public DateTime Fecha { get; set; }
 
         public DateTime FechaTimbre { get; set; }
@@ -98,8 +100,9 @@ namespace FacturacionSAT.CSL.WEB.Models.ViewModel
         public string UsoCFDI { get; set; }
         public string sUsoCFDI { get; set; }
 
+        [Display(Name = "Tipo de comprobante")]
         public string TipoComprobante { get; set; } //dato calculado
-
+        public string TipoComprobanteDB { get; set; }
         public string sTipoComprobante
         {
             get
@@ -315,10 +318,13 @@ namespace FacturacionSAT.CSL.WEB.Models.ViewModel
         public class Concepto
         {
             public string ClaveProducto { get; set; }
+            public string ClaveProductoDB { get; set; }
             //public string Codigo { get; set; }
 
-            public decimal Cantidad { get; set; }
             public string ClaveUnidad { get; set; }
+            public string ClaveUnidadDB { get; set; }
+
+            public decimal Cantidad { get; set; }
             public string Unidad { get; set; }
 
             public string Descripcion { get; set; }

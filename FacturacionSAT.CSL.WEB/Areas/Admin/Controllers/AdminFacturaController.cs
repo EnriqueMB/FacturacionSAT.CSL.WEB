@@ -67,13 +67,14 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
                 AuxSQLModel oAuxSQLModel = new AuxSQLModel();
                 FacturaDatos oFacturaDatos = new FacturaDatos();
                 oAuxSQLModel.Conexion = Conexion;
+                oAuxSQLModel.Id_usuario = Convert.ToInt32(User.Identity.Name);
 
                 GetListasSAT(oComboDatos, oAuxSQLModel, Model.RFCReceptor);
 
                 FacturacionViewModel oFactura = new FacturacionViewModel();
                 oFactura = oFacturaDatos.Factura_get_Generales_ADD(oAuxSQLModel, Model.CodigoBarra, Model.RFCReceptor);
 
-                oFactura.Fecha = DateTime.Today;
+                oFactura.Fecha = DateTime.Now;
 
                 if (!oAuxSQLModel.Success)
                 {
@@ -195,7 +196,7 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
                 oComprobante.SubTotal = Factura.Subtotal; // Atributo requerido para representar la suma de los importes de los conceptos antes de descuentos e 
                                                           //impuesto.No se permiten valores negativos.
                 oComprobante.Descuento = Factura.TotalDescuento;
-                oComprobante.Moneda = Factura.Moneda; // Catálogo del Cfdi:Moneda, si no es moneda nacional, se debe de poner el tipo de cambio
+                oComprobante.Moneda = Factura.MonedaDB; // Catálogo del Cfdi:Moneda, si no es moneda nacional, se debe de poner el tipo de cambio
                                                       //oComprobante.TipoCambio
                 oComprobante.Total = Factura.Total; //Subtotal menos descuento
                 oComprobante.TipoDeComprobante = Factura.TipoComprobante; // Atributo requerido para expresar la clave del efecto del comprobante fiscal para el contribuyente emisor.
@@ -218,17 +219,31 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
 
                 //obtenemos los detalles del concepto, en este caso siempre será 1 por que se factura a 1 boleto
                 List<ComprobanteConcepto> lstConceptos = new List<ComprobanteConcepto>();
-
                 ComprobanteConcepto oConcepto = new ComprobanteConcepto();
-                oConcepto.Importe = 10m;
-                oConcepto.ClaveProdServ = "10122102";
-                oConcepto.Cantidad = 1;
-                oConcepto.ClaveUnidad = "C81";
-                oConcepto.Descripcion = "Concepto de prueba SAT 3.3";
-                oConcepto.ValorUnitario = 10m;
-                oConcepto.Descuento = 1;
-                lstConceptos.Add(oConcepto);
+
+                foreach (var Concepto in Factura.Conceptos)
+                {
+                    oConcepto.Importe = Concepto.PrecioUnitario;
+                    oConcepto.ClaveProdServ = Concepto.ClaveProductoDB;
+                    oConcepto.Cantidad = Concepto.Cantidad;
+                    oConcepto.ClaveUnidad = Concepto.ClaveUnidadDB;
+                    oConcepto.Descripcion = Concepto.Descripcion;
+                    oConcepto.ValorUnitario = Concepto.PrecioUnitario;
+                    oConcepto.Descuento = Concepto.Descuento.Value;
+                    lstConceptos.Add(oConcepto);
+                }
                 oComprobante.Conceptos = lstConceptos.ToArray();
+
+                //ComprobanteConcepto oConcepto = new ComprobanteConcepto();
+                //oConcepto.Importe = 10m;
+                //oConcepto.ClaveProdServ = "10122102";
+                //oConcepto.Cantidad = 1;
+                //oConcepto.ClaveUnidad = "C81";
+                //oConcepto.Descripcion = "Concepto de prueba SAT 3.3";
+                //oConcepto.ValorUnitario = 10m;
+                //oConcepto.Descuento = 1;
+                //lstConceptos.Add(oConcepto);
+                //oComprobante.Conceptos = lstConceptos.ToArray();
 
                 this.CreateXML(oComprobante, pathXML);
 
@@ -363,9 +378,9 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
 
             oAuxSQLModel.Conexion = Conexion;
 
-            ViewBag.ListaFormaPago = oComboDatos.ListaFormaPagoDetalle(oAuxSQLModel);
-            ViewBag.ListaMetodoPago = oComboDatos.ListaMetodoPagoDetalle(oAuxSQLModel);
-            ViewBag.ListaMoneda = oComboDatos.ListaMonedaDetalle(oAuxSQLModel);
+            //ViewBag.ListaFormaPago = oComboDatos.ListaFormaPagoDetalle(oAuxSQLModel);
+            //ViewBag.ListaMetodoPago = oComboDatos.ListaMetodoPagoDetalle(oAuxSQLModel);
+            //ViewBag.ListaMoneda = oComboDatos.ListaMonedaDetalle(oAuxSQLModel);
             /*
              * El RFC se divide en 2, personas fisicas y morales, la diferencia:
              * Morales: Se compone de 3 letras seguidas por 6 dígitos y 3 caracteres alfanumericos = 12
