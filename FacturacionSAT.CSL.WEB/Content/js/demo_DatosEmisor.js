@@ -13,9 +13,7 @@
                     $("#" + row).hide("slow", function () {
                         box.find(".mb-control-yes").prop('onclick', null).off('click');
                         $("#" + row).remove();
-                        //location.reload(true);
-                        console.log(result);
-                        //if(result == 'true')
+                        location.reload(true);
                         Mensaje("Registro Eliminado Correctamente", "1");
                     });
                 }

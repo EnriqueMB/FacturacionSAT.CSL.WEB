@@ -68,7 +68,7 @@ namespace FacturacionSAT.CSL.WEB.Models
 
         private string _IDCFDIRegimenFiscalDetalle;
         [Required(AllowEmptyStrings = false, ErrorMessage = "Seleccione un regimen fiscal.")]
-        public string IDCFDIReqgimenFiscalDetalle
+        public string IDCFDIRegimenFiscalDetalle
         {
             get { return _IDCFDIRegimenFiscalDetalle; }
             set { _IDCFDIRegimenFiscalDetalle = value; }
