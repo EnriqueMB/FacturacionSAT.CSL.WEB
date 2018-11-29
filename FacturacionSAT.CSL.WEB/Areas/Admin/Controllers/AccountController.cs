@@ -52,68 +52,66 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
         public ActionResult Index(UsuarioModels model, string returnUrl)
         {
-            FormsAuthentication.SetAuthCookie("1", model.RememberMe);
-            return RedirectToAction("Index", "HomeAdmin", new { Area = "Admin" });
-            //UsuarioDatos DatosU = new UsuarioDatos();
-            //model.Conexion = Conexion;
-            //model = DatosU.ValidarUsuario(model);
-            //if (model.Opcion == 1)
-            //{
-            //    FormsAuthentication.SignOut();
-            //    if (model.Id_TipoUsuario != 3)
-            //    {
-            //        int TipoUsario = DatosU.ObtenerTipoUsuarioByUserName(model);
-            //        System.Web.HttpContext.Current.Session["SessionTipoUsuario"] = TipoUsario;
-            //        model.Id_TipoUsuario = TipoUsario;
-            //    }
-            //    FormsAuthentication.SetAuthCookie(model.Id_Usuario.ToString(), model.RememberMe);
-            //    HttpCookie authCookie = FormsAuthentication.GetAuthCookie(model.Id_Usuario.ToString(), model.RememberMe);
-            //    FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(authCookie.Value);
-            //    if (model.Id_TipoUsuario == 3)
-            //    {
-            //        return RedirectToAction("Index", "HomeAdmin", new { Area = "Admin" });
-            //    }
-            //    else
-            //    {
-            //        ModelState.AddModelError("", "El usuario no tiene permiso para entrar el sistema facturación");
-            //        Session.Abandon();
-            //        Session.Clear();
-            //        Session.RemoveAll();
-            //        return View(model);
-            //    }
-            //}
-            //else if (model.Opcion == 4)
-            //{
-            //    ModelState.AddModelError("", "El usuario tiene que ser de tipo. Administrador");
-            //    Session.Abandon();
-            //    Session.Clear();
-            //    Session.RemoveAll();
-            //    return View(model);
-            //}
-            //else if (model.Opcion == 2)
-            //{
-            //    ModelState.AddModelError("", "Usuario no existe");
-            //    Session.Abandon();
-            //    Session.Clear();
-            //    Session.RemoveAll();
-            //    return View(model);
-            //}
-            //else if (model.Opcion == 9)
-            //{
-            //    ModelState.AddModelError("", "El password es incorrecto");
-            //    Session.Abandon();
-            //    Session.Clear();
-            //    Session.RemoveAll();
-            //    return View(model);
-            //}
-            //else
-            //{
-            //    ModelState.AddModelError("", "Contacte a soporte técnico.");
-            //    Session.Abandon();
-            //    Session.Clear();
-            //    Session.RemoveAll();
-            //    return View(model);
-            //}
+            UsuarioDatos DatosU = new UsuarioDatos();
+            model.Conexion = Conexion;
+            model = DatosU.ValidarUsuario(model);
+            if (model.Opcion == 1)
+            {
+                FormsAuthentication.SignOut();
+                if (model.Id_TipoUsuario != 3)
+                {
+                    int TipoUsario = DatosU.ObtenerTipoUsuarioByUserName(model);
+                    System.Web.HttpContext.Current.Session["SessionTipoUsuario"] = TipoUsario;
+                    model.Id_TipoUsuario = TipoUsario;
+                }
+                FormsAuthentication.SetAuthCookie(model.Id_Usuario.ToString(), model.RememberMe);
+                HttpCookie authCookie = FormsAuthentication.GetAuthCookie(model.Id_Usuario.ToString(), model.RememberMe);
+                FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(authCookie.Value);
+                if (model.Id_TipoUsuario == 3)
+                {
+                    return RedirectToAction("Index", "HomeAdmin", new { Area = "Admin" });
+                }
+                else
+                {
+                    ModelState.AddModelError("", "El usuario no tiene permiso para entrar el sistema facturación");
+                    Session.Abandon();
+                    Session.Clear();
+                    Session.RemoveAll();
+                    return View(model);
+                }
+            }
+            else if (model.Opcion == 4)
+            {
+                ModelState.AddModelError("", "El usuario tiene que ser de tipo. Administrador");
+                Session.Abandon();
+                Session.Clear();
+                Session.RemoveAll();
+                return View(model);
+            }
+            else if (model.Opcion == 2)
+            {
+                ModelState.AddModelError("", "Usuario no existe");
+                Session.Abandon();
+                Session.Clear();
+                Session.RemoveAll();
+                return View(model);
+            }
+            else if (model.Opcion == 9)
+            {
+                ModelState.AddModelError("", "El password es incorrecto");
+                Session.Abandon();
+                Session.Clear();
+                Session.RemoveAll();
+                return View(model);
+            }
+            else
+            {
+                ModelState.AddModelError("", "Contacte a soporte técnico.");
+                Session.Abandon();
+                Session.Clear();
+                Session.RemoveAll();
+                return View(model);
+            }
         }
 
         // GET: /Account/LogOff

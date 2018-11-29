@@ -55,7 +55,7 @@
                 },
                 ignore: "",
                 rules: {
-                    IDCFDITIpoPersona: { required: true },
+                    IDCFDITipoPersona: { required: true },
                     IDCFDIRegimenFiscalDetalle: { required: true },
                     RazonSocial: { required: true },
                     RFC: { required: true, rfc: true },
@@ -69,7 +69,7 @@
                     CodigoPostal: { required: true }
                 },
                 messages: {
-                    IDCFDITIpoPersona: { required: "Seleccione un tipo de persona" },
+                    IDCFDITipoPersona: { required: "Seleccione un tipo de persona" },
                     IDCFDIRegimenFiscalDetalle: { required: "Seleccione un regimen fiscal" },
                     RazonSocial: { required: "Ingrese la razón social del emisor" },
                     RFC: { required: "Ingrese el RFC del emisor", rfc: "Revise el formato de RFC es incorrecto XAXX010101000 " },
@@ -134,7 +134,7 @@
                 },
                 ignore: "",
                 rules: {
-                    IDCFDITIpoPersona: { required: true },
+                    IDCFDITipoPersona: { required: true },
                     IDCFDIRegimenFiscalDetalle: { required: true },
                     RazonSocial: { required: true },
                     RFC: { required: true, rfc: true },
@@ -144,7 +144,7 @@
                     CodigoPostal: { required: true }
                 },
                 messages: {
-                    IDCFDITIpoPersona: { required: "Seleccione un tipo de persona" },
+                    IDCFDITipoPersona: { required: "Seleccione un tipo de persona" },
                     IDCFDIRegimenFiscalDetalle: { required: "Seleccione un regimen fiscal" },
                     RazonSocial: { required: "Ingrese la razón social del emisor" },
                     RFC: { required: "Ingrese el RFC del emisor", rfc: "Revise el formato de RFC es incorrecto XAXX010101000 " },

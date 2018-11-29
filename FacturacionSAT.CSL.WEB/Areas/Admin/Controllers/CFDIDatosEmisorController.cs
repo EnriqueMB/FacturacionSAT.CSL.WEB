@@ -157,6 +157,7 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
         {
             try
             {
+                Token.SaveToken();
                 CFDIDatosEmisorModels DatosEmisor = new CFDIDatosEmisorModels();
                 CFDIDatosEmisorDatos Datos = new CFDIDatosEmisorDatos();
                 DatosEmisor.Conexion = Conexion;
@@ -236,6 +237,7 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
                             else
                             {
                                 DatosAux.ListaTipoPersona = Datos.ListaPersonaCMB(DatosAux);
+                                DatosAux.ListaRegimenFiscalDetalle = Datos.ListaRegimenFiscalDetalle(DatosAux);
                                 TempData["typemessage"] = "2";
                                 TempData["message"] = "Ocurrio un error al intentar guardar las los archivo con las extenciones. CER, KEY, IMG";
                                 return View(DatosAux);
@@ -243,16 +245,27 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
                         }
                         else
                         {
-                            DatosAux.ListaTipoPersona = Datos.ListaPersonaCMB(DatosAux);
-                            TempData["typemessage"] = "2";
-                            TempData["message"] = "Ocurrio un error al intentar guardar los datos.";
-                            return View(DatosAux);
+                            if (DatosAux.Resultado == 1)
+                            {
+                                TempData["typemessage"] = "2";
+                                TempData["message"] = "Ocurrio un error al intentar modificar el regitro. Por default el predeterminado tiene que estar activo.";
+                                return RedirectToAction("Index"); 
+                            }
+                            else
+                            {
+                                DatosAux.ListaTipoPersona = Datos.ListaPersonaCMB(DatosAux);
+                                DatosAux.ListaRegimenFiscalDetalle = Datos.ListaRegimenFiscalDetalle(DatosAux);
+                                TempData["typemessage"] = "2";
+                                TempData["message"] = "Ocurrio un error al intentar guardar los datos.";
+                                return View(DatosAux);
+                            }
                         }
                     }
                     else
                     {
                         DatosAux.Conexion = Conexion;
                         DatosAux.ListaTipoPersona = Datos.ListaPersonaCMB(DatosAux);
+                        DatosAux.ListaRegimenFiscalDetalle = Datos.ListaRegimenFiscalDetalle(DatosAux);
                         return View(DatosAux);
                     }
                 }
