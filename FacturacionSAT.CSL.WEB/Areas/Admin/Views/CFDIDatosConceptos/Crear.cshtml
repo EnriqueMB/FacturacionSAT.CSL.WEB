@@ -48,110 +48,120 @@
             <div class="panel-body">
 
                 <div class="col-md-12">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="col-md-12 col-xs-12 control-label text-center">Clave producto</label>
-                            <div class="col-md-12 col-xs-12">
-                                @Html.TextBoxFor(m => m.CFDI_Claveproducto.Descripcion, "", new { @class = "form-control", @readonly = "true" })
-                                @Html.HiddenFor(m => m.CFDI_Claveproducto.Id_cfdiClaveProdServDetalle)
-                                <span class="input-group-btn">
-                                    <button id="btnClaveProducto" class="btn btn-default" type="button">Seleccionar</button>
-                                </span>
-                                <span class="help-block">Seleccione una clave producto</span>
-                                @Html.ValidationMessageFor(model => model.CFDI_Claveproducto.Id_cfdiClaveProdServDetalle)
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="col-md-12 col-xs-12 control-label text-center">Clave Unidad</label>
-                            <div class="col-md-12 col-xs-12">
-                                @Html.TextBoxFor(m => m.CFDI_ClaveUnidad.Nombre, "", new { @class = "form-control", @readonly = "true" })
-                                @Html.HiddenFor(m => m.CFDI_ClaveUnidad.Id_cfdiClaveUnidadDetalle)
-                                <span class="input-group-btn">
-                                    <button id="btnClaveUnidad" class="btn btn-default" type="button">Seleccionar</button>
-                                </span>
-                                <span class="help-block">Seleccione una clave unidad</span>
-                                @Html.ValidationMessageFor(model => model.CFDI_ClaveUnidad.Id_cfdiClaveUnidadDetalle)
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="col-md-12 col-xs-12 control-label text-center">CFDI Tipo Producto</label>
-                            <div class="col-md-12 col-xs-12">
-                                @Html.TextBoxFor(m => m.CFDI_TipoProducto.TipoProducto, "", new { @class = "form-control", @readonly = "true" })
-                                @Html.HiddenFor(m => m.CFDI_TipoProducto.Id_cfdiTipoProducto)
-                                <span class="input-group-btn">
-                                    <button id="btnTipoProducto" class="btn btn-default" type="button">Seleccionar</button>
-                                </span>
-                                <span class="help-block">Seleccione un tipo producto</span>
-                                @Html.ValidationMessageFor(model => model.CFDI_TipoProducto.Id_cfdiTipoProducto)
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="col-md-12 col-xs-12 control-label text-center">CFDI Division</label>
-                            <div class="col-md-12 col-xs-12">
-                                @Html.TextBoxFor(m => m.CFDI_ClaveDivision.Division, "", new { @class = "form-control", @readonly = "true" })
-                                @Html.HiddenFor(m => m.CFDI_ClaveDivision.Id_cfdiDivision)
-                                <span class="input-group-btn">
-                                    <button id="btnClaveDivision" class="btn btn-default" type="button">Seleccionar</button>
-                                </span>
-                                <span class="help-block">Seleccione una division</span>
-                                @Html.ValidationMessageFor(model => model.CFDI_ClaveDivision.Id_cfdiDivision)
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="col-md-12 col-xs-12 control-label text-center">CFDI Grupo</label>
-                            <div class="col-md-12 col-xs-12">
-                                @Html.TextBoxFor(m => m.CFDI_Grupo.Grupo, "", new { @class = "form-control", @readonly = "true" })
-                                @Html.HiddenFor(m => m.CFDI_Grupo.Id_cfdiGrupo)
-                                <span class="input-group-btn">
-                                    <button id="btnClaveGrupo" class="btn btn-default" type="button">Seleccionar</button>
-                                </span>
-                                <span class="help-block">Seleccione un grupo</span>
-                                @Html.ValidationMessageFor(model => model.CFDI_Grupo.Id_cfdiGrupo)
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="col-md-12 col-xs-12 control-label text-center">CFDI Clase</label>
-                            <div class="col-md-12 col-xs-12">
-                                @Html.TextBoxFor(m => m.CFDI_Clase.clase, "", new { @class = "form-control", @readonly = "true" })
-                                @Html.HiddenFor(m => m.CFDI_Clase.Id_CfdiClase)
-                                <span class="input-group-btn">
-                                    <button id="btnClaveClase" class="btn btn-default" type="button">Seleccionar</button>
-                                </span>
-                                <span class="help-block">Seleccione una clase</span>
-                                @Html.ValidationMessageFor(model => model.CFDI_Clase.Id_CfdiClase)
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="col-md-12 control-label text-center">Descripcion</label>
-                            <div class="col-md-12 col-xs-12">
-                                <div class="input-group">
-                                    <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
-                                    @Html.TextBoxFor(model => model.Descripcion, new { id = "Descripcion", @class = "form-control" })
-                                    @Html.ValidationMessageFor(model => model.Descripcion)
+                    <div class="col-md-12">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-md-12 col-xs-12 control-label text-center">Clave producto</label>
+                                <div class="col-md-12 col-xs-12">
+                                    @Html.TextBoxFor(m => m.CFDI_Claveproducto.Descripcion, "", new { @class = "form-control", @readonly = "true" })
+                                    @Html.HiddenFor(m => m.CFDI_Claveproducto.Id_cfdiClaveProdServDetalle)
+                                    <span class="input-group-btn">
+                                        <button id="btnClaveProducto" class="btn btn-default" type="button">Seleccionar</button>
+                                    </span>
+                                    <span class="help-block">Seleccione una clave producto</span>
+                                    @Html.ValidationMessageFor(model => model.CFDI_Claveproducto.Id_cfdiClaveProdServDetalle)
                                 </div>
-                                <span class="help-block">Ingrese una descripcion</span>
-
                             </div>
-
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-md-12 col-xs-12 control-label text-center">Clave Unidad</label>
+                                <div class="col-md-12 col-xs-12">
+                                    @Html.TextBoxFor(m => m.CFDI_ClaveUnidad.Nombre, "", new { @class = "form-control", @readonly = "true"})
+                                    @Html.HiddenFor(m => m.CFDI_ClaveUnidad.Id_cfdiClaveUnidadDetalle)
+                                    <span class="input-group-btn">
+                                        <button id="btnClaveUnidad" class="btn btn-default" type="button">Seleccionar</button>
+                                    </span>
+                                    <span class="help-block">Seleccione una clave unidad</span>
+                                    @Html.ValidationMessageFor(model => model.CFDI_ClaveUnidad.Id_cfdiClaveUnidadDetalle)
+                                </div>
+                            </div>
                         </div>
                     </div>
-
+                    <div class="col-md-12">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-md-12 col-xs-12 control-label text-center">CFDI Tipo Producto</label>
+                                <div class="col-md-12 col-xs-12">
+                                    @Html.TextBoxFor(m => m.CFDI_TipoProducto.TipoProducto, "", new { @class = "form-control", @readonly = "true" })
+                                    @Html.HiddenFor(m => m.CFDI_TipoProducto.Id_cfdiTipoProducto)
+                                    <span class="input-group-btn">
+                                        <button id="btnTipoProducto" class="btn btn-default" type="button">Seleccionar</button>
+                                    </span>
+                                    <span class="help-block">Seleccione un tipo producto</span>
+                                    @Html.ValidationMessageFor(model => model.CFDI_TipoProducto.Id_cfdiTipoProducto)
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-md-12 col-xs-12 control-label text-center">CFDI Division</label>
+                                <div class="col-md-12 col-xs-12">
+                                    @Html.TextBoxFor(m => m.CFDI_ClaveDivision.Division, "", new { @class = "form-control", @readonly = "true" })
+                                    @Html.HiddenFor(m => m.CFDI_ClaveDivision.Id_cfdiDivision)
+                                    <span class="input-group-btn">
+                                        <button id="btnClaveDivision" class="btn btn-default" type="button">Seleccionar</button>
+                                    </span>
+                                    <span class="help-block">Seleccione una division</span>
+                                    @Html.ValidationMessageFor(model => model.CFDI_ClaveDivision.Id_cfdiDivision)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-md-12 col-xs-12 control-label text-center">CFDI Grupo</label>
+                                <div class="col-md-12 col-xs-12">
+                                    @Html.TextBoxFor(m => m.CFDI_Grupo.Grupo, "", new { @class = "form-control", @readonly = "true" })
+                                    @Html.HiddenFor(m => m.CFDI_Grupo.Id_cfdiGrupo)
+                                    <span class="input-group-btn">
+                                        <button id="btnClaveGrupo" class="btn btn-default" type="button">Seleccionar</button>
+                                    </span>
+                                    <span class="help-block">Seleccione un grupo</span>
+                                    @Html.ValidationMessageFor(model => model.CFDI_Grupo.Id_cfdiGrupo)
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-md-12 col-xs-12 control-label text-center">CFDI Clase</label>
+                                <div class="col-md-12 col-xs-12">
+                                    @Html.TextBoxFor(m => m.CFDI_Clase.clase, "", new { @class = "form-control", @readonly = "true" })
+                                    @Html.HiddenFor(m => m.CFDI_Clase.Id_CfdiClase)
+                                    <span class="input-group-btn">
+                                        <button id="btnClaveClase" class="btn btn-default" type="button">Seleccionar</button>
+                                    </span>
+                                    <span class="help-block">Seleccione una clase</span>
+                                    @Html.ValidationMessageFor(model => model.CFDI_Clase.Id_CfdiClase)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-md-12 control-label text-center">Descripcion</label>
+                                <div class="col-md-12 col-xs-12">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
+                                        @Html.TextBoxFor(model => model.Descripcion, new { id = "Descripcion", @class = "form-control" })
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.Descripcion)
+                                    <span class="help-block">Ingrese una descripcion</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-md-6 control-label"><strong>¿Es Predeterminado?</strong></label>
+                                <div class="text-center col-md-9">
+                                    @Html.CheckBoxFor(model => model.Predeterminado)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-
             </div>
             <div class="panel-footer">
                 <input type="submit" value="Guardar" class="btn btn-primary pull-right">
@@ -184,7 +194,7 @@
 
         </div>
     </div>
-   
+
     <div id="ModalClaveGrupo" class="modal fade" role="dialog" style="display:none" aria-hidden="true">
         <div class="modal-dialog modal-lg" id="ContenidoClaveGrupo">
 
@@ -208,12 +218,12 @@
     <script type="text/javascript" src="@Url.Content("~/Content/js/mensajeDeError.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Content/js/plugins/jquery-validation/jquery.validate.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Content/js/validaciones/additionals.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/js/ConceptoDatos.js")"></script>
     @*<script type="text/javascript" src="@Url.Content("~/Content/js/Usuario.js")"></script>*@
-
     <script>
         jQuery(document).ready(function () {
             Mensaje(message, typemessage);
-            //Usuario.init();
+            ConceptoDatos.init();
             //Modal
             $('#btnClaveUnidad').on('click', function () {
                 $("body").css("cursor", "progress");

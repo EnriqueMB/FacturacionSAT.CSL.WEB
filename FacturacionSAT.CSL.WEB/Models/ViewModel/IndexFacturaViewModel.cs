@@ -18,8 +18,5 @@ namespace FacturacionSAT.CSL.WEB.Models.ViewModel
         [Required]
         public string CodigoBarra { get; set; }
 
-        [Display(Name = "* Emisor")]
-        [Required(AllowEmptyStrings = false)]
-        public string Id_emisor { get; set; }
     }
 }

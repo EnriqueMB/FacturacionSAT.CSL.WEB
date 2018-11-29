@@ -33,6 +33,7 @@ namespace FacturacionSAT.CSL.WEB.Models.Datos
                     Item.clase.clase = !dr.IsDBNull(dr.GetOrdinal("clase")) ? dr.GetString(dr.GetOrdinal("clase")) : string.Empty;
                     Item.CFDI_Claveproducto.Descripcion = !dr.IsDBNull(dr.GetOrdinal("claveProducto")) ? dr.GetString(dr.GetOrdinal("claveProducto")) : string.Empty;
                     Item.servicioDetalle.Nombre = !dr.IsDBNull(dr.GetOrdinal("unidad")) ? dr.GetString(dr.GetOrdinal("unidad")) : string.Empty;
+                    Item.Predeterminado = !dr.IsDBNull(dr.GetOrdinal("predeterminado")) ? dr.GetBoolean(dr.GetOrdinal("predeterminado")) : false;
                     //Item.Id_cfdiClaveUnidad = !dr.IsDBNull(dr.GetOrdinal("id_cfdiClaveUnidad")) ? dr.GetString(dr.GetOrdinal("id_cfdiClaveUnidad")) : string.Empty;
                     //Item.Id_usuario = !dr.IsDBNull(dr.GetOrdinal("id_usuario")) ? dr.GetString(dr.GetOrdinal("id_usuario")) : string.Empty;
 
@@ -57,7 +58,7 @@ namespace FacturacionSAT.CSL.WEB.Models.Datos
                 {
                   datos.Opcion, datos.Id_cfdiDatosConceptos, datos.Descripcion, datos.CFDI_TipoProducto.Id_cfdiTipoProducto,
                   datos.CFDI_ClaveDivision.Id_cfdiDivision, datos.CFDI_Grupo.Id_cfdiGrupo, datos.CFDI_Clase.Id_CfdiClase, datos.CFDI_Claveproducto.Id_cfdiClaveProdServDetalle,
-                  datos.CFDI_ClaveUnidad.Id_cfdiClaveUnidadDetalle, datos.Id_usuario
+                  datos.CFDI_ClaveUnidad.Id_cfdiClaveUnidadDetalle, datos.Predeterminado, datos.Id_usuario
                 };
                 object aux = SqlHelper.ExecuteScalar(datos.Conexion, "dbo.abc_CFDIDatosConceptos", parametros);
                 datos.Id_cfdiDatosConceptos = aux.ToString();
@@ -101,6 +102,7 @@ namespace FacturacionSAT.CSL.WEB.Models.Datos
                     datos.CFDI_ClaveUnidad.Nombre = !dr.IsDBNull(dr.GetOrdinal("nombreClaveUnidad")) ? dr.GetString(dr.GetOrdinal("nombreClaveUnidad")) : string.Empty; 
                     datos.CFDI_Claveproducto.Id_cfdiClaveProdServDetalle = !dr.IsDBNull(dr.GetOrdinal("claveProducto")) ? dr.GetString(dr.GetOrdinal("claveProducto")) : string.Empty;
                     datos.CFDI_Claveproducto.Descripcion = !dr.IsDBNull(dr.GetOrdinal("claveProduct")) ? dr.GetString(dr.GetOrdinal("claveProduct")) : string.Empty;
+                    datos.Predeterminado = !dr.IsDBNull(dr.GetOrdinal("predeterminado")) ? dr.GetBoolean(dr.GetOrdinal("predeterminado")) : false;
 
                 }
                 dr.Close();

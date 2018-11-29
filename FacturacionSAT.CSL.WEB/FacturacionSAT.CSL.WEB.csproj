@@ -399,12 +399,14 @@
     <Content Include="Content\js\Bancos.js" />
     <Content Include="Content\js\CalAlmacen.js" />
     <Content Include="Content\js\Canvas.js" />
+    <Content Include="Content\js\ConceptoDatos.js" />
     <Content Include="Content\js\DatosEmisor.js" />
     <Content Include="Content\js\DatosPac.js" />
     <Content Include="Content\js\demo_charts_morris.js" />
     <Content Include="Content\js\demo_charts_nvd3.js" />
     <Content Include="Content\js\demo_charts_rickshaw.js" />
     <Content Include="Content\js\demo_dashboard.js" />
+    <Content Include="Content\js\demo_DatosConcepto.js" />
     <Content Include="Content\js\demo_DatosEmisor.js" />
     <Content Include="Content\js\demo_DatosPac.js" />
     <Content Include="Content\js\demo_icons.js" />
@@ -998,7 +1000,6 @@
     <Content Include="Content\themes\smoothness\jquery.ui.tabs.css" />
     <Content Include="Content\themes\smoothness\jquery.ui.theme.css" />
     <Content Include="Global.asax" />
-    <Content Include="SATTempXML\Factura-2018-11-26_05-41-45-p.m..xml" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
@@ -1105,6 +1106,7 @@
     <Compile Include="Areas\Admin\Controllers\HomeAdminController.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Filters\AutorizadoAttribute.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -1138,6 +1140,25 @@
     <Compile Include="Models\Datos\UsuarioDatos.cs" />
     <Compile Include="Models\Error.cs" />
     <Compile Include="Models\UsuarioModels.cs" />
+    <Compile Include="Models\Validaciones\ClabeInterbancariaAttribute.cs" />
+    <Compile Include="Models\Validaciones\CombosIntAttribute.cs" />
+    <Compile Include="Models\Validaciones\CorreoAttribute.cs" />
+    <Compile Include="Models\Validaciones\DecimalMayor0Attribute.cs" />
+    <Compile Include="Models\Validaciones\DescripcionAttribute.cs" />
+    <Compile Include="Models\Validaciones\DireccionAttribute.cs" />
+    <Compile Include="Models\Validaciones\IFEAttribute.cs" />
+    <Compile Include="Models\Validaciones\NombreAttribute.cs" />
+    <Compile Include="Models\Validaciones\NumeroCuentaAttribute.cs" />
+    <Compile Include="Models\Validaciones\PesoAttribute.cs" />
+    <Compile Include="Models\Validaciones\PlacasAttribute.cs" />
+    <Compile Include="Models\Validaciones\PrecioAttribute.cs" />
+    <Compile Include="Models\Validaciones\RFCAttribute.cs" />
+    <Compile Include="Models\Validaciones\SAT_BaseAttribute.cs" />
+    <Compile Include="Models\Validaciones\SAT_TasaCuotaAttribute.cs" />
+    <Compile Include="Models\Validaciones\TarjetaCreditoAttribute.cs" />
+    <Compile Include="Models\Validaciones\TelefonoAttribute.cs" />
+    <Compile Include="Models\Validaciones\TestAttribute.cs" />
+    <Compile Include="Models\Validaciones\TextoAttribute.cs" />
     <Compile Include="Models\ViewModel\FacturaViewModel.cs" />
     <Compile Include="Models\ViewModel\IndexFacturaViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -1209,6 +1230,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Areas\Admin\Views\Json\" />
+    <Folder Include="SATTempXML\" />
     <Folder Include="SAT\SAT1\" />
   </ItemGroup>
   <ItemGroup>

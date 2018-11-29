@@ -38,15 +38,14 @@
                             <img src="http://www.viajesaury.com/images/logo.png" alt="Viajes Aury" />
                         </div>
                         <div class="profile-data">
-                            <div class="profile-data-name">VIAJES AURY FACTURACIÓN</div>
-                            @*@{
-                        HttpContext context = HttpContext.Current;
-                        if (context != null && context.Session != null)
-                        {
-                            string NombreUsuario = (string)HttpContext.Current.Session["NombreUsuario"];
-                            <div class="profile-data-name">@NombreUsuario</div>
-                        }
-                    }*@
+                            @{
+                                HttpContext context = HttpContext.Current;
+                                if (context != null && context.Session != null)
+                                {
+                                    string NombreUsuario = (string)HttpContext.Current.Session["NombreUsuario"];
+                                    <div class="profile-data-name">@NombreUsuario</div>
+                                }
+                            }
                         </div>
                         @*<div class="profile-controls">
                     <a href="pages-profile.html" class="profile-control-left"><span class="fa fa-info"></span></a>
@@ -55,6 +54,9 @@
                     </div>
                 </li>
                 <li class="xn-title">Menu</li>
+                <li>
+                    <a href="@Url.Action("Index","AdminFactura")"><span class="fa fa-desktop"></span> <span class="xn-text">FACTURA</span></a>
+                </li>
                 <li>
                     <a href="@Url.Action("Index","CFDIDatosPac")"><span class="fa fa-desktop"></span> <span class="xn-text">PAC</span></a>
                 </li>

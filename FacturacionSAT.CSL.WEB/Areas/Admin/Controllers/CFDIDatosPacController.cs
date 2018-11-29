@@ -7,9 +7,11 @@ using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using FacturacionSAT.CSL.WEB.Filters;
 
 namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
 {
+    [Autorizado]
     public class CFDIDatosPacController : Controller
     {
         private TokenProcessor Token = TokenProcessor.GetInstance();
