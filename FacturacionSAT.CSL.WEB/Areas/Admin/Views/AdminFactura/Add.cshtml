@@ -21,6 +21,8 @@
     <div class="col-md-12">
         <div class="panel panel-default tabs">
             <form action="@Url.Content("~/Admin/AdminFactura/Add")" method="post">
+                @Html.HiddenFor(m=>m.Moneda)
+
                 <!-- Nav tabs -->
                 <ul class="nav nav-tabs" role="tablist">
                     <li role="presentation" class="active">

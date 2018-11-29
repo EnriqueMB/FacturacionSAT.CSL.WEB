@@ -42,6 +42,8 @@ namespace FacturacionSAT.CSL.WEB.Models.ViewModel
         public string sRegimenFiscal { get; set; }
 
         public string UUID { get; set; }
+        public string Version { get; set; }
+        
 
         [Display(Name = "Condiciones de pago")]
         [StringLength(1000, ErrorMessage = "Las condiciones de pago no pueden superar los 1000 caracteres", MinimumLength = 1)]

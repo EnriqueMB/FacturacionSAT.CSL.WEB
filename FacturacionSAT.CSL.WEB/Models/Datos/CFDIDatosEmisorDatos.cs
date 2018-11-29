@@ -165,5 +165,43 @@ namespace FacturacionSAT.CSL.WEB.Models.Datos
                 throw;
             }
         }
+
+        public CFDIDatosEmisorModels ObtenerDatosEmisorPredeterminado(AuxSQLModel oAuxSQLModel)
+        {
+            try
+            {
+                CFDIDatosEmisorModels item = new CFDIDatosEmisorModels();
+                SqlDataReader dr = null;
+                dr = SqlHelper.ExecuteReader(oAuxSQLModel.Conexion, "[dbo].[spCSLDB_CFDIDatosEmisor_get_EmisorPredeterminado]");
+                while (dr.Read())
+                {
+                    item.IDCFDIDatosEmisor = !dr.IsDBNull(dr.GetOrdinal("id_cfdiDatosEmisor")) ? dr.GetString(dr.GetOrdinal("id_cfdiDatosEmisor")) : string.Empty;
+                    item.IDCFDITipoPersona = !dr.IsDBNull(dr.GetOrdinal("id_cfdiTipoPersona")) ? dr.GetString(dr.GetOrdinal("id_cfdiTipoPersona")) : string.Empty;
+                    item.CFDITipoPersona.TipoPersona = !dr.IsDBNull(dr.GetOrdinal("tipoPersona")) ? dr.GetString(dr.GetOrdinal("tipoPersona")) : string.Empty;
+                    item.RazonSocial = !dr.IsDBNull(dr.GetOrdinal("razonSocial")) ? dr.GetString(dr.GetOrdinal("razonSocial")) : string.Empty;
+                    item.RFC = !dr.IsDBNull(dr.GetOrdinal("rfc")) ? dr.GetString(dr.GetOrdinal("rfc")) : string.Empty;
+                    item.IDCFDIReqgimenFiscalDetalle = !dr.IsDBNull(dr.GetOrdinal("id_cfdiRegimenFiscalDetalle")) ? dr.GetString(dr.GetOrdinal("id_cfdiRegimenFiscalDetalle")) : string.Empty;
+                    item.CFDIRegimenFiscalDetalle.C_RegimenFiscal = !dr.IsDBNull(dr.GetOrdinal("regimenFiscalDetalle")) ? dr.GetString(dr.GetOrdinal("regimenFiscalDetalle")) : string.Empty;
+                    item.CFDIRegimenFiscalDetalle.Descripcion = !dr.IsDBNull(dr.GetOrdinal("regimenFiscalDetalleFULL")) ? dr.GetString(dr.GetOrdinal("regimenFiscalDetalleFULL")) : string.Empty;
+                    item.Direccion = !dr.IsDBNull(dr.GetOrdinal("direccion")) ? dr.GetString(dr.GetOrdinal("direccion")) : string.Empty;
+                    item.CodigoPostal = !dr.IsDBNull(dr.GetOrdinal("codigoPostal")) ? dr.GetString(dr.GetOrdinal("codigoPostal")) : string.Empty;
+                    item.Predeterminado = !dr.IsDBNull(dr.GetOrdinal("predeterminada")) ? dr.GetBoolean(dr.GetOrdinal("predeterminada")) : false;
+                    item.Correo = !dr.IsDBNull(dr.GetOrdinal("correo")) ? dr.GetString(dr.GetOrdinal("correo")) : string.Empty;
+                    item.URLArchivoCER = !dr.IsDBNull(dr.GetOrdinal("urlArchivoCER")) ? dr.GetString(dr.GetOrdinal("urlArchivoCER")) : string.Empty;
+                    item.URLArchivoKEY = !dr.IsDBNull(dr.GetOrdinal("urlArchivoKEY")) ? dr.GetString(dr.GetOrdinal("urlArchivoKEY")) : string.Empty;
+                    item.PasswordArchivoKEY = !dr.IsDBNull(dr.GetOrdinal("PasswordArchivoKEY")) ? dr.GetString(dr.GetOrdinal("PasswordArchivoKEY")) : string.Empty;
+                    item.Password = !dr.IsDBNull(dr.GetOrdinal("passwordCorreo")) ? dr.GetString(dr.GetOrdinal("passwordCorreo")) : string.Empty;
+                    item.Imagen = !dr.IsDBNull(dr.GetOrdinal("imagen")) ? dr.GetString(dr.GetOrdinal("imagen")) : string.Empty;
+                    break;
+                }
+                dr.Close();
+                return item;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

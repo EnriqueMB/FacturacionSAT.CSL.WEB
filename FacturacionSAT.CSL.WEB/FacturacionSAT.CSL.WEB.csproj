@@ -994,7 +994,6 @@
     <Content Include="Content\themes\smoothness\jquery.ui.tabs.css" />
     <Content Include="Content\themes\smoothness\jquery.ui.theme.css" />
     <Content Include="Global.asax" />
-    <Content Include="SATTempXML\Factura-2018-11-26_05-41-45-p.m..xml" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
@@ -1201,6 +1200,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Areas\Admin\Views\Json\" />
+    <Folder Include="SATTempXML\" />
     <Folder Include="SAT\SAT1\" />
   </ItemGroup>
   <ItemGroup>

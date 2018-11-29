@@ -11,5 +11,11 @@ namespace FacturacionSAT.CSL.WEB.Models
         public string Id_usuario { get; set; }
         public bool Success { get; set; }
         public string Mensaje { get; set; }
+
+        public void ResetValuesSQL()
+        {
+            this.Success = false;
+            this.Mensaje = string.Empty;
+        }
     }
 }
