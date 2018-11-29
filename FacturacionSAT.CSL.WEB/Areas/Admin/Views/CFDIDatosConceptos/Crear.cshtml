@@ -270,7 +270,7 @@
                             else {
                                 dtClaveUnidad.$('tr.selected').removeClass('selected');
                                 $(this).addClass('selected');
-                                $(this).focus('autofocus');
+                               
                             }
                         });
 
@@ -355,6 +355,7 @@
 
                                 $("#CFDI_Claveproducto_Descripcion").val(nombre);
                                 $("#CFDI_Claveproducto_Id_cfdiClaveProdServDetalle").val(id);
+                                $("#CFDI_Claveproducto_Descripcion").blur();
                             }
 
                         });
@@ -423,6 +424,7 @@
 
                                 $("#CFDI_TipoProducto_TipoProducto").val(nombre);
                                 $("#CFDI_TipoProducto_Id_cfdiTipoProducto").val(id);
+                                $("#CFDI_TipoProducto_TipoProducto").blur();
                             }
 
                         });
@@ -493,6 +495,8 @@
 
                                 $("#CFDI_ClaveDivision_Division").val(nombre);
                                 $("#CFDI_ClaveDivision_Id_cfdiDivision").val(id);
+                                $("#CFDI_ClaveDivision_Division").blur();
+
                             }
 
                         });
@@ -563,6 +567,8 @@
 
                                 $("#CFDI_Grupo_Grupo").val(nombre);
                                 $("#CFDI_Grupo_Id_cfdiGrupo").val(id);
+                                $("#CFDI_Grupo_Grupo").blur();
+
                             }
 
                         });
@@ -633,6 +639,8 @@
 
                                 $("#CFDI_Clase_clase").val(nombre);
                                 $("#CFDI_Clase_Id_CfdiClase").val(id);
+                                $("#CFDI_Clase_clase").blur();
+
                             }
 
                         });
