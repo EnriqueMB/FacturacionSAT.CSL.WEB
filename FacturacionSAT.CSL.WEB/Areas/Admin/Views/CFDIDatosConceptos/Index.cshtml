@@ -41,10 +41,10 @@
                         <div class="table-responsive">
                             <table class="table datatable">
                                 <thead>
-                                    <tr>                                     
+                                    <tr>
                                         <th>Descripcion</th>
-                                        <th>Tipo Producto</th>                                       
-                                        <th>Divicion</th>                                        
+                                        <th>Tipo Producto</th>
+                                        <th>Divicion</th>
                                         <th>Grupo</th>
                                         <th>Clase</th>
                                         <th>Producto</th>
@@ -54,53 +54,53 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                   @foreach (var item in Model.ListaCFDIConceptos)
+                                    @foreach (var item in Model.ListaCFDIConceptos)
                                     {
-                                    <tr id="@item.Id_cfdiDatosConceptos">
-                                        <td>@item.Descripcion</td>
-                                        <td>@item.CFDI_TipoProducto.TipoProducto</td>
-                                        <td>@item.divicion.Division</td>
-                                        <td>@item.grupo.Grupo</td>
-                                        <td>@item.clase.clase</td>
-                                        <td>@item.CFDI_Claveproducto.Descripcion</td>
-                                        <td>@item.servicioDetalle.Nombre</td>
-                                        <td>
-                                            @if (item.Predeterminado == true)
-                                            {
-                                                <span class="badge badge-warning">SI</span>
-                                            }
-                                            else
-                                            {
-                                                <span class="badge badge-danger">NO</span>
-                                            }
-                                        </td>
+                                        <tr id="@item.Id_cfdiDatosConceptos">
+                                            <td>@item.Descripcion</td>
+                                            <td>@item.CFDI_TipoProducto.TipoProducto</td>
+                                            <td>@item.divicion.Division</td>
+                                            <td>@item.grupo.Grupo</td>
+                                            <td>@item.clase.clase</td>
+                                            <td>@item.CFDI_Claveproducto.Descripcion</td>
+                                            <td>@item.servicioDetalle.Nombre</td>
+                                            <td>
+                                                @if (item.Predeterminado == true)
+                                                {
+                                                    <span class="badge badge-warning">SI</span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="badge badge-danger">NO</span>
+                                                }
+                                            </td>
 
-                                        <td style="text-align:center;">
-                                            <div class="visible-md visible-lg hidden-sm hidden-xs">
-                                                <a title="Editar" href="@Url.Action("Edit","CFDIDatosConceptos",new { id = item.Id_cfdiDatosConceptos})" class="btn btn-yellow tooltips" data-placement="top" data-original-title="Edit"><i class="fa fa-edit"></i></a>
-                                                <a title="Eliminar" id="delete-@item.Id_cfdiDatosConceptos" data-hrefa="@Url.Action("Delete", "CFDIDatosConceptos", new { id = item.Id_cfdiDatosConceptos })" onClick="delete_row('@item.Id_cfdiDatosConceptos');" class="btn btn-danger tooltips" data-placement="top" data-original-title="Eliminar"><i class="fa fa-trash-o"></i></a>
-                                            </div>
-                                            <div class="visible-xs visible-sm hidden-md hidden-lg">
-                                                <div class="btn-group">
-                                                    <a class="btn btn-danger dropdown-toggle btn-sm" data-toggle="dropdown" href="#">
-                                                        <i class="fa fa-cog"></i> <span class="caret"></span>
-                                                    </a>
-                                                    <ul role="menu" class="dropdown-menu pull-right dropdown-dark">
-                                                        <li>
-                                                            <a role="menuitem" tabindex="-1" href="@Url.Action("Edit", "CFDIDatosConceptos", new { id = item.Id_cfdiDatosConceptos})">
-                                                                <i class="fa fa-edit"></i> Editar
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a role="menuitem" tabindex="-1" id="delete-@item.Id_cfdiDatosConceptos" data-hrefa="@Url.Action("Delete", "CFDIDatosConceptos", new { id = item.Id_cfdiDatosConceptos})" onClick="delete_row('@item.Id_cfdiDatosConceptos');">
-                                                                <i class="fa fa-trash-o"></i> Eliminar
-                                                            </a>
-                                                        </li>
-                                                    </ul>
+                                            <td style="text-align:center;">
+                                                <div class="visible-md visible-lg hidden-sm hidden-xs">
+                                                    <a title="Editar" href="@Url.Action("Edit","CFDIDatosConceptos",new { id = item.Id_cfdiDatosConceptos})" class="btn btn-yellow tooltips" data-placement="top" data-original-title="Edit"><i class="fa fa-edit"></i></a>
+                                                    <a title="Eliminar" id="delete-@item.Id_cfdiDatosConceptos" data-hrefa="@Url.Action("Delete", "CFDIDatosConceptos", new { id = item.Id_cfdiDatosConceptos })" onClick="delete_row('@item.Id_cfdiDatosConceptos');" class="btn btn-danger tooltips" data-placement="top" data-original-title="Eliminar"><i class="fa fa-trash-o"></i></a>
                                                 </div>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                                <div class="visible-xs visible-sm hidden-md hidden-lg">
+                                                    <div class="btn-group">
+                                                        <a class="btn btn-danger dropdown-toggle btn-sm" data-toggle="dropdown" href="#">
+                                                            <i class="fa fa-cog"></i> <span class="caret"></span>
+                                                        </a>
+                                                        <ul role="menu" class="dropdown-menu pull-right dropdown-dark">
+                                                            <li>
+                                                                <a role="menuitem" tabindex="-1" href="@Url.Action("Edit", "CFDIDatosConceptos", new { id = item.Id_cfdiDatosConceptos})">
+                                                                    <i class="fa fa-edit"></i> Editar
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a role="menuitem" tabindex="-1" id="delete-@item.Id_cfdiDatosConceptos" data-hrefa="@Url.Action("Delete", "CFDIDatosConceptos", new { id = item.Id_cfdiDatosConceptos})" onClick="delete_row('@item.Id_cfdiDatosConceptos');">
+                                                                    <i class="fa fa-trash-o"></i> Eliminar
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
                                     }
                                 </tbody>
                             </table>
@@ -137,6 +137,7 @@
 @section script
 {
     <script type="text/javascript" src="@Url.Content("~/Content/js/demo_tables.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/js/demo_DatosConcepto.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Content/js/plugins/datatables/jquery.dataTables.min.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Content/js/mensajeDeError.js")"></script>
     <script>

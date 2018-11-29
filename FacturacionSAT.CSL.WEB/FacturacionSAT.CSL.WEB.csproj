@@ -404,6 +404,7 @@
     <Content Include="Content\js\demo_charts_nvd3.js" />
     <Content Include="Content\js\demo_charts_rickshaw.js" />
     <Content Include="Content\js\demo_dashboard.js" />
+    <Content Include="Content\js\demo_DatosConcepto.js" />
     <Content Include="Content\js\demo_DatosEmisor.js" />
     <Content Include="Content\js\demo_DatosPac.js" />
     <Content Include="Content\js\demo_icons.js" />
@@ -1101,6 +1102,7 @@
     <Compile Include="Areas\Admin\Controllers\HomeAdminController.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Filters\AutorizadoAttribute.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
