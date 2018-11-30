@@ -37,10 +37,10 @@
                 "CFDI_Claveproducto.Descripcion": { required: "El Campo Clave Producto es Requerido"},
                 "CFDI_ClaveUnidad.Nombre": { required: "El Campo Clave unidad es requerido"},
                 "CFDI_TipoProducto.TipoProducto": { required: "El Campo Tipo producto" },
-                "CFDI_ClaveDivision.Division": { required: "El Campo CFDI Division es requerido " },
+                "CFDI_ClaveDivision.Division": { required: "El Campo CFDI División es requerido " },
                 "CFDI_Grupo.Grupo": { required: "El Campo CFDI Grupo es requerido" },
                 "CFDI_Clase.clase": { required: "El Campo CFDI Clase es requerido" },
-                "Descripcion": { required: "El Campo Descripcion es requerido" }
+                "Descripcion": { required: "El Campo Descripción es requerido" }
             },
             invalidHandler: function (event, validator) { //display error alert on form submit
                 successHandler1.hide();

@@ -25,7 +25,7 @@
             ignore: "",
             rules: {
                 Descripcion: { required: true, descripcion: true },
-                UserPac: { required: true, texto: true},
+                UserPac: { required: true },
                 PasswordPac: { required: true, minlength:3, maxlength:25},
                 UserPacTest: { required: true },
                 PasswordPacTest: { required: true, minlength: 3, maxlength:25}

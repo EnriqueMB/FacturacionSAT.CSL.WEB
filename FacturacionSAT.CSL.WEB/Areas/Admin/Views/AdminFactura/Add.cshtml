@@ -18,15 +18,55 @@
 
 @section featured
 {
+
+    @{
+        var message = TempData["message"] ?? string.Empty;
+        var typemessage = TempData["typemessage"] ?? string.Empty;
+    }
+
+    <div id="Error" class="progress-bar progress-bar-striped active errorCSL" style="display:none; width:100%">
+        <h3></h3>
+    </div>
+    <div id="Success" class="progress-bar progress-bar-striped active successCSL" style="display:none; width:100%">
+        <h3></h3>
+    </div>
+
     <div class="col-md-12">
         <form action="@Url.Content("~/Admin/AdminFactura/Add")" method="post">
-            @Html.HiddenFor(d => d.TipoComprobanteDB)
+            @Html.HiddenFor(d => d.Version)
+            @Html.HiddenFor(d => d.TipoComprobante)
             @Html.HiddenFor(d => d.MonedaDB)
             @Html.HiddenFor(d => d.Version)
             @Html.HiddenFor(d => d.Subtotal)
             @Html.HiddenFor(d => d.TotalDescuento)
             @Html.HiddenFor(d => d.Total)
             @Html.HiddenFor(d => d.LugarExpedicion)
+            @Html.HiddenFor(d => d.CodigoBarraBoleto)
+
+            @for (int i = 0; i < Model.Conceptos.Count; i++)
+            {
+                @Html.HiddenFor(d => d.Conceptos[i].Cantidad)
+                @Html.HiddenFor(d => d.Conceptos[i].ClaveProducto)
+                @Html.HiddenFor(d => d.Conceptos[i].ClaveProductoDB)
+                @Html.HiddenFor(d => d.Conceptos[i].ClaveUnidad)
+                @Html.HiddenFor(d => d.Conceptos[i].ClaveUnidadDB)
+                @Html.HiddenFor(d => d.Conceptos[i].CuentaPredial)
+                @Html.HiddenFor(d => d.Conceptos[i].Descripcion)
+                @Html.HiddenFor(d => d.Conceptos[i].Descuento)
+                @Html.HiddenFor(d => d.Conceptos[i].PrecioUnitario)
+                @Html.HiddenFor(d => d.Conceptos[i].Unidad)
+
+                for (int x = 0; x < Model.Conceptos[i].Impuestos.Count; x++)
+                {
+                    @Html.HiddenFor(d => d.Conceptos[i].Impuestos[x].Ambito)
+                    @Html.HiddenFor(d => d.Conceptos[i].Impuestos[x].Factor)
+                    @Html.HiddenFor(d => d.Conceptos[i].Impuestos[x].Importe)
+                    @Html.HiddenFor(d => d.Conceptos[i].Impuestos[x].Nombre)
+                    @Html.HiddenFor(d => d.Conceptos[i].Impuestos[x].Tasa)
+                    @Html.HiddenFor(d => d.Conceptos[i].Impuestos[x].Tipo)
+                }
+            }
+
 
             <div class="row">
                 <div class="col-md-4">
@@ -130,11 +170,20 @@
             </div>
         </form>
     </div>
+
+    <script>
+        var message = '@message';
+        var typemessage = '@typemessage';
+    </script>
 }
 @section script{
     <script type="text/javascript" src="@Url.Content("~/Content/js/plugins/datatables/jquery.dataTables.min.js")"></script>
-   <script>
-       var tblProdServ = $("#tblProdServ").DataTable({
+    <script type="text/javascript" src="@Url.Content("~/Content/js/mensajeDeError.js")"></script>
+    <script>
+        jQuery(document).ready(function () {
+            Mensaje(message, typemessage);
+
+            var tblProdServ = $("#tblProdServ").DataTable({
            "language": {
                "url": "@Url.Content("~/Content/assets/json/Spanish.json")"
            },
@@ -186,5 +235,7 @@
 
 
        });
+
+    });
     </script>
 }
