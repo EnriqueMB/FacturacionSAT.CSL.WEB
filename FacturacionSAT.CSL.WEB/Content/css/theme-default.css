@@ -7553,7 +7553,7 @@ display:none;
     width: 100% !important;
 }
 
-.modalSeleccione {
+.modal-Seleccione {
     background-color: #fff;
     border-radius: 4px;
     margin: 150px auto;
@@ -7561,8 +7561,7 @@ display:none;
     opacity: 20;
     transform: translateY(100px);
     transform: translateX(100px);
-   position: relative;
-    
+    position: relative;
 }
 
 .modal-headerSeleccione {
@@ -7572,10 +7571,12 @@ display:none;
     -webkit-border-radius: 5px 5px 0px 0px;
     border-radius: 5px 5px 0px 0px;
     background: #bd2020;
+    border-width: 5px;
     border-color: #080a0e;
 }
 
 .modal-headerSeleccione .close {
     margin-top: 5px;
     margin-right: 5px;
+    color:black;
 }
