@@ -7552,3 +7552,30 @@ display:none;
 .select {
     width: 100% !important;
 }
+
+.modalSeleccione {
+    background-color: #fff;
+    border-radius: 4px;
+    margin: 150px auto;
+    max-width: 800%;
+    opacity: 20;
+    transform: translateY(100px);
+    transform: translateX(100px);
+   position: relative;
+    
+}
+
+.modal-headerSeleccione {
+    padding: 10px 10px 10px 15px;
+    line-height: 30px;
+    -moz-border-radius: 5px 5px 0px 0px;
+    -webkit-border-radius: 5px 5px 0px 0px;
+    border-radius: 5px 5px 0px 0px;
+    background: #bd2020;
+    border-color: #080a0e;
+}
+
+.modal-headerSeleccione .close {
+    margin-top: 5px;
+    margin-right: 5px;
+}
