@@ -53,7 +53,7 @@
                             <div class="form-group">
                                 <label class="col-md-12 col-xs-12 control-label text-center">Clave producto</label>
                                 <div class="col-md-12 col-xs-12">
-                                    @Html.TextBoxFor(m => m.CFDI_Claveproducto.Descripcion, "", new { @class = "form-control", @readonly = "true" })
+                                    @Html.TextBoxFor(m => m.CFDI_Claveproducto.Descripcion, "", new { @class = "form-control", @readonly = "true", autofocus = "autofocus" })
                                     @Html.HiddenFor(m => m.CFDI_Claveproducto.Id_cfdiClaveProdServDetalle)
                                     <span class="input-group-btn">
                                         <button id="btnClaveProducto" class="btn btn-default" type="button">Seleccionar</button>
@@ -95,14 +95,14 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="col-md-12 col-xs-12 control-label text-center">CFDI Division</label>
+                                <label class="col-md-12 col-xs-12 control-label text-center">CFDI División</label>
                                 <div class="col-md-12 col-xs-12">
                                     @Html.TextBoxFor(m => m.CFDI_ClaveDivision.Division, "", new { @class = "form-control", @readonly = "true" })
                                     @Html.HiddenFor(m => m.CFDI_ClaveDivision.Id_cfdiDivision)
                                     <span class="input-group-btn">
                                         <button id="btnClaveDivision" class="btn btn-default" type="button">Seleccionar</button>
                                     </span>
-                                    <span class="help-block">Seleccione una division</span>
+                                    <span class="help-block">Seleccione una división</span>
                                     @Html.ValidationMessageFor(model => model.CFDI_ClaveDivision.Id_cfdiDivision)
                                 </div>
                             </div>
@@ -141,14 +141,14 @@
                     <div class="col-md-12">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="col-md-12 control-label text-center">Descripcion</label>
+                                <label class="col-md-12 control-label text-center">Descripción</label>
                                 <div class="col-md-12 col-xs-12">
                                     <div class="input-group">
                                         <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
                                         @Html.TextBoxFor(model => model.Descripcion, new { id = "Descripcion", @class = "form-control" })
                                     </div>
                                     @Html.ValidationMessageFor(model => model.Descripcion)
-                                    <span class="help-block">Ingrese una descripcion</span>
+                                    <span class="help-block">Ingrese una descripción</span>
                                 </div>
                             </div>
                         </div>
@@ -270,6 +270,7 @@
                             else {
                                 dtClaveUnidad.$('tr.selected').removeClass('selected');
                                 $(this).addClass('selected');
+                               
                             }
                         });
 
@@ -285,6 +286,7 @@
 
                                 $("#CFDI_ClaveUnidad_Nombre").val(nombreClave);
                                 $("#CFDI_ClaveUnidad_Id_cfdiClaveUnidadDetalle").val(idClaveUnidad);
+                                $("#CFDI_ClaveUnidad_Nombre").blur();
                             }
 
                         });
@@ -353,6 +355,7 @@
 
                                 $("#CFDI_Claveproducto_Descripcion").val(nombre);
                                 $("#CFDI_Claveproducto_Id_cfdiClaveProdServDetalle").val(id);
+                                $("#CFDI_Claveproducto_Descripcion").blur();
                             }
 
                         });
@@ -390,7 +393,7 @@
                             ajax: {
                                 type: "POST",
                                 contentType: "application/json",
-                                url: "@Url.Content("~/Admin/CFDIDatosConceptos/DataTableTipoProducto") ",
+                                url: "@Url.Content("~/Admin/CFDIDatosConceptos/DataTableTipoProducto")",
                                 data: function (d) {
                                     // note: d is created by datatable, the structure of d is the same with DataTableParameters model above
                                     //console.log(JSON.stringify(d));
@@ -421,6 +424,7 @@
 
                                 $("#CFDI_TipoProducto_TipoProducto").val(nombre);
                                 $("#CFDI_TipoProducto_Id_cfdiTipoProducto").val(id);
+                                $("#CFDI_TipoProducto_TipoProducto").blur();
                             }
 
                         });
@@ -491,6 +495,8 @@
 
                                 $("#CFDI_ClaveDivision_Division").val(nombre);
                                 $("#CFDI_ClaveDivision_Id_cfdiDivision").val(id);
+                                $("#CFDI_ClaveDivision_Division").blur();
+
                             }
 
                         });
@@ -561,6 +567,8 @@
 
                                 $("#CFDI_Grupo_Grupo").val(nombre);
                                 $("#CFDI_Grupo_Id_cfdiGrupo").val(id);
+                                $("#CFDI_Grupo_Grupo").blur();
+
                             }
 
                         });
@@ -631,6 +639,8 @@
 
                                 $("#CFDI_Clase_clase").val(nombre);
                                 $("#CFDI_Clase_Id_CfdiClase").val(id);
+                                $("#CFDI_Clase_clase").blur();
+
                             }
 
                         });

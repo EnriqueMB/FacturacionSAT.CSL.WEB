@@ -136,6 +136,8 @@
     <Content Include="Areas\Admin\Views\CFDIDatosConceptos\ModalClaveGrupo.cshtml" />
     <Content Include="Areas\Admin\Views\CFDIDatosConceptos\ModalClaveClase.cshtml" />
     <Content Include="Areas\Admin\Views\CFDIDatosEmisor\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\CFDIFormaPago\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\CFDIFormaPago\UpdateCFDIFP.cshtml" />
     <None Include="Connected Services\SolucionFactible\configuration91.svcinfo" />
     <None Include="Connected Services\SolucionFactible\configuration.svcinfo" />
     <Content Include="Connected Services\SolucionFactible\FacturacionSAT.CSL.WEB.SolucionFactible.cancelarBase64Response.datasource">
@@ -412,6 +414,7 @@
     <Content Include="Content\js\demo_tables.js" />
     <Content Include="Content\js\demo_tasks.js" />
     <Content Include="Content\js\faq.js" />
+    <Content Include="Content\js\FormaPago.js" />
     <Content Include="Content\js\mensajeDeError.js" />
     <Content Include="Content\js\plugins.js" />
     <Content Include="Content\js\plugins\blueimp\jquery.blueimp-gallery.min.js" />
@@ -1016,7 +1019,6 @@
     <Content Include="Areas\Admin\Views\CFDIDatosEmisor\Index.cshtml" />
     <Content Include="Areas\Admin\Views\CFDIDatosEmisor\Create.cshtml" />
     <None Include="Connected Services\SolucionFactible\Timbrado.wsdl" />
-    <Content Include="Areas\Admin\Views\CFDIDatosPac\Indxprueba.cshtml" />
     <Content Include="SAT\CSD_Pruebas_CFDI_LAN7008173R5.cer" />
     <Content Include="SAT\CSD_Pruebas_CFDI_LAN7008173R5.key" />
     <!-->>>>>>> 20dc6b70ee4a003db4d84e5a9b915af4f0f8ebe7-->
@@ -1091,6 +1093,7 @@
     <Compile Include="Areas\Admin\Controllers\CFDIDatosConceptosController.cs" />
     <Compile Include="Areas\Admin\Controllers\CFDIDatosEmisorController.cs" />
     <Compile Include="Areas\Admin\Controllers\CFDIDatosPacController.cs" />
+    <Compile Include="Areas\Admin\Controllers\CFDIFormaPagoController.cs" />
     <Compile Include="Areas\Admin\Controllers\JsonController.cs" />
     <Compile Include="Connected Services\SolucionFactible\Reference.cs">
       <AutoGen>True</AutoGen>
@@ -1117,10 +1120,13 @@
     <Compile Include="Models\CFDIDatosConceptosModels.cs" />
     <Compile Include="Models\CFDIDatosEmisorModels.cs" />
     <Compile Include="Models\CFDIDatosPacModels.cs" />
+    <Compile Include="Models\CFDIFormaPagoDetalleModels.cs" />
+    <Compile Include="Models\CFDIFormaPago_AuryModels.cs" />
     <Compile Include="Models\CFDIRegimenFiscalDetalleModels.cs" />
     <Compile Include="Models\CFDITipoPersonaModels.cs" />
     <Compile Include="Models\ComboModel.cs" />
     <Compile Include="Models\DataTableParameters.cs" />
+    <Compile Include="Models\Datos\CFDIFormaPagoDatos.cs" />
     <!--<<<<<<< HEAD-->
     <Compile Include="Models\Datos\CFDIPacDatos.cs" />
     <!--=======-->

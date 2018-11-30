@@ -1,12 +1,12 @@
-﻿var ConceptoDatos = function () {
+﻿var FormaPago = function () {
     "use strict";
-    //Funcion para validar nuevo dato concepto
+    //Funcion para validad Nuevo CFDIDatosPac
     var runValidator1 = function () {
-        var form1 = $('#form-dg');
+        var form1 = $('#form-FormaPago');
         var errorHandler1 = $('.errorHandler', form1);
         var successHandler1 = $('.successHandler', form1);
 
-        $('#form-dg').validate({
+        $('#form-FormaPago').validate({
             errorElement: "span", // contain the error msg in a span tag
             errorClass: 'help-block color',
             errorLabelContainer: $("#validation_summary"),
@@ -24,23 +24,10 @@
             },
             ignore: "",
             rules: {
-                "CFDI_Claveproducto.Descripcion": { required: true },
-                "CFDI_ClaveUnidad.Nombre": { required: true },
-                "CFDI_TipoProducto.TipoProducto": { required: true },
-                "CFDI_ClaveDivision.Division": { required: true },
-                "CFDI_Grupo.Grupo": {required: true},
-                "CFDI_Clase.clase": {required: true},
-                "Descripcion": {required:true}
-               
+                "TipoDePago.Id_cfdiFormaPagoDetalle":{ required: true }
             },
             messages: {
-                "CFDI_Claveproducto.Descripcion": { required: "El Campo Clave Producto es Requerido"},
-                "CFDI_ClaveUnidad.Nombre": { required: "El Campo Clave unidad es requerido"},
-                "CFDI_TipoProducto.TipoProducto": { required: "El Campo Tipo producto" },
-                "CFDI_ClaveDivision.Division": { required: "El Campo CFDI División es requerido " },
-                "CFDI_Grupo.Grupo": { required: "El Campo CFDI Grupo es requerido" },
-                "CFDI_Clase.clase": { required: "El Campo CFDI Clase es requerido" },
-                "Descripcion": { required: "El Campo Descripción es requerido" }
+                "TipoDePago.Id_cfdiFormaPagoDetalle": { required: "El Campo Metodo de Pago es Requerido"}             
             },
             invalidHandler: function (event, validator) { //display error alert on form submit
                 successHandler1.hide();
@@ -71,12 +58,10 @@
             }
         });
     }
-    
-
+  
     return {
         init: function () {
             runValidator1();
-           
         }
     };
 }();
