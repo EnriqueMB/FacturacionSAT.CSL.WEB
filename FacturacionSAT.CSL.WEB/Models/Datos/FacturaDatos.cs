@@ -32,12 +32,18 @@ namespace FacturacionSAT.CSL.WEB.Models.Datos
                     {
                         item = new FacturacionViewModel();
                         //generales
+                        item.Version = !dr.IsDBNull(dr.GetOrdinal("CFDI_version")) ? dr.GetString(dr.GetOrdinal("CFDI_version")) : string.Empty;
                         item.Total = !dr.IsDBNull(dr.GetOrdinal("total")) ? dr.GetDecimal(dr.GetOrdinal("total")) : 0;
                         item.Moneda = !dr.IsDBNull(dr.GetOrdinal("CFDI_moneda")) ? dr.GetString(dr.GetOrdinal("CFDI_moneda")) : string.Empty;
                         item.MonedaDB = !dr.IsDBNull(dr.GetOrdinal("CFDI_moneda_db")) ? dr.GetString(dr.GetOrdinal("CFDI_moneda_db")) : string.Empty;
 
                         item.TotalDescuento = !dr.IsDBNull(dr.GetOrdinal("descuento")) ? dr.GetDecimal(dr.GetOrdinal("descuento")) : 0;
                         item.Subtotal = !dr.IsDBNull(dr.GetOrdinal("subtotal")) ? dr.GetDecimal(dr.GetOrdinal("subtotal")) : 0;
+
+                        item.Subtotal = Convert.ToDecimal(String.Format("{0:0.00}", item.Subtotal)); //redondeo a 2 decimales
+                        item.TotalDescuento = Convert.ToDecimal(String.Format("{0:0.00}", item.TotalDescuento)); //redondeo a 2 decimales
+
+
                         item.Folio = !dr.IsDBNull(dr.GetOrdinal("folio")) ? dr.GetString(dr.GetOrdinal("folio")) : string.Empty;
                         item.FormaDePago = !dr.IsDBNull(dr.GetOrdinal("CFDI_formaPago")) ? dr.GetString(dr.GetOrdinal("CFDI_formaPago")) : string.Empty;
 
@@ -146,7 +152,7 @@ namespace FacturacionSAT.CSL.WEB.Models.Datos
             }
         }
 
-        public void Factura_Save_Factura(AuxSQLModel oAuxSQLModel, string pathXML)
+        public void Factura_Save_Factura(AuxSQLModel oAuxSQLModel, string pathXML, FacturacionViewModel oFactura)
         {
             try
             {
@@ -157,9 +163,14 @@ namespace FacturacionSAT.CSL.WEB.Models.Datos
                     {
                         //parametros de entrada
                         cmd.CommandType = CommandType.StoredProcedure;
-                        SqlXml ParametroSQLXML = new SqlXml(new XmlTextReader(pathXML));
-                        cmd.Parameters.AddWithValue("@xmlFacturaSAT" , ParametroSQLXML);
-                        
+
+                        string xmlString = System.IO.File.ReadAllText(pathXML);
+                        cmd.Parameters.AddWithValue("@xmlFacturaSAT" , xmlString);
+                        cmd.Parameters.Add("@rfcEmisor", SqlDbType.VarChar).Value = oFactura.RFCEmisor;
+                        cmd.Parameters.Add("@rfcReceptor", SqlDbType.VarChar).Value = oFactura.RFCReceptor;
+                        cmd.Parameters.Add("@codigoBarra", SqlDbType.VarChar).Value = oFactura.CodigoBarraBoleto;
+                        cmd.Parameters.Add("@totalFactura", SqlDbType.Money).Value = oFactura.Total;
+
                         //parametros de salida
                         cmd.Parameters.Add(new SqlParameter("@mensaje", SqlDbType.NVarChar, -1)); //-1 para tipo MAX
                         cmd.Parameters["@mensaje"].Direction = ParameterDirection.Output;

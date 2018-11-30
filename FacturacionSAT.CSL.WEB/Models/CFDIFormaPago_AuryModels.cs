@@ -20,8 +20,6 @@ namespace FacturacionSAT.CSL.WEB.Models
             Completado = false;
         }
 
-        
-
         private string _ID_FormaPago;
      
         public string ID_FormaPago
