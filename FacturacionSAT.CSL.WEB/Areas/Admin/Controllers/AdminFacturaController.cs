@@ -20,21 +20,20 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
     public class AdminFacturaController : Controller
     {
         private string Conexion = ConfigurationManager.AppSettings.Get("strConnection");
-        
+        string pathXML;
 
         // GET: Admin/Facturacion
         public ActionResult Index()
         {
             try
             {
-                MostrarHTMLError();
-
                 return View();
             }
             catch (Exception ex)
             {
-                Error.Success = false;
-                Error.Mensaje = "Se ha generado el siguiente error: \\n" + ex.Message + "\\n Contacte a soporte t&eacute;cnico.";
+                string Mensaje = ex.Message.Replace("\r\n", "").Replace("\r", "").Replace("\n", "");
+                TempData["message"] = Mensaje;
+                TempData["typemessage"] = "2";
                 return View();
             }
 
@@ -44,8 +43,8 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
         {
             if (!ModelState.IsValid)
             {
-                Error.Success = false;
-                Error.Mensaje = "Verifique sus datos.";
+                TempData["message"] = "Verifique sus datos";
+                TempData["typemessage"] = "2";
                 return View(Model);
             }
             else
@@ -60,8 +59,8 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
             {
                 if (!ModelState.IsValid)
                 {
-                    Error.Success = false;
-                    Error.Mensaje = "Verifique sus datos.";
+                    TempData["message"] = "Verifique sus datos";
+                    TempData["typemessage"] = "2";
                     return RedirectToAction("Index", Model);
                 }
 
@@ -75,14 +74,13 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
 
                 FacturacionViewModel oFactura = new FacturacionViewModel();
                 oFactura = oFacturaDatos.Factura_get_Generales_ADD(oAuxSQLModel, Model.CodigoBarra, Model.RFCReceptor);
-
+                oFactura.CodigoBarraBoleto = Model.CodigoBarra;
                 oFactura.Fecha = DateTime.Now;
 
                 if (!oAuxSQLModel.Success)
                 {
-                     
-                    Error.Success = oAuxSQLModel.Success;
-                    Error.Mensaje = oAuxSQLModel.Mensaje;
+                    TempData["message"] = oAuxSQLModel.Mensaje;
+                    TempData["typemessage"] = "2";
 
                     return RedirectToAction("Index");
                 }
@@ -91,8 +89,9 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
             }
             catch (Exception ex)
             {
-                Error.Success = false;
-                Error.Mensaje = "Se ha generado el siguiente error: \\n" + ex.Message + "\\n Contacte a soporte técnico.";
+                string Mensaje = ex.Message.Replace("\r\n", "").Replace("\r", "").Replace("\n", "");
+                TempData["message"] = Mensaje;
+                TempData["typemessage"] = "2";
                 return RedirectToAction("Index");
             }
             
@@ -114,8 +113,9 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
                     string pathRootSATEmisorXML = Server.MapPath("~/SAT");
                     string pahtRootSATTempXML = Server.MapPath("~/SATTempXML");
 
-                    string getNameXML = string.Format("Factura-{0:yyyy-MM-dd_hh-mm-ss}.xml", DateTime.Now);
-                    string pathXML = pahtRootSATTempXML + "\\" + getNameXML;
+                    //string getNameXML = string.Format("Factura-{0:yyyy-MM-dd_hh-mm-ss}.xml", DateTime.Now);
+                    string getNameXML = Guid.NewGuid().ToString() + ".xml";
+                    pathXML = pahtRootSATTempXML + "\\" + getNameXML;
                     string pathCadenaOriginal = pathRootSystemHelperSAT + "\\xslt33\\cadenaoriginal_3_3.xslt";
                     /**************************************/
                     /*Obtenemos los datos del emisor*/
@@ -137,20 +137,33 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
                     if (result)
                     {
                         FacturaDatos oFacturaDatos = new FacturaDatos();
+                        oAuxSQLModel.ResetValuesSQL();
+
                         oAuxSQLModel.Conexion = Conexion;
 
-                        oFacturaDatos.Factura_Save_Factura(oAuxSQLModel, pathXML);
+                        oFacturaDatos.Factura_Save_Factura(oAuxSQLModel, pathXML, Factura);
 
-                        //if (System.IO.File.Exists(pathXML))
-                        //{
-                        //    System.IO.File.Delete(pathXML); //hay que liberarlo antes en el factura_save_factura
-                           
-                        //}
+                        if (oAuxSQLModel.Success)
+                        {
+                            if (System.IO.File.Exists(pathXML))
+                            {
+                                System.IO.File.Delete(pathXML);
+                                TempData["message"] = "Factura creada con éxito.";
+                                TempData["typemessage"] = "1";
+                            }
+                        }
+                        else
+                        {
+                            throw new System.Exception(oAuxSQLModel.Mensaje);
+                        }
 
                         return RedirectToAction("Index");
                     }
                     else
                     {
+                        TempData["message"] = "Verifique sus datos";
+                        TempData["typemessage"] = "2";
+
                         return View(Factura);
                     }
                 }
@@ -159,10 +172,17 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
                     return RedirectToAction("Index");
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                if (System.IO.File.Exists(pathXML))
+                {
+                    System.IO.File.Delete(pathXML);
+                }
+                string Mensaje = ex.Message.Replace("\r\n", "").Replace("\r", "").Replace("\n", "");
+                TempData["message"] = Mensaje;
+                TempData["typemessage"] = "2";
+                
+                return RedirectToAction("Index");
             }
         }
 
@@ -188,7 +208,7 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
 
                 Comprobante oComprobante = new Comprobante();
                 oComprobante.Version = Factura.Version; //requerido, se puede poner en la tabla configuracion
-               // oComprobante.Serie = Factura.Serie; //opcional, clasificacion interna en la empresa
+                                                        // oComprobante.Serie = Factura.Serie; //opcional, clasificacion interna en la empresa
                 oComprobante.Folio = Factura.Folio; //opcional, numero del folio
                 oComprobante.Fecha = DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss"); //requerido, fecha y hora de la expedicion del comprobante, hora local
                 oComprobante.Sello = ""; //requerido: quien realiza la factura
@@ -199,7 +219,7 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
                                                           //impuesto.No se permiten valores negativos.
                 oComprobante.Descuento = Factura.TotalDescuento;
                 oComprobante.Moneda = Factura.MonedaDB; // Catálogo del Cfdi:Moneda, si no es moneda nacional, se debe de poner el tipo de cambio
-                                                      //oComprobante.TipoCambio
+                                                        //oComprobante.TipoCambio
                 oComprobante.Total = Factura.Total; //Subtotal menos descuento
                 oComprobante.TipoDeComprobante = Factura.TipoComprobante; // Atributo requerido para expresar la clave del efecto del comprobante fiscal para el contribuyente emisor.
                                                                           //Se obtiene de la tabla Cfdi:TipoComprobante
@@ -226,26 +246,15 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
                 foreach (var Concepto in Factura.Conceptos)
                 {
                     oConcepto.Importe = Concepto.PrecioUnitario;
-                    oConcepto.ClaveProdServ = Concepto.ClaveProductoDB;
+                    oConcepto.ClaveProdServ = Concepto.ClaveProducto;
                     oConcepto.Cantidad = Concepto.Cantidad;
-                    oConcepto.ClaveUnidad = Concepto.ClaveUnidadDB;
+                    oConcepto.ClaveUnidad = Concepto.ClaveUnidad;
                     oConcepto.Descripcion = Concepto.Descripcion;
                     oConcepto.ValorUnitario = Concepto.PrecioUnitario;
                     oConcepto.Descuento = Concepto.Descuento.Value;
                     lstConceptos.Add(oConcepto);
                 }
                 oComprobante.Conceptos = lstConceptos.ToArray();
-
-                //ComprobanteConcepto oConcepto = new ComprobanteConcepto();
-                //oConcepto.Importe = 10m;
-                //oConcepto.ClaveProdServ = "10122102";
-                //oConcepto.Cantidad = 1;
-                //oConcepto.ClaveUnidad = "C81";
-                //oConcepto.Descripcion = "Concepto de prueba SAT 3.3";
-                //oConcepto.ValorUnitario = 10m;
-                //oConcepto.Descuento = 1;
-                //lstConceptos.Add(oConcepto);
-                //oComprobante.Conceptos = lstConceptos.ToArray();
 
                 this.CreateXML(oComprobante, pathXML);
 
@@ -299,24 +308,38 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
 
                 SolucionFactible.CFDICertificacion response = portClient.timbrar(usuario, contrasena, xmlSAT, false);
 
-                System.Console.WriteLine("Información de la transacción");
-                System.Console.WriteLine(response.status);
-                System.Console.WriteLine(response.mensaje);
-                System.Console.WriteLine("Resultados recibidos" + response.resultados.Length);
-                SolucionFactible.CFDIResultadoCertificacion[] resultados = response.resultados;
-                System.IO.File.WriteAllBytes(pathXML, resultados[0].cfdiTimbrado); //creamos el xml ya timbrado
+                //System.Console.WriteLine("Información de la transacción");
+                //System.Console.WriteLine(response.status);
+                //System.Console.WriteLine(response.mensaje);
+                //System.Console.WriteLine("Resultados recibidos" + response.resultados.Length);
 
-                if (System.IO.File.Exists(pathXML))
+                SolucionFactible.CFDIResultadoCertificacion[] resultados = response.resultados;
+
+                if(resultados == null)
                 {
-                    return true;
+                    if (System.IO.File.Exists(pathXML))
+                    {
+                        System.IO.File.Delete(pathXML); 
+                    }
+                    throw new System.Exception(response.mensaje);
                 }
                 else
                 {
-                    return false;
+                    if(resultados[0].status == 200)
+                    {
+                        System.IO.File.WriteAllBytes(pathXML, resultados[0].cfdiTimbrado); //creamos el xml ya timbrado
+                        return true;
+                    }
+                    else
+                    {
+                        if (System.IO.File.Exists(pathXML))
+                        {
+                            System.IO.File.Delete(pathXML);
+                        }
+
+                        throw new System.Exception(resultados[0].mensaje);
+                    }
                 }
-
-
-
             }
             catch (Exception)
             {
@@ -355,25 +378,6 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
             }
         }
 
-        private void MostrarHTMLError()
-        {
-            if (Error.Success != null || Error.Success == false)
-            {
-                //Guardamos el error en los ViewBag
-                ViewBag.Success = Error.Success;
-                ViewBag.Mensaje = Error.Mensaje;
-
-                //Limpiamos
-                    Error.Success = false;
-                Error.Mensaje = string.Empty;
-            }
-            else
-            {
-                Error.Success = false;
-                Error.Mensaje = string.Empty;
-            }
-        }
-
         private void GetListasSAT(ComboDatos oComboDatos, AuxSQLModel oAuxSQLModel, string RFCReceptor)
         {
             FacturaDatos oFacturaDatos = new FacturaDatos();
@@ -390,11 +394,11 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
             */
             if (RFCReceptor.Length == 13)
             {
-                ViewBag.ListaUsoCFDI = oComboDatos.ListaUsoCFDIDetalle(oAuxSQLModel, "78654122-1130-405B-A739-1D19C19955EF");
+                ViewBag.ListaUsoCFDI = oComboDatos.ListaUsoCFDIDetalleFactura(oAuxSQLModel, "78654122-1130-405B-A739-1D19C19955EF");
             }
             else
             {
-                ViewBag.ListaUsoCFDI = oComboDatos.ListaUsoCFDIDetalle(oAuxSQLModel, "25BD8A08-3C23-4359-8E34-76A2C8E95B3D");
+                ViewBag.ListaUsoCFDI = oComboDatos.ListaUsoCFDIDetalleFactura(oAuxSQLModel, "25BD8A08-3C23-4359-8E34-76A2C8E95B3D");
             }
         }
     }

@@ -1131,7 +1131,6 @@
     <Compile Include="Models\Datos\FacturaDatos.cs" />
     <Compile Include="Models\Datos\JsonDatos.cs" />
     <Compile Include="Models\Datos\UsuarioDatos.cs" />
-    <Compile Include="Models\Error.cs" />
     <Compile Include="Models\UsuarioModels.cs" />
     <Compile Include="Models\Validaciones\ClabeInterbancariaAttribute.cs" />
     <Compile Include="Models\Validaciones\CombosIntAttribute.cs" />

@@ -8,6 +8,7 @@ namespace FacturacionSAT.CSL.WEB.Models.ViewModel
 {
     public class FacturacionViewModel
     {
+        
         public int Id_factura { get; set; }
 
         //public byte[] QR
@@ -27,7 +28,7 @@ namespace FacturacionSAT.CSL.WEB.Models.ViewModel
 
         //    }
         //}
-
+        public string CodigoBarraBoleto { get; set; }
         public string Logotipo { get; set; }
         public string NoCertificadoSAT { get; set; }
         public string SelloSAT { get; set; }

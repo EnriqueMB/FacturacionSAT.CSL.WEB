@@ -111,6 +111,31 @@ namespace FacturacionSAT.CSL.WEB.Models.Datos
             }
         }
 
+        public List<ComboModel> ListaUsoCFDIDetalleFactura(AuxSQLModel oAuxSQLModel, string id_cfdiTipoPersona)
+        {
+            try
+            {
+                List<ComboModel> lista = new List<ComboModel>();
+                ComboModel item;
+                SqlDataReader dr = null;
+                object[] parametro = { id_cfdiTipoPersona };
+                dr = SqlHelper.ExecuteReader(oAuxSQLModel.Conexion, "[dbo].[CFDIUsoCFDIDetalleFactura_Combo_sp]", parametro);
+                while (dr.Read())
+                {
+                    item = new ComboModel();
+                    item.Id = !dr.IsDBNull(dr.GetOrdinal("id_cfdiUsoCFDIDetalle")) ? dr.GetString(dr.GetOrdinal("id_cfdiUsoCFDIDetalle")) : string.Empty;
+                    item.Value = !dr.IsDBNull(dr.GetOrdinal("descripcion")) ? dr.GetString(dr.GetOrdinal("descripcion")) : string.Empty;
+                    lista.Add(item);
+                }
+                dr.Close();
+                return lista;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public List<ComboModel> ListaMonedaDetalle(AuxSQLModel oAuxSQLModel)
         {
             try

@@ -51,7 +51,6 @@ namespace FacturacionSAT.CSL.WEB.Models
 
         private string _UserPac;
         [Required(ErrorMessage = "El campo UserPac es requerido")]
-        [RegularExpression(@"^[A-Za-záéíóúñÁÉÍÓÚÑ0-9\(\)\-\,\.\;\:\s]*$", ErrorMessage = "Solo Letras y Números")]
         public string UserPac
         {
             get { return _UserPac; }
