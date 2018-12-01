@@ -6,6 +6,7 @@ using FacturacionSAT.CSL.WEB.SystemHelper;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -20,7 +21,9 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
     public class AdminFacturaController : Controller
     {
         private string Conexion = ConfigurationManager.AppSettings.Get("strConnection");
-        string pathXML;
+        private string pathXML, idFile, pathRootSystemHelperSAT, pahtRootSATTempFile;
+
+
 
         // GET: Admin/Facturacion
         public ActionResult Index()
@@ -109,13 +112,14 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
                     oAuxSQLModel.Conexion = Conexion;
                     /**************************************/
                     /*paths*/
-                    string pathRootSystemHelperSAT = Server.MapPath("~/SystemHelper/SAT");
+                    pathRootSystemHelperSAT = Server.MapPath("~/SystemHelper/SAT");
                     string pathRootSATEmisorXML = Server.MapPath("~/SAT");
-                    string pahtRootSATTempXML = Server.MapPath("~/SATTempXML");
+                    pahtRootSATTempFile = Server.MapPath("~/SATTempFile");
 
                     //string getNameXML = string.Format("Factura-{0:yyyy-MM-dd_hh-mm-ss}.xml", DateTime.Now);
-                    string getNameXML = Guid.NewGuid().ToString() + ".xml";
-                    pathXML = pahtRootSATTempXML + "\\" + getNameXML;
+                    idFile = Guid.NewGuid().ToString();
+                    string getNameXML =  idFile + ".xml";
+                    pathXML = pahtRootSATTempFile + "\\" + getNameXML;
                     string pathCadenaOriginal = pathRootSystemHelperSAT + "\\xslt33\\cadenaoriginal_3_3.xslt";
                     /**************************************/
                     /*Obtenemos los datos del emisor*/
@@ -136,25 +140,21 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
 
                     if (result)
                     {
-                        FacturaDatos oFacturaDatos = new FacturaDatos();
-                        oAuxSQLModel.ResetValuesSQL();
-
-                        oAuxSQLModel.Conexion = Conexion;
-
-                        oFacturaDatos.Factura_Save_Factura(oAuxSQLModel, pathXML, Factura);
-
-                        if (oAuxSQLModel.Success)
+                        if (System.IO.File.Exists(pathXML))
                         {
-                            if (System.IO.File.Exists(pathXML))
+                            TempData["message"] = "Archivo xml creado con éxito.";
+                            TempData["typemessage"] = "1";
+
+                            if (GenerarPDF())
                             {
-                                System.IO.File.Delete(pathXML);
-                                TempData["message"] = "Factura creada con éxito.";
-                                TempData["typemessage"] = "1";
+                                TempData["message"] = "Archivo pdf creado con éxito.";
+                                //faltaria enviar al correo
+                                FacturaDatos oFacturaDatos = new FacturaDatos();
+                                oAuxSQLModel.ResetValuesSQL();
+                                oAuxSQLModel.Conexion = Conexion;
+                                //oFacturaDatos.Factura_Save_Factura(oAuxSQLModel, pathXML, Factura);
                             }
-                        }
-                        else
-                        {
-                            throw new System.Exception(oAuxSQLModel.Mensaje);
+                            System.IO.File.Delete(pathXML);
                         }
 
                         return RedirectToAction("Index");
@@ -231,7 +231,7 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
                 oEmisor.Nombre = Factura.NombreEmisor;
                 oEmisor.RegimenFiscal = Factura.RegimenFiscal;
                 ComprobanteReceptor oReceptor = new ComprobanteReceptor();
-                oReceptor.Nombre = Factura.NombreEmisor;
+                oReceptor.Nombre = Factura.RazonSocial;
                 oReceptor.Rfc = Factura.RFCReceptor;
                 oReceptor.UsoCFDI = Factura.UsoCFDI; // requerido, uso del Cfdi por parte del receptor, se obtiene de la tabla Cfdi:UsoCFDI
 
@@ -400,6 +400,89 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
             {
                 ViewBag.ListaUsoCFDI = oComboDatos.ListaUsoCFDIDetalleFactura(oAuxSQLModel, "25BD8A08-3C23-4359-8E34-76A2C8E95B3D");
             }
+        }
+
+        private bool GenerarPDF()
+        {
+            try
+            {
+                Comprobante oComprobante;
+                XmlSerializer oXmlSerializer = new XmlSerializer(typeof(Comprobante));
+
+                using (StreamReader oReader = new StreamReader(pathXML))
+                {
+                    oComprobante = (Comprobante)oXmlSerializer.Deserialize(oReader);
+
+                    if (oComprobante.Complemento != null)
+                    {
+                        //Complemento
+                        foreach (var oComplemento in oComprobante.Complemento)
+                        {
+                            foreach (var oComplementoInterior in oComplemento.Any)
+                            {
+                                if (oComplementoInterior.Name.Contains("TimbreFiscalDigital"))
+                                {
+                                    XmlSerializer oXmlSerializerComplemento = new XmlSerializer(typeof(TimbreFiscalDigital));
+                                    using (var readerComplemento = new StringReader(oComplementoInterior.OuterXml))
+                                    {
+                                        oComprobante.TimbreFiscalDigital = (TimbreFiscalDigital)oXmlSerializerComplemento.Deserialize(readerComplemento);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                //Aplicando razor
+                string path = pathRootSystemHelperSAT + "\\Plantilla\\";
+                string pathHTMLTempFileHtml = pahtRootSATTempFile + "\\" + idFile + ".html";
+                string pathHTMLTempFilePDF = pahtRootSATTempFile + "\\" + idFile + ".pdf";
+
+                string pathHtmlPlantilla = path + "plantillaFactura.html";
+                string sHtml = GetStringOfFile(pathHtmlPlantilla);
+                string resultHtml = "";
+
+                SystemHelper.SAT.CFDI3_3_PDF cFDI3_3_PDF = new SystemHelper.SAT.CFDI3_3_PDF(oComprobante);
+
+
+                resultHtml = RazorEngine.Razor.Parse(sHtml, cFDI3_3_PDF);
+
+                
+
+                //creamos el archivo temporal
+                System.IO.File.WriteAllText(pathHTMLTempFileHtml, resultHtml);
+
+                string pathWkhtml = pathRootSystemHelperSAT + "\\Wkhtml\\wkhtmltopdf.exe";
+
+                ProcessStartInfo oProcessStartInfo = new ProcessStartInfo();
+                oProcessStartInfo.UseShellExecute = false;
+                oProcessStartInfo.FileName = pathWkhtml;
+                oProcessStartInfo.Arguments = pathHTMLTempFileHtml + " " + pathHTMLTempFilePDF;
+
+                using (Process oProcess = Process.Start(oProcessStartInfo))
+                {
+                    oProcess.WaitForExit();
+                }
+
+                //eliminamos el archivo temporal
+                System.IO.File.Delete(pathHTMLTempFileHtml);
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                string Mensaje = ex.Message.Replace("\r\n", "").Replace("\r", "").Replace("\n", "");
+                TempData["message"] = Mensaje;
+                TempData["typemessage"] = "2";
+                throw;
+            }
+           
+        }
+
+        private string GetStringOfFile(string pathFile)
+        {
+            string contenido = System.IO.File.ReadAllText(pathFile);
+            return contenido;
         }
     }
 }

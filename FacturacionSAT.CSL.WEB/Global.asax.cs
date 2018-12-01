@@ -7,6 +7,8 @@ using System.Web.Routing;
 using System.Web.Http;
 using System.Web.Optimization;
 using FacturacionSAT.CSL.WEB.App_Start;
+using System.Globalization;
+using System.Threading;
 
 namespace FacturacionSAT.CSL.WEB
 {
@@ -19,6 +21,12 @@ namespace FacturacionSAT.CSL.WEB
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             AuthConfig.RegisterAuth();
+        }
+
+        protected void Application_BeginRequest()
+        {
+            Thread.CurrentThread.CurrentCulture = new CultureInfo("es-MX");
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo("es-MX");
         }
     }
 }
