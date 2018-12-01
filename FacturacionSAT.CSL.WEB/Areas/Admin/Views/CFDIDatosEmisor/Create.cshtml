@@ -106,7 +106,7 @@
                             </div>
                         </div>
                         <div class="col-md-12">
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label class="col-md-12 control-label text-center">Código Postal</label>
                                     <div class="col-md-12 col-xs-12">
@@ -118,16 +118,8 @@
                                         <span class="help-block">Ingrese el código postal del emisor</span>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label class="col-md-6 control-label">¿Es Predeterminado?</label>
-                                    <div class="text-center col-md-9">
-                                        @Html.CheckBoxFor(model => model.Predeterminado)
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
+                            </div>                          
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label class="col-md-12 control-label text-center">Correo</label>
                                     <div class="col-md-12 col-xs-12">
@@ -140,7 +132,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label class="col-md-12 control-label text-center">Password Correo Enviar</label>
                                     <div class="col-md-12 col-xs-12">
@@ -160,7 +152,7 @@
                         <div class="col-md-12">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label class="col-md-12 control-label text-center">Seleccionar .CER</label>
+                                    <label class="col-md-12 control-label text-left">Seleccionar .CER</label>
                                     <div class="col-md-12 col-xs-12">
                                         <div class="input-group">
                                             <input type="file" class="fileinput btn-success" name="filename2" id="filename2" data-filename-placement="inside" title="Selecciones el archivo .CER" />
@@ -171,7 +163,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label class="col-md-12 control-label  text-center">Seleccionar .KEY</label>
+                                    <label class="col-md-12 control-label  text-left">Seleccionar .KEY</label>
                                     <div class="col-md-12 col-xs-12">
                                         <div class="input-group">
                                             <input type="file" class="fileinput btn-success" name="filename3" id="filename3" data-filename-placement="inside" title="Selecciones el archivo .KEY" />
@@ -200,13 +192,21 @@
                         <div class="col-md-12">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label class="col-md-12 control-label text-center">Seleccionar imagen</label>
+                                    <label class="col-md-12 control-label text-left">Seleccionar imagen</label>
                                     <div class="col-md-12 col-xs-12">
                                         <div class="input-group">
                                             <input type="file" class="fileinput btn-success" name="filename1" id="filename1" data-filename-placement="inside" title="Selecciones la imagen" />
                                         </div>
                                     </div>
                                     <span class="help-block">- </span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="col-md-6 control-label">¿Es Predeterminado?</label>
+                                    <div class="text-center col-md-9">
+                                        @Html.CheckBoxFor(model => model.Predeterminado)
+                                    </div>
                                 </div>
                             </div>
                         </div>
