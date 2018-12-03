@@ -19,8 +19,8 @@ namespace FacturacionSAT.CSL.WEB.Models.ViewModel
         //        string sQR = "";
         //        string baseQR = "";
 
-        //        qr = XMLToClassSAT.QR.createBarCode("https://verificacfdi.facturaelectronica.sat.gob.mx/default.aspx?id=" + TimbreFiscalDigital.UUID +
-        //            "&re=" + Emisor.Rfc + "&fe=" + Receptor.Rfc + "&tt=" + Total + "&fe=" + Sello.Substring(Sello.Length - 9, 8));
+        //        qr = FacturacionSAT.CSL.WEB.SystemHelper.QR.createBarCode("https://verificacfdi.facturaelectronica.sat.gob.mx/default.aspx?id=" + TimbreFiscalDigital.UUID +
+        //            "&re=" + RFCEmisor + "&fe=" + RFCReceptor + "&tt=" + Total + "&fe=" + Sello.Substring(Sello.Length - 9, 8));
         //        baseQR = System.Convert.ToBase64String(qr);
         //        sQR = System.String.Format("data:image/gif;base64,{0}", baseQR);
 
@@ -172,7 +172,7 @@ namespace FacturacionSAT.CSL.WEB.Models.ViewModel
         [Required]
         public string RFCReceptor { get; set; }
 
-        [Display(Name = "Razón social")]
+        [Display(Name = "Nombre")]
         public string RazonSocial { get; set; }
 
         [Display(Name = "Calle")]

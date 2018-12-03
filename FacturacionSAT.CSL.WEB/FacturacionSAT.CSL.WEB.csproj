@@ -53,6 +53,9 @@
     <Reference Include="dotless.Core, Version=1.4.0.0, Culture=neutral, PublicKeyToken=96b446c9e63eae34, processorArchitecture=MSIL">
       <HintPath>..\packages\dotless.1.4.0.0\lib\dotless.Core.dll</HintPath>
     </Reference>
+    <Reference Include="itextsharp, Version=5.5.13.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\iTextSharp.5.5.13\lib\itextsharp.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.ApplicationBlocks.Data">
       <HintPath>..\..\..\..\..\..\..\Dll\Microsoft.ApplicationBlocks.Data.dll</HintPath>
     </Reference>
@@ -62,6 +65,9 @@
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="RazorEngine, Version=3.10.0.0, Culture=neutral, PublicKeyToken=9ee697374c7e744a, processorArchitecture=MSIL">
+      <HintPath>..\packages\RazorEngine.3.10.0\lib\net45\RazorEngine.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -916,6 +922,30 @@
     <Content Include="Content\js\portlet.js" />
     <Content Include="Content\js\settings.js" />
     <Content Include="Content\js\validaciones\additionals.js" />
+    <Content Include="Content\pagina\css\algo.css" />
+    <Content Include="Content\pagina\css\bootstrap.css" />
+    <Content Include="Content\pagina\css\bootstrap.min.css" />
+    <Content Include="Content\pagina\css\estilo-responsive.css" />
+    <Content Include="Content\pagina\css\grid.css" />
+    <Content Include="Content\pagina\css\normalize.css" />
+    <Content Include="Content\pagina\css\style.css" />
+    <Content Include="Content\pagina\images\f_logo.png" />
+    <Content Include="Content\pagina\images\icon-pino-01.png" />
+    <Content Include="Content\pagina\images\icon-scuderia.png" />
+    <Content Include="Content\pagina\images\image1.png" />
+    <Content Include="Content\pagina\images\loader.gif" />
+    <Content Include="Content\pagina\images\logo.png" />
+    <Content Include="Content\pagina\images\suc_mexico.jpg" />
+    <Content Include="Content\pagina\images\totop.png" />
+    <Content Include="Content\pagina\js\bootstrap.min.js" />
+    <Content Include="Content\pagina\js\DrawSVGPlugin.min.js" />
+    <Content Include="Content\pagina\js\fontawesome-all.js" />
+    <Content Include="Content\pagina\js\jquery.js" />
+    <Content Include="Content\pagina\js\modernizr-custom.js" />
+    <Content Include="Content\pagina\js\popper.min.js" />
+    <Content Include="Content\pagina\js\ScrollMagic.js" />
+    <Content Include="Content\pagina\js\TimelineMax.min.js" />
+    <Content Include="Content\pagina\js\TweenMax.min.js" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
     <Content Include="Content\themes\base\autocomplete.css" />
@@ -1021,6 +1051,9 @@
     <None Include="Connected Services\SolucionFactible\Timbrado.wsdl" />
     <Content Include="SAT\CSD_Pruebas_CFDI_LAN7008173R5.cer" />
     <Content Include="SAT\CSD_Pruebas_CFDI_LAN7008173R5.key" />
+    <Content Include="Content\pagina\document\infografia-facturacion.size.pdf" />
+    <Content Include="Content\pagina\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\pagina\images\image1.rar" />
     <!-->>>>>>> 20dc6b70ee4a003db4d84e5a9b915af4f0f8ebe7-->
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -1040,6 +1073,10 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <None Include="Scripts\_references.js" />
+    <Content Include="SystemHelper\SAT\Plantilla\plantillaFactura.html" />
+    <Content Include="SystemHelper\SAT\Wkhtml\wkhtmltoimage.exe" />
+    <Content Include="SystemHelper\SAT\Wkhtml\wkhtmltopdf.exe" />
+    <Content Include="SystemHelper\SAT\Wkhtml\wkhtmltox.dll" />
     <Content Include="SystemHelper\SAT\xslt33\AcreditamientoIEPS10.xslt" />
     <Content Include="SystemHelper\SAT\xslt33\aerolineas.xslt" />
     <Content Include="SystemHelper\SAT\xslt33\cadenaoriginal_3_3.xslt" />
@@ -1076,6 +1113,9 @@
     <Content Include="SystemHelper\SAT\xslt33\valesdedespensa.xslt" />
     <Content Include="SystemHelper\SAT\xslt33\vehiculousado.xslt" />
     <Content Include="SystemHelper\SAT\xslt33\ventavehiculos11.xslt" />
+    <Content Include="SystemHelper\Wkhtml\wkhtmltoimage.exe" />
+    <Content Include="SystemHelper\Wkhtml\wkhtmltopdf.exe" />
+    <Content Include="SystemHelper\Wkhtml\wkhtmltox.dll" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -1160,8 +1200,11 @@
     <Compile Include="Models\ViewModel\FacturaViewModel.cs" />
     <Compile Include="Models\ViewModel\IndexFacturaViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SystemHelper\Moneda.cs" />
     <Compile Include="SystemHelper\OpenSSLKey.cs" />
+    <Compile Include="SystemHelper\QR.cs" />
     <Compile Include="SystemHelper\SAT\CFDI3_3.cs" />
+    <Compile Include="SystemHelper\SAT\CFDI3_3_PDF.cs" />
     <Compile Include="SystemHelper\SAT\TimbreFiscalDigital.cs" />
     <Compile Include="SystemHelper\SelloDigital.cs" />
     <Compile Include="SystemHelper\StringWriterWithEncoding.cs" />
@@ -1209,14 +1252,17 @@
     <Content Include="Content\js\plugins\wPaint\package.json" />
     <Content Include="Content\js\plugins\wPaint\README.md" />
     <Content Include="Content\js\plugins\wPaint\wPaint.jquery.json" />
-    <Content Include="Areas\Admin\Views\web.config" />
+    <Content Include="Areas\Admin\Views\web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Areas\Admin\Views\HomeAdmin\Index.cshtml" />
     <None Include="packages.config" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Home\Facturacion.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Factura\Add.cshtml" />
     <Content Include="Views\Factura\Index.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\Facturacion.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1228,7 +1274,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Areas\Admin\Views\Json\" />
-    <Folder Include="SATTempXML\" />
+    <Folder Include="SATTempFile\" />
     <Folder Include="SAT\SAT1\" />
   </ItemGroup>
   <ItemGroup>

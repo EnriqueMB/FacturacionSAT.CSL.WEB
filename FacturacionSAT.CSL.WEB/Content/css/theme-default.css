@@ -7554,14 +7554,22 @@ display:none;
 }
 
 .modal-Seleccione {
+    -moz-border-radius: 0px;
+    -webkit-border-radius: 0px;
+    border-radius: 0px;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    border-width: 5px;
     background-color: #fff;
     border-radius: 4px;
-    margin: 150px auto;
+    margin: 140px auto;
     max-width: 800%;
-    opacity: 20;
-    transform: translateY(100px);
-    transform: translateX(100px);
+   
+    /*transform: translateY(100px);
+    transform: translateX(100px);*/
     position: relative;
+    border-width: 5px;
 }
 
 .modal-headerSeleccione {
@@ -7571,12 +7579,37 @@ display:none;
     -webkit-border-radius: 5px 5px 0px 0px;
     border-radius: 5px 5px 0px 0px;
     background: #bd2020;
-    border-width: 5px;
-    border-color: #080a0e;
+    border-bottom-color: #333 
+    
+    ;
+    border-bottom: 3px solid;
 }
 
 .modal-headerSeleccione .close {
     margin-top: 5px;
     margin-right: 5px;
-    color:black;
+  
+}
+
+.btnseleccionar {
+    webkit-box-shadow: none;
+    box-shadow: none;
+    background-color: #a43f3e;
+    border-color: #a43f3e;
+    font-size: 12px;
+    padding: 4px 15px;
+    line-height: 20px;
+    font-weight: 400;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
 }

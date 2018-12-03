@@ -1,0 +1,257 @@
+@charset "UTF-8";
+/* CSS Document */
+
+
+@media only screen and (max-width:800px) {
+	body {
+		min-width: auto;
+	}
+	div.sy-box {
+		display: none;
+	}
+	div#menu-conte { 
+		display: none;
+		width: 100%;
+		}
+	div#menu-conte-2 {
+		display: none;
+	}
+	div#menu-responsive {
+		display:block;
+		background: rgba(26,26,26,1);
+		background: -moz-linear-gradient(left, rgba(26,26,26,1) 0%, rgba(51,51,51,1) 51%, rgba(26,26,26,1) 100%);
+		background: -webkit-gradient(left top, right top, color-stop(0%, rgba(26,26,26,1)), color-stop(51%, rgba(51,51,51,1)), color-stop(100%, rgba(26,26,26,1)));
+		background: -webkit-linear-gradient(left, rgba(26,26,26,1) 0%, rgba(51,51,51,1) 51%, rgba(26,26,26,1) 100%);
+		background: -o-linear-gradient(left, rgba(26,26,26,1) 0%, rgba(51,51,51,1) 51%, rgba(26,26,26,1) 100%);
+		background: -ms-linear-gradient(left, rgba(26,26,26,1) 0%, rgba(51,51,51,1) 51%, rgba(26,26,26,1) 100%);
+		background: linear-gradient(to right, rgba(26,26,26,1) 0%, rgba(51,51,51,1) 51%, rgba(26,26,26,1) 100%);
+		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1a1a1a', endColorstr='#1a1a1a', GradientType=1 );
+	}
+	header {
+		width:100%;
+	}
+	header h1 {
+		width: 215px;
+		padding-left: 20px;
+		padding-bottom: 0px;
+	}
+	.page1 header h1 {
+    padding-bottom: 0px;
+	}
+	header h1 a {
+		float: left;
+	}
+	header nav {
+		width:80%;
+		height:100%;
+		left:-100%;
+		margin:0;
+		position: fixed;
+		z-index: 20;
+		top: 82px;
+	}
+	
+	header nav ul {
+		background-color: crimson;
+	}
+ 
+	header nav ul li {
+		display:block;
+		float:none;
+		border-bottom:1px solid rgba(255,255,255, .3);
+	}
+	header nav ul li a {
+	color:#fff;
+	padding:20px;
+	display:block;
+	text-decoration:none;
+	}
+ 
+	header nav ul li span {
+	margin-right:10px;
+	}
+ 
+	header nav ul li a:hover {
+	background:#200000;
+	}
+	
+	.menu_bar {
+		display:block;
+		padding: 20px 20px 0px 0px;
+		float: right;
+	}
+ 
+	.menu_bar .bt-menu {
+		background-image:url(../img/icon-menu.png);
+		background-position: center;
+		background-repeat: no-repeat;
+		background-size: 100% 100%;
+		display:block;
+		padding:15px;
+		color:#fff;
+		text-decoration:none;
+		font-weight: bold;
+		font-size:25px;
+		-webkit-box-sizing:border-box;
+		-moz-box-sizing:border-box;
+		box-sizing:border-box;
+		width:55px;
+		height: auto;	
+	}
+ 
+	.menu_bar span {
+		float:right;
+		font-size:40px;
+	}
+	.container_12 {
+		width: 100%;
+		overflow: hidden;
+	}
+	.container_12 .grid_12 {
+		width: 100%;
+		overflow: hidden;
+	}
+	h2 {
+		font-size: 8vw;
+		padding-top: 5px;
+		margin-bottom: 5px;
+	}
+	.container_12 .grid_3 {
+		width: 50%;
+		margin-left: 0px;
+		margin-right: 0px;
+	}
+	.box_bot {
+		padding-top: 20px;
+		padding-bottom: 20px;
+		font-size:20px; 
+	}
+	.box_bot span {
+		display:inline;
+		font-size:20px;
+	}	
+	.container_12 .grid_3 img {
+		width: 100%;
+	}
+	.grid_12 {
+		margin-left: 0px;
+		margin-right: 0px;
+	}
+	.ban_img {
+    	margin-bottom: 20px;
+		max-width: 135%;
+	}
+	.container_12 .prefix_2 {
+		padding-left: 0px;
+	}
+	.container_12 .grid_9 {
+		width: 95%;
+	}
+	.container_12 .grid_6 {
+		width: 100%;
+		margin-left: 18px;
+		margin-right: 18px;
+		margin-bottom: 40px;
+		margin-top: 40px;
+	}
+	.container_12 .grid_5 {
+	    width: 100%;
+	}
+	.container_12 .prefix_1 {
+    padding-left: 0px;
+	}
+	
+	.page1 h3 {
+    	padding-top: 0px;
+    	margin-bottom: 0px;
+	}
+	.copy {
+    	width: 100%;
+    	display: inline-block;
+    	vertical-align: middle;
+	}
+	.sub_copy {
+    	display: inline-block;
+    	vertical-align: middle;
+		margin-top: -1px;
+		padding-left: 10px;
+	}
+	
+	.titulo-secciones {
+		padding: 20px 0px 50px 0px;
+	}
+	.container_12 .grid_8 {
+    	width: 100%;
+	}
+	h3 {
+    	text-align: center;
+	}
+	
+	.fleft {
+    	width: 100%;
+	}
+	div.img-hidden-responsive {
+		overflow: hidden;
+		width: 96%;
+    	height: 250px;
+		margin-bottom: 20px;
+	}
+	.container_12 .grid_4 {
+    	width: 96%;
+	}
+	h4 {
+    	font-size: 35px;
+    	line-height: 40px;
+    	padding-top: 15px;
+    	margin-bottom: 10px;
+    	text-align: center;
+	}
+	p {
+   		text-align: justify;
+	}
+	.img_inner {
+    	width: 100%;
+	}
+	
+	#nuestras-lineas ul li h1 {
+    	font-size: 3em;
+	}
+	
+	#nuestras-lineas ul li small {
+    	font-size: 20px;
+		padding: 20px 0px;
+	}
+	
+	#nuestras-lineas ul li {
+    	padding: 30px 0px;
+	}
+	
+	#nuestras-lineas ul li p {
+    	width: 95%;
+    	margin: auto;
+	}
+	div#politicas {
+	width: 90%;
+	}
+	div#politicas p {
+	text-align: justify;
+	}
+}
+
+
+/* Dispositivos extra pequeños (teléfonos, 600px y abajo) */
+@media only screen and (max-width: 600px) {...}
+
+/* Dispositivos pequeños (tabletas de retrato y teléfonos grandes, de 600 px y más) */
+@media only screen and (min-width: 600px) {...} 
+
+/* Dispositivos medianos (tabletas de paisajes, 768px y más) */
+@media only screen and (min-width: 768px) {...} 
+
+/* Dispositivos grandes (laptops / escritorio, 992px y más) */
+@media only screen and (min-width: 992px) {...} 
+
+/* Dispositivos extragrandes (computadoras portátiles grandes y de escritorio, 1200px y más) */
+@media only screen and (min-width: 1200px) {...}
+
+

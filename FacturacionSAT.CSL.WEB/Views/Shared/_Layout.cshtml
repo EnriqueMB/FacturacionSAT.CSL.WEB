@@ -1,40 +1,106 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
-    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
-    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+    <title>Viajes Aury</title>
+    <meta charset="utf-8">
+    <meta name="author" content="Chandoki.com, viajesaury, Antonio Chandoki" />
+    <meta name="description" content="Servicios de transporte con la comodidad y seguridad garantizada con destino a las ciudades de Tuxtla, San Cristóbal, Tapachula, Huixtla, Puebla y Ciudad de México." />
+    <meta name="keywords" content="Viajes,Aury,México,Chiapas,Tuxtla,Gutiérrez,,Huixtla,Tapachula,San Cristóbal,Puebla,CallCenter,Viaja,Seguro,Económico" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="format-detection" content="telephone=no" />
+    <!--META PROPERTY OPEN GRAFH-->
+    <!--SOLO CAMBIAR ESTO-->
+    <meta property="og:url" content="https://www.viajesaury.com/">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Viajes Aury">
+    <meta property="og:description" content="Servicios de transporte con la comodidad y seguridad garantizada con destino a las ciudades de Tuxtla, San Cristóbal, Tapachula, Huixtla, Puebla y Ciudad de México.">
+    <meta property="og:image" content="https://www.viajesaury.com/img/img_face.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="625">
+    <meta property="og:locale" content="es_ES">
+    <meta property="article:section" content="blog">
+    <!--SOLO CAMBIAR ESTO-->
+    <meta property="og:site_name" content="Viajes Aury | viaja seguro y económico">
+    <meta property="article:publisher" content="https://www.facebook.com/ViajesAuryOficial/">
+    <meta property="article:author" content="https://www.facebook.com/chandoki/">
+    <meta property="article:tag" content="Viaja Seguro y Económico">
+    <!--FIN META PROPERTY OPEN GRAFH-->
+    <link rel="shortcut icon" href="@Url.Content("~/Content/favicon.ico")" type="image/x-icon" />
+    <link rel="stylesheet" href="@Url.Content("~/Content/pagina/css/style.css")" />
+    <link rel="stylesheet" href="@Url.Content("~/Content/pagina/css/bootstrap.css")"/>
+    <link rel="stylesheet" href="@Url.Content("~/Content/pagina/css/bootstrap.min.css")" />
+    <link rel="stylesheet" href="@Url.Content("~/Content/pagina/css/estilo-responsive.css")" /><!--ESTILO RESPOSIVE IMPORTANTE-->
+    <script src="@Url.Content("~/Content/pagina/js/jquery.js")"></script>
 </head>
-<body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                </ul>
+<body class="page1" id="top">
+    <header>
+        <div id="menu-responsive">
+            <header>
+                <h1>
+                    <a href="@Url.Action("Index","Home")"><img src="@Url.Content("~/Content/img/logo.png")" alt="Viajes Aury"></a>
+                </h1>
+                <div class="menu_bar">
+                    <a href="#" class="bt-menu"></a>
+                </div>
+                <nav>
+                    @*<ul>
+                        <li><a href="index.php">Inicio</a></li>
+                        <li><a href="nosotros.php">Nosotros</a></li>
+                        <li><a href="destinos.php">Destinos</a></li>
+                        <li><a href="nuestras-lineas.php">Nuestras Líneas</a></li>
+                        <li><a href="contacto.php">Contacto</a></li>
+                    </ul>*@
+                </nav>
+            </header>
+        </div>
+
+        <div id="menu-conte-2">
+            <h1>
+                <a href="@Url.Action("Index","Home")"><img src="@Url.Content("~/Content/img/logo.png")" alt="Viajes Aury"></a>
+            </h1>
+            <nav>
+                @*<ul>
+                    <li class="current"><a href="index.php">Inicio</a></li>
+                    <li><a href="nosotros.php">Nosotros</a></li>
+                    <li><a href="destinos.php">Destinos</a></li>
+                    <li><a href="nuestras-lineas.php">Nuestras Líneas</a></li>
+                    <li><a href="contacto.php">Contacto</a></li>
+                </ul>*@
+            </nav>
+            <div class="clear"></div>
+        </div> <h1 class="titulo-secciones">Facturación electrónica</h1>
+    </header>
+    <!--=====================Content======================-->
+    <div>
+        @RenderBody()
+    </div>
+    <footer>
+        <div class="container_12">
+            <div class="row">
+                <div class="grid_12">
+                    <a href="#" onclick="goToByScroll('top'); return false;" class="top"></a><br> <a href="#" class="f_logo"><img src="@Url.Content("~/Content/img/logo.png")" alt=""></a>
+                    <div class="footer_socials">
+                        <a href="https://www.facebook.com/ViajesAuryOficial/" class="fa fa-facebook" target="_blank"></a>
+                    </div>
+                    <div class="copy">
+                        <span class="brand">Viajes Aury </span>  &copy; <span id="copyright-year"></span>  | <a href="#">Politica de Privacidad</a>
+                        <div class="sub_copy">Sitio Web diseñado por <a href="http://www.facebook.com/Chandoki" rel="nofollow" target="_blank">Antonio Chandoki</a></div>
+                        <div class="sub_copy">Sistema Elaborado por <a href="http://www.creativasoftline.com/" rel="nofollow" target="_blank">Creativa Softline</a></div>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
+        <div class="clear"></div>
+    </footer>
+    <script type="text/javascript" src="@Url.Content("~/Content/pagina/js/jquery.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/pagina/js/bootstrap.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/pagina/js/popper.min.js")"></script>
+    @*<script type="text/javascript">
 
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
+            $('#carousel').elastislide({
+                minItems: 8
+            });
 
-    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
-    <script src="~/Scripts/bootstrap.min.js"></script>
+        </script>*@
 </body>
 </html>

@@ -92,31 +92,40 @@ public partial class Comprobante
 
     public TimbreFiscalDigital TimbreFiscalDigital;
 
-    //public string QR
-    //{
-    //    get
-    //    {
-    //        byte[] qr = null;
-    //        string sQR = "";
-    //        string baseQR = "";
+    public string QR
+    {
+        get
+        {
+            byte[] qr = null;
+            string sQR = "";
+            string baseQR = "";
 
-    //        qr = FacturacionSAT33.QR.createBarCode("https://verificacfdi.facturaelectronica.sat.gob.mx/default.aspx?id=" + TimbreFiscalDigital.UUID +
-    //            "&re=" + Emisor.Rfc + "&rr=" + Receptor.Rfc + "&tt=" + Total + "&fe=" + Sello.Substring(Sello.Length - 9, 8));
-    //        baseQR = System.Convert.ToBase64String(qr);
-    //        sQR = System.String.Format("data:image/gif;base64,{0}", baseQR);
+            qr = FacturacionSAT.CSL.WEB.SystemHelper.QR.createBarCode("https://verificacfdi.facturaelectronica.sat.gob.mx/default.aspx?id=" + TimbreFiscalDigital.UUID +
+                "&re=" + Emisor.Rfc + "&rr=" + Receptor.Rfc + "&tt=" + Total + "&fe=" + Sello.Substring(Sello.Length - 9, 8));
+            baseQR = System.Convert.ToBase64String(qr);
+            sQR = System.String.Format("data:image/gif;base64,{0}", baseQR);
 
-    //        return sQR;
-    //    }
-    //}
+            return sQR;
+        }
+    }
 
-    //public string MonedaConLetra
-    //{
-    //    get
-    //    {
-    //        FacturacionSAT33.Moneda oMoneda = new FacturacionSAT33.Moneda();
-    //        return oMoneda.Convertir(Total.ToString("#.00"), true);
-    //    }
-    //}
+    public string FechaElaboracion
+    {
+        get
+        {
+            string fechaHoraActual = System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            return fechaHoraActual;
+        }
+    }
+
+    public string MonedaConLetra
+    {
+        get
+        {
+            FacturacionSAT.CSL.WEB.SystemHelper.Moneda oMoneda = new FacturacionSAT.CSL.WEB.SystemHelper.Moneda();
+            return oMoneda.Convertir(Total.ToString("#.00"), true);
+        }
+    }
 
 
 

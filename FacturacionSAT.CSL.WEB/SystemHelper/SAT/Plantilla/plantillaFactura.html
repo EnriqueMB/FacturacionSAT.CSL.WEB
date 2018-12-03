@@ -1,0 +1,277 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body style="font-family:Helvetica;">
+
+    <div id="div_encabezado">
+        <table id="tbl_logo">
+            <tr>
+                <td>
+                    <img src="https://www.w3schools.com/images/w3schools_green.jpg"
+                         width="250"
+                         height="150"
+                         alt="Ejemplo de imagen grande codificada en base 64"
+                         title="Ejemplo de imagen grande codificada en base 64">
+                </td>
+            </tr>
+        </table>
+
+        <table id="tbl_emisor" cellpadding=3>
+            <tr>
+                <td colspan=2 class="textoCentrado"><b>CONSTRUCTORA IZEL S.A. DE C.V.</b></td>
+            </tr>
+            <tr>
+                <td>RFC del Emisor :</td>
+                <td><b>@Model.Comprobante.Emisor.Nombre</b></td>
+            </tr>
+            <tr>
+                <td>Tipo de comprobante :</td>
+                <td><b>@Model.Comprobante.TipoDeComprobante</b></td>
+            </tr>
+            <tr>
+                <td>Lugar de Expedición :</td>
+                <td><b>@Model.Comprobante.LugarExpedicion</b></td>
+            </tr>
+            <tr>
+                <td>Régimen Fiscal :</td>
+                <td><b>601 General de Ley Personas Morales</b></td>
+            </tr>
+        </table>
+    </div>
+    <br />
+    <div>
+        <table id="tbl_generales">
+            <tr>
+                <td class="fondoGris"><b>Forma de pago:</b></td>
+                <td>@Model.Comprobante.FormaPago</td>
+                <td class="fondoGris"><b>Folio</b></td>
+                <td>@Model.Comprobante.Folio</td>
+            </tr>
+            <tr>
+                <td class="fondoGris"><b>Fecha y hora de elaboración:</b></td>
+                <td>@Model.Comprobante.FechaElaboracion</td>
+                <td class="fondoGris"><b>Móneda:</b></td>
+                <td>@Model.Comprobante.Moneda</td>
+            </tr>
+        </table>
+
+        <div>
+            <br />
+            <div>
+                <table id="tbl_cliente">
+                    <tr>
+                        <td class="fondoNegroTextoBlanco textoCentrado" colspan=4>Datos del cliente</td>
+                    </tr>
+                    <tr>
+                        <td class="fondoGris"><b>Cliente:</b></td>
+                        <td colspan=3>@Model.Comprobante.Receptor.Nombre</td>
+                    </tr>
+                    <tr>
+                        <td class="fondoGris"><b>RFC:</b></td>
+                        <td>@Model.Comprobante.Receptor.Rfc</td>
+                        <td class="fondoGris"><b>Uso CFDI:</b></td>
+                        <td>@Model.Comprobante.Receptor.UsoCFDI</td>
+                    </tr>
+                </table>
+            </div>
+            <br />
+            <div>
+                <table id="tbl_SAT">
+                    <tr>
+                        <td class="fondoNegroTextoBlanco textoCentrado">Cantidad:</td>
+                        <td class="fondoNegroTextoBlanco textoCentrado">Unidad</td>
+                        <td class="fondoNegroTextoBlanco textoCentrado">Clave unidad SAT</td>
+                        <td class="fondoNegroTextoBlanco textoCentrado">Clave Producto / Servicio</td>
+                        <td class="fondoNegroTextoBlanco textoCentrado">Descripción</td>
+                        <td class="fondoNegroTextoBlanco textoCentrado">Subtotal</td>
+                    </tr>
+
+                    @foreach(var oConcepto in Model.Comprobante.Conceptos){
+                    <tr>
+                        <td class="textoCentrado">@oConcepto.Cantidad</td>
+                        <td class="textoCentrado">@oConcepto.Cantidad</td>
+                        <td class="textoCentrado">@oConcepto.ClaveProdServ</td>
+                        <td class="textoCentrado">@oConcepto.ClaveProdServ</td>
+                        <td class="textoCentrado">@oConcepto.Descripcion</td>
+                        <td class="textoCentrado">@oConcepto.Importe.ToString("C")</td>
+                    </tr>
+                    }
+                </table>
+            </div>
+            <br />
+
+
+
+
+        </div>
+
+        <div style="width: 100%">
+
+            <table style="width: 100%">
+                <tr>
+                    <td style="width: 40%">
+                        <table style="width: 100%">
+                            <tr>
+                                <td style="background: #00225c; color: white; text-align: center;"><b>Serie del certificado emisor:</b></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center;"> @Model.Comprobante.NoCertificado</td>
+                            </tr>
+                            <tr>
+                                <td style="background: #00225c; color: white; text-align: center;"><b>Folio fiscal:</b></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center;"> @Model.Comprobante.TimbreFiscalDigital.UUID</td>
+                            </tr>
+                            <tr>
+                                <td style="background: #00225c; color: white; text-align: center;"><b>No. de Serie del Certificado del SAT:</b></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center;">@Model.Comprobante.TimbreFiscalDigital.NoCertificadoSAT</td>
+                            </tr>
+                            <tr>
+                                <td style="background: #00225c; color: white; text-align: center;"><b>Fecha y hora de certificación:</b></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center;">@Model.Comprobante.TimbreFiscalDigital.FechaTimbrado</td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td style="width: 10%">
+                        <table style="width: 100%"></table>
+                    </td>
+                    <td style="width: 50%">
+                        <table style="width: 100%">
+                            <tr>
+                                <td style="background: #00225c; color: white; text-align: center;"><b>Sello Digital del CFDI:</b></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center;">
+                                    @Model.Comprobante.TimbreFiscalDigital.SelloCFD
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="background: #00225c; color: white; text-align: center;"><b>Sello Digital del SAT:</b></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center;">
+                                    @Model.Comprobante.TimbreFiscalDigital.SelloSAT
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="background: #00225c; color: white; text-align: center;"><b>Cadena original del complemento de certificación digital del SAT:</b></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center;">
+                                    
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+
+        </div>
+    </div>
+</body>
+</html>
+
+<style>
+    .textoContiguo {
+        -ms-word-break: break-all;
+        word-break: break-all;
+        word-break: break-word; /* Sólo WebKit -NO DOCUMENTADO */
+        -ms-hyphens: auto; /* Guiones para separar en sílabas */
+        -moz-hyphens: auto; /*  depende de lang en <html>      */
+        -webkit-hyphens: auto;
+        hyphens: auto;
+    }
+
+
+    table {
+        border-collapse: collapse;
+    }
+
+        table#tbl_emisor, table#tbl_emisor td, table#tbl_emisor th, table#tbl_emisor tr {
+            border: 1px solid black;
+            border-spacing: 5px;
+        }
+
+        table#tbl_emisor {
+            background: #e2e2e2;
+            font: 12px 'Helvetica';
+            float: right;
+        }
+
+        table#tbl_logo {
+            float: left;
+        }
+
+    #div_encabezado {
+        width: 100%;
+    }
+
+    #div_monto {
+        width: 100%;
+        height: auto%;
+    }
+
+    table#tbl_generales {
+        width: 100%;
+    }
+
+    table#tbl_cliente {
+        width: 100%;
+    }
+
+    table#tbl_SAT {
+        width: 100%;
+    }
+
+    .fondoGris {
+        background: #e2e2e2;
+    }
+
+    table#tbl_generales, table#tbl_generales td, table#tbl_generales th, table#tbl_generales tr {
+        border: 1px solid black;
+        border-spacing: 5px;
+    }
+
+    tbl_cliente#tbl_cliente, table#tbl_cliente td, table#tbl_cliente th, table#tbl_cliente tr {
+        border: 1px solid black;
+        border-spacing: 5px;
+    }
+
+    tbl_cliente#tbl_SAT, table#tbl_SAT td, table#tbl_SAT th, table#tbl_SAT tr {
+        border: 1px solid black;
+        border-spacing: 5px;
+    }
+
+    tbl_cliente#tbl_SATConceptos, table#tbl_SATConceptos td, table#tbl_SATConceptos th, table#tbl_SATConceptos tr {
+        border: 1px solid black;
+        border-spacing: 5px;
+    }
+
+    table#tbl_ImporteConLetra {
+        border: 1px solid black;
+    }
+
+    table#tbl_Totales {
+        float: right;
+    }
+
+
+
+    .textoCentrado {
+        text-align: center;
+    }
+
+    .fondoNegroTextoBlanco {
+        background: black;
+        color: white;
+    }
+</style>

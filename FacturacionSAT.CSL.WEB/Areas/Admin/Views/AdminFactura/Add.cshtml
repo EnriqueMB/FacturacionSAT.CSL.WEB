@@ -32,7 +32,7 @@
     </div>
 
     <div class="col-md-12">
-        <form action="@Url.Content("~/Admin/AdminFactura/Add")" method="post">
+        <form action="@Url.Content("~/Admin/AdminFactura/Add")" method="post" autocomplete="off">
             @Html.HiddenFor(d => d.Version)
             @Html.HiddenFor(d => d.TipoComprobante)
             @Html.HiddenFor(d => d.MonedaDB)
