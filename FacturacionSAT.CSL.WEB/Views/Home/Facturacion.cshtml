@@ -1,94 +1,80 @@
 ﻿
 @{
-    Layout = null;
+    ViewBag.Title = "Facturacion";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
-    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-    <style>
-        .header {
-            color: #36A0FF;
-            font-size: 27px;
-            padding: 10px;
-        }
-
-        .bigicon {
-            font-size: 35px;
-            color: #36A0FF;
-        }
-    </style>
-    <meta name="viewport" content="width=device-width" />
-    <title>Facturacion</title>
-</head>
-<body>
-    <div>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="well well-sm">
-                        @using (Html.BeginForm("Facturacion", "Home", FormMethod.Post, new { @class = "form-horizontal", id = "form-dg", autocomplete = "off", @enctype = "multipart/form-data" }))
-                        {
-                            <fieldset>
-                                <!-- Form Name -->
-                                <legend>FACTURACIÓN</legend>
-                                <!-- Text input-->
-                                <div class="control-group">
-                                    <label class="control-label" for="name">RFC o Cliente</label>
-                                    <div class="controls">
-                                        <input id="name" name="name" type="text" placeholder="AAAA010101AA0" class="input-xlarge" required="">
-                                    </div>
+<!--=====================Content======================-->
+<section class="zonafact">
+    <div class="title">
+        <h1>Realice su facturación</h1>
+    </div>
+    <div class="container contenidoTabs">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="factura-tab" data-toggle="tab" href="#factura" role="tab" aria-controls="factura" aria-selected="true">Facturar</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="ticketFactura-tab" data-toggle="tab" href="#ticketFactura" role="tab" aria-controls="ticketFactura" aria-selected="false">Consultar por Ticket</a>
+            </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="factura" role="tabpanel" aria-labelledby="factura-tab">
+                <div class="formFacturar">
+                    <form action="">
+                        <div class="formTitle">
+                            <h2>Facturar</h2>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="group-input">
+                                    <input type="text" name="membresia" class="form-control factura" placeholder="Membresía o RFC">
                                 </div>
-                                <!-- Text input-->
-                                <div class="control-group">
-                                    <label class="control-label" for="last">Código Postal</label>
-                                    <div class="controls">
-                                        <input id="last" name="last" type="text" placeholder="Código Postal" class="input-xlarge" required="">
-
-                                    </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="group-input">
+                                    <input type="text" name="codigoPostal" class="form-control factura" placeholder="Código postal">
                                 </div>
-                                <!-- Text input-->
-                                <div class="control-group">
-                                    <label class="control-label" for="phone">Número del Ticket</label>
-                                    <div class="controls">
-                                        <input id="phone" name="phone" type="text" placeholder="# del Ticket" class="input-xlarge" required="">
-
-                                    </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="group-input">
+                                    <input type="text" name="noTicket" class="form-control factura" placeholder="Número de ticket">
                                 </div>
-                                <!-- Text input-->
-                                <div class="control-group">
-                                    <label class="control-label" for="mail">Correo Electrónico</label>
-                                    <div class="controls">
-                                        <input id="mail" name="mail" type="text" placeholder="" class="input-xlarge" required="">
-
-                                    </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="group-input">
+                                    <input type="text" name="transaccion" class="form-control factura" placeholder="# Transacción">
                                 </div>
-                                <!-- Text input-->
-                                <div class="control-group">
-                                    <label class="control-label" for="email">Confirmar correo</label>
-                                    <div class="controls">
-                                        <input id="email" name="email" type="text" placeholder="" class="input-xlarge" required="">
-
-                                    </div>
+                            </div>
+                        </div>
+                        <div class="actionButtons">
+                            <a href="#"><button type="button" class="">Cancelar</button></a>
+                            <a href=""><button class="" type="submit">Continuar</button></a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="ticketFactura" role="tabpanel" aria-labelledby="ticketFactura-tab">
+                <div class="formFacturar">
+                    <form>
+                        <div class="formTitle">
+                            <h2>Consultar por número de ticket</h2>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="group-input">
+                                    <input type="text" name="noConsultaTicket" placeholder="Número de Ticket o factura" class="form-control factura">
                                 </div>
+                            </div>
 
-                                <!-- Button -->
-                                <div class="control-group">
-                                    <label class="control-label" for="send"></label>
-                                    <div class="controls">
-                                        <button id="send" name="send" class="btn btn-primary">Guardar y Enviar</button>
-                                    </div>
-                                </div>
-                            </fieldset>
-                        }
-                     </div>
+                        </div>
+                        <div class="actionButtons">
+                            <a href="#"><button type="button" class="">Cancelar</button></a>
+                            <a href=""><button class="" type="submit">Continuar</button></a>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
-</body>
-</html>
+</section>

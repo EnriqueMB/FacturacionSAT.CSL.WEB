@@ -922,6 +922,30 @@
     <Content Include="Content\js\portlet.js" />
     <Content Include="Content\js\settings.js" />
     <Content Include="Content\js\validaciones\additionals.js" />
+    <Content Include="Content\pagina\css\algo.css" />
+    <Content Include="Content\pagina\css\bootstrap.css" />
+    <Content Include="Content\pagina\css\bootstrap.min.css" />
+    <Content Include="Content\pagina\css\estilo-responsive.css" />
+    <Content Include="Content\pagina\css\grid.css" />
+    <Content Include="Content\pagina\css\normalize.css" />
+    <Content Include="Content\pagina\css\style.css" />
+    <Content Include="Content\pagina\images\f_logo.png" />
+    <Content Include="Content\pagina\images\icon-pino-01.png" />
+    <Content Include="Content\pagina\images\icon-scuderia.png" />
+    <Content Include="Content\pagina\images\image1.png" />
+    <Content Include="Content\pagina\images\loader.gif" />
+    <Content Include="Content\pagina\images\logo.png" />
+    <Content Include="Content\pagina\images\suc_mexico.jpg" />
+    <Content Include="Content\pagina\images\totop.png" />
+    <Content Include="Content\pagina\js\bootstrap.min.js" />
+    <Content Include="Content\pagina\js\DrawSVGPlugin.min.js" />
+    <Content Include="Content\pagina\js\fontawesome-all.js" />
+    <Content Include="Content\pagina\js\jquery.js" />
+    <Content Include="Content\pagina\js\modernizr-custom.js" />
+    <Content Include="Content\pagina\js\popper.min.js" />
+    <Content Include="Content\pagina\js\ScrollMagic.js" />
+    <Content Include="Content\pagina\js\TimelineMax.min.js" />
+    <Content Include="Content\pagina\js\TweenMax.min.js" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
     <Content Include="Content\themes\base\autocomplete.css" />
@@ -1027,6 +1051,9 @@
     <None Include="Connected Services\SolucionFactible\Timbrado.wsdl" />
     <Content Include="SAT\CSD_Pruebas_CFDI_LAN7008173R5.cer" />
     <Content Include="SAT\CSD_Pruebas_CFDI_LAN7008173R5.key" />
+    <Content Include="Content\pagina\document\infografia-facturacion.size.pdf" />
+    <Content Include="Content\pagina\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\pagina\images\image1.rar" />
     <!-->>>>>>> 20dc6b70ee4a003db4d84e5a9b915af4f0f8ebe7-->
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -1225,14 +1252,17 @@
     <Content Include="Content\js\plugins\wPaint\package.json" />
     <Content Include="Content\js\plugins\wPaint\README.md" />
     <Content Include="Content\js\plugins\wPaint\wPaint.jquery.json" />
-    <Content Include="Areas\Admin\Views\web.config" />
+    <Content Include="Areas\Admin\Views\web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Areas\Admin\Views\HomeAdmin\Index.cshtml" />
     <None Include="packages.config" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Home\Facturacion.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Factura\Add.cshtml" />
     <Content Include="Views\Factura\Index.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\Facturacion.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
