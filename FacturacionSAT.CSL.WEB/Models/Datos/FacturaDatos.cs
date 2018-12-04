@@ -58,6 +58,7 @@ namespace FacturacionSAT.CSL.WEB.Models.Datos
                         //receptor
                         item.RazonSocial = !dr.IsDBNull(dr.GetOrdinal("razonSocial")) ? dr.GetString(dr.GetOrdinal("razonSocial")) : string.Empty;
                         item.RFCReceptor = !dr.IsDBNull(dr.GetOrdinal("rfcReceptor")) ? dr.GetString(dr.GetOrdinal("rfcReceptor")) : RFCReceptor;
+                        item.EmailReceptor = !dr.IsDBNull(dr.GetOrdinal("emailReceptor")) ? dr.GetString(dr.GetOrdinal("emailReceptor")) : string.Empty;
 
                         List<Concepto> ListaConceptos = new List<Concepto>();
                         Concepto itemConcepto = new Concepto();
@@ -77,9 +78,10 @@ namespace FacturacionSAT.CSL.WEB.Models.Datos
                         itemConcepto.PrecioUnitario = !dr.IsDBNull(dr.GetOrdinal("CFDI_PrecioUnitario")) ? dr.GetDecimal(dr.GetOrdinal("CFDI_PrecioUnitario")) : 0;
 
                         Impuesto.Nombre = !dr.IsDBNull(dr.GetOrdinal("CFDI_NombreImpuesto")) ? dr.GetString(dr.GetOrdinal("CFDI_NombreImpuesto")) : string.Empty;
+
                         Impuesto.Importe = !dr.IsDBNull(dr.GetOrdinal("CFDI_ImpuestoImporte")) ? dr.GetDecimal(dr.GetOrdinal("CFDI_ImpuestoImporte")) : 0;
-                        Impuesto.Tasa = (!dr.IsDBNull(dr.GetOrdinal("porcentajeIVA")) ? dr.GetDecimal(dr.GetOrdinal("porcentajeIVA")) : 0) / 1000000;
-                        Impuesto.Tipo = !dr.IsDBNull(dr.GetOrdinal("CFDI_TipoImpuesto")) ? dr.GetString(dr.GetOrdinal("CFDI_TipoImpuesto")) : string.Empty;
+                        Impuesto.TasaOCuota = (!dr.IsDBNull(dr.GetOrdinal("porcentajeIVA")) ? dr.GetDecimal(dr.GetOrdinal("porcentajeIVA")) : 0) / 1000000;
+                        Impuesto.TipoFactor = !dr.IsDBNull(dr.GetOrdinal("CFDI_TipoImpuesto")) ? dr.GetString(dr.GetOrdinal("CFDI_TipoImpuesto")) : string.Empty;
 
                         ListaImpuesto.Add(Impuesto);
 
@@ -91,8 +93,6 @@ namespace FacturacionSAT.CSL.WEB.Models.Datos
                     }
                 }
                 dr.Close();
-
-
 
                 return item;
             }
@@ -132,7 +132,7 @@ namespace FacturacionSAT.CSL.WEB.Models.Datos
 
                         Impuesto.Nombre = !dr.IsDBNull(dr.GetOrdinal("nombre_cve_impuesto_iva")) ? dr.GetString(dr.GetOrdinal("nombre_cve_impuesto_iva")) : string.Empty;
                         Impuesto.Importe = !dr.IsDBNull(dr.GetOrdinal("iva")) ? dr.GetDecimal(dr.GetOrdinal("iva")) : 0;
-                        Impuesto.Tasa = !dr.IsDBNull(dr.GetOrdinal("porcentaje_iva")) ? dr.GetDecimal(dr.GetOrdinal("porcentaje_iva")) : 0;
+                        Impuesto.TasaOCuota = !dr.IsDBNull(dr.GetOrdinal("porcentaje_iva")) ? dr.GetDecimal(dr.GetOrdinal("porcentaje_iva")) : 0;
 
                         item.PrecioUnitario = totalProdServ - Impuesto.Importe;
 

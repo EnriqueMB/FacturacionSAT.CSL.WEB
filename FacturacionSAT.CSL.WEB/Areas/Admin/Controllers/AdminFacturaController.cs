@@ -190,11 +190,6 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
         {
             try
             {
-
-                //string pathKey = pathRootSATEmisorXML +"\\"  + "CSD_Pruebas_CFDI_LAN7008173R5.key";
-                //string pathCer = pathRootSATEmisorXML + "\\" + "CSD_Pruebas_CFDI_LAN7008173R5.cer";
-                //string clavePrivada = "12345678a";
-
                 string pathKey = pathRootSATEmisorXML + "\\" + Emisor.URLArchivoKEY;
                 string pathCer = pathRootSATEmisorXML + "\\" + Emisor.URLArchivoCER;
                 string clavePrivada = Emisor.PasswordArchivoKEY;
@@ -214,7 +209,7 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
                 oComprobante.Sello = ""; //requerido: quien realiza la factura
                 oComprobante.FormaPago = Factura.FormaDePago; //requerido, del catálogo: Cfdi:FormaPago
                 oComprobante.NoCertificado = numeroCertificado; //requerido, es en relacion al .cer 
-                oComprobante.Certificado = ""; //sig video 
+                oComprobante.Certificado = "";
                 oComprobante.SubTotal = Factura.Subtotal; // Atributo requerido para representar la suma de los importes de los conceptos antes de descuentos e 
                                                           //impuesto.No se permiten valores negativos.
                 oComprobante.Descuento = Factura.TotalDescuento;
@@ -254,6 +249,16 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
                     oConcepto.Descuento = Concepto.Descuento.Value;
                     lstConceptos.Add(oConcepto);
                 }
+
+                //impuesto trasladado
+                List<ComprobanteConceptoImpuestosTraslado> ListaImpuestosTraladado = new List<ComprobanteConceptoImpuestosTraslado>();
+                ComprobanteConceptoImpuestosTraslado oImpuestosTraslado = new ComprobanteConceptoImpuestosTraslado();
+                oImpuestosTraslado.Base = oConcepto.Importe - oConcepto.Descuento;
+                //oImpuestosTraslado.TasaOCuota = Factura.Conceptos[0].Impuestos[0].CFDI_Impuesto;
+                //oImpuestosTraslado.TipoFactor = Factura.Conceptos[0].Impuestos[0].CFDI_Impuesto;
+                //oImpuestosTraslado.Impuesto = Factura.Conceptos[0].Impuestos[0].CFDI_Impuesto;
+                //oImpuestosTraslado.Importe = Factura.Conceptos[0].Impuestos[0].CFDI_Impuesto;
+
                 oComprobante.Conceptos = lstConceptos.ToArray();
 
                 this.CreateXML(oComprobante, pathXML);
@@ -278,40 +283,21 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
 
                 CreateXML(oComprobante, pathXML);
 
-
-                /*Timbrado del CFDI con el proveedor del pack*/
-                //string usuario = "testing@solucionfactible.com";
-                //string contraseña = "timbrado.SF.16672";
                 string usuario = Pac.UserPac;
                 string contrasena = Pac.PasswordPac;
 
-                /*Datos del pack que se maneja en su momento será el que se desea*/
                 bool produccion = false;
-                //Checar esto lo da el proveedor del pac, pero puede que no sea en todos
                 string prod_endpoint = "TimbradoEndpoint_PRODUCCION";
                 string test_endpoint = "TimbradoHttpSoap11Endpoint";
-
-                //Si recibe error 417 deberá descomentar la linea a continuación
-                //System.Net.ServicePointManager.Expect100Continue = false;
-
-                //El paquete o namespace en el que se encuentran las clases
-                //será el que se define al agregar la referencia al WebService,
-                //en este ejemplo es: com.sf.ws.Timbrado
 
                 SolucionFactible.TimbradoPortTypeClient portClient = null;
                 portClient = (produccion)
                     ? new SolucionFactible.TimbradoPortTypeClient(prod_endpoint)
                     : portClient = new SolucionFactible.TimbradoPortTypeClient(test_endpoint);
 
-
                 byte[] xmlSAT = System.IO.File.ReadAllBytes(pathXML);
 
                 SolucionFactible.CFDICertificacion response = portClient.timbrar(usuario, contrasena, xmlSAT, false);
-
-                //System.Console.WriteLine("Información de la transacción");
-                //System.Console.WriteLine(response.status);
-                //System.Console.WriteLine(response.mensaje);
-                //System.Console.WriteLine("Resultados recibidos" + response.resultados.Length);
 
                 SolucionFactible.CFDIResultadoCertificacion[] resultados = response.resultados;
 
@@ -444,10 +430,7 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
 
                 SystemHelper.SAT.CFDI3_3_PDF cFDI3_3_PDF = new SystemHelper.SAT.CFDI3_3_PDF(oComprobante);
 
-
                 resultHtml = RazorEngine.Razor.Parse(sHtml, cFDI3_3_PDF);
-
-                
 
                 //creamos el archivo temporal
                 System.IO.File.WriteAllText(pathHTMLTempFileHtml, resultHtml);
@@ -483,6 +466,21 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
         {
             string contenido = System.IO.File.ReadAllText(pathFile);
             return contenido;
+        }
+
+        private bool EnviarFacturaEmail()
+        {
+            try
+            {
+                return true;
+            }
+            catch (Exception ex)
+            {
+                string Mensaje = ex.Message.Replace("\r\n", "").Replace("\r", "").Replace("\n", "");
+                TempData["message"] = Mensaje;
+                TempData["typemessage"] = "2";
+                throw;
+            }
         }
     }
 }

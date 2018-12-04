@@ -29,6 +29,9 @@ namespace FacturacionSAT.CSL.WEB.Models.ViewModel
         //    }
         //}
         public string CodigoBarraBoleto { get; set; }
+        [Required]
+        [Display(Name = "Email del receptor")]
+        public string EmailReceptor { get; set; }
         public string Logotipo { get; set; }
         public string NoCertificadoSAT { get; set; }
         public string SelloSAT { get; set; }
@@ -347,11 +350,21 @@ namespace FacturacionSAT.CSL.WEB.Models.ViewModel
         {
             public string Nombre { get; set; }
 
-            public decimal Tasa { get; set; }
+            /// <summary>
+            /// Atributo condicional para señalar el valor de la tasa
+            /// o cuota del impuesto que se traslada para el
+            /// presente concepto.Es requerido cuando el atributo
+            /// TipoFactor tenga una clave que corresponda a Tasa
+            /// o Cuota
+            /// </summary>
+            public decimal TasaOCuota { get; set; }
+            public decimal Base { get; set; }
+            public string CFDI_Impuesto { get; set; }
+            public string TipoFactor { get; set; }
             public string Ambito { get; set; }
-            public string Tipo { get; set; }
+            public string CFDI_TipoFactor { get; set; }
 
-            public string Factor { get; set; }
+            //public string Factor { get; set; }
             //valor que se utiliza en el pdf, se llena al hacer la factura,
             //es decir no viene en el formulario
             public decimal Importe { get; set; }

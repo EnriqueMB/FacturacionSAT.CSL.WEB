@@ -120,6 +120,17 @@
                         @Html.TextBoxFor(d => d.RazonSocial, "", new { @class = "form-control", @readonly = "true" })
                     }
                 </div>
+                <div class="col-md-4">
+                    @Html.LabelFor(d => d.EmailReceptor)
+                    @if (string.IsNullOrEmpty(Model.EmailReceptor))
+                    {
+                        @Html.TextBoxFor(d => d.EmailReceptor, "", new { @class = "form-control" })
+                    }
+                    else
+                    {
+                        @Html.TextBoxFor(d => d.EmailReceptor, "", new { @class = "form-control", @readonly = "true" })
+                    }
+                </div>
             </div>
             <br />
             <hr />
