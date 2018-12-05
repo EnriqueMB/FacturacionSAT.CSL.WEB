@@ -157,11 +157,16 @@ namespace FacturacionSAT.CSL.WEB.Models.Datos
                         cmd.CommandType = CommandType.StoredProcedure;
 
                         string xmlString = System.IO.File.ReadAllText(pathXML);
-                        cmd.Parameters.AddWithValue("@xmlFacturaSAT" , xmlString);
+                        cmd.Parameters.AddWithValue("@xmlFacturaSAT", xmlString);
                         cmd.Parameters.Add("@rfcEmisor", SqlDbType.VarChar).Value = oFactura.RFCEmisor;
                         cmd.Parameters.Add("@rfcReceptor", SqlDbType.VarChar).Value = oFactura.RFCReceptor;
                         cmd.Parameters.Add("@codigoBarra", SqlDbType.VarChar).Value = oFactura.CodigoBarraBoleto;
                         cmd.Parameters.Add("@totalFactura", SqlDbType.Money).Value = oFactura.Total;
+                        cmd.Parameters.Add("@id_usuario", SqlDbType.Int).Value = oAuxSQLModel.Id_usuario;
+                        cmd.Parameters.Add("@emailReceptor", SqlDbType.NVarChar).Value = oFactura.EmailReceptor;
+                        cmd.Parameters.Add("@emailEmisor", SqlDbType.NVarChar).Value = oFactura.EmailEmisor;
+
+
 
                         //parametros de salida
                         cmd.Parameters.Add(new SqlParameter("@mensaje", SqlDbType.NVarChar, -1)); //-1 para tipo MAX

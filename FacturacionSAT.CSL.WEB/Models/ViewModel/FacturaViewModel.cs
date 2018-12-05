@@ -216,7 +216,7 @@ namespace FacturacionSAT.CSL.WEB.Models.ViewModel
 
         [Display(Name = "Correo electrónico")]
         [EmailAddress]
-        public string Email { get; set; }
+        public string EmailEmisor { get; set; }
 
         [Display(Name = "Referencia")]
         public string Referencia { get; set; }

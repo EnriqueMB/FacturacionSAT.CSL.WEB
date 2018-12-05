@@ -11,11 +11,11 @@
         <table id="tbl_logo">
             <tr>
                 <td>
-                    <img src="https://www.w3schools.com/images/w3schools_green.jpg"
+                    <img src="@Model.FacturaModel.Logotipo"
                          width="250"
                          height="150"
-                         alt="Ejemplo de imagen grande codificada en base 64"
-                         title="Ejemplo de imagen grande codificada en base 64">
+                         alt="Viajes aury"
+                         title="Viajes aury">
                 </td>
             </tr>
         </table>
@@ -138,13 +138,13 @@
                             <table style="width: 100%"></table>
                         </td>
                         <td style="width: 15%">
-                            <table style="width: 100%">
+                            <table style="width: 100%;  border-spacing: 5px;">
                                 <tr>
                                     <td style="text-align: right;">
                                         <b>Subtotal:</b>
                                     </td>
                                     <td style=" border: 1px solid black; text-align: right">
-                                        $999999.99
+                                        $@Model.Comprobante.SubTotal
                                     </td>
                                 </tr>
                                 <tr>
@@ -152,7 +152,7 @@
                                         <b>Descuento:</b>
                                     </td>
                                     <td style=" border: 1px solid black; text-align: right">
-                                        $0.00
+                                        $@Model.Comprobante.Descuento
                                     </td>
                                 </tr>
                                 <tr>
@@ -168,7 +168,7 @@
                                         <b>IVA:</b>
                                     </td>
                                     <td style=" border: 1px solid black; text-align: right">
-                                        $0.00
+                                        $@Model.Comprobante.Impuestos.TotalImpuestosTrasladados
                                     </td>
                                 </tr>
                                 <tr>
@@ -176,7 +176,7 @@
                                         <b>Total:</b>
                                     </td>
                                     <td style=" border: 1px solid black; text-align: right">
-                                        $0.00
+                                        $@Model.Comprobante.Total
                                     </td>
                                 </tr>
                             </table>

@@ -50,12 +50,20 @@ namespace FacturacionSAT.CSL.WEB.App_Start
                             if (System.IO.File.Exists(@archivo))
                             {
                                 Attachment data = new Attachment(@archivo, MediaTypeNames.Application.Octet);
-                                data.Name = "Prueba 1.txt";
+                                string[] arrayFile = archivo.Split('.');
+                                string extension = arrayFile[arrayFile.Length - 1];
+
+                                switch (extension)
+                                {
+                                    case "pdf":
+                                        data.Name = "Factura.pdf";
+                                        break;
+                                    case "xml":
+                                        data.Name = "Factura.xml";
+                                        break;
+                                }
                                 mailMessage.Attachments.Add(data);
                             }
-                                
-
-
                         }
                     }
 
@@ -67,6 +75,8 @@ namespace FacturacionSAT.CSL.WEB.App_Start
                 smtpClient.EnableSsl = Ssl;
                 smtpClient.Credentials = new NetworkCredential(De, Contraseña);
                 smtpClient.Send(mailMessage);
+
+                mailMessage.Attachments.Dispose();
                 return true;
             }
             catch (Exception ex)
