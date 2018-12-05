@@ -145,7 +145,7 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
                             TempData["message"] = "Archivo xml creado con éxito.";
                             TempData["typemessage"] = "1";
 
-                            if (GenerarPDF())
+                            if (GenerarPDF(Factura))
                             {
                                 TempData["message"] = "Archivo pdf creado con éxito.";
                                 //faltaria enviar al correo
@@ -213,7 +213,7 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
                 oComprobante.SubTotal = Factura.Subtotal; // Atributo requerido para representar la suma de los importes de los conceptos antes de descuentos e 
                                                           //impuesto.No se permiten valores negativos.
                 oComprobante.Descuento = Factura.TotalDescuento;
-                oComprobante.Moneda = Factura.MonedaDB; // Catálogo del Cfdi:Moneda, si no es moneda nacional, se debe de poner el tipo de cambio
+                oComprobante.Moneda = Factura.Moneda; // Catálogo del Cfdi:Moneda, si no es moneda nacional, se debe de poner el tipo de cambio
                                                         //oComprobante.TipoCambio
                 oComprobante.Total = Factura.Total; //Subtotal menos descuento
                 oComprobante.TipoDeComprobante = Factura.TipoComprobante; // Atributo requerido para expresar la clave del efecto del comprobante fiscal para el contribuyente emisor.
@@ -250,16 +250,39 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
                     lstConceptos.Add(oConcepto);
                 }
 
-                //impuesto trasladado
+                //ComprobanteConceptoImpuestosTraslado 
                 List<ComprobanteConceptoImpuestosTraslado> ListaImpuestosTraladado = new List<ComprobanteConceptoImpuestosTraslado>();
                 ComprobanteConceptoImpuestosTraslado oImpuestosTraslado = new ComprobanteConceptoImpuestosTraslado();
                 oImpuestosTraslado.Base = oConcepto.Importe - oConcepto.Descuento;
-                //oImpuestosTraslado.TasaOCuota = Factura.Conceptos[0].Impuestos[0].CFDI_Impuesto;
-                //oImpuestosTraslado.TipoFactor = Factura.Conceptos[0].Impuestos[0].CFDI_Impuesto;
-                //oImpuestosTraslado.Impuesto = Factura.Conceptos[0].Impuestos[0].CFDI_Impuesto;
-                //oImpuestosTraslado.Importe = Factura.Conceptos[0].Impuestos[0].CFDI_Impuesto;
+                oImpuestosTraslado.TasaOCuota = Factura.Conceptos[0].Impuestos[0].TasaOCuota;
+                oImpuestosTraslado.TipoFactor = Factura.Conceptos[0].Impuestos[0].TipoFactor;
+                oImpuestosTraslado.Impuesto = Factura.Conceptos[0].Impuestos[0].Clave_Impuesto;
+                oImpuestosTraslado.Importe = Factura.Conceptos[0].Impuestos[0].Importe;
+
+                ListaImpuestosTraladado.Add(oImpuestosTraslado);
+                oConcepto.Impuestos = new ComprobanteConceptoImpuestos();
+                oConcepto.Impuestos.Traslados = ListaImpuestosTraladado.ToArray();
 
                 oComprobante.Conceptos = lstConceptos.ToArray();
+
+                //ComprobanteImpuestosTraslado
+                List<ComprobanteImpuestosTraslado> ListaComprobanteImpuestosTraslados = new List<ComprobanteImpuestosTraslado>();
+                ComprobanteImpuestos oComprobanteImpuestos = new ComprobanteImpuestos();
+                ComprobanteImpuestosTraslado oComprobanteImpuestosTraslado = new ComprobanteImpuestosTraslado();
+                
+                oComprobanteImpuestos.TotalImpuestosTrasladados = Factura.Conceptos[0].Impuestos[0].Importe;
+
+                oComprobanteImpuestosTraslado.Importe = Math.Round(Factura.Conceptos[0].Impuestos[0].Importe, 2);
+                oComprobanteImpuestosTraslado.Impuesto = Factura.Conceptos[0].Impuestos[0].Clave_Impuesto;
+                oComprobanteImpuestosTraslado.TipoFactor = Factura.Conceptos[0].Impuestos[0].TipoFactor;
+                oComprobanteImpuestosTraslado.TasaOCuota = Factura.Conceptos[0].Impuestos[0].TasaOCuota;
+
+                ListaComprobanteImpuestosTraslados.Add(oComprobanteImpuestosTraslado);
+                oComprobanteImpuestos.Traslados = ListaComprobanteImpuestosTraslados.ToArray();
+                //agregamos el impuesto
+                oComprobante.Impuestos = oComprobanteImpuestos;
+                //oComprobante.Impuestos.TotalImpuestosTrasladados = Factura.Conceptos[0].Impuestos[0].Importe;
+                oComprobante.Impuestos.TotalImpuestosTrasladados = Math.Round(Factura.Conceptos[0].Impuestos[0].Importe ,2);
 
                 this.CreateXML(oComprobante, pathXML);
 
@@ -388,7 +411,7 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
             }
         }
 
-        private bool GenerarPDF()
+        private bool GenerarPDF(FacturacionViewModel oFactura)
         {
             try
             {
@@ -428,9 +451,11 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
                 string sHtml = GetStringOfFile(pathHtmlPlantilla);
                 string resultHtml = "";
 
-                SystemHelper.SAT.CFDI3_3_PDF cFDI3_3_PDF = new SystemHelper.SAT.CFDI3_3_PDF(oComprobante);
+                SystemHelper.SAT.CFDI3_3_PDF cFDI3_3_PDF = new SystemHelper.SAT.CFDI3_3_PDF(oComprobante, oFactura);
 
                 resultHtml = RazorEngine.Razor.Parse(sHtml, cFDI3_3_PDF);
+
+                //cFDI3_3_PDF.FacturaModel.UsoCFDI_Generico
 
                 //creamos el archivo temporal
                 System.IO.File.WriteAllText(pathHTMLTempFileHtml, resultHtml);
@@ -454,7 +479,8 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
             }
             catch (Exception ex)
             {
-                string Mensaje = ex.Message.Replace("\r\n", "").Replace("\r", "").Replace("\n", "");
+                //string Mensaje = ex.Message.Replace("\r\n", "").Replace("\r", "").Replace("\n", "");
+                string Mensaje = "Error al generar el pdf";
                 TempData["message"] = Mensaje;
                 TempData["typemessage"] = "2";
                 throw;

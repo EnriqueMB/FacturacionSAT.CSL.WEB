@@ -31,31 +31,29 @@ namespace FacturacionSAT.CSL.WEB.Models.Datos
                     if (oAuxSQLModel.Success)
                     {
                         item = new FacturacionViewModel();
-                        //generales
-                        item.Version = !dr.IsDBNull(dr.GetOrdinal("CFDI_version")) ? dr.GetString(dr.GetOrdinal("CFDI_version")) : string.Empty;
-                        item.Total = !dr.IsDBNull(dr.GetOrdinal("total")) ? dr.GetDecimal(dr.GetOrdinal("total")) : 0;
+
                         item.Moneda = !dr.IsDBNull(dr.GetOrdinal("CFDI_moneda")) ? dr.GetString(dr.GetOrdinal("CFDI_moneda")) : string.Empty;
-                        item.MonedaDB = !dr.IsDBNull(dr.GetOrdinal("CFDI_moneda_db")) ? dr.GetString(dr.GetOrdinal("CFDI_moneda_db")) : string.Empty;
-
-                        item.TotalDescuento = !dr.IsDBNull(dr.GetOrdinal("descuento")) ? dr.GetDecimal(dr.GetOrdinal("descuento")) : 0;
+                        item.TotalDescuento = !dr.IsDBNull(dr.GetOrdinal("descuento_boleto")) ? dr.GetDecimal(dr.GetOrdinal("descuento_boleto")) : 0;
+                        item.PorcentajeIVA = !dr.IsDBNull(dr.GetOrdinal("porcentajeIVA")) ? dr.GetDecimal(dr.GetOrdinal("porcentajeIVA")) : 0;
                         item.Subtotal = !dr.IsDBNull(dr.GetOrdinal("subtotal")) ? dr.GetDecimal(dr.GetOrdinal("subtotal")) : 0;
+                        item.Total = !dr.IsDBNull(dr.GetOrdinal("total")) ? dr.GetDecimal(dr.GetOrdinal("total")) : 0;
 
-                        item.Subtotal = Convert.ToDecimal(String.Format("{0:0.00}", item.Subtotal)); //redondeo a 2 decimales
-                        item.TotalDescuento = Convert.ToDecimal(String.Format("{0:0.00}", item.TotalDescuento)); //redondeo a 2 decimales
-
+                        item.TotalDescuento = Math.Round(item.TotalDescuento, 2);
+                        item.Subtotal = Math.Round(item.Subtotal, 2);
+                        item.Total = Math.Round(item.Total, 2);
 
                         item.Folio = !dr.IsDBNull(dr.GetOrdinal("folio")) ? dr.GetString(dr.GetOrdinal("folio")) : string.Empty;
                         item.FormaDePago = !dr.IsDBNull(dr.GetOrdinal("CFDI_formaPago")) ? dr.GetString(dr.GetOrdinal("CFDI_formaPago")) : string.Empty;
-
                         item.TipoComprobante = !dr.IsDBNull(dr.GetOrdinal("CFDI_tipoComprobante")) ? dr.GetString(dr.GetOrdinal("CFDI_tipoComprobante")) : string.Empty;
-                        item.TipoComprobanteDB = !dr.IsDBNull(dr.GetOrdinal("CFDI_tipoComprobante_db")) ? dr.GetString(dr.GetOrdinal("CFDI_tipoComprobante_db")) : string.Empty;
-
                         item.LugarExpedicion = !dr.IsDBNull(dr.GetOrdinal("CFDI_LugarExpedicion")) ? dr.GetString(dr.GetOrdinal("CFDI_LugarExpedicion")) : string.Empty;
-                        //emisor
+                        item.Version = !dr.IsDBNull(dr.GetOrdinal("CFDI_version")) ? dr.GetString(dr.GetOrdinal("CFDI_version")) : string.Empty;
+                        item.Moneda_Generico = !dr.IsDBNull(dr.GetOrdinal("CFDI_moneda_generico")) ? dr.GetString(dr.GetOrdinal("CFDI_moneda_generico")) : string.Empty;
+                        item.TipoComprobante_Generico = !dr.IsDBNull(dr.GetOrdinal("CFDI_tipoComprobante_generico")) ? dr.GetString(dr.GetOrdinal("CFDI_tipoComprobante_generico")) : string.Empty;
+                        item.FormaDePago_Generico = !dr.IsDBNull(dr.GetOrdinal("CFDI_FormaPago_generico")) ? dr.GetString(dr.GetOrdinal("CFDI_FormaPago_generico")) : string.Empty;
+                        item.RegimenFiscal_Generico = !dr.IsDBNull(dr.GetOrdinal("regimenFiscal_Generico")) ? dr.GetString(dr.GetOrdinal("regimenFiscal_Generico")) : string.Empty;
                         item.NombreEmisor = !dr.IsDBNull(dr.GetOrdinal("nombreEmisor")) ? dr.GetString(dr.GetOrdinal("nombreEmisor")) : string.Empty;
                         item.RFCEmisor = !dr.IsDBNull(dr.GetOrdinal("rfcEmisor")) ? dr.GetString(dr.GetOrdinal("rfcEmisor")) : string.Empty;
                         item.RegimenFiscal = !dr.IsDBNull(dr.GetOrdinal("regimenFiscal")) ? dr.GetString(dr.GetOrdinal("regimenFiscal")) : string.Empty;
-                        //receptor
                         item.RazonSocial = !dr.IsDBNull(dr.GetOrdinal("razonSocial")) ? dr.GetString(dr.GetOrdinal("razonSocial")) : string.Empty;
                         item.RFCReceptor = !dr.IsDBNull(dr.GetOrdinal("rfcReceptor")) ? dr.GetString(dr.GetOrdinal("rfcReceptor")) : RFCReceptor;
                         item.EmailReceptor = !dr.IsDBNull(dr.GetOrdinal("emailReceptor")) ? dr.GetString(dr.GetOrdinal("emailReceptor")) : string.Empty;
@@ -65,30 +63,24 @@ namespace FacturacionSAT.CSL.WEB.Models.Datos
                         Impuesto Impuesto = new Impuesto();
                         List<Impuesto> ListaImpuesto = new List<Impuesto>();
 
-                        itemConcepto.Cantidad = !dr.IsDBNull(dr.GetOrdinal("cantidadConceptos")) ? dr.GetDecimal(dr.GetOrdinal("cantidadConceptos")) : 0;
-
-                        itemConcepto.ClaveProducto = !dr.IsDBNull(dr.GetOrdinal("CFDI_ClaveProdServ")) ? dr.GetString(dr.GetOrdinal("CFDI_ClaveProdServ")) : string.Empty;
-                        itemConcepto.ClaveProductoDB = !dr.IsDBNull(dr.GetOrdinal("CFDI_ClaveProdServ_db")) ? dr.GetString(dr.GetOrdinal("CFDI_ClaveProdServ_db")) : string.Empty;
-
-                        itemConcepto.ClaveUnidad = !dr.IsDBNull(dr.GetOrdinal("CFDI_ClaveUnidad")) ? dr.GetString(dr.GetOrdinal("CFDI_ClaveUnidad")) : string.Empty;
-                        itemConcepto.ClaveUnidadDB = !dr.IsDBNull(dr.GetOrdinal("CFDI_ClaveUnidad_db")) ? dr.GetString(dr.GetOrdinal("CFDI_ClaveUnidad_db")) : string.Empty;
-
-                        itemConcepto.Descripcion = !dr.IsDBNull(dr.GetOrdinal("CFDI_Descripcion")) ? dr.GetString(dr.GetOrdinal("CFDI_Descripcion")) : string.Empty;
-                        itemConcepto.Descuento = !dr.IsDBNull(dr.GetOrdinal("CFDI_DescuentoConcepto")) ? dr.GetDecimal(dr.GetOrdinal("CFDI_DescuentoConcepto")) : 0;
-                        itemConcepto.PrecioUnitario = !dr.IsDBNull(dr.GetOrdinal("CFDI_PrecioUnitario")) ? dr.GetDecimal(dr.GetOrdinal("CFDI_PrecioUnitario")) : 0;
-
-                        Impuesto.Nombre = !dr.IsDBNull(dr.GetOrdinal("CFDI_NombreImpuesto")) ? dr.GetString(dr.GetOrdinal("CFDI_NombreImpuesto")) : string.Empty;
-
-                        Impuesto.Importe = !dr.IsDBNull(dr.GetOrdinal("CFDI_ImpuestoImporte")) ? dr.GetDecimal(dr.GetOrdinal("CFDI_ImpuestoImporte")) : 0;
-                        Impuesto.TasaOCuota = (!dr.IsDBNull(dr.GetOrdinal("porcentajeIVA")) ? dr.GetDecimal(dr.GetOrdinal("porcentajeIVA")) : 0) / 1000000;
-                        Impuesto.TipoFactor = !dr.IsDBNull(dr.GetOrdinal("CFDI_TipoImpuesto")) ? dr.GetString(dr.GetOrdinal("CFDI_TipoImpuesto")) : string.Empty;
+                        itemConcepto.Cantidad = !dr.IsDBNull(dr.GetOrdinal("CFDI_Concepto_Cantidad")) ? dr.GetDecimal(dr.GetOrdinal("CFDI_Concepto_Cantidad")) : 0;
+                        itemConcepto.ClaveProducto = !dr.IsDBNull(dr.GetOrdinal("CFDI_Concepto_ClaveProdServ")) ? dr.GetString(dr.GetOrdinal("CFDI_Concepto_ClaveProdServ")) : string.Empty;
+                        itemConcepto.ClaveProducto_Generico = !dr.IsDBNull(dr.GetOrdinal("CFDI_Concepto_ClaveProdServ_generico")) ? dr.GetString(dr.GetOrdinal("CFDI_Concepto_ClaveProdServ_generico")) : string.Empty;
+                        itemConcepto.ClaveUnidad = !dr.IsDBNull(dr.GetOrdinal("CFDI_Concepto_ClaveUnidad")) ? dr.GetString(dr.GetOrdinal("CFDI_Concepto_ClaveUnidad")) : string.Empty;
+                        itemConcepto.ClaveUnidad_Generico = !dr.IsDBNull(dr.GetOrdinal("CFDI_Concepto_ClaveUnidad_generico")) ? dr.GetString(dr.GetOrdinal("CFDI_Concepto_ClaveUnidad_generico")) : string.Empty;
+                        itemConcepto.Descripcion = !dr.IsDBNull(dr.GetOrdinal("CFDI_Concepto_Descripcion")) ? dr.GetString(dr.GetOrdinal("CFDI_Concepto_Descripcion")) : string.Empty;
+                        itemConcepto.Descuento = !dr.IsDBNull(dr.GetOrdinal("CFDI_Concepto_Descuento")) ? dr.GetDecimal(dr.GetOrdinal("CFDI_Concepto_Descuento")) : 0;
+                        itemConcepto.PrecioUnitario = !dr.IsDBNull(dr.GetOrdinal("CFDI_Concepto_PrecioUnitario")) ? dr.GetDecimal(dr.GetOrdinal("CFDI_Concepto_PrecioUnitario")) : 0;
+                        Impuesto.Nombre = !dr.IsDBNull(dr.GetOrdinal("CFDI_Impuesto_Impuesto_generico")) ? dr.GetString(dr.GetOrdinal("CFDI_Impuesto_Impuesto_generico")) : string.Empty;
+                        Impuesto.Clave_Impuesto = !dr.IsDBNull(dr.GetOrdinal("CFDI_Impuesto_Impuesto")) ? dr.GetString(dr.GetOrdinal("CFDI_Impuesto_Impuesto")) : string.Empty; 
+                        Impuesto.Base = !dr.IsDBNull(dr.GetOrdinal("CFDI_Impuesto_Base")) ? dr.GetDecimal(dr.GetOrdinal("CFDI_Impuesto_Base")) : 0;
+                        Impuesto.Importe = !dr.IsDBNull(dr.GetOrdinal("CFDI_Impuesto_Importe")) ? dr.GetDecimal(dr.GetOrdinal("CFDI_Impuesto_Importe")) : 0;
+                        Impuesto.TasaOCuota = !dr.IsDBNull(dr.GetOrdinal("CFDI_Impuesto_TasaOCuota")) ? dr.GetDecimal(dr.GetOrdinal("CFDI_Impuesto_TasaOCuota")) : 0;
+                        Impuesto.TipoFactor = !dr.IsDBNull(dr.GetOrdinal("CFDI_Impuesto_TipoFactor")) ? dr.GetString(dr.GetOrdinal("CFDI_Impuesto_TipoFactor")) : string.Empty;
 
                         ListaImpuesto.Add(Impuesto);
-
                         itemConcepto.Impuestos = ListaImpuesto;
-
                         ListaConceptos.Add(itemConcepto);
-
                         item.Conceptos = ListaConceptos;
                     }
                 }

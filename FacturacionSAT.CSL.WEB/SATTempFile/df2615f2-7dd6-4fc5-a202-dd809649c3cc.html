@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -22,23 +22,23 @@
 
         <table id="tbl_emisor" cellpadding=3>
             <tr>
-                <td colspan=2 class="textoCentrado"><b>@Model.Comprobante.Emisor.Nombre</b></td>
+                <td colspan=2 class="textoCentrado"><b>TRANSPORTE SA </b></td>
             </tr>
             <tr>
                 <td>RFC del Emisor :</td>
-                <td><b>@Model.Comprobante.Emisor.Rfc</b></td>
+                <td><b>LAN7008173R5</b></td>
             </tr>
             <tr>
                 <td>Tipo de comprobante :</td>
-                <td><b>@Model.FacturaModel.TipoComprobante_Generico</b></td>
+                <td><b>I ingreso</b></td>
             </tr>
             <tr>
                 <td>Lugar de Expedición :</td>
-                <td><b>@Model.Comprobante.LugarExpedicion</b></td>
+                <td><b>29020</b></td>
             </tr>
             <tr>
                 <td>Régimen Fiscal :</td>
-                <td><b>@Model.FacturaModel.RegimenFiscal_Generico</b></td>
+                <td><b>601 General de Ley Personas Morales</b></td>
             </tr>
         </table>
     </div>
@@ -47,15 +47,15 @@
         <table id="tbl_generales">
             <tr>
                 <td class="fondoGris"><b>Forma de pago:</b></td>
-                <td>@Model.FacturaModel.FormaDePago_Generico</td>
+                <td>01 Efectivo</td>
                 <td class="fondoGris"><b>Folio</b></td>
-                <td>@Model.Comprobante.Folio</td>
+                <td>20181204000097</td>
             </tr>
             <tr>
                 <td class="fondoGris"><b>Fecha y hora de elaboración:</b></td>
-                <td>@Model.FechaElaboracion</td>
+                <td>2018-12-04 18:24:36</td>
                 <td class="fondoGris"><b>Móneda:</b></td>
-                <td>@Model.FacturaModel.Moneda_Generico</td>
+                <td>MXN Peso Mexicano</td>
             </tr>
         </table>
 
@@ -68,13 +68,13 @@
                     </tr>
                     <tr>
                         <td class="fondoGris"><b>Cliente:</b></td>
-                        <td colspan=3>@Model.Comprobante.Receptor.Nombre</td>
+                        <td colspan=3>fgg</td>
                     </tr>
                     <tr>
                         <td class="fondoGris"><b>RFC:</b></td>
-                        <td>@Model.Comprobante.Receptor.Rfc</td>
+                        <td>GAGF9007317Q9</td>
                         <td class="fondoGris"><b>Uso CFDI:</b></td>
-                        <td>@Model.FacturaModel.UsoCFDI_Generico</td>
+                        <td>G03 - Gastos en general</td>
                     </tr>
                 </table>
             </div>
@@ -91,17 +91,15 @@
                         <td class="fondoNegroTextoBlanco textoCentrado">Subtotal</td>
                     </tr>
 
-                    @foreach(var oConcepto in Model.FacturaModel.Conceptos){
                     <tr>
-                        <td class="textoCentrado">@oConcepto.Cantidad</td>
-                        <td class="textoCentrado">@oConcepto.ClaveUnidad_Generico</td>
-                        <td class="textoCentrado">@oConcepto.ClaveProducto_Generico</td>
-                        <td class="textoCentrado">@oConcepto.Descripcion</td>
-                        <td class="textoCentrado">@oConcepto.PrecioUnitario</td>
-                        <td class="textoCentrado">@oConcepto.Impuestos[0].Importe</td>
-                        <td class="textoCentrado">@(oConcepto.PrecioUnitario + @oConcepto.Impuestos[0].Importe)</td>
+                        <td class="textoCentrado">1.00</td>
+                        <td class="textoCentrado">Acele</td>
+                        <td class="textoCentrado">“Raclette” para uso dom&#233;stico</td>
+                        <td class="textoCentrado">Grupo viajes aury venta de boletos </td>
+                        <td class="textoCentrado">517.2414</td>
+                        <td class="textoCentrado">82.7586</td>
+                        <td class="textoCentrado">600.0000</td>
                     </tr>
-                    }
                 </table>
             </div>
             <br />
@@ -112,7 +110,7 @@
                             <table style="width: 100%;" border="0">
                                 <tr>
                                     <td>
-                                        <img src="@Model.Comprobante.QR" width="250" height="250" />
+                                        <img src="data:image/gif;base64,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" width="250" height="250" />
                                     </td>
                                 </tr>
                             </table>
@@ -129,7 +127,7 @@
                                 </tr>
                                 <tr>
                                     <td style="text-align:center">
-                                        @Model.Comprobante.MonedaConLetra
+                                        SEISCIENTOS PESOS 00/100 M.N.
                                     </td>
                                 </tr>
                             </table>
@@ -195,25 +193,25 @@
                                     <td style="background: #00225c; color: white; text-align: center;"><b>Serie del certificado emisor:</b></td>
                                 </tr>
                                 <tr>
-                                    <td style="text-align: center;"> @Model.Comprobante.NoCertificado</td>
+                                    <td style="text-align: center;"> 20001000000300022815</td>
                                 </tr>
                                 <tr>
                                     <td style="background: #00225c; color: white; text-align: center;"><b>Folio fiscal:</b></td>
                                 </tr>
                                 <tr>
-                                    <td style="text-align: center;"> @Model.Comprobante.TimbreFiscalDigital.UUID</td>
+                                    <td style="text-align: center;"> 3084670A-3353-4238-BF32-3C03A202EFEA</td>
                                 </tr>
                                 <tr>
                                     <td style="background: #00225c; color: white; text-align: center;"><b>No. de Serie del Certificado del SAT:</b></td>
                                 </tr>
                                 <tr>
-                                    <td style="text-align: center;">@Model.Comprobante.TimbreFiscalDigital.NoCertificadoSAT</td>
+                                    <td style="text-align: center;">20001000000300022779</td>
                                 </tr>
                                 <tr>
                                     <td style="background: #00225c; color: white; text-align: center;"><b>Fecha y hora de certificación:</b></td>
                                 </tr>
                                 <tr>
-                                    <td style="text-align: center;">@Model.Comprobante.TimbreFiscalDigital.FechaTimbrado</td>
+                                    <td style="text-align: center;">04/12/2018 06:23:14 p.m.</td>
                                 </tr>
                             </table>
                         </td>
@@ -227,7 +225,7 @@
                                 </tr>
                                 <tr>
                                     <td class="textoContiguo" style="text-align: center;">
-                                        @Model.Comprobante.TimbreFiscalDigital.SelloCFD
+                                        deI+BVnZvHbS/hyyLOD3VvYlnfPSm0uB0BW4i2gWkw8KH/vIlwOSZGbEKj8XFpCPZcQ9NAJBWkKqdH7krRdl9hVaR+098XAPdiUtxcQpFpTlFOOBNklF3E7EM7EjS9px/N1waWgMWaI6V3ajUbbllqIzFPoa5/W2JPwUoWuvfoawq9vooN1yaVv961h32bw0w5U/8EyZXzq82lD8KppSdDH+/N3wgu6B/hVSZGCNgP7UGgbuhRCT54CC2NIxQkdBctZGGREK20YLZEUJc/pmwywPL+VMAquIHNlslGtSOYprktihUKXnPuMK1KH4MUGRUrVGmumCynBBDFQK3AQsnA==
                                     </td>
                                 </tr>
                                 <tr>
@@ -235,7 +233,7 @@
                                 </tr>
                                 <tr>
                                     <td class="textoContiguo" style="text-align: center;">
-                                        @Model.Comprobante.TimbreFiscalDigital.SelloSAT
+                                        pwyE85g/JKY0DgLSFrHOAGqeP6sGb870mpD/I8RjktzX7fbSp53yCaT1kfGFkneEUYNnuBfEGm4JsCkcXBevswPkbouhDR/N1RSvnbUGsv0oG4h5cZAV0cHAVJa99q30fx/vcNI0U/Qd0rTLK0UtuR5r3cEAxcdcoy8OrSLUJXHYAFQ+Mvmho8hj91nU9Kr8vhAuQcf6UMMUmPU9edw39ttTwqbCN6JqsFKBY8jCazhnVDglGjrispEykhoaa8hS2nyitIrdapggoFxUZCRW9zIhyOioW5cQza9sIIpAA3axwysreKvtSekIFAxnti7qgvOeUoSDwTO6brb4FTPQSQ==
                                     </td>
                                 </tr>
                                 <tr>
@@ -243,7 +241,7 @@
                                 </tr>
                                 <tr>
                                     <td class="textoContiguo" style="text-align: center;">
-                                        @Model.CadenaOriginal
+                                        Cadena
                                     </td>
                                 </tr>
                             </table>
