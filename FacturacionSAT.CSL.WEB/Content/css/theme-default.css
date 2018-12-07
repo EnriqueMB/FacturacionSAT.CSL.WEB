@@ -4138,11 +4138,11 @@ background: #bd2020 !important;
   background: url("/Content/img/backgrounds/wall_1.jpg") left top no-repeat;
 }
 .login-container.lightmode .login-box .login-body {
-  background: rgba(255, 255, 255, 0.2);
+    background: rgba(6, 6, 6, 0.4);
 }
 .login-container.lightmode .login-box .login-body .form-control {
-  background: rgba(255, 255, 255, 0.4);
-  color: #333;
+    background: rgba(6, 6, 6, 0.4);
+    color: #333;
 }
 .login-container.lightmode .login-box .login-subtitle a {
   color: #1b1e24;
