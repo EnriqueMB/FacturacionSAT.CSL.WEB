@@ -18,5 +18,10 @@ namespace FacturacionSAT.CSL.WEB.Models.ViewModel
         [Required]
         public string CodigoBarra { get; set; }
 
+        [Display(Name = "* Código de barra")]
+        [StringLength(14, ErrorMessage = "El código de barra es de {1} caracteres", MinimumLength = 14)]
+        [Required]
+        public string CodigoBarraReimpresion { get; set; }
+
     }
 }

@@ -27,10 +27,11 @@
     <!--FIN META PROPERTY OPEN GRAFH-->
     <link rel="shortcut icon" href="@Url.Content("~/Content/favicon.ico")" type="image/x-icon" />
     <link rel="stylesheet" href="@Url.Content("~/Content/pagina/css/style.css")" />
-    <link rel="stylesheet" href="@Url.Content("~/Content/pagina/css/bootstrap.css")"/>
+    <link rel="stylesheet" href="@Url.Content("~/Content/pagina/css/bootstrap.css")" />
     <link rel="stylesheet" href="@Url.Content("~/Content/pagina/css/bootstrap.min.css")" />
     <link rel="stylesheet" href="@Url.Content("~/Content/pagina/css/estilo-responsive.css")" /><!--ESTILO RESPOSIVE IMPORTANTE-->
     <script src="@Url.Content("~/Content/pagina/js/jquery.js")"></script>
+    @RenderSection("css", required: false)
 </head>
 <body class="page1" id="top">
     <header>
@@ -44,12 +45,12 @@
                 </div>
                 <nav>
                     @*<ul>
-                        <li><a href="index.php">Inicio</a></li>
-                        <li><a href="nosotros.php">Nosotros</a></li>
-                        <li><a href="destinos.php">Destinos</a></li>
-                        <li><a href="nuestras-lineas.php">Nuestras Líneas</a></li>
-                        <li><a href="contacto.php">Contacto</a></li>
-                    </ul>*@
+                            <li><a href="index.php">Inicio</a></li>
+                            <li><a href="nosotros.php">Nosotros</a></li>
+                            <li><a href="destinos.php">Destinos</a></li>
+                            <li><a href="nuestras-lineas.php">Nuestras Líneas</a></li>
+                            <li><a href="contacto.php">Contacto</a></li>
+                        </ul>*@
                 </nav>
             </header>
         </div>
@@ -60,12 +61,12 @@
             </h1>
             <nav>
                 @*<ul>
-                    <li class="current"><a href="index.php">Inicio</a></li>
-                    <li><a href="nosotros.php">Nosotros</a></li>
-                    <li><a href="destinos.php">Destinos</a></li>
-                    <li><a href="nuestras-lineas.php">Nuestras Líneas</a></li>
-                    <li><a href="contacto.php">Contacto</a></li>
-                </ul>*@
+                        <li class="current"><a href="index.php">Inicio</a></li>
+                        <li><a href="nosotros.php">Nosotros</a></li>
+                        <li><a href="destinos.php">Destinos</a></li>
+                        <li><a href="nuestras-lineas.php">Nuestras Líneas</a></li>
+                        <li><a href="contacto.php">Contacto</a></li>
+                    </ul>*@
             </nav>
             <div class="clear"></div>
         </div> <h1 class="titulo-secciones">Facturación electrónica</h1>
@@ -95,6 +96,12 @@
     <script type="text/javascript" src="@Url.Content("~/Content/pagina/js/jquery.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Content/pagina/js/bootstrap.min.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Content/pagina/js/popper.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/js/demo_tables.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/js/plugins/datatables/jquery.dataTables.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/js/mensajeDeError.js")"></script>
+
+    @RenderSection("script", required: false)
+
     @*<script type="text/javascript">
 
             $('#carousel').elastislide({

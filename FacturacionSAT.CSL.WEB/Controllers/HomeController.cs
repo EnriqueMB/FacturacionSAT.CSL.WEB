@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FacturacionSAT.CSL.WEB.Models.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -21,10 +22,38 @@ namespace FacturacionSAT.CSL.WEB.Controllers
         }
 
         [HttpPost]
-        public ActionResult Facturacion(FormCollection collection)
+        public ActionResult Facturacion(IndexFacturaViewModel Model)
         {
-            string nombre = collection["name"].ToString();
-            return View();
+            ModelState.Remove("CodigoBarraReimpresion");
+            if (!ModelState.IsValid)
+            {
+                TempData["message"] = "Verifique sus datos";
+                TempData["typemessage"] = "2";
+                return View(Model);
+            }
+            else
+            {
+                
+                return RedirectToAction("Add", "Factura", Model);
+            }
+        }
+
+        [HttpPost]
+        public ActionResult Reimpresion(IndexFacturaViewModel Model)
+        {
+            ModelState.Remove("RFCReceptor");
+            ModelState.Remove("CodigoBarra");
+            if (!ModelState.IsValid)
+            {
+                TempData["message"] = "Verifique sus datos";
+                TempData["typemessage"] = "2";
+                return View(Model);
+            }
+            else
+            {
+
+                return RedirectToAction("Reimpresion", "Factura", Model);
+            }
         }
     }
 }

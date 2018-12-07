@@ -28,7 +28,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="well well-sm">
-                @using (Html.BeginForm("Index", "AdminFactura", FormMethod.Post, new { @class = "form-horizontal", id = "form-dg", autocomplete = "off", @enctype = "multipart/form-data" }))
+                @using (Html.BeginForm("Add", "Factura", FormMethod.Post, new { @class = "form-horizontal", id = "form-dg", autocomplete = "off", @enctype = "multipart/form-data" }))
                 {
                     @Html.AntiForgeryToken()
                     <fieldset>
@@ -68,9 +68,6 @@
 }
 
 @section script{
-    <script type="text/javascript" src="@Url.Content("~/Content/js/demo_tables.js")"></script>
-    <script type="text/javascript" src="@Url.Content("~/Content/js/plugins/datatables/jquery.dataTables.min.js")"></script>
-    <script type="text/javascript" src="@Url.Content("~/Content/js/mensajeDeError.js")"></script>
     <script>
         jQuery(document).ready(function () {
             Mensaje(message, typemessage);

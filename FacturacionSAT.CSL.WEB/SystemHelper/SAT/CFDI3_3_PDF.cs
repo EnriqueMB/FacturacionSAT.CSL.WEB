@@ -15,7 +15,23 @@ namespace FacturacionSAT.CSL.WEB.SystemHelper.SAT
         {
             get
             {
-                return "Cadena";
+                //puede ser así, o puede que el proveedor del pac, lo proporcione ;D xD
+                if(Comprobante != null && Comprobante.TimbreFiscalDigital != null)
+                {
+                    string cadena = "||" + Comprobante.TimbreFiscalDigital.Version.Trim() +
+                        "|" + Comprobante.TimbreFiscalDigital.UUID.Trim() +
+                        "|" + Comprobante.TimbreFiscalDigital.FechaTimbrado +
+                        "|" + Comprobante.TimbreFiscalDigital.RfcProvCertif.Trim() +
+                        "|" + Comprobante.Sello.Trim() +
+                        "|" + Comprobante.TimbreFiscalDigital.NoCertificadoSAT.Trim() +
+                        "||";
+
+                    return cadena;
+                }
+                else
+                {
+                    return "Sin datos, contacte con soporte técnico.";
+                }
             }
         }
 

@@ -23,8 +23,6 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
         private string Conexion = ConfigurationManager.AppSettings.Get("strConnection");
         private string pathXML, idFile, pathRootSystemHelperSAT, pahtRootSATTempFile, pathHTMLTempFilePDF, pathRootSATEmisorXML;
 
-
-
         // GET: Admin/Facturacion
         public ActionResult Index()
         {
@@ -44,6 +42,7 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Index(IndexFacturaViewModel Model)
         {
+            ModelState.Remove("CodigoBarraReimpresion");
             if (!ModelState.IsValid)
             {
                 TempData["message"] = "Verifique sus datos";
@@ -140,10 +139,10 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
                     
                     //podemos validar el boleto antes por si le dan regresar y no vaya a facturar de nuevo 
 
-                    if (oAuxSQLModel.Success)
-                    {
-                        throw new Exception(oAuxSQLModel.Mensaje);
-                    }
+                    //if (oAuxSQLModel.Success)
+                    //{
+                    //    throw new Exception(oAuxSQLModel.Mensaje);
+                    //}
 
                     bool result = GenerarXML(pathRootSATEmisorXML, pathXML, pathCadenaOriginal, oEmisor, Factura, oPac);
 

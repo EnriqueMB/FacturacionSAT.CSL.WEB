@@ -295,6 +295,7 @@
     <Content Include="Content\css\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\css\fonts\ocampoIcons.svg" />
     <Content Include="Content\css\fullcalendar\fullcalendar.css" />
+    <Content Include="Content\css\jquery.dataTables.min.css" />
     <Content Include="Content\css\jquery\jquery-ui.min.css" />
     <Content Include="Content\css\mcustomscrollbar\jquery.mCustomScrollbar.css" />
     <Content Include="Content\css\nvd3\nv.d3.css" />
@@ -1177,6 +1178,7 @@
     <Compile Include="Models\Datos\FacturaDatos.cs" />
     <Compile Include="Models\Datos\JsonDatos.cs" />
     <Compile Include="Models\Datos\UsuarioDatos.cs" />
+    <Compile Include="Models\FacturaReimpresionModel.cs" />
     <Compile Include="Models\UsuarioModels.cs" />
     <Compile Include="Models\Validaciones\ClabeInterbancariaAttribute.cs" />
     <Compile Include="Models\Validaciones\CombosIntAttribute.cs" />
@@ -1260,9 +1262,9 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Factura\Add.cshtml" />
-    <Content Include="Views\Factura\Index.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Facturacion.cshtml" />
+    <Content Include="Views\Factura\Reimpresion.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

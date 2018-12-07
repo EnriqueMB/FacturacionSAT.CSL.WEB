@@ -93,7 +93,52 @@ namespace FacturacionSAT.CSL.WEB.Models.Datos
                 throw ex;
             }
         }
-    
+
+        public void Factura_get_Generales_Reimpresion(AuxSQLModel oAuxSQLModel, string codigoBarra, Comprobante comprobante, FacturacionViewModel factura)
+        {
+            try
+            {
+                SqlDataReader dr = null;
+                object[] parametros = { codigoBarra, comprobante.Emisor.RegimenFiscal, comprobante.FormaPago, comprobante.Receptor.UsoCFDI, comprobante.Conceptos[0].ClaveProdServ, comprobante.Conceptos[0].ClaveUnidad };
+                dr = SqlHelper.ExecuteReader(oAuxSQLModel.Conexion, "[dbo].[spCSLDB_Factura_get_Generales_Reimpresion]", parametros);
+                while (dr.Read())
+                {
+                    oAuxSQLModel.Success = !dr.IsDBNull(dr.GetOrdinal("success")) ? dr.GetBoolean(dr.GetOrdinal("success")) : false;
+                    oAuxSQLModel.Mensaje = !dr.IsDBNull(dr.GetOrdinal("mensaje")) ? dr.GetString(dr.GetOrdinal("mensaje")) : string.Empty;
+
+
+                    if (oAuxSQLModel.Success)
+                    {
+                        factura.Logotipo = !dr.IsDBNull(dr.GetOrdinal("logitpo")) ? dr.GetString(dr.GetOrdinal("logitpo")) : string.Empty;
+                        factura.TipoComprobante_Generico = !dr.IsDBNull(dr.GetOrdinal("tipoComprobante_Generico")) ? dr.GetString(dr.GetOrdinal("tipoComprobante_Generico")) : string.Empty;
+                        factura.RegimenFiscal_Generico = !dr.IsDBNull(dr.GetOrdinal("regimenFiscal_Generico")) ? dr.GetString(dr.GetOrdinal("regimenFiscal_Generico")) : string.Empty;
+                        factura.FormaDePago_Generico = !dr.IsDBNull(dr.GetOrdinal("formaDePago_Generico")) ? dr.GetString(dr.GetOrdinal("formaDePago_Generico")) : string.Empty;
+                        factura.Moneda_Generico = !dr.IsDBNull(dr.GetOrdinal("moneda_Generico")) ? dr.GetString(dr.GetOrdinal("moneda_Generico")) : string.Empty;
+                        factura.UsoCFDI_Generico = !dr.IsDBNull(dr.GetOrdinal("usoCFDI_Generico")) ? dr.GetString(dr.GetOrdinal("usoCFDI_Generico")) : string.Empty;
+
+                        List<Concepto> ListaConceptos = new List<Concepto>();
+                        Concepto itemConcepto = new Concepto();
+                        Impuesto Impuesto = new Impuesto();
+                        List<Impuesto> ListaImpuesto = new List<Impuesto>();
+
+                        itemConcepto.Cantidad = !dr.IsDBNull(dr.GetOrdinal("cantidad_Concepto")) ? dr.GetDecimal(dr.GetOrdinal("cantidad_Concepto")) : 0;
+                        itemConcepto.ClaveProducto_Generico = !dr.IsDBNull(dr.GetOrdinal("prodServ_Generico")) ? dr.GetString(dr.GetOrdinal("prodServ_Generico")) : string.Empty;
+                        itemConcepto.ClaveUnidad_Generico = !dr.IsDBNull(dr.GetOrdinal("unidadMedida_generico")) ? dr.GetString(dr.GetOrdinal("unidadMedida_generico")) : string.Empty;
+
+                        ListaImpuesto.Add(Impuesto);
+                        itemConcepto.Impuestos = ListaImpuesto;
+                        ListaConceptos.Add(itemConcepto);
+                        factura.Conceptos = ListaConceptos;
+                    }
+                }
+                dr.Close();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public List<Concepto> Factura_get_Conceptos(string codigoBarra, AuxSQLModel oAuxSQLModel)
         {
             try
@@ -190,5 +235,39 @@ namespace FacturacionSAT.CSL.WEB.Models.Datos
                 throw;
             }
         }
+
+        public FacturaReimpresionModel Factura_get_Reimpresion(AuxSQLModel oAuxSQLModel, string codigoBarra)
+        {
+            try
+            {
+                FacturaReimpresionModel item = new FacturaReimpresionModel();
+                SqlDataReader dr = null;
+                object[] parametros = { codigoBarra };
+                dr = SqlHelper.ExecuteReader(oAuxSQLModel.Conexion, "[dbo].[spCSLDB_Factura_get_Reimpresion]", parametros);
+
+                while (dr.Read())
+                {
+                    oAuxSQLModel.Success = !dr.IsDBNull(dr.GetOrdinal("success")) ? dr.GetBoolean(dr.GetOrdinal("success")) : false;
+                    oAuxSQLModel.Mensaje = !dr.IsDBNull(dr.GetOrdinal("mensaje")) ? dr.GetString(dr.GetOrdinal("mensaje")) : string.Empty;
+
+                    if (oAuxSQLModel.Success)
+                    {
+                        item = new FacturaReimpresionModel();
+
+                        item.Id = !dr.IsDBNull(dr.GetOrdinal("id")) ? dr.GetInt32(dr.GetOrdinal("id")) : 0;
+                        item.CodigoBarra = !dr.IsDBNull(dr.GetOrdinal("codigoBarra")) ? dr.GetString(dr.GetOrdinal("codigoBarra")) : string.Empty;
+                        item.XMLFactura = !dr.IsDBNull(dr.GetOrdinal("xmlFactura")) ? dr.GetString(dr.GetOrdinal("xmlFactura")) : string.Empty;
+                    }
+                }
+                dr.Close();
+                return item;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+          
+
     }
 }
