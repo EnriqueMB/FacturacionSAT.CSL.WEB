@@ -1,8 +1,20 @@
-﻿
+﻿@model FacturacionSAT.CSL.WEB.Models.ViewModel.IndexFacturaViewModel
 @{
     ViewBag.Title = "Facturacion";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+@{
+    var message = TempData["message"] ?? string.Empty;
+    var typemessage = TempData["typemessage"] ?? string.Empty;
+}
+
+<div id="Error" class="progress-bar progress-bar-striped active errorCSL" style="display:none; width:100%">
+    <h3></h3>
+</div>
+<div id="Success" class="progress-bar progress-bar-striped active successCSL" style="display:none; width:100%">
+    <h3></h3>
+</div>
 
 <!--=====================Content======================-->
 <section class="zonafact">
@@ -21,60 +33,75 @@
         <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade show active" id="factura" role="tabpanel" aria-labelledby="factura-tab">
                 <div class="formFacturar">
-                    <form action="">
+                    @using (Html.BeginForm("Facturacion", "Home", FormMethod.Post, new { @class = "form-horizontal", id = "form-dg", autocomplete = "off", @enctype = "multipart/form-data" }))
+                    {
+                        @Html.AntiForgeryToken()
                         <div class="formTitle">
                             <h2>Facturar</h2>
                         </div>
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="group-input">
-                                    <input type="text" name="membresia" class="form-control factura" placeholder="Membresía o RFC">
+                                    @Html.TextBoxFor(m => m.RFCReceptor, "", new { @class = "form-control factura", placeholder = "Ingrese su RFC" })
+                                    @Html.ValidationMessage("RFCReceptor", new { @class = "text-danger" })
+                                    @*<input type="text" name="membresia" class="form-control factura" placeholder="Ingrese su RFC">*@
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="group-input">
-                                    <input type="text" name="codigoPostal" class="form-control factura" placeholder="Código postal">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="group-input">
-                                    <input type="text" name="noTicket" class="form-control factura" placeholder="Número de ticket">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="group-input">
-                                    <input type="text" name="transaccion" class="form-control factura" placeholder="# Transacción">
+
+                                    @*<input type="text" name="noTicket" class="form-control factura" placeholder="Ingrese su número de boleto">*@
+                                    @Html.TextBoxFor(m => m.CodigoBarra, "", new { @class = "form-control factura", placeholder = "Ingrese su número de boleto" })
+                                    @Html.ValidationMessage("CodigoBarra", new { @class = "text-danger" })
                                 </div>
                             </div>
                         </div>
                         <div class="actionButtons">
-                            <a href="#"><button type="button" class="">Cancelar</button></a>
+                            <a href="@Url.Action("Index", "Home")"><button type="button" class="">Cancelar</button></a>
                             <a href=""><button class="" type="submit">Continuar</button></a>
                         </div>
-                    </form>
+                    }
                 </div>
             </div>
             <div class="tab-pane fade" id="ticketFactura" role="tabpanel" aria-labelledby="ticketFactura-tab">
                 <div class="formFacturar">
-                    <form>
+                    @using (Html.BeginForm("Reimpresion", "Home", FormMethod.Post, new { @class = "form-horizontal", id = "form-dg", autocomplete = "off", @enctype = "multipart/form-data" }))
+                    {
                         <div class="formTitle">
-                            <h2>Consultar por número de ticket</h2>
+                            <h2>Consultar por número de boleto</h2>
                         </div>
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="group-input">
-                                    <input type="text" name="noConsultaTicket" placeholder="Número de Ticket o factura" class="form-control factura">
+                                    @*<input type="text" name="noConsultaTicket" placeholder="Número de boleto" class="form-control factura">*@
+                                    @Html.TextBoxFor(m => m.CodigoBarraReimpresion, "", new { @class = "form-control factura", placeholder = "Ingrese su número de boleto" })
+                                    @Html.ValidationMessage("CodigoBarraReimpresion", new { @class = "text-danger" })
                                 </div>
                             </div>
 
                         </div>
                         <div class="actionButtons">
-                            <a href="#"><button type="button" class="">Cancelar</button></a>
+                            <a href="" @Url.Action("Index", "Home") ""><button type="button" class="">Cancelar</button></a>
                             <a href=""><button class="" type="submit">Continuar</button></a>
                         </div>
-                    </form>
-                </div>
+                    }
+                    </div>
             </div>
         </div>
     </div>
 </section>
+
+<script>
+        var message = '@message';
+        var typemessage = '@typemessage';
+</script>
+
+@section script{
+    <script>
+        jQuery(document).ready(function () {
+            if (typemessage == 1 || typemessage == 2) {
+                alert("@message");
+            }
+        });
+    </script>
+}

@@ -1,8 +1,6 @@
 ﻿@model FacturacionSAT.CSL.WEB.Models.ViewModel.FacturacionViewModel
 @{
-    ViewBag.Title = "Nueva factura";
-    SelectList ListaUsoCFDI = new SelectList(ViewBag.ListaUsoCFDI, "Id", "Value");
-
+    ViewBag.Title = "Reimpresión";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -32,7 +30,7 @@
 </div>
 
 <div class="col-md-12">
-    <form action="@Url.Content("~/Factura/Add")" method="post" autocomplete="off">
+    <form action="@Url.Content("~/Factura/Reimpresion")" method="post" autocomplete="off">
         @Html.HiddenFor(d => d.Version)
         @Html.HiddenFor(d => d.TipoComprobante)
         @Html.HiddenFor(d => d.TipoComprobante_Generico)
@@ -82,8 +80,9 @@
                 @Html.TextBoxFor(d => d.TipoComprobante_Generico, "", new { @class = "form-control", @readonly = "true" })
                 @Html.ValidationMessage("TipoComprobante", new { @class = "text-danger" })
 
+
                 @Html.LabelFor(d => d.UsoCFDI)
-                @Html.DropDownListFor(d => d.UsoCFDI, ListaUsoCFDI, new { @class = "form-control" })
+                @Html.TextBoxFor(d => d.UsoCFDI_Generico, "", new { @class = "form-control", @readonly = "true" })
                 @Html.ValidationMessage("UsoCFDI", new { @class = "text-danger" })
             </div>
             <div class="col-md-4">
@@ -116,26 +115,12 @@
             </div>
             <div class="col-md-4">
                 @Html.LabelFor(d => d.RazonSocial)
-                @if (string.IsNullOrEmpty(Model.RazonSocial))
-                {
-                    @Html.TextBoxFor(d => d.RazonSocial, "", new { @class = "form-control" })
-                }
-                else
-                {
-                    @Html.TextBoxFor(d => d.RazonSocial, "", new { @class = "form-control", @readonly = "true" })
-                }
+                @Html.TextBoxFor(d => d.RazonSocial, "", new { @class = "form-control", @readonly = "true" })
                 @Html.ValidationMessage("RazonSocial", new { @class = "text-danger" })
             </div>
             <div class="col-md-4">
                 @Html.LabelFor(d => d.EmailReceptor)
-                @if (string.IsNullOrEmpty(Model.EmailReceptor))
-                {
-                    @Html.TextBoxFor(d => d.EmailReceptor, "", new { @class = "form-control" })
-                }
-                else
-                {
-                    @Html.TextBoxFor(d => d.EmailReceptor, "", new { @class = "form-control", @readonly = "true" })
-                }
+                @Html.TextBoxFor(d => d.EmailReceptor, "", new { @class = "form-control" })
                 @Html.ValidationMessage("EmailReceptor", new { @class = "text-danger" })
             </div>
         </div>
@@ -179,7 +164,7 @@
         <hr />
         <div style="text-align:right ">
             <a id="regresar" href="@Url.Action("Facturacion", "Home")" class="btn btn-danger"><i class="icon-prev"></i>Regresar</a>
-            <input type="submit" class="btn btn-success" value="Generar factura" />
+            <input type="submit" class="btn btn-success" value="Enviar factura por email" />
         </div>
     </form>
 </div>
@@ -236,12 +221,6 @@
 
                    }
                ]
-            });
-
-            $("#UsoCFDI").on("change", function () {
-                var usoCFDI_Generico = $(this).find("option:selected").text();
-                $("#UsoCFDI_Generico").val(usoCFDI_Generico);
-                $("#UsoCFDI_Generico").val(usoCFDI_Generico);
             });
     });
     </script>

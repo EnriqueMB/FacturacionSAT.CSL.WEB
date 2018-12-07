@@ -21,9 +21,7 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
     public class AdminFacturaController : Controller
     {
         private string Conexion = ConfigurationManager.AppSettings.Get("strConnection");
-        private string pathXML, idFile, pathRootSystemHelperSAT, pahtRootSATTempFile;
-
-
+        private string pathXML, idFile, pathRootSystemHelperSAT, pahtRootSATTempFile, pathHTMLTempFilePDF, pathRootSATEmisorXML;
 
         // GET: Admin/Facturacion
         public ActionResult Index()
@@ -44,6 +42,7 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Index(IndexFacturaViewModel Model)
         {
+            ModelState.Remove("CodigoBarraReimpresion");
             if (!ModelState.IsValid)
             {
                 TempData["message"] = "Verifique sus datos";
@@ -110,10 +109,11 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
                     /*Generales*/
                     AuxSQLModel oAuxSQLModel = new AuxSQLModel();
                     oAuxSQLModel.Conexion = Conexion;
+                    oAuxSQLModel.Id_usuario = Convert.ToInt32(User.Identity.Name);
                     /**************************************/
                     /*paths*/
                     pathRootSystemHelperSAT = Server.MapPath("~/SystemHelper/SAT");
-                    string pathRootSATEmisorXML = Server.MapPath("~/SAT");
+                    pathRootSATEmisorXML = Server.MapPath("~/SAT");
                     pahtRootSATTempFile = Server.MapPath("~/SATTempFile");
 
                     //string getNameXML = string.Format("Factura-{0:yyyy-MM-dd_hh-mm-ss}.xml", DateTime.Now);
@@ -125,6 +125,7 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
                     /*Obtenemos los datos del emisor*/
                     CFDIDatosEmisorModels oEmisor = new CFDIDatosEmisorModels();
                     CFDIDatosEmisorDatos oEmisorDatos = new CFDIDatosEmisorDatos();
+                    
 
                     oEmisor = oEmisorDatos.ObtenerDatosEmisorPredeterminado(oAuxSQLModel);
                     /**************************************/
@@ -135,6 +136,13 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
 
                     oPac = oPacDatos.ObtenerDatosPacPredeterminado(oAuxSQLModel);
                     /**************************************/
+                    
+                    //podemos validar el boleto antes por si le dan regresar y no vaya a facturar de nuevo 
+
+                    //if (oAuxSQLModel.Success)
+                    //{
+                    //    throw new Exception(oAuxSQLModel.Mensaje);
+                    //}
 
                     bool result = GenerarXML(pathRootSATEmisorXML, pathXML, pathCadenaOriginal, oEmisor, Factura, oPac);
 
@@ -145,16 +153,57 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
                             TempData["message"] = "Archivo xml creado con éxito.";
                             TempData["typemessage"] = "1";
 
-                            if (GenerarPDF())
+                            Factura.Logotipo = Server.MapPath(oEmisor.Imagen);
+
+                            if (GenerarPDF(Factura))
                             {
                                 TempData["message"] = "Archivo pdf creado con éxito.";
                                 //faltaria enviar al correo
                                 FacturaDatos oFacturaDatos = new FacturaDatos();
                                 oAuxSQLModel.ResetValuesSQL();
                                 oAuxSQLModel.Conexion = Conexion;
-                                //oFacturaDatos.Factura_Save_Factura(oAuxSQLModel, pathXML, Factura);
+                                Factura.EmailEmisor = oEmisor.Correo;
+                                oFacturaDatos.Factura_Save_Factura(oAuxSQLModel, pathXML, Factura); //guardamos la factura, ya generada
+
+                                List<string> ListaPathArchivos = new List<string>();
+
+                                ListaPathArchivos.Add(pathXML);
+                                ListaPathArchivos.Add(pathHTMLTempFilePDF);
+
+                                if(EnviarFacturaEmail(oEmisor.Correo, oEmisor.Password, Factura.EmailReceptor, ListaPathArchivos))
+                                {
+                                    TempData["message"] = "Factura enviada a su email, por favor verifique su bandeja.";
+                                    TempData["typemessage"] = "1";
+                                }
+                                else
+                                {
+                                    TempData["message"] = "Hubo un error al enviar la factura a su correo.";
+                                    TempData["typemessage"] = "2";
+                                }
+
+                                //borramos los archivos
+                                if (System.IO.File.Exists(pathXML))
+                                {
+                                    System.IO.File.Delete(pathXML);
+                                }
+                                if (System.IO.File.Exists(pathHTMLTempFilePDF))
+                                {
+                                    System.IO.File.Delete(pathHTMLTempFilePDF);
+                                }
+
                             }
-                            System.IO.File.Delete(pathXML);
+                            else
+                            {
+                                //borramos los archivos
+                                if (System.IO.File.Exists(pathXML))
+                                {
+                                    System.IO.File.Delete(pathXML);
+                                }
+                                if (System.IO.File.Exists(pathHTMLTempFilePDF))
+                                {
+                                    System.IO.File.Delete(pathHTMLTempFilePDF);
+                                }
+                            }
                         }
 
                         return RedirectToAction("Index");
@@ -178,6 +227,11 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
                 {
                     System.IO.File.Delete(pathXML);
                 }
+                if (System.IO.File.Exists(pathHTMLTempFilePDF))
+                {
+                    System.IO.File.Delete(pathHTMLTempFilePDF);
+                }
+
                 string Mensaje = ex.Message.Replace("\r\n", "").Replace("\r", "").Replace("\n", "");
                 TempData["message"] = Mensaje;
                 TempData["typemessage"] = "2";
@@ -190,11 +244,6 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
         {
             try
             {
-
-                //string pathKey = pathRootSATEmisorXML +"\\"  + "CSD_Pruebas_CFDI_LAN7008173R5.key";
-                //string pathCer = pathRootSATEmisorXML + "\\" + "CSD_Pruebas_CFDI_LAN7008173R5.cer";
-                //string clavePrivada = "12345678a";
-
                 string pathKey = pathRootSATEmisorXML + "\\" + Emisor.URLArchivoKEY;
                 string pathCer = pathRootSATEmisorXML + "\\" + Emisor.URLArchivoCER;
                 string clavePrivada = Emisor.PasswordArchivoKEY;
@@ -214,11 +263,11 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
                 oComprobante.Sello = ""; //requerido: quien realiza la factura
                 oComprobante.FormaPago = Factura.FormaDePago; //requerido, del catálogo: Cfdi:FormaPago
                 oComprobante.NoCertificado = numeroCertificado; //requerido, es en relacion al .cer 
-                oComprobante.Certificado = ""; //sig video 
+                oComprobante.Certificado = "";
                 oComprobante.SubTotal = Factura.Subtotal; // Atributo requerido para representar la suma de los importes de los conceptos antes de descuentos e 
                                                           //impuesto.No se permiten valores negativos.
                 oComprobante.Descuento = Factura.TotalDescuento;
-                oComprobante.Moneda = Factura.MonedaDB; // Catálogo del Cfdi:Moneda, si no es moneda nacional, se debe de poner el tipo de cambio
+                oComprobante.Moneda = Factura.Moneda; // Catálogo del Cfdi:Moneda, si no es moneda nacional, se debe de poner el tipo de cambio
                                                         //oComprobante.TipoCambio
                 oComprobante.Total = Factura.Total; //Subtotal menos descuento
                 oComprobante.TipoDeComprobante = Factura.TipoComprobante; // Atributo requerido para expresar la clave del efecto del comprobante fiscal para el contribuyente emisor.
@@ -254,7 +303,40 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
                     oConcepto.Descuento = Concepto.Descuento.Value;
                     lstConceptos.Add(oConcepto);
                 }
+
+                //ComprobanteConceptoImpuestosTraslado 
+                List<ComprobanteConceptoImpuestosTraslado> ListaImpuestosTraladado = new List<ComprobanteConceptoImpuestosTraslado>();
+                ComprobanteConceptoImpuestosTraslado oImpuestosTraslado = new ComprobanteConceptoImpuestosTraslado();
+                oImpuestosTraslado.Base = oConcepto.Importe - oConcepto.Descuento;
+                oImpuestosTraslado.TasaOCuota = Factura.Conceptos[0].Impuestos[0].TasaOCuota;
+                oImpuestosTraslado.TipoFactor = Factura.Conceptos[0].Impuestos[0].TipoFactor;
+                oImpuestosTraslado.Impuesto = Factura.Conceptos[0].Impuestos[0].Clave_Impuesto;
+                oImpuestosTraslado.Importe = Factura.Conceptos[0].Impuestos[0].Importe;
+
+                ListaImpuestosTraladado.Add(oImpuestosTraslado);
+                oConcepto.Impuestos = new ComprobanteConceptoImpuestos();
+                oConcepto.Impuestos.Traslados = ListaImpuestosTraladado.ToArray();
+
                 oComprobante.Conceptos = lstConceptos.ToArray();
+
+                //ComprobanteImpuestosTraslado
+                List<ComprobanteImpuestosTraslado> ListaComprobanteImpuestosTraslados = new List<ComprobanteImpuestosTraslado>();
+                ComprobanteImpuestos oComprobanteImpuestos = new ComprobanteImpuestos();
+                ComprobanteImpuestosTraslado oComprobanteImpuestosTraslado = new ComprobanteImpuestosTraslado();
+                
+                oComprobanteImpuestos.TotalImpuestosTrasladados = Factura.Conceptos[0].Impuestos[0].Importe;
+
+                oComprobanteImpuestosTraslado.Importe = Math.Round(Factura.Conceptos[0].Impuestos[0].Importe, 2);
+                oComprobanteImpuestosTraslado.Impuesto = Factura.Conceptos[0].Impuestos[0].Clave_Impuesto;
+                oComprobanteImpuestosTraslado.TipoFactor = Factura.Conceptos[0].Impuestos[0].TipoFactor;
+                oComprobanteImpuestosTraslado.TasaOCuota = Factura.Conceptos[0].Impuestos[0].TasaOCuota;
+
+                ListaComprobanteImpuestosTraslados.Add(oComprobanteImpuestosTraslado);
+                oComprobanteImpuestos.Traslados = ListaComprobanteImpuestosTraslados.ToArray();
+                //agregamos el impuesto
+                oComprobante.Impuestos = oComprobanteImpuestos;
+                //oComprobante.Impuestos.TotalImpuestosTrasladados = Factura.Conceptos[0].Impuestos[0].Importe;
+                oComprobante.Impuestos.TotalImpuestosTrasladados = Math.Round(Factura.Conceptos[0].Impuestos[0].Importe ,2);
 
                 this.CreateXML(oComprobante, pathXML);
 
@@ -278,40 +360,21 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
 
                 CreateXML(oComprobante, pathXML);
 
-
-                /*Timbrado del CFDI con el proveedor del pack*/
-                //string usuario = "testing@solucionfactible.com";
-                //string contraseña = "timbrado.SF.16672";
                 string usuario = Pac.UserPac;
                 string contrasena = Pac.PasswordPac;
 
-                /*Datos del pack que se maneja en su momento será el que se desea*/
                 bool produccion = false;
-                //Checar esto lo da el proveedor del pac, pero puede que no sea en todos
                 string prod_endpoint = "TimbradoEndpoint_PRODUCCION";
                 string test_endpoint = "TimbradoHttpSoap11Endpoint";
-
-                //Si recibe error 417 deberá descomentar la linea a continuación
-                //System.Net.ServicePointManager.Expect100Continue = false;
-
-                //El paquete o namespace en el que se encuentran las clases
-                //será el que se define al agregar la referencia al WebService,
-                //en este ejemplo es: com.sf.ws.Timbrado
 
                 SolucionFactible.TimbradoPortTypeClient portClient = null;
                 portClient = (produccion)
                     ? new SolucionFactible.TimbradoPortTypeClient(prod_endpoint)
                     : portClient = new SolucionFactible.TimbradoPortTypeClient(test_endpoint);
 
-
                 byte[] xmlSAT = System.IO.File.ReadAllBytes(pathXML);
 
                 SolucionFactible.CFDICertificacion response = portClient.timbrar(usuario, contrasena, xmlSAT, false);
-
-                //System.Console.WriteLine("Información de la transacción");
-                //System.Console.WriteLine(response.status);
-                //System.Console.WriteLine(response.mensaje);
-                //System.Console.WriteLine("Resultados recibidos" + response.resultados.Length);
 
                 SolucionFactible.CFDIResultadoCertificacion[] resultados = response.resultados;
 
@@ -402,7 +465,7 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
             }
         }
 
-        private bool GenerarPDF()
+        private bool GenerarPDF(FacturacionViewModel oFactura)
         {
             try
             {
@@ -436,18 +499,15 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
                 //Aplicando razor
                 string path = pathRootSystemHelperSAT + "\\Plantilla\\";
                 string pathHTMLTempFileHtml = pahtRootSATTempFile + "\\" + idFile + ".html";
-                string pathHTMLTempFilePDF = pahtRootSATTempFile + "\\" + idFile + ".pdf";
+                pathHTMLTempFilePDF = pahtRootSATTempFile + "\\" + idFile + ".pdf";
 
                 string pathHtmlPlantilla = path + "plantillaFactura.html";
                 string sHtml = GetStringOfFile(pathHtmlPlantilla);
                 string resultHtml = "";
 
-                SystemHelper.SAT.CFDI3_3_PDF cFDI3_3_PDF = new SystemHelper.SAT.CFDI3_3_PDF(oComprobante);
-
+                SystemHelper.SAT.CFDI3_3_PDF cFDI3_3_PDF = new SystemHelper.SAT.CFDI3_3_PDF(oComprobante, oFactura);
 
                 resultHtml = RazorEngine.Razor.Parse(sHtml, cFDI3_3_PDF);
-
-                
 
                 //creamos el archivo temporal
                 System.IO.File.WriteAllText(pathHTMLTempFileHtml, resultHtml);
@@ -464,14 +524,18 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
                     oProcess.WaitForExit();
                 }
 
-                //eliminamos el archivo temporal
-                System.IO.File.Delete(pathHTMLTempFileHtml);
+                //eliminamos el archivo temporal, el pdf se borrará después de enviarlo por email
+                if (System.IO.File.Exists(pathHTMLTempFileHtml))
+                {
+                    System.IO.File.Delete(pathHTMLTempFileHtml);
+                }
 
                 return true;
             }
             catch (Exception ex)
             {
-                string Mensaje = ex.Message.Replace("\r\n", "").Replace("\r", "").Replace("\n", "");
+                //string Mensaje = ex.Message.Replace("\r\n", "").Replace("\r", "").Replace("\n", "");
+                string Mensaje = "Error al generar el pdf";
                 TempData["message"] = Mensaje;
                 TempData["typemessage"] = "2";
                 throw;
@@ -483,6 +547,36 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
         {
             string contenido = System.IO.File.ReadAllText(pathFile);
             return contenido;
+        }
+
+        private bool EnviarFacturaEmail(string emailEmisor, string passwordEmisor, string emailReceptor, List<string> ListaArchivos)
+        {
+            try
+            {
+                bool respuesta = 
+                FacturacionSAT.CSL.WEB.App_Start.ClaseAux.EnviarCorreo(
+                    emailEmisor 
+                  , passwordEmisor 
+                  , emailReceptor 
+                  , "Factura: Viajes Aury"
+                  , "Se le envía el siguiente email, en la cual se le adjunta su factura."
+                  , true
+                  , ""
+                  , false
+                  , "smtp.gmail.com"
+                  , 587
+                  , true
+                  , ListaArchivos);
+
+                return respuesta;
+            }
+            catch (Exception ex)
+            {
+                string Mensaje = ex.Message.Replace("\r\n", "").Replace("\r", "").Replace("\n", "");
+                TempData["message"] = Mensaje;
+                TempData["typemessage"] = "2";
+                throw;
+            }
         }
     }
 }

@@ -8,7 +8,7 @@ namespace FacturacionSAT.CSL.WEB.Models.ViewModel
 {
     public class FacturacionViewModel
     {
-        
+
         public int Id_factura { get; set; }
 
         //public byte[] QR
@@ -29,6 +29,13 @@ namespace FacturacionSAT.CSL.WEB.Models.ViewModel
         //    }
         //}
         public string CodigoBarraBoleto { get; set; }
+        public decimal PorcentajeIVA { get; set; }
+
+        [Required(AllowEmptyStrings = false)]
+        [Display(Name = "Email del receptor")]
+        [EmailAddress]
+        public string EmailReceptor { get; set; }
+
         public string Logotipo { get; set; }
         public string NoCertificadoSAT { get; set; }
         public string SelloSAT { get; set; }
@@ -40,11 +47,11 @@ namespace FacturacionSAT.CSL.WEB.Models.ViewModel
 
         public string NombreEmisor { get; set; }
         public string RegimenFiscal { get; set; }
-        public string sRegimenFiscal { get; set; }
+        public string RegimenFiscal_Generico { get; set; }
 
         public string UUID { get; set; }
         public string Version { get; set; }
-        
+
 
         [Display(Name = "Condiciones de pago")]
         [StringLength(1000, ErrorMessage = "Las condiciones de pago no pueden superar los 1000 caracteres", MinimumLength = 1)]
@@ -59,7 +66,7 @@ namespace FacturacionSAT.CSL.WEB.Models.ViewModel
         [Display(Name = "Forma de pago")]
         [Required(AllowEmptyStrings = false)]
         public string FormaDePago { get; set; }
-        public string sFormaDePago { get; set; }
+        public string FormaDePago_Generico { get; set; }
 
         [Display(Name = "Método de pago")]
         public string MetodoDePago { get; set; }
@@ -67,7 +74,7 @@ namespace FacturacionSAT.CSL.WEB.Models.ViewModel
 
         [Display(Name = "Moneda")]
         public string Moneda { get; set; }
-        public string MonedaDB { get; set; }
+        public string Moneda_Generico { get; set; }
 
         [Display(Name = "Tipo de cambio")]
         public string TipoDeCambio { get; set; }
@@ -97,13 +104,14 @@ namespace FacturacionSAT.CSL.WEB.Models.ViewModel
         [StringLength(40, ErrorMessage = "El folio no puede superar 40 caracteres", MinimumLength = 1)]
         public string Folio { get; set; }
 
+        [Required(AllowEmptyStrings = false)]
         [Display(Name = "Uso del CFDI")]
         public string UsoCFDI { get; set; }
-        public string sUsoCFDI { get; set; }
+        public string UsoCFDI_Generico { get; set; }
 
         [Display(Name = "Tipo de comprobante")]
         public string TipoComprobante { get; set; } //dato calculado
-        public string TipoComprobanteDB { get; set; }
+        public string TipoComprobante_Generico { get; set; }
         public string sTipoComprobante
         {
             get
@@ -172,6 +180,7 @@ namespace FacturacionSAT.CSL.WEB.Models.ViewModel
         [Required]
         public string RFCReceptor { get; set; }
 
+        [Required(AllowEmptyStrings = false)]
         [Display(Name = "Nombre")]
         public string RazonSocial { get; set; }
 
@@ -207,7 +216,7 @@ namespace FacturacionSAT.CSL.WEB.Models.ViewModel
 
         [Display(Name = "Correo electrónico")]
         [EmailAddress]
-        public string Email { get; set; }
+        public string EmailEmisor { get; set; }
 
         [Display(Name = "Referencia")]
         public string Referencia { get; set; }
@@ -319,11 +328,11 @@ namespace FacturacionSAT.CSL.WEB.Models.ViewModel
         public class Concepto
         {
             public string ClaveProducto { get; set; }
-            public string ClaveProductoDB { get; set; }
+            public string ClaveProducto_Generico { get; set; }
             //public string Codigo { get; set; }
 
             public string ClaveUnidad { get; set; }
-            public string ClaveUnidadDB { get; set; }
+            public string ClaveUnidad_Generico { get; set; }
 
             public decimal Cantidad { get; set; }
             public string Unidad { get; set; }
@@ -346,12 +355,21 @@ namespace FacturacionSAT.CSL.WEB.Models.ViewModel
         public class Impuesto
         {
             public string Nombre { get; set; }
+            public string Clave_Impuesto { get; set; }
 
-            public decimal Tasa { get; set; }
+            /// <summary>
+            /// Atributo condicional para señalar el valor de la tasa
+            /// o cuota del impuesto que se traslada para el
+            /// presente concepto.Es requerido cuando el atributo
+            /// TipoFactor tenga una clave que corresponda a Tasa
+            /// o Cuota
+            /// </summary>
+            public decimal TasaOCuota { get; set; }
+            public decimal Base { get; set; }
+            public string TipoFactor { get; set; }
             public string Ambito { get; set; }
-            public string Tipo { get; set; }
 
-            public string Factor { get; set; }
+            //public string Factor { get; set; }
             //valor que se utiliza en el pdf, se llena al hacer la factura,
             //es decir no viene en el formulario
             public decimal Importe { get; set; }

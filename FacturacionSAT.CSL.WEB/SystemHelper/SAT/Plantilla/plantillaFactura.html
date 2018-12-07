@@ -11,26 +11,26 @@
         <table id="tbl_logo">
             <tr>
                 <td>
-                    <img src="https://www.w3schools.com/images/w3schools_green.jpg"
+                    <img src="@Model.FacturaModel.Logotipo"
                          width="250"
                          height="150"
-                         alt="Ejemplo de imagen grande codificada en base 64"
-                         title="Ejemplo de imagen grande codificada en base 64">
+                         alt="Viajes aury"
+                         title="Viajes aury">
                 </td>
             </tr>
         </table>
 
         <table id="tbl_emisor" cellpadding=3>
             <tr>
-                <td colspan=2 class="textoCentrado"><b>CONSTRUCTORA IZEL S.A. DE C.V.</b></td>
+                <td colspan=2 class="textoCentrado"><b>@Model.Comprobante.Emisor.Nombre</b></td>
             </tr>
             <tr>
                 <td>RFC del Emisor :</td>
-                <td><b>@Model.Comprobante.Emisor.Nombre</b></td>
+                <td><b>@Model.Comprobante.Emisor.Rfc</b></td>
             </tr>
             <tr>
                 <td>Tipo de comprobante :</td>
-                <td><b>@Model.Comprobante.TipoDeComprobante</b></td>
+                <td><b>@Model.FacturaModel.TipoComprobante_Generico</b></td>
             </tr>
             <tr>
                 <td>Lugar de Expedición :</td>
@@ -38,7 +38,7 @@
             </tr>
             <tr>
                 <td>Régimen Fiscal :</td>
-                <td><b>601 General de Ley Personas Morales</b></td>
+                <td><b>@Model.FacturaModel.RegimenFiscal_Generico</b></td>
             </tr>
         </table>
     </div>
@@ -47,15 +47,15 @@
         <table id="tbl_generales">
             <tr>
                 <td class="fondoGris"><b>Forma de pago:</b></td>
-                <td>@Model.Comprobante.FormaPago</td>
+                <td>@Model.FacturaModel.FormaDePago_Generico</td>
                 <td class="fondoGris"><b>Folio</b></td>
                 <td>@Model.Comprobante.Folio</td>
             </tr>
             <tr>
                 <td class="fondoGris"><b>Fecha y hora de elaboración:</b></td>
-                <td>@Model.Comprobante.FechaElaboracion</td>
+                <td>@Model.FechaElaboracion</td>
                 <td class="fondoGris"><b>Móneda:</b></td>
-                <td>@Model.Comprobante.Moneda</td>
+                <td>@Model.FacturaModel.Moneda_Generico</td>
             </tr>
         </table>
 
@@ -74,7 +74,7 @@
                         <td class="fondoGris"><b>RFC:</b></td>
                         <td>@Model.Comprobante.Receptor.Rfc</td>
                         <td class="fondoGris"><b>Uso CFDI:</b></td>
-                        <td>@Model.Comprobante.Receptor.UsoCFDI</td>
+                        <td>@Model.FacturaModel.UsoCFDI_Generico</td>
                     </tr>
                 </table>
             </div>
@@ -83,104 +83,206 @@
                 <table id="tbl_SAT">
                     <tr>
                         <td class="fondoNegroTextoBlanco textoCentrado">Cantidad:</td>
-                        <td class="fondoNegroTextoBlanco textoCentrado">Unidad</td>
                         <td class="fondoNegroTextoBlanco textoCentrado">Clave unidad SAT</td>
                         <td class="fondoNegroTextoBlanco textoCentrado">Clave Producto / Servicio</td>
                         <td class="fondoNegroTextoBlanco textoCentrado">Descripción</td>
+                        <td class="fondoNegroTextoBlanco textoCentrado">Precio unitario</td>
+                        <td class="fondoNegroTextoBlanco textoCentrado">Impuesto</td>
                         <td class="fondoNegroTextoBlanco textoCentrado">Subtotal</td>
                     </tr>
 
-                    @foreach(var oConcepto in Model.Comprobante.Conceptos){
+                    @foreach(var oConcepto in Model.FacturaModel.Conceptos){
                     <tr>
                         <td class="textoCentrado">@oConcepto.Cantidad</td>
-                        <td class="textoCentrado">@oConcepto.Cantidad</td>
-                        <td class="textoCentrado">@oConcepto.ClaveProdServ</td>
-                        <td class="textoCentrado">@oConcepto.ClaveProdServ</td>
+                        <td class="textoCentrado">@oConcepto.ClaveUnidad_Generico</td>
+                        <td class="textoCentrado">@oConcepto.ClaveProducto_Generico</td>
                         <td class="textoCentrado">@oConcepto.Descripcion</td>
-                        <td class="textoCentrado">@oConcepto.Importe.ToString("C")</td>
+                        <td class="textoCentrado">@oConcepto.PrecioUnitario</td>
+                        <td class="textoCentrado">@oConcepto.Impuestos[0].Importe</td>
+                        <td class="textoCentrado">@(oConcepto.PrecioUnitario + @oConcepto.Impuestos[0].Importe)</td>
                     </tr>
                     }
                 </table>
             </div>
             <br />
+            <div clas="" style="width: 100%">
+                <table style="width: 100%" border="0">
+                    <tr valign="top">
+                        <td style="width: 20%">
+                            <table style="width: 100%;" border="0">
+                                <tr>
+                                    <td>
+                                        <img src="@Model.Comprobante.QR" width="250" height="250" />
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td style="width: 1%">
+                            <table style="width: 100%"></table>
+                        </td>
+                        <td style="width: 63%">
+                            <table style="width: 100%;" border="0">
+                                <tr>
+                                    <td class="fondoNegroTextoBlanco" style="text-align:center;">
+                                        <b>Importe con letra:</b>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:center">
+                                        @Model.Comprobante.MonedaConLetra
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td style="width: 1%">
+                            <table style="width: 100%"></table>
+                        </td>
+                        <td style="width: 15%">
+                            <table style="width: 100%;  border-spacing: 5px;">
+                                <tr>
+                                    <td style="text-align: right;">
+                                        <b>Subtotal:</b>
+                                    </td>
+                                    <td style=" border: 1px solid black; text-align: right">
+                                        $@Model.Comprobante.SubTotal
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: right;">
+                                        <b>Descuento:</b>
+                                    </td>
+                                    <td style=" border: 1px solid black; text-align: right">
+                                        $@Model.Comprobante.Descuento
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: right;">
+                                        <b>IEPS:</b>
+                                    </td>
+                                    <td style=" border: 1px solid black; text-align: right">
+                                        $0.00
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: right;">
+                                        <b>IVA:</b>
+                                    </td>
+                                    <td style=" border: 1px solid black; text-align: right">
+                                        $@Model.Comprobante.Impuestos.TotalImpuestosTrasladados
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: right;">
+                                        <b>Total:</b>
+                                    </td>
+                                    <td style=" border: 1px solid black; text-align: right">
+                                        $@Model.Comprobante.Total
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <br />
+            <div clas="footer" style="width: 100%">
 
+                <table style="width: 100%">
+                    <tr valign="top">
+                        <td style="width: 40%">
+                            <table style="width: 100%">
+                                <tr>
+                                    <td style="background: #00225c; color: white; text-align: center;"><b>Serie del certificado emisor:</b></td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center;"> @Model.Comprobante.NoCertificado</td>
+                                </tr>
+                                <tr>
+                                    <td style="background: #00225c; color: white; text-align: center;"><b>Folio fiscal:</b></td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center;"> @Model.Comprobante.TimbreFiscalDigital.UUID</td>
+                                </tr>
+                                <tr>
+                                    <td style="background: #00225c; color: white; text-align: center;"><b>No. de Serie del Certificado del SAT:</b></td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center;">@Model.Comprobante.TimbreFiscalDigital.NoCertificadoSAT</td>
+                                </tr>
+                                <tr>
+                                    <td style="background: #00225c; color: white; text-align: center;"><b>Fecha y hora de certificación:</b></td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center;">@Model.Comprobante.TimbreFiscalDigital.FechaTimbrado</td>
+                                </tr>
+                                <tr>
+                                    <td style="background: #00225c; color: white; text-align: center;"><b>RFC del Proveedor de Certificación:</b></td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center;">
+                                        @Model.Comprobante.TimbreFiscalDigital.RfcProvCertif
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td style="width: 1%">
+                            <table style="width: 100%"></table>
+                        </td>
+                        <td style="width: 59%">
+                            <table style="width: 100%">
+                                
+                                <tr>
+                                    <td style="background: #00225c; color: white; text-align: center;"><b>Sello Digital del CFDI:</b></td>
+                                </tr>
+                                <tr>
+                                    <td class="textoContiguo" style="text-align: center;">
+                                        @Model.Comprobante.TimbreFiscalDigital.SelloCFD
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="background: #00225c; color: white; text-align: center;"><b>Sello Digital del SAT:</b></td>
+                                </tr>
+                                <tr>
+                                    <td class="textoContiguo" style="text-align: center;">
+                                        @Model.Comprobante.TimbreFiscalDigital.SelloSAT
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="background: #00225c; color: white; text-align: center;"><b>Cadena original del complemento de certificación digital del SAT:</b></td>
+                                </tr>
+                                <tr>
+                                    <td class="textoContiguo" style="text-align: center;">
+                                        @Model.CadenaOriginal
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+
+            </div>
 
 
 
         </div>
 
-        <div style="width: 100%">
-
-            <table style="width: 100%">
-                <tr>
-                    <td style="width: 40%">
-                        <table style="width: 100%">
-                            <tr>
-                                <td style="background: #00225c; color: white; text-align: center;"><b>Serie del certificado emisor:</b></td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: center;"> @Model.Comprobante.NoCertificado</td>
-                            </tr>
-                            <tr>
-                                <td style="background: #00225c; color: white; text-align: center;"><b>Folio fiscal:</b></td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: center;"> @Model.Comprobante.TimbreFiscalDigital.UUID</td>
-                            </tr>
-                            <tr>
-                                <td style="background: #00225c; color: white; text-align: center;"><b>No. de Serie del Certificado del SAT:</b></td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: center;">@Model.Comprobante.TimbreFiscalDigital.NoCertificadoSAT</td>
-                            </tr>
-                            <tr>
-                                <td style="background: #00225c; color: white; text-align: center;"><b>Fecha y hora de certificación:</b></td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: center;">@Model.Comprobante.TimbreFiscalDigital.FechaTimbrado</td>
-                            </tr>
-                        </table>
-                    </td>
-                    <td style="width: 10%">
-                        <table style="width: 100%"></table>
-                    </td>
-                    <td style="width: 50%">
-                        <table style="width: 100%">
-                            <tr>
-                                <td style="background: #00225c; color: white; text-align: center;"><b>Sello Digital del CFDI:</b></td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: center;">
-                                    @Model.Comprobante.TimbreFiscalDigital.SelloCFD
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="background: #00225c; color: white; text-align: center;"><b>Sello Digital del SAT:</b></td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: center;">
-                                    @Model.Comprobante.TimbreFiscalDigital.SelloSAT
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="background: #00225c; color: white; text-align: center;"><b>Cadena original del complemento de certificación digital del SAT:</b></td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: center;">
-                                    
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
-            </table>
-
-        </div>
+  
     </div>
 </body>
 </html>
 
 <style>
+
+    .footer {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        background-color: red;
+        color: white;
+        text-align: center;
+    }
+
     .textoContiguo {
         -ms-word-break: break-all;
         word-break: break-all;
