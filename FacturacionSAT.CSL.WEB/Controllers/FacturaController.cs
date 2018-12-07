@@ -61,6 +61,7 @@ namespace FacturacionSAT.CSL.WEB.Controllers
                     }
                     FacturacionViewModel oFactura = new FacturacionViewModel();
 
+                    oFactura.Id_factura = oReimpresionModel.Id;
                     oFactura.Version = oComprobante.Version;
                     oFactura.TipoComprobante = oComprobante.TipoDeComprobante;
                     oFactura.Moneda = oComprobante.Moneda;
