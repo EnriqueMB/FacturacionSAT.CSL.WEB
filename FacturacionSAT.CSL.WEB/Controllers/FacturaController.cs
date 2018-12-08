@@ -74,9 +74,10 @@ namespace FacturacionSAT.CSL.WEB.Controllers
                     oFactura.RegimenFiscal = oComprobante.Emisor.RegimenFiscal;
                     oFactura.Folio = oComprobante.Folio;
                     oFactura.Fecha = DateTime.Now;
-
+                    
                     oFactura.RFCReceptor = oComprobante.Receptor.Rfc;
                     oFactura.RazonSocial = oComprobante.Receptor.Nombre;
+                    oFactura.UsoCFDI = oComprobante.Receptor.UsoCFDI;
 
                     oAuxSQLModel.ResetValuesSQL();
 
@@ -84,6 +85,15 @@ namespace FacturacionSAT.CSL.WEB.Controllers
 
                     if (oAuxSQLModel.Success)
                     {
+                        for (int i = 0; i < oComprobante.Conceptos.Length; i++)
+                        {
+                            oFactura.Conceptos[i].Descripcion = oComprobante.Conceptos[i].Descripcion;
+                            oFactura.Conceptos[i].PrecioUnitario = oComprobante.Conceptos[i].ValorUnitario;
+                            oFactura.Conceptos[i].Impuestos[0].TasaOCuota = oComprobante.Conceptos[i].Impuestos.Traslados[0].TasaOCuota;
+                            oFactura.Conceptos[i].Impuestos[0].Importe = oComprobante.Conceptos[i].Impuestos.Traslados[0].Importe;
+                            oFactura.Conceptos[i].Impuestos[0].Clave_Impuesto = oComprobante.Conceptos[i].Impuestos.Traslados[0].Impuesto;
+                            oFactura.Conceptos[i].Impuestos[0].TipoFactor = oComprobante.Conceptos[i].Impuestos.Traslados[0].TipoFactor;
+                        }
                         return View(oFactura);
                     }
                     else
@@ -116,6 +126,121 @@ namespace FacturacionSAT.CSL.WEB.Controllers
 
         }
 
+        [HttpPost]
+        public ActionResult Reimpresion(FacturacionViewModel Factura)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    AuxSQLModel oAuxSQLModel = new AuxSQLModel();
+                    FacturaDatos oFacturaDatos = new FacturaDatos();
+
+                    oAuxSQLModel.Conexion = Conexion;
+
+                    FacturaReimpresionModel oReimpresionModel = oFacturaDatos.Factura_get_Reimpresion(oAuxSQLModel, Factura.CodigoBarraBoleto);
+
+                    if (oAuxSQLModel.Success)
+                    {
+                        //guardamos el string en un archivo
+                        /**************************************/
+                        /*paths*/
+                        idFile = Guid.NewGuid().ToString();
+                        string getNameXML = idFile + ".xml";
+                        pahtRootSATTempFile = Server.MapPath("~/SATTempFile");
+                        pathXML = pahtRootSATTempFile + "\\" + getNameXML;
+                        pathRootSystemHelperSAT = Server.MapPath("~/SystemHelper/SAT");
+                        /**************************************/
+                        //generamos el xml
+                        System.IO.File.WriteAllText(pathXML, oReimpresionModel.XMLFactura);
+                        //generamos un objeto comprobante ya que la mayoría de la informacion de la factura esta en el xml
+                        Comprobante oComprobante = GenerarComprobanteDeXMLPath();
+
+                        oAuxSQLModel.ResetValuesSQL();
+                        CFDIDatosEmisorModels oEmisor = new CFDIDatosEmisorModels();
+                        CFDIDatosEmisorDatos oEmisorDatos = new CFDIDatosEmisorDatos();
+                        oEmisor = oEmisorDatos.ObtenerDatosEmisorPredeterminado(oAuxSQLModel);
+                        Factura.Logotipo = oEmisor.Imagen;
+
+                        if (GenerarPDFReimpresion(oComprobante, Factura))
+                        {
+                            TempData["message"] = "Archivo pdf creado con éxito.";
+                            //faltaria enviar al correo
+                            /*Obtenemos los datos del emisor*/
+                            
+                            oAuxSQLModel.ResetValuesSQL();
+                            oAuxSQLModel.Conexion = Conexion;
+                            Factura.EmailEmisor = oEmisor.Correo;
+                            oFacturaDatos.Factura_Save_Factura_ReimpresionFactura(oAuxSQLModel, Factura); //guardamos la factura, ya generada
+
+                            List<string> ListaPathArchivos = new List<string>();
+
+                            ListaPathArchivos.Add(pathXML);
+                            ListaPathArchivos.Add(pathHTMLTempFilePDF);
+
+                            if (EnviarFacturaEmail(oEmisor.Correo, oEmisor.Password, Factura.EmailReceptor, ListaPathArchivos))
+                            {
+                                TempData["message"] = "Factura enviada a su email, por favor verifique su bandeja.";
+                                TempData["typemessage"] = "1";
+                            }
+                            else
+                            {
+                                TempData["message"] = "Hubo un error al enviar la factura a su correo.";
+                                TempData["typemessage"] = "2";
+                            }
+
+                            //borramos los archivos
+                            if (System.IO.File.Exists(pathXML))
+                            {
+                                System.IO.File.Delete(pathXML);
+                            }
+                            if (System.IO.File.Exists(pathHTMLTempFilePDF))
+                            {
+                                System.IO.File.Delete(pathHTMLTempFilePDF);
+                            }
+
+                            return RedirectToAction("Facturacion", "Home");
+                        }
+                        else
+                        {
+                            TempData["message"] = "Hubo un error al obtener los datos, contacte con soporte técnico.";
+                            TempData["typemessage"] = "2";
+                            return View(Factura);
+                        }
+                    }
+                    else
+                    {
+                        TempData["message"] = "Hubo un error al obtener los datos, contacte con soporte técnico.";
+                        TempData["typemessage"] = "2";
+                        return View(Factura);
+                    }
+                }
+                else
+                {
+                    TempData["message"] = "Hubo un error al obtener los datos, contacte con soporte técnico.";
+                    TempData["typemessage"] = "2";
+                    return View(Factura);
+                }
+            }
+            catch (Exception ex)
+            {
+                if (System.IO.File.Exists(pathXML))
+                {
+                    System.IO.File.Delete(pathXML);
+                }
+                if (System.IO.File.Exists(pathHTMLTempFilePDF))
+                {
+                    System.IO.File.Delete(pathHTMLTempFilePDF);
+                }
+
+                //string Mensaje = ex.Message.Replace("\r\n", "").Replace("\r", "").Replace("\n", "");
+                //TempData["message"] = Mensaje;
+                TempData["message"] = "Hubo un error al obtener los datos, contacte con soporte técnico.";
+                TempData["typemessage"] = "2";
+
+                return RedirectToAction("Facturacion", "Home");
+            }
+        }
 
         [HttpGet]
         public ActionResult Add(IndexFacturaViewModel Model)
@@ -651,12 +776,10 @@ namespace FacturacionSAT.CSL.WEB.Controllers
             return oComprobante;
         }
 
-        private bool GenerarPDFReimpresion(Comprobante oComprobante)
+        private bool GenerarPDFReimpresion(Comprobante oComprobante, FacturacionViewModel oFactura)
         {
             try
             {
-               
-
                 //Aplicando razor
                 string path = pathRootSystemHelperSAT + "\\Plantilla\\";
                 string pathHTMLTempFileHtml = pahtRootSATTempFile + "\\" + idFile + ".html";
@@ -667,7 +790,6 @@ namespace FacturacionSAT.CSL.WEB.Controllers
                 string resultHtml = "";
 
                 //necesito obtener los datos
-                FacturacionViewModel oFactura = new FacturacionViewModel(); 
 
                 SystemHelper.SAT.CFDI3_3_PDF cFDI3_3_PDF = new SystemHelper.SAT.CFDI3_3_PDF(oComprobante, oFactura);
 

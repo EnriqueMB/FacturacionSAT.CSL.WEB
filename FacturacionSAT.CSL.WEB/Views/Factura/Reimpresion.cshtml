@@ -31,6 +31,7 @@
 
 <div class="col-md-12">
     <form action="@Url.Content("~/Factura/Reimpresion")" method="post" autocomplete="off">
+        @Html.HiddenFor(d => d.Id_factura)
         @Html.HiddenFor(d => d.Version)
         @Html.HiddenFor(d => d.TipoComprobante)
         @Html.HiddenFor(d => d.TipoComprobante_Generico)
@@ -43,6 +44,7 @@
         @Html.HiddenFor(d => d.LugarExpedicion)
         @Html.HiddenFor(d => d.CodigoBarraBoleto)
         @Html.HiddenFor(d => d.UsoCFDI_Generico)
+        @Html.HiddenFor(d => d.UsoCFDI)
         @Html.HiddenFor(d => d.FormaDePago)
         @Html.HiddenFor(d => d.RegimenFiscal)
 

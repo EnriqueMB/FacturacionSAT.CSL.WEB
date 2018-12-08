@@ -125,6 +125,8 @@ namespace FacturacionSAT.CSL.WEB.Models.Datos
                         itemConcepto.ClaveProducto_Generico = !dr.IsDBNull(dr.GetOrdinal("prodServ_Generico")) ? dr.GetString(dr.GetOrdinal("prodServ_Generico")) : string.Empty;
                         itemConcepto.ClaveUnidad_Generico = !dr.IsDBNull(dr.GetOrdinal("unidadMedida_generico")) ? dr.GetString(dr.GetOrdinal("unidadMedida_generico")) : string.Empty;
 
+                        Impuesto.Nombre = !dr.IsDBNull(dr.GetOrdinal("nombreImpuesto_Generico")) ? dr.GetString(dr.GetOrdinal("nombreImpuesto_Generico")) : string.Empty;
+
                         ListaImpuesto.Add(Impuesto);
                         itemConcepto.Impuestos = ListaImpuesto;
                         ListaConceptos.Add(itemConcepto);
@@ -267,7 +269,45 @@ namespace FacturacionSAT.CSL.WEB.Models.Datos
                 throw ex;
             }
         }
-          
 
+        public void Factura_Save_Factura_ReimpresionFactura(AuxSQLModel oAuxSQLModel, FacturacionViewModel oFactura)
+        {
+            try
+            {
+                // construct sql connection and sql command objects.
+                using (SqlConnection sqlcon = new SqlConnection(oAuxSQLModel.Conexion))
+                {
+                    using (SqlCommand cmd = new SqlCommand("[dbo].[spCSLDB_Factura_Save_ReimpresionFactura]", sqlcon))
+                    {
+                        //parametros de entrada
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        cmd.Parameters.Add("@codigoBarra", SqlDbType.VarChar).Value = oFactura.CodigoBarraBoleto;
+                        cmd.Parameters.Add("@idFactura", SqlDbType.Int).Value = oFactura.Id_factura;
+                        cmd.Parameters.Add("@emailReceptor", SqlDbType.NVarChar).Value = oFactura.EmailReceptor;
+                        cmd.Parameters.Add("@emailEmisor", SqlDbType.NVarChar).Value = oFactura.EmailEmisor;
+
+                        //parametros de salida
+                        cmd.Parameters.Add(new SqlParameter("@mensaje", SqlDbType.NVarChar, -1)); //-1 para tipo MAX
+                        cmd.Parameters["@mensaje"].Direction = ParameterDirection.Output;
+                        cmd.Parameters.Add(new SqlParameter("@success", SqlDbType.Bit));
+                        cmd.Parameters["@success"].Direction = ParameterDirection.Output;
+                        // execute
+                        sqlcon.Open();
+
+                        cmd.ExecuteNonQuery();
+                        oAuxSQLModel.Mensaje = cmd.Parameters["@mensaje"].Value.ToString();
+                        if (bool.TryParse(cmd.Parameters["@success"].Value.ToString(), out bool success))
+                        {
+                            oAuxSQLModel.Success = success;
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

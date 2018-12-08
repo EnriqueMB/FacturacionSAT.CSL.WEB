@@ -47,7 +47,7 @@ namespace FacturacionSAT.CSL.WEB.Controllers
             {
                 TempData["message"] = "Verifique sus datos";
                 TempData["typemessage"] = "2";
-                return View(Model);
+                return RedirectToAction("Facturacion", "Home", Model);
             }
             else
             {
