@@ -37,6 +37,7 @@ namespace FacturacionSAT.CSL.WEB.Models.ViewModel
         public string EmailReceptor { get; set; }
 
         public string Logotipo { get; set; }
+
         public string NoCertificadoSAT { get; set; }
         public string SelloSAT { get; set; }
 

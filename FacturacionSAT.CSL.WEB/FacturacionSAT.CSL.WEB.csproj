@@ -144,6 +144,7 @@
     <Content Include="Areas\Admin\Views\CFDIDatosEmisor\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\CFDIFormaPago\Index.cshtml" />
     <Content Include="Areas\Admin\Views\CFDIFormaPago\UpdateCFDIFP.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminFactura\Reimprimir.cshtml" />
     <None Include="Connected Services\SolucionFactible\configuration91.svcinfo" />
     <None Include="Connected Services\SolucionFactible\configuration.svcinfo" />
     <Content Include="Connected Services\SolucionFactible\FacturacionSAT.CSL.WEB.SolucionFactible.cancelarBase64Response.datasource">

@@ -8,6 +8,18 @@
 
 @section css
 {
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+    <style>
+        td.details-control {
+            background: url("@Url.Content("~/Content/img/details_open.png")") no-repeat center center;
+            cursor: pointer;
+        }
+
+        tr.shown td.details-control {
+            background: url("@Url.Content("~/Content/img/details_close.png")") no-repeat center center;
+        }
+
+    </style>
 }
 
 @section featured
@@ -28,7 +40,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="well well-sm">
-                @using (Html.BeginForm("Add", "Factura", FormMethod.Post, new { @class = "form-horizontal", id = "form-dg", autocomplete = "off", @enctype = "multipart/form-data" }))
+                @using (Html.BeginForm("Index", "AdminFactura", FormMethod.Post, new { @class = "form-horizontal", id = "form-dg", autocomplete = "off", @enctype = "multipart/form-data" }))
                 {
                     @Html.AntiForgeryToken()
                     <fieldset>
@@ -61,6 +73,25 @@
         </div>
     </div>
 
+    <div class="row">
+        <div class="col-md-12">
+            <table id="dtFacturas" class="table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>ID</th>
+                        <th>RFC del cliente</th>
+                        <th>Código de barra del boleto</th>
+                        <th>Monto total del boleto ($)</th>
+                        <th>Fecha de creación</th>
+                        <th>Acción</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+
+
     <script>
         var message = '@message';
         var typemessage = '@typemessage';
@@ -68,9 +99,126 @@
 }
 
 @section script{
+    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/js/mensajeDeError.js")"></script>
     <script>
         jQuery(document).ready(function () {
             Mensaje(message, typemessage);
+
+            var dtFacturas = $('#dtFacturas').DataTable({
+                language: {
+                    "url": "@Url.Content("~/Content/json/Spanish.json")"
+                },
+                processing: true,
+                serverSide: true,
+                ordering: false,
+                responsive: true,
+                columns: [
+                    {
+                        "class": "details-control",
+                        "orderable": false,
+                        "data": null,
+                        "defaultContent": ""
+                    },
+                    {
+                        "data": "id",
+                        "visible": false,
+                        "searchable": false
+                    },
+                    { "data": "2" },
+                    { "data": "cb" },
+                    {
+                        "data": "total",
+                        "render": $.fn.dataTable.render.number(',', '.', 2, '$'),
+                    },
+                    { "data": "5" },
+                    {
+                        "data": null,
+                        "render": function (data, type, full) {
+                            var botones =
+                                "<div class='visible-md visible-lg hidden-sm hidden-xs'>" +
+                                "<a data-id='" + full["id"] + "' data-cb='" + full["cb"] +"' class='btn tooltips btn-sm btn-primary reimprimir' title='Reimprimir' data-toggle='tooltip' data-placement='top' data-original-title='Reimprimir'><i class='fa fa-file-text-o'></i></a>"+
+                                "</div>" +
+                                    "<div class='visible-xs visible-sm hidden-md hidden-lg'>" +
+                                    "<div class='btn-group'>" +
+                                    "<a class='btn btn-danger dropdown-toggle btn-sm' data-toggle='dropdown' href='#'" +
+                                    "<i class='fa fa-cog'></i> <span class='caret'></span>" +
+                                    "</a>" +
+                                    "<ul role='menu' class='dropdown-menu pull-right dropdown-dark'>" +
+                                    "<li>" +
+                                    "<a class='reimprimir' data-id='" + full["id"] + "'  role='menuitem' tabindex='-1'>" +
+                                    "<i class='fa fa-file-text-o'></i> Reimprimir" +
+                                    "</a>" +
+                                    "</li>" + "</ul>" +
+                                    "</div>" +
+                                "</div>";
+
+                            return botones;
+                        }
+                    }
+                ],
+                "drawCallback": function (settings) {
+                    $(".reimprimir").on("click", function () {
+
+                        var id = $(this).data("id");
+                        var cb = $(this).data("cb");
+
+                        window.location.href = '/Admin/AdminFactura/Reimprimir?id=' + id + '&codigoBarra=' + cb;
+                    });
+                },
+                ajax: {
+                    type: "POST",
+                    contentType: "application/json",
+                    url: "@Url.Content("~/Admin/AdminFactura/DtFactura") ",
+                    data: function (d) {
+                        return JSON.stringify(d);
+                    }
+                }
+            });
+
+            // Add event listener for opening and closing details
+            $('#dtFacturas tbody').on('click', 'td.details-control', function () {
+                var tr = $(this).closest('tr');
+                var row = dtFacturas.row(tr);
+
+                console.log(row);
+
+                if (row.child.isShown()) {
+                    // This row is already open - close it
+                    row.child.hide();
+                    tr.removeClass('shown');
+                }
+                else {
+                    // Open this row
+                    row.child(format(row.data())).show();
+                    tr.addClass('shown');
+                }
+            });
+
+            function format(d) {
+                var dato = d.Reimpresion;
+                var filas = '';
+
+                for (var i = 0; i < dato.length; i++) {
+                    filas += '<tr><td>' + dato[i].fecins + '</td> <td> ' + dato[i].emailEmisor + '</td> <td> ' + dato[i].emailReceptor + ' </td> </tr>'
+                }
+
+                var subTabla =
+                    '<table class="table" cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">' +
+                    '<thead>' +
+                    '<tr>' +
+                    '<th>Fecha de impresión</th>' +
+                    '<th>Email emisor</th>' +
+                    '<th>Email receptor</th>' +
+                    '</tr>' +
+                    '</thead >' +
+                    '<tbody>' +
+                    filas +
+                    '</tbody>' +
+                    '</table>';
+
+                return subTabla;
+            }
         });
     </script>
 }
