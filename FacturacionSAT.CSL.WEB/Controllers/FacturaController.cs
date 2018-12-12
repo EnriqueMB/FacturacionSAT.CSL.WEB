@@ -14,6 +14,7 @@ using System.Xml.Serialization;
 using System.Text;
 using System.Diagnostics;
 using FacturacionSAT.CSL.WEB.App_Start;
+using FacturacionSAT.CSL.WEB.Filters;
 
 namespace FacturacionSAT.CSL.WEB.Controllers
 {
@@ -130,12 +131,12 @@ namespace FacturacionSAT.CSL.WEB.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [PreventDuplicateRequest]
         public ActionResult Reimpresion(FacturacionViewModel Factura)
         {
             try
             {
-                if (Token.IsTokenValid())
-                {
+              
                     if (ModelState.IsValid)
                     {
                         AuxSQLModel oAuxSQLModel = new AuxSQLModel();
@@ -223,17 +224,14 @@ namespace FacturacionSAT.CSL.WEB.Controllers
                     }
                     else
                     {
-                        TempData["message"] = "Hubo un error al obtener los datos, contacte con soporte técnico.";
+                        string error = ModelState.Keys.Contains("PreventDuplicateRequest").ToString();
+                        
+                        TempData["message"] = string.IsNullOrEmpty(error) ? "Hubo un error al obtener los datos, contacte con soporte técnico." : error;
                         TempData["typemessage"] = "2";
                         return View(Factura);
                     }
-                }
-                else
-                {
-                    TempData["message"] = "Hubo un error al obtener los datos, contacte con soporte técnico.";
-                    TempData["typemessage"] = "2";
-                    return RedirectToAction("Facturacion", "Home"); ;
-                }
+               
+               
 
                
             }
@@ -304,150 +302,143 @@ namespace FacturacionSAT.CSL.WEB.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
+        [PreventDuplicateRequest]
         public ActionResult Add(FacturacionViewModel Factura)
         {
             try
             {
-                if (Token.IsTokenValid())
+                
+                if (ModelState.IsValid)
                 {
-                    if (ModelState.IsValid)
+                    /*Generales*/
+                    AuxSQLModel oAuxSQLModel = new AuxSQLModel();
+                    oAuxSQLModel.Conexion = Conexion;
+                    oAuxSQLModel.Id_usuario = -1;
+                    /**************************************/
+                    /*paths*/
+                    pathRootSystemHelperSAT = Server.MapPath("~/SystemHelper/SAT");
+                    pathRootSATEmisorXML = Server.MapPath("~/SAT");
+                    pahtRootSATTempFile = Server.MapPath("~/SATTempFile");
+
+                    //string getNameXML = string.Format("Factura-{0:yyyy-MM-dd_hh-mm-ss}.xml", DateTime.Now);
+                    idFile = Guid.NewGuid().ToString();
+                    string getNameXML = idFile + ".xml";
+                    pathXML = pahtRootSATTempFile + "\\" + getNameXML;
+                    string pathCadenaOriginal = pathRootSystemHelperSAT + "\\xslt33\\cadenaoriginal_3_3.xslt";
+                    /**************************************/
+                    /*Obtenemos los datos del emisor*/
+                    CFDIDatosEmisorModels oEmisor = new CFDIDatosEmisorModels();
+                    CFDIDatosEmisorDatos oEmisorDatos = new CFDIDatosEmisorDatos();
+
+
+                    oEmisor = oEmisorDatos.ObtenerDatosEmisorPredeterminado(oAuxSQLModel);
+                    /**************************************/
+                    /*Obtenemos los datos del pac*/
+                    oAuxSQLModel.ResetValuesSQL();
+                    CFDIDatosPacModels oPac = new CFDIDatosPacModels();
+                    CFDIPacDatos oPacDatos = new CFDIPacDatos();
+
+                    oPac = oPacDatos.ObtenerDatosPacPredeterminado(oAuxSQLModel);
+                    /**************************************/
+
+                    //podemos validar el boleto antes por si le dan regresar y no vaya a facturar de nuevo 
+
+                    //if (oAuxSQLModel.Success)
+                    //{
+                    //    throw new Exception(oAuxSQLModel.Mensaje);
+                    //}
+
+                    bool result = GenerarXML(pathRootSATEmisorXML, pathXML, pathCadenaOriginal, oEmisor, Factura, oPac);
+
+                    if (result)
                     {
-                        /*Generales*/
-                        AuxSQLModel oAuxSQLModel = new AuxSQLModel();
-                        oAuxSQLModel.Conexion = Conexion;
-                        oAuxSQLModel.Id_usuario = -1;
-                        /**************************************/
-                        /*paths*/
-                        pathRootSystemHelperSAT = Server.MapPath("~/SystemHelper/SAT");
-                        pathRootSATEmisorXML = Server.MapPath("~/SAT");
-                        pahtRootSATTempFile = Server.MapPath("~/SATTempFile");
-
-                        //string getNameXML = string.Format("Factura-{0:yyyy-MM-dd_hh-mm-ss}.xml", DateTime.Now);
-                        idFile = Guid.NewGuid().ToString();
-                        string getNameXML = idFile + ".xml";
-                        pathXML = pahtRootSATTempFile + "\\" + getNameXML;
-                        string pathCadenaOriginal = pathRootSystemHelperSAT + "\\xslt33\\cadenaoriginal_3_3.xslt";
-                        /**************************************/
-                        /*Obtenemos los datos del emisor*/
-                        CFDIDatosEmisorModels oEmisor = new CFDIDatosEmisorModels();
-                        CFDIDatosEmisorDatos oEmisorDatos = new CFDIDatosEmisorDatos();
-
-
-                        oEmisor = oEmisorDatos.ObtenerDatosEmisorPredeterminado(oAuxSQLModel);
-                        /**************************************/
-                        /*Obtenemos los datos del pac*/
-                        oAuxSQLModel.ResetValuesSQL();
-                        CFDIDatosPacModels oPac = new CFDIDatosPacModels();
-                        CFDIPacDatos oPacDatos = new CFDIPacDatos();
-
-                        oPac = oPacDatos.ObtenerDatosPacPredeterminado(oAuxSQLModel);
-                        /**************************************/
-
-                        //podemos validar el boleto antes por si le dan regresar y no vaya a facturar de nuevo 
-
-                        //if (oAuxSQLModel.Success)
-                        //{
-                        //    throw new Exception(oAuxSQLModel.Mensaje);
-                        //}
-
-                        bool result = GenerarXML(pathRootSATEmisorXML, pathXML, pathCadenaOriginal, oEmisor, Factura, oPac);
-
-                        if (result)
+                        if (System.IO.File.Exists(pathXML))
                         {
-                            if (System.IO.File.Exists(pathXML))
+                            TempData["message"] = "Archivo xml creado con éxito.";
+                            TempData["typemessage"] = "1";
+
+                            Factura.Logotipo = Server.MapPath(oEmisor.Imagen);
+
+                            if (GenerarPDF(Factura))
                             {
-                                TempData["message"] = "Archivo xml creado con éxito.";
-                                TempData["typemessage"] = "1";
+                                TempData["message"] = "Archivo pdf creado con éxito.";
+                                //faltaria enviar al correo
+                                FacturaDatos oFacturaDatos = new FacturaDatos();
+                                oAuxSQLModel.ResetValuesSQL();
+                                oAuxSQLModel.Conexion = Conexion;
+                                Factura.EmailEmisor = oEmisor.Correo;
+                                oFacturaDatos.Factura_Save_Factura(oAuxSQLModel, pathXML, Factura); //guardamos la factura, ya generada
 
-                                Factura.Logotipo = Server.MapPath(oEmisor.Imagen);
+                                List<string> ListaPathArchivos = new List<string>();
 
-                                if (GenerarPDF(Factura))
+                                ListaPathArchivos.Add(pathXML);
+                                ListaPathArchivos.Add(pathHTMLTempFilePDF);
+
+                                if (EnviarFacturaEmail(oEmisor.Correo, oEmisor.Password, Factura.EmailReceptor, ListaPathArchivos))
                                 {
-                                    TempData["message"] = "Archivo pdf creado con éxito.";
-                                    //faltaria enviar al correo
-                                    FacturaDatos oFacturaDatos = new FacturaDatos();
-                                    oAuxSQLModel.ResetValuesSQL();
-                                    oAuxSQLModel.Conexion = Conexion;
-                                    Factura.EmailEmisor = oEmisor.Correo;
-                                    oFacturaDatos.Factura_Save_Factura(oAuxSQLModel, pathXML, Factura); //guardamos la factura, ya generada
-
-                                    List<string> ListaPathArchivos = new List<string>();
-
-                                    ListaPathArchivos.Add(pathXML);
-                                    ListaPathArchivos.Add(pathHTMLTempFilePDF);
-
-                                    if (EnviarFacturaEmail(oEmisor.Correo, oEmisor.Password, Factura.EmailReceptor, ListaPathArchivos))
-                                    {
-                                        TempData["message"] = "Factura enviada a su email, por favor verifique su bandeja.";
-                                        TempData["typemessage"] = "1";
-                                    }
-                                    else
-                                    {
-                                        TempData["message"] = "Hubo un error al enviar la factura a su correo.";
-                                        TempData["typemessage"] = "2";
-                                    }
-
-                                    //borramos los archivos
-                                    if (System.IO.File.Exists(pathXML))
-                                    {
-                                        System.IO.File.Delete(pathXML);
-                                    }
-                                    if (System.IO.File.Exists(pathHTMLTempFilePDF))
-                                    {
-                                        System.IO.File.Delete(pathHTMLTempFilePDF);
-                                    }
-
+                                    TempData["message"] = "Factura enviada a su email, por favor verifique su bandeja.";
+                                    TempData["typemessage"] = "1";
                                 }
                                 else
                                 {
-                                    //borramos los archivos
-                                    if (System.IO.File.Exists(pathXML))
-                                    {
-                                        System.IO.File.Delete(pathXML);
-                                    }
-                                    if (System.IO.File.Exists(pathHTMLTempFilePDF))
-                                    {
-                                        System.IO.File.Delete(pathHTMLTempFilePDF);
-                                    }
+                                    TempData["message"] = "Hubo un error al enviar la factura a su correo.";
+                                    TempData["typemessage"] = "2";
+                                }
+
+                                //borramos los archivos
+                                if (System.IO.File.Exists(pathXML))
+                                {
+                                    System.IO.File.Delete(pathXML);
+                                }
+                                if (System.IO.File.Exists(pathHTMLTempFilePDF))
+                                {
+                                    System.IO.File.Delete(pathHTMLTempFilePDF);
+                                }
+
+                            }
+                            else
+                            {
+                                //borramos los archivos
+                                if (System.IO.File.Exists(pathXML))
+                                {
+                                    System.IO.File.Delete(pathXML);
+                                }
+                                if (System.IO.File.Exists(pathHTMLTempFilePDF))
+                                {
+                                    System.IO.File.Delete(pathHTMLTempFilePDF);
                                 }
                             }
-
-                            return RedirectToAction("Facturacion", "Home");
                         }
-                        else
-                        {
-                            TempData["message"] = "Verifique sus datos";
-                            TempData["typemessage"] = "2";
 
-                            ComboDatos oComboDatos = new ComboDatos();
-                            oAuxSQLModel = new AuxSQLModel();
-                            FacturaDatos oFacturaDatos = new FacturaDatos();
-                            oAuxSQLModel.Conexion = Conexion;
-                            oAuxSQLModel.Id_usuario = Convert.ToInt32(User.Identity.Name);
-                            GetListasSAT(oComboDatos, oAuxSQLModel, Factura.RFCReceptor);
-
-                            return View(Factura);
-                        }
+                        return RedirectToAction("Facturacion", "Home");
                     }
                     else
                     {
+                        TempData["message"] = "Verifique sus datos";
+                        TempData["typemessage"] = "2";
+
                         ComboDatos oComboDatos = new ComboDatos();
-                        AuxSQLModel oAuxSQLModel = new AuxSQLModel();
+                        oAuxSQLModel = new AuxSQLModel();
                         FacturaDatos oFacturaDatos = new FacturaDatos();
                         oAuxSQLModel.Conexion = Conexion;
                         oAuxSQLModel.Id_usuario = Convert.ToInt32(User.Identity.Name);
                         GetListasSAT(oComboDatos, oAuxSQLModel, Factura.RFCReceptor);
+
                         return View(Factura);
                     }
                 }
                 else
                 {
-                    string Mensaje = "Hubo un error al obtener los datos, contacte con soporte técnico.";
-                    TempData["message"] = Mensaje;
-                    TempData["typemessage"] = "2";
-
-                    return RedirectToAction("Facturacion", "Home");
+                    ComboDatos oComboDatos = new ComboDatos();
+                    AuxSQLModel oAuxSQLModel = new AuxSQLModel();
+                    FacturaDatos oFacturaDatos = new FacturaDatos();
+                    oAuxSQLModel.Conexion = Conexion;
+                    oAuxSQLModel.Id_usuario = Convert.ToInt32(User.Identity.Name);
+                    GetListasSAT(oComboDatos, oAuxSQLModel, Factura.RFCReceptor);
+                    return View(Factura);
                 }
+               
             }
             catch (Exception ex)
             {

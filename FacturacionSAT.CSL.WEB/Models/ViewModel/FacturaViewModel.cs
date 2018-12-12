@@ -32,7 +32,7 @@ namespace FacturacionSAT.CSL.WEB.Models.ViewModel
         public decimal PorcentajeIVA { get; set; }
 
         [Required(AllowEmptyStrings = false)]
-        [Display(Name = "Email del receptor")]
+        [Display(Name = "Email")]
         [EmailAddress]
         public string EmailReceptor { get; set; }
 

@@ -9,13 +9,6 @@
     var typemessage = TempData["typemessage"] ?? string.Empty;
 }
 
-<div id="Error" class="progress-bar progress-bar-striped active errorCSL" style="display:none; width:100%">
-    <h3></h3>
-</div>
-<div id="Success" class="progress-bar progress-bar-striped active successCSL" style="display:none; width:100%">
-    <h3></h3>
-</div>
-
 <!--=====================Content======================-->
 <section class="zonafact">
     <div class="title">
@@ -92,15 +85,16 @@
 </section>
 
 <script>
-        var message = '@message';
+        var message = '@Html.Raw(message)';
         var typemessage = '@typemessage';
 </script>
 
 @section script{
     <script>
         jQuery(document).ready(function () {
-            if (typemessage == 1 || typemessage == 2) {
-                alert("@message");
+            if (typemessage == 1 || typemessage == 2)
+            {
+                alert(message);
             }
         });
     </script>

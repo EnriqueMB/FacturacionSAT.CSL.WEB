@@ -20,7 +20,7 @@ namespace FacturacionSAT.CSL.WEB.SystemHelper.SAT
                 {
                     string cadena = "||" + Comprobante.TimbreFiscalDigital.Version.Trim() +
                         "|" + Comprobante.TimbreFiscalDigital.UUID.Trim() +
-                        "|" + Comprobante.TimbreFiscalDigital.FechaTimbrado +
+                        "|" + Comprobante.TimbreFiscalDigital.FechaTimbrado.ToString("yyyy-MM-ddTHH:mm:ss") +
                         "|" + Comprobante.TimbreFiscalDigital.RfcProvCertif.Trim() +
                         "|" + Comprobante.Sello.Trim() +
                         "|" + Comprobante.TimbreFiscalDigital.NoCertificadoSAT.Trim() +

@@ -14,6 +14,15 @@
         .form-control[readonly] {
             color: #000 !important;
         }
+        .validation-summary-valid {
+            display: none;
+        }
+
+        .validation-summary-errors {
+            color: #e80c4d;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
     </style>
 }
 
@@ -33,6 +42,7 @@
 
 <div class="col-md-12">
     <form action="@Url.Content("~/Factura/Add")" method="post" autocomplete="off">
+        @Html.ValidationSummary(false, "Se han generado los siguientes errores:")
         @Html.AntiForgeryToken()
         @Html.HiddenFor(d => d.Version)
         @Html.HiddenFor(d => d.TipoComprobante)
@@ -180,22 +190,21 @@
         <hr />
         <div style="text-align:right ">
             <a id="regresar" href="@Url.Action("Facturacion", "Home")" class="btn btn-danger"><i class="icon-prev"></i>Regresar</a>
-            <input type="submit" class="btn btn-success" value="Generar factura" />
+            <input type="submit" id="btnSubmit" class="btn btn-success" value="Generar factura" />
         </div>
     </form>
 </div>
-
-<script>
-        var message = '@message';
-        var typemessage = '@typemessage';
-</script>
 
 @section script{
     <script type="text/javascript" src="@Url.Content("~/Content/js/plugins/datatables/jquery.dataTables.min.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Content/js/mensajeDeError.js")"></script>
     <script>
         jQuery(document).ready(function () {
-            Mensaje(message, typemessage);
+
+            $('form').on('submit', function () {
+                document.getElementById("btnSubmit").value = "Generando factura, por favor espere...";
+                document.getElementById("btnSubmit").disabled = true;
+            });
 
             var tblProdServ = $("#tblProdServ").DataTable({
                 "language":
@@ -241,7 +250,6 @@
 
             $("#UsoCFDI").on("change", function () {
                 var usoCFDI_Generico = $(this).find("option:selected").text();
-                $("#UsoCFDI_Generico").val(usoCFDI_Generico);
                 $("#UsoCFDI_Generico").val(usoCFDI_Generico);
             });
     });
