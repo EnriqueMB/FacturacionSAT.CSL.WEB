@@ -5,13 +5,13 @@
 
 @section css{
     <style>
-        a {
+        a.redireccionar {
             text-decoration: none;
         }
         /* visited link */
-        a:visited, a:link {
-            color: white;
-        }
+            a.redireccionar:visited, a.redireccionar:link {
+                color: white;
+            }
     </style>
 }
 
@@ -20,7 +20,7 @@
         <ul>
             <li class="factu-zone">
                 <h1>Facturación <span>Viajes Aury</span></h1>
-                <a href="#makeadill">Ir a facturar</a>
+                <a href="#makeadill" class="redireccionar">Ir a facturar</a>
             </li>
         </ul>
     </div>
@@ -32,8 +32,8 @@
         </div>
         <div class="optioncontent">
             <ul>
-                <li><a href="@Url.Action("Facturacion", "Home")">Obtener factura</a></li>
-                <li><a href="@Url.Content("~/Content/pagina/document/infografia-facturacion.size.pdf#zoom=200")">¿Cómo hacer una factura?</a></li>
+                <li><a href="@Url.Action("Facturacion", "Home")" class="redireccionar">Obtener factura</a></li>
+                <li><a href="@Url.Content("~/Content/pagina/document/infografia-facturacion.size.pdf#zoom=200")" class="redireccionar">¿Cómo hacer una factura?</a></li>
             </ul>
         </div>
     </div>

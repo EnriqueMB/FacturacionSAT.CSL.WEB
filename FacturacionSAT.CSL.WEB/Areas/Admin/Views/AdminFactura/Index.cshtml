@@ -8,7 +8,7 @@
 
 @section css
 {
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/css/datatable/jquery.dataTables.min.css")" />
     <style>
         td.details-control {
             background: url("@Url.Content("~/Content/img/details_open.png")") no-repeat center center;
@@ -86,7 +86,7 @@
 
                 <div class="row">
                     <div class="col-md-12">
-                        <table id="dtFacturas" class="table">
+                        <table id="dtFacturas" class="table display">
                             <thead>
                                 <tr>
                                     <th></th>
@@ -98,23 +98,36 @@
                                     <th>Acción</th>
                                 </tr>
                             </thead>
+                            <tbody>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th></th>
+                                    <th>ID</th>
+                                    <th>RFC del cliente</th>
+                                    <th>Código de barra del boleto</th>
+                                    <th>Monto total del boleto ($)</th>
+                                    <th>Fecha de creación</th>
+                                    <th>Acción</th>
+                                </tr>
+                            </tfoot>
                         </table>
                     </div>
                 </div>
             </div>
         </div>
-    
+
     </div>
-        <script>
+    <script>
         var message = '@message';
         var typemessage = '@typemessage';
-        </script>
-    }
+    </script>
+}
 
-    @section script{
-        <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-        <script type="text/javascript" src="@Url.Content("~/Content/js/mensajeDeError.js")"></script>
-        <script>
+@section script{
+    <script type="text/javascript" src="@Url.Content("~/Content/js/plugins/datatables/jquery.dataTables.v1.10.19.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/js/mensajeDeError.js")"></script>
+    <script>
         jQuery(document).ready(function () {
             Mensaje(message, typemessage);
 
@@ -233,6 +246,6 @@
                 return subTabla;
             }
         });
-        </script>
-    }
+    </script>
+}
 

@@ -290,6 +290,7 @@
     <Content Include="Content\css\codemirror\theme\xq-dark.css" />
     <Content Include="Content\css\codemirror\theme\xq-light.css" />
     <Content Include="Content\css\compra.css" />
+    <Content Include="Content\css\datatable\jquery.dataTables.min.css" />
     <Content Include="Content\css\dropzone\dropzone.css" />
     <Content Include="Content\css\fontawesome\font-awesome.min.css" />
     <Content Include="Content\css\fonts\fontawesome-webfont.svg" />
@@ -545,6 +546,7 @@
     <Content Include="Content\js\plugins\datatablesbtn\pdfmake.min.js" />
     <Content Include="Content\js\plugins\datatablesbtn\vfs_fonts.js" />
     <Content Include="Content\js\plugins\datatables\jquery.dataTables.min.js" />
+    <Content Include="Content\js\plugins\datatables\jquery.dataTables.v1.10.19.min.js" />
     <Content Include="Content\js\plugins\daterangepicker\bootstrap-datepicker.es.js" />
     <Content Include="Content\js\plugins\daterangepicker\daterangepicker.js" />
     <Content Include="Content\js\plugins\dropzone\dropzone.min.js" />
