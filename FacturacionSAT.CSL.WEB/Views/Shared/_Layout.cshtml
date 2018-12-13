@@ -76,12 +76,12 @@
         @RenderBody()
     </div>
     <footer>
-        <div class="container_12">
+        <div class="container">
             <div class="row">
-                <div class="grid_12">
+                <div class="footerContent">
                     <a href="#" onclick="goToByScroll('top'); return false;" class="top"></a><br> <a href="@Url.Action("Index","Home")" class="f_logo"><img src="@Url.Content("~/Content/img/logo.png")" alt=""></a>
                     <div class="footer_socials">
-                        <a href="https://www.facebook.com/ViajesAuryOficial/" class="fa fa-facebook" target="_blank"></a>
+                        <a href="https://www.facebook.com/ViajesAuryOficial/" target="_blank"><i class="fab fa-facebook"></i></a>
                     </div>
                     <div class="copy">
                         <span class="brand">Viajes Aury </span>  &copy; <span id="copyright-year"></span>  | <a href="#">Politica de Privacidad</a>
@@ -99,6 +99,8 @@
     <script type="text/javascript" src="@Url.Content("~/Content/js/demo_tables.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Content/js/plugins/datatables/jquery.dataTables.min.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Content/js/mensajeDeError.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/pagina/js/fontawesome-all.js")"></script>
+    
 
     @RenderSection("script", required: false)
 

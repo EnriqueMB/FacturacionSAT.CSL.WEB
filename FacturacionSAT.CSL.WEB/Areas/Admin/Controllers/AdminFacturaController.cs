@@ -39,7 +39,7 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
 
         //reimpresion
         [HttpGet]
-        public ActionResult Reimprimir(int? id, string codigoBarra)
+        public ActionResult Reimpresion(int? id, string codigoBarra)
         {
             try
             {
@@ -138,6 +138,8 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
+        [PreventDuplicateRequest]
         public ActionResult Reimpresion(FacturacionViewModel Factura)
         {
             try
@@ -414,6 +416,8 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
+        [PreventDuplicateRequest]
         public ActionResult Add(FacturacionViewModel Factura)
         {
             try
@@ -430,7 +434,6 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
                     pathRootSATEmisorXML = Server.MapPath("~/SAT");
                     pahtRootSATTempFile = Server.MapPath("~/SATTempFile");
 
-                    //string getNameXML = string.Format("Factura-{0:yyyy-MM-dd_hh-mm-ss}.xml", DateTime.Now);
                     idFile = Guid.NewGuid().ToString();
                     string getNameXML =  idFile + ".xml";
                     pathXML = pahtRootSATTempFile + "\\" + getNameXML;
@@ -451,13 +454,6 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
                     oPac = oPacDatos.ObtenerDatosPacPredeterminado(oAuxSQLModel);
                     /**************************************/
                     
-                    //podemos validar el boleto antes por si le dan regresar y no vaya a facturar de nuevo 
-
-                    //if (oAuxSQLModel.Success)
-                    //{
-                    //    throw new Exception(oAuxSQLModel.Mensaje);
-                    //}
-
                     bool result = GenerarXML(pathRootSATEmisorXML, pathXML, pathCadenaOriginal, oEmisor, Factura, oPac);
 
                     if (result)
@@ -532,7 +528,15 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
                 }
                 else
                 {
-                    return RedirectToAction("Index");
+                    ComboDatos oComboDatos = new ComboDatos();
+                    AuxSQLModel oAuxSQLModel = new AuxSQLModel();
+                    FacturaDatos oFacturaDatos = new FacturaDatos();
+                    oAuxSQLModel.Conexion = Conexion;
+                    oAuxSQLModel.Id_usuario = Convert.ToInt32(User.Identity.Name);
+
+                    GetListasSAT(oComboDatos, oAuxSQLModel, Factura.RFCReceptor);
+
+                    return View(Factura);
                 }
             }
             catch (Exception ex)
@@ -558,8 +562,8 @@ namespace FacturacionSAT.CSL.WEB.Areas.Admin.Controllers
         {
             try
             {
-                string pathKey = pathRootSATEmisorXML + "\\" + Emisor.URLArchivoKEY;
-                string pathCer = pathRootSATEmisorXML + "\\" + Emisor.URLArchivoCER;
+                string pathKey = Server.MapPath(Emisor.URLArchivoKEY);
+                string pathCer = Server.MapPath(Emisor.URLArchivoCER);
                 string clavePrivada = Emisor.PasswordArchivoKEY;
 
                 Factura.NombreEmisor = Emisor.RazonSocial;

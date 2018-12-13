@@ -331,7 +331,6 @@ namespace FacturacionSAT.CSL.WEB.Controllers
                     CFDIDatosEmisorModels oEmisor = new CFDIDatosEmisorModels();
                     CFDIDatosEmisorDatos oEmisorDatos = new CFDIDatosEmisorDatos();
 
-
                     oEmisor = oEmisorDatos.ObtenerDatosEmisorPredeterminado(oAuxSQLModel);
                     /**************************************/
                     /*Obtenemos los datos del pac*/
@@ -341,13 +340,6 @@ namespace FacturacionSAT.CSL.WEB.Controllers
 
                     oPac = oPacDatos.ObtenerDatosPacPredeterminado(oAuxSQLModel);
                     /**************************************/
-
-                    //podemos validar el boleto antes por si le dan regresar y no vaya a facturar de nuevo 
-
-                    //if (oAuxSQLModel.Success)
-                    //{
-                    //    throw new Exception(oAuxSQLModel.Mensaje);
-                    //}
 
                     bool result = GenerarXML(pathRootSATEmisorXML, pathXML, pathCadenaOriginal, oEmisor, Factura, oPac);
 
@@ -422,7 +414,7 @@ namespace FacturacionSAT.CSL.WEB.Controllers
                         oAuxSQLModel = new AuxSQLModel();
                         FacturaDatos oFacturaDatos = new FacturaDatos();
                         oAuxSQLModel.Conexion = Conexion;
-                        oAuxSQLModel.Id_usuario = Convert.ToInt32(User.Identity.Name);
+                        oAuxSQLModel.Id_usuario = -1;
                         GetListasSAT(oComboDatos, oAuxSQLModel, Factura.RFCReceptor);
 
                         return View(Factura);
@@ -434,7 +426,7 @@ namespace FacturacionSAT.CSL.WEB.Controllers
                     AuxSQLModel oAuxSQLModel = new AuxSQLModel();
                     FacturaDatos oFacturaDatos = new FacturaDatos();
                     oAuxSQLModel.Conexion = Conexion;
-                    oAuxSQLModel.Id_usuario = Convert.ToInt32(User.Identity.Name);
+                    oAuxSQLModel.Id_usuario = -1;
                     GetListasSAT(oComboDatos, oAuxSQLModel, Factura.RFCReceptor);
                     return View(Factura);
                 }
@@ -464,8 +456,8 @@ namespace FacturacionSAT.CSL.WEB.Controllers
         {
             try
             {
-                string pathKey = pathRootSATEmisorXML + "\\" + Emisor.URLArchivoKEY;
-                string pathCer = pathRootSATEmisorXML + "\\" + Emisor.URLArchivoCER;
+                string pathKey = Server.MapPath(Emisor.URLArchivoKEY);
+                string pathCer = Server.MapPath(Emisor.URLArchivoCER);
                 string clavePrivada = Emisor.PasswordArchivoKEY;
 
                 Factura.NombreEmisor = Emisor.RazonSocial;

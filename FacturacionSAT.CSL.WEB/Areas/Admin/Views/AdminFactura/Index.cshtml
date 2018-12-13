@@ -19,6 +19,14 @@
             background: url("@Url.Content("~/Content/img/details_close.png")") no-repeat center center;
         }
 
+        .page-container .page-content {
+            height: 100% !important;
+        }
+
+        .dataTables_length {
+          padding: 0px 0px 11px !important;
+        }
+
     </style>
 }
 
@@ -36,72 +44,77 @@
     <div id="Success" class="progress-bar progress-bar-striped active successCSL" style="display:none; width:100%">
         <h3></h3>
     </div>
+    <div class="page-content-wrap">
 
-    <div class="row">
-        <div class="col-md-12">
-            <div class="well well-sm">
-                @using (Html.BeginForm("Index", "AdminFactura", FormMethod.Post, new { @class = "form-horizontal", id = "form-dg", autocomplete = "off", @enctype = "multipart/form-data" }))
-                {
-                    @Html.AntiForgeryToken()
-                    <fieldset>
-                        <!-- Form Name -->
-                        <legend>FACTURACIÓN</legend>
-                        <!-- Text input-->
-                        <div class="control-group">
-                            @Html.LabelFor(m => m.RFCReceptor)
-                            @Html.TextBoxFor(m => m.RFCReceptor, "", new { @class = "form-control" })
-                            @Html.ValidationMessage("RFCReceptor", new { @class = "text-danger" })
-                        </div>
-                        <!-- Text input-->
-                        <div class="control-group">
-                            @Html.LabelFor(m => m.CodigoBarra)
-                            @Html.TextBoxFor(m => m.CodigoBarra, "", new { @class = "form-control" })
-                            @Html.ValidationMessage("CodigoBarra", new { @class = "text-danger" })
-                        </div>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="well well-sm">
+                            @using (Html.BeginForm("Index", "AdminFactura", FormMethod.Post, new { @class = "form-horizontal", id = "form-dg", autocomplete = "off", @enctype = "multipart/form-data" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                <fieldset>
+                                    <!-- Form Name -->
+                                    <legend>FACTURACIÓN</legend>
+                                    <!-- Text input-->
+                                    <div class="control-group">
+                                        @Html.LabelFor(m => m.RFCReceptor)
+                                        @Html.TextBoxFor(m => m.RFCReceptor, "", new { @class = "form-control" })
+                                        @Html.ValidationMessage("RFCReceptor", new { @class = "text-danger" })
+                                    </div>
+                                    <!-- Text input-->
+                                    <div class="control-group">
+                                        @Html.LabelFor(m => m.CodigoBarra)
+                                        @Html.TextBoxFor(m => m.CodigoBarra, "", new { @class = "form-control" })
+                                        @Html.ValidationMessage("CodigoBarra", new { @class = "text-danger" })
+                                    </div>
 
-                        <br />
-                        <!-- Button -->
-                        <div class="control-group">
-                            <label class="control-label" for="send"></label>
-                            <div class="controls">
-                                <button id="send" name="send" class="btn btn-primary">Enviar</button>
-                            </div>
+                                    <br />
+                                    <!-- Button -->
+                                    <div class="control-group">
+                                        <label class="control-label" for="send"></label>
+                                        <div class="controls">
+                                            <button id="send" name="send" class="btn btn-primary">Enviar</button>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            }
                         </div>
-                    </fieldset>
-                }
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <table id="dtFacturas" class="table">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>ID</th>
+                                    <th>RFC del cliente</th>
+                                    <th>Código de barra del boleto</th>
+                                    <th>Monto total del boleto ($)</th>
+                                    <th>Fecha de creación</th>
+                                    <th>Acción</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
+    
     </div>
-
-    <div class="row">
-        <div class="col-md-12">
-            <table id="dtFacturas" class="table">
-                <thead>
-                    <tr>
-                        <th></th>
-                        <th>ID</th>
-                        <th>RFC del cliente</th>
-                        <th>Código de barra del boleto</th>
-                        <th>Monto total del boleto ($)</th>
-                        <th>Fecha de creación</th>
-                        <th>Acción</th>
-                    </tr>
-                </thead>
-            </table>
-        </div>
-    </div>
-
-
-    <script>
+        <script>
         var message = '@message';
         var typemessage = '@typemessage';
-    </script>
-}
+        </script>
+    }
 
-@section script{
-    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" src="@Url.Content("~/Content/js/mensajeDeError.js")"></script>
-    <script>
+    @section script{
+        <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+        <script type="text/javascript" src="@Url.Content("~/Content/js/mensajeDeError.js")"></script>
+        <script>
         jQuery(document).ready(function () {
             Mensaje(message, typemessage);
 
@@ -163,7 +176,7 @@
                         var id = $(this).data("id");
                         var cb = $(this).data("cb");
 
-                        window.location.href = '/Admin/AdminFactura/Reimprimir?id=' + id + '&codigoBarra=' + cb;
+                        window.location.href = '/Admin/AdminFactura/Reimpresion?id=' + id + '&codigoBarra=' + cb;
                     });
                 },
                 ajax: {
@@ -220,6 +233,6 @@
                 return subTabla;
             }
         });
-    </script>
-}
+        </script>
+    }
 

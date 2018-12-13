@@ -29,150 +29,168 @@
     var message = TempData["message"] ?? string.Empty;
     var typemessage = TempData["typemessage"] ?? string.Empty;
 }
+    <div class="container_fluid">
+        <div class="col-md-12">
+            <form action="@Url.Content("~/Factura/Reimpresion")" class="reimpresionForm" method="post" autocomplete="off">
+                @Html.ValidationSummary(false, "Se han generado los siguientes errores:")
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(d => d.Id_factura)
+                @Html.HiddenFor(d => d.Version)
+                @Html.HiddenFor(d => d.TipoComprobante)
+                @Html.HiddenFor(d => d.TipoComprobante_Generico)
+                @Html.HiddenFor(d => d.Moneda_Generico)
+                @Html.HiddenFor(d => d.Moneda)
+                @Html.HiddenFor(d => d.Version)
+                @Html.HiddenFor(d => d.Subtotal)
+                @Html.HiddenFor(d => d.TotalDescuento)
+                @Html.HiddenFor(d => d.Total)
+                @Html.HiddenFor(d => d.LugarExpedicion)
+                @Html.HiddenFor(d => d.CodigoBarraBoleto)
+                @Html.HiddenFor(d => d.UsoCFDI_Generico)
+                @Html.HiddenFor(d => d.UsoCFDI)
+                @Html.HiddenFor(d => d.FormaDePago)
+                @Html.HiddenFor(d => d.RegimenFiscal)
 
-<div class="col-md-12">
-    <form action="@Url.Content("~/Factura/Reimpresion")" method="post" autocomplete="off">
-        @Html.ValidationSummary(false, "Se han generado los siguientes errores:")
-        @Html.AntiForgeryToken()
-        @Html.HiddenFor(d => d.Id_factura)
-        @Html.HiddenFor(d => d.Version)
-        @Html.HiddenFor(d => d.TipoComprobante)
-        @Html.HiddenFor(d => d.TipoComprobante_Generico)
-        @Html.HiddenFor(d => d.Moneda_Generico)
-        @Html.HiddenFor(d => d.Moneda)
-        @Html.HiddenFor(d => d.Version)
-        @Html.HiddenFor(d => d.Subtotal)
-        @Html.HiddenFor(d => d.TotalDescuento)
-        @Html.HiddenFor(d => d.Total)
-        @Html.HiddenFor(d => d.LugarExpedicion)
-        @Html.HiddenFor(d => d.CodigoBarraBoleto)
-        @Html.HiddenFor(d => d.UsoCFDI_Generico)
-        @Html.HiddenFor(d => d.UsoCFDI)
-        @Html.HiddenFor(d => d.FormaDePago)
-        @Html.HiddenFor(d => d.RegimenFiscal)
+                @for (int i = 0; i < Model.Conceptos.Count; i++)
+                {
+                    @Html.HiddenFor(d => d.Conceptos[i].Cantidad)
+                    @Html.HiddenFor(d => d.Conceptos[i].ClaveProducto)
+                    @Html.HiddenFor(d => d.Conceptos[i].ClaveProducto_Generico)
+                    @Html.HiddenFor(d => d.Conceptos[i].ClaveUnidad)
+                    @Html.HiddenFor(d => d.Conceptos[i].ClaveUnidad_Generico)
+                    @Html.HiddenFor(d => d.Conceptos[i].CuentaPredial)
+                    @Html.HiddenFor(d => d.Conceptos[i].Descripcion)
+                    @Html.HiddenFor(d => d.Conceptos[i].Descuento)
+                    @Html.HiddenFor(d => d.Conceptos[i].PrecioUnitario)
+                    @Html.HiddenFor(d => d.Conceptos[i].Unidad)
 
-        @for (int i = 0; i < Model.Conceptos.Count; i++)
-        {
-            @Html.HiddenFor(d => d.Conceptos[i].Cantidad)
-            @Html.HiddenFor(d => d.Conceptos[i].ClaveProducto)
-            @Html.HiddenFor(d => d.Conceptos[i].ClaveProducto_Generico)
-            @Html.HiddenFor(d => d.Conceptos[i].ClaveUnidad)
-            @Html.HiddenFor(d => d.Conceptos[i].ClaveUnidad_Generico)
-            @Html.HiddenFor(d => d.Conceptos[i].CuentaPredial)
-            @Html.HiddenFor(d => d.Conceptos[i].Descripcion)
-            @Html.HiddenFor(d => d.Conceptos[i].Descuento)
-            @Html.HiddenFor(d => d.Conceptos[i].PrecioUnitario)
-            @Html.HiddenFor(d => d.Conceptos[i].Unidad)
-
-            for (int x = 0; x < Model.Conceptos[i].Impuestos.Count; x++)
-            {
-                @Html.HiddenFor(d => d.Conceptos[i].Impuestos[x].TipoFactor)
-                @Html.HiddenFor(d => d.Conceptos[i].Impuestos[x].Importe)
-                @Html.HiddenFor(d => d.Conceptos[i].Impuestos[x].Nombre)
-                @Html.HiddenFor(d => d.Conceptos[i].Impuestos[x].TasaOCuota)
-                @Html.HiddenFor(d => d.Conceptos[i].Impuestos[x].Clave_Impuesto)
-            }
-        }
-
-
-        <div class="row">
-            <div class="col-md-4">
-                @Html.LabelFor(d => d.Folio)
-                @Html.TextBoxFor(d => d.Folio, "", new { @class = "form-control", @readonly = "true" })
-                @Html.ValidationMessage("Folio", new { @class = "text-danger" })
-
-                @Html.LabelFor(d => d.TipoComprobante)
-                @Html.TextBoxFor(d => d.TipoComprobante_Generico, "", new { @class = "form-control", @readonly = "true" })
-                @Html.ValidationMessage("TipoComprobante", new { @class = "text-danger" })
-
-
-                @Html.LabelFor(d => d.UsoCFDI)
-                @Html.TextBoxFor(d => d.UsoCFDI_Generico, "", new { @class = "form-control", @readonly = "true" })
-                @Html.ValidationMessage("UsoCFDI", new { @class = "text-danger" })
-            </div>
-            <div class="col-md-4">
-                @Html.LabelFor(d => d.FormaDePago)
-                @Html.TextBoxFor(d => d.FormaDePago_Generico, "", new { @class = "form-control", @readonly = "true" })
-                @Html.ValidationMessage("FormaDePago", new { @class = "text-danger" })
-
-                @Html.LabelFor(d => d.Fecha)
-                @Html.TextBoxFor(d => d.Fecha, "{0:yyyy/MM/dd HH:mm:ss}", new { @class = "form-control", @readonly = "true" })
-                @Html.ValidationMessage("Fecha", new { @class = "text-danger" })
-            </div>
-            <div class="col-md-4">
-                @Html.LabelFor(d => d.Moneda)
-                @Html.TextBoxFor(d => d.Moneda_Generico, "", new { @class = "form-control", @readonly = "true" })
-                @Html.ValidationMessage("Moneda", new { @class = "text-danger" })
-
-                @Html.LabelFor(d => d.RegimenFiscal)
-                @Html.TextBoxFor(d => d.RegimenFiscal_Generico, "", new { @class = "form-control", @readonly = "true" })
-                @Html.ValidationMessage("RegimenFiscal", new { @class = "text-danger" })
-            </div>
-        </div>
-        <br />
-        <hr />
-        <h5>Datos del cliente</h5>
-        <div class="row">
-            <div class="col-md-4">
-                @Html.LabelFor(d => d.RFCReceptor)
-                @Html.TextBoxFor(d => d.RFCReceptor, "", new { @class = "form-control", @readonly = "true" })
-                @Html.ValidationMessage("RFCReceptor", new { @class = "text-danger" })
-            </div>
-            <div class="col-md-4">
-                @Html.LabelFor(d => d.RazonSocial)
-                @Html.TextBoxFor(d => d.RazonSocial, "", new { @class = "form-control", @readonly = "true" })
-                @Html.ValidationMessage("RazonSocial", new { @class = "text-danger" })
-            </div>
-            <div class="col-md-4">
-                @Html.LabelFor(d => d.EmailReceptor)
-                @Html.TextBoxFor(d => d.EmailReceptor, "", new { @class = "form-control" })
-                @Html.ValidationMessage("EmailReceptor", new { @class = "text-danger" })
-            </div>
-        </div>
-        <br />
-        <hr />
-        <h5>Productos / Servicios</h5>
-        <div class="row">
-            <table id="tblProdServ" class="table">
-                <thead>
-                    <tr>
-                        <th> Cantidad </th>
-                        <th> Descripción </th>
-                        <th> Producto / Servicio </th>
-                        <th> Unidad de medida </th>
-                        <th> Precio unitario </th>
-                        <th> Nombre del impuesto </th>
-                        <th> Porcentaje del impuesto </th>
-                        <th> Importe del impuesto </th>
-                        <th> Total </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model.Conceptos)
+                    for (int x = 0; x < Model.Conceptos[i].Impuestos.Count; x++)
                     {
-                        <tr>
-                            <td> @item.Cantidad  </td>
-                            <td> @item.Descripcion </td>
-                            <td> @item.ClaveProducto_Generico </td>
-                            <td> @item.ClaveUnidad_Generico </td>
-                            <td> @item.PrecioUnitario </td>
-                            <td> @item.Impuestos[0].Nombre  </td>
-                            <td> @item.Impuestos[0].TasaOCuota</td>
-                            <td> @item.Impuestos[0].Importe  </td>
-                            <td> @(item.PrecioUnitario + @item.Impuestos[0].Importe)</td>
-                        </tr>
+                        @Html.HiddenFor(d => d.Conceptos[i].Impuestos[x].TipoFactor)
+                        @Html.HiddenFor(d => d.Conceptos[i].Impuestos[x].Importe)
+                        @Html.HiddenFor(d => d.Conceptos[i].Impuestos[x].Nombre)
+                        @Html.HiddenFor(d => d.Conceptos[i].Impuestos[x].TasaOCuota)
+                        @Html.HiddenFor(d => d.Conceptos[i].Impuestos[x].Clave_Impuesto)
                     }
-                </tbody>
-            </table>
+                }
+
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="inputContent">
+                            @Html.LabelFor(d => d.Folio)
+                            @Html.TextBoxFor(d => d.Folio, "", new { @class = "form-control", @readonly = "true" })
+                            @Html.ValidationMessage("Folio", new { @class = "text-danger" })
+                        </div>
+                        <div class="inputContent">
+                            @Html.LabelFor(d => d.TipoComprobante)
+                            @Html.TextBoxFor(d => d.TipoComprobante_Generico, "", new { @class = "form-control", @readonly = "true" })
+                            @Html.ValidationMessage("TipoComprobante", new { @class = "text-danger" })
+                        </div>
+                        <div class="inputContent">
+                            @Html.LabelFor(d => d.UsoCFDI)
+                            @Html.TextBoxFor(d => d.UsoCFDI_Generico, "", new { @class = "form-control", @readonly = "true" })
+                            @Html.ValidationMessage("UsoCFDI", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="inputContent">
+                            @Html.LabelFor(d => d.FormaDePago)
+                            @Html.TextBoxFor(d => d.FormaDePago_Generico, "", new { @class = "form-control", @readonly = "true" })
+                            @Html.ValidationMessage("FormaDePago", new { @class = "text-danger" })
+                        </div>
+                        <div class="inputContent">
+                            @Html.LabelFor(d => d.Fecha)
+                            @Html.TextBoxFor(d => d.Fecha, "{0:yyyy/MM/dd HH:mm:ss}", new { @class = "form-control", @readonly = "true" })
+                            @Html.ValidationMessage("Fecha", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="inputContent">
+                            @Html.LabelFor(d => d.Moneda)
+                            @Html.TextBoxFor(d => d.Moneda_Generico, "", new { @class = "form-control", @readonly = "true" })
+                            @Html.ValidationMessage("Moneda", new { @class = "text-danger" })
+                        </div>
+                        <div class="inputContent">
+                            @Html.LabelFor(d => d.RegimenFiscal)
+                            @Html.TextBoxFor(d => d.RegimenFiscal_Generico, "", new { @class = "form-control", @readonly = "true" })
+                            @Html.ValidationMessage("RegimenFiscal", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <hr />
+                <h5 class="tituloForm">Datos del cliente</h5>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="inputContent">
+                            @Html.LabelFor(d => d.RFCReceptor)
+                            @Html.TextBoxFor(d => d.RFCReceptor, "", new { @class = "form-control", @readonly = "true" })
+                            @Html.ValidationMessage("RFCReceptor", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="inputContent">
+                            @Html.LabelFor(d => d.RazonSocial)
+                            @Html.TextBoxFor(d => d.RazonSocial, "", new { @class = "form-control", @readonly = "true" })
+                            @Html.ValidationMessage("RazonSocial", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="inputContent">
+                            @Html.LabelFor(d => d.EmailReceptor)
+                            @Html.TextBoxFor(d => d.EmailReceptor, "", new { @class = "form-control" })
+                            @Html.ValidationMessage("EmailReceptor", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <hr />
+                <h5 class="tituloForm">Productos / Servicios</h5>
+                <div class="row">
+                    <div class="table-responsive">
+                        <table id="tblProdServ" class="table">
+                            <thead>
+                                <tr>
+                                    <th> Cantidad </th>
+                                    <th> Descripción </th>
+                                    <th> Producto / Servicio </th>
+                                    <th> Unidad de medida </th>
+                                    <th> Precio unitario </th>
+                                    <th> Nombre del impuesto </th>
+                                    <th> Porcentaje del impuesto </th>
+                                    <th> Importe del impuesto </th>
+                                    <th> Total </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.Conceptos)
+                                {
+                                    <tr>
+                                        <td> @item.Cantidad  </td>
+                                        <td> @item.Descripcion </td>
+                                        <td> @item.ClaveProducto_Generico </td>
+                                        <td> @item.ClaveUnidad_Generico </td>
+                                        <td> @item.PrecioUnitario </td>
+                                        <td> @item.Impuestos[0].Nombre  </td>
+                                        <td> @item.Impuestos[0].TasaOCuota</td>
+                                        <td> @item.Impuestos[0].Importe  </td>
+                                        <td> @(item.PrecioUnitario + @item.Impuestos[0].Importe)</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <br />
+                <hr />
+                <div style="text-align:center ">
+                    <a id="regresar" href="@Url.Action("Facturacion", "Home")" class="btn btn-danger formCancel"><i class="icon-prev"></i>Regresar</a>
+                    <input id="btnSubmit" type="submit" class="btn btn-success formOk" value="Enviar factura por email" />
+                </div>
+            </form>
         </div>
-        <br />
-        <hr />
-        <div style="text-align:right ">
-            <a id="regresar" href="@Url.Action("Facturacion", "Home")" class="btn btn-danger"><i class="icon-prev"></i>Regresar</a>
-            <input id="btnSubmit" type="submit" class="btn btn-success" value="Enviar factura por email" />
-        </div>
-    </form>
-</div>
+    </div>
 
 @section script{
     <script type="text/javascript" src="@Url.Content("~/Content/js/plugins/datatables/jquery.dataTables.min.js")"></script>

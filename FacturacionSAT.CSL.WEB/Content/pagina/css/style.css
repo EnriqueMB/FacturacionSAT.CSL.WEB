@@ -1,7 +1,5 @@
 @import "grid.css";
-@import "reset.css";
-@import "font-awesome.css";
-@import "superfish.css";
+
 
 @import url(//fonts.googleapis.com/css?family=Dosis:400);
 @import url(//fonts.googleapis.com/css?family=Dosis:700);
@@ -708,6 +706,7 @@ div#menu-conte-2 nav ul li a:hover {
 }
 
 .titulo-secciones {
+    font-family: 'Dosis',sans-serif;
 background: rgba(26,26,26,1);
 background: -moz-linear-gradient(left, rgba(26,26,26,1) 0%, rgba(51,51,51,1) 51%, rgba(26,26,26,1) 100%);
 background: -webkit-gradient(left top, right top, color-stop(0%, rgba(26,26,26,1)), color-stop(51%, rgba(51,51,51,1)), color-stop(100%, rgba(26,26,26,1)));
@@ -1082,3 +1081,110 @@ div#politicas ol {
 }
 
 /* END ADDED CLASSES */
+
+
+/* ADDED CLASES 12/12/2018 */
+
+.reimpresionForm {
+    padding: 2%;
+}
+.reimpresionForm label{
+    font-family: 'Dosis', sans-serif;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 20px;
+}
+    .reimpresionForm .inputContent{
+        margin: 2% 0%;
+    }
+    .reimpresionForm .tituloForm {
+        color: #fff;
+        font-weight: bold;
+        font-size: 25px;
+        text-transform: uppercase;
+        background-color: rgb(248, 57, 23);
+        padding: 1% 0%;
+        font-family: 'Dosis', sans-serif;
+        width: 30%;
+        display: block;
+        margin: auto;
+        text-align: center;
+        margin-bottom: 2%;
+        border-radius: 5px;
+    }
+    .reimpresionForm .btn {
+        text-transform: uppercase;
+        font-family: 'Dosis', sans-serif;
+        padding: 1% 1%;
+        color: #fff;
+        border-radius: 2px;
+        transition: ease all 0.2s;
+    }
+    .reimpresionForm .btn:hover{
+        transform: translateY(-5px);
+        box-shadow: 0px 1px 10px 1px rgba(0,0,0,0.5);
+    }
+    .reimpresionForm .formCancel {
+        background-color: rgb(248, 57, 23);
+    }
+    .reimpresionForm .formOk{
+        background-color: #15b427;
+    }
+    #tblProdServ {
+        margin-top: 2%;
+    }
+    #tblProdServ thead {
+        font-family: 'Dosis',sans-serif;
+        text-align: center;
+        vertical-align: middle;
+    }
+    #tblProdServ tbody{
+        text-align: center;
+        vertical-align: middle;
+    }
+    #tblProdServ tbody td{
+        transition: ease all 0.2s;
+        
+    }
+        #tblProdServ tbody tr {
+            border-top: 1px solid #ccc;
+            border-bottom: 1px solid #ccc;
+        }
+        #tblProdServ tbody td:hover {
+            cursor: pointer;
+            transform: scale(1.1);
+            background-color: #e2e2e2;
+            transform-origin: center;
+        }
+    }
+.reimpresionForm span .paginate_button {
+    background: rgba(248, 57, 23, 0.3) !important;
+    font-family: 'Dosis',sans-serif;
+    text-align: center;
+    border-radius: 5px;
+    color: #fff !important;
+    font-weight: bold;
+}
+    .reimpresionForm span .paginate_button.current {
+        background: rgb(248, 57, 23) !important;
+        color: #fff !important;
+        border: none !important;
+    }
+
+.footer_socials a{
+    font-size: 75px;
+}
+footer{
+    width: 100%;
+}
+.footerContent{
+    display: block;
+    margin: auto;
+    width: 100%;
+}
+@media only screen and (max-width: 600px) and (min-width: 300px) {
+    .reimpresionForm .tituloForm {
+        width: 90% !important;
+    }
+}
+/* END ADDED CLASSES*/

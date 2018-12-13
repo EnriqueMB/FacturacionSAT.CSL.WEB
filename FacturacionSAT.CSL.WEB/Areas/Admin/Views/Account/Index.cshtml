@@ -22,13 +22,13 @@
                     @*<form action="index.html" class="form-horizontal" method="post">*@
                     <div class="form-group">
                         <div class="col-md-12">
-                            @Html.TextBoxFor(model => model.user, new { @class = "form-control", placeholder = "Usuario" })
+                            @Html.TextBoxFor(model => model.user, new { @class = "form-control", placeholder = "Usuario", style = " color:white " })
                             @Html.ValidationMessageFor(model => model.user)
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-md-12">
-                            @Html.PasswordFor(model => model.Password, new { @class = "form-control", placeholder = "Contraseña" })
+                            @Html.PasswordFor(model => model.Password, new { @class = "form-control", placeholder = "Contraseña", style = " color:white " })
                             @Html.ValidationMessageFor(model => model.Password)
                         </div>
                     </div>

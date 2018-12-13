@@ -12,6 +12,19 @@
         .form-control[readonly] {
             color: #000 !important;
         }
+        .validation-summary-valid {
+            display: none;
+        }
+
+        .validation-summary-errors {
+            color: #e80c4d;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        .page-container .page-content {
+            height: 100% !important;
+        }
     </style>
 }
 @section featured
@@ -23,15 +36,14 @@
         var typemessage = TempData["typemessage"] ?? string.Empty;
     }
 
-    <div id="Error" class="progress-bar progress-bar-striped active errorCSL" style="display:none; width:100%">
-        <h3></h3>
-    </div>
-    <div id="Success" class="progress-bar progress-bar-striped active successCSL" style="display:none; width:100%">
-        <h3></h3>
-    </div>
-
     <div class="col-md-12">
-        <form action="@Url.Content("~/AdminFactura/Reimpresion")" method="post" autocomplete="off">
+        <form action="@Url.Content("~/Admin/AdminFactura/Reimpresion")" method="post" autocomplete="off">
+            @{
+                Html.EnableClientValidation(false);
+                Html.EnableUnobtrusiveJavaScript(false);
+            }
+            @Html.ValidationSummary(false, "Se han generado los siguientes errores:")
+            @Html.AntiForgeryToken()
             @Html.HiddenFor(d => d.Id_factura)
             @Html.HiddenFor(d => d.Version)
             @Html.HiddenFor(d => d.TipoComprobante)
@@ -167,22 +179,22 @@
             <hr />
             <div style="text-align:right ">
                 <a id="regresar" href="@Url.Action("Index", "AdminFactura")" class="btn btn-danger"><i class="icon-prev"></i>Regresar</a>
-                <input type="submit" class="btn btn-success" value="Enviar factura por email" />
+                <input type="submit" id="btnSubmit" class="btn btn-success" value="Enviar factura por email" />
             </div>
         </form>
     </div>
 
-    <script>
-        var message = '@message';
-        var typemessage = '@typemessage';
-    </script>
 }
     @section script{
         <script type="text/javascript" src="@Url.Content("~/Content/js/plugins/datatables/jquery.dataTables.min.js")"></script>
         <script type="text/javascript" src="@Url.Content("~/Content/js/mensajeDeError.js")"></script>
         <script>
         jQuery(document).ready(function () {
-            Mensaje(message, typemessage);
+           
+            $('form').on('submit', function () {
+                document.getElementById("btnSubmit").value = "Enviando email, por favor espere...";
+                document.getElementById("btnSubmit").disabled = true;
+            });
 
             var tblProdServ = $("#tblProdServ").DataTable({
                 "language":
