@@ -37,7 +37,7 @@
     }
 
     <div class="col-md-12">
-        <form action="@Url.Content("~/Admin/AdminFactura/Reimpresion")" method="post" autocomplete="off">
+        <form action="@Url.Content("~/Admin/AdminFactura/Reimpresion")" class="reimpresionForm" method="post" autocomplete="off">
             @{
                 Html.EnableClientValidation(false);
                 Html.EnableUnobtrusiveJavaScript(false);
@@ -121,7 +121,7 @@
             </div>
             <br />
             <hr />
-            <h5>Datos del cliente</h5>
+            <h5 class="tituloForm">Datos del cliente</h5>
             <div class="row">
                 <div class="col-md-4">
                     @Html.LabelFor(d => d.RFCReceptor)
@@ -141,7 +141,7 @@
             </div>
             <br />
             <hr />
-            <h5>Productos / Servicios</h5>
+            <h5 class="tituloForm">Productos / Servicios</h5>
             <div class="row">
                 <table id="tblProdServ" class="table">
                     <thead>
@@ -178,8 +178,8 @@
             <br />
             <hr />
             <div style="text-align:right ">
-                <a id="regresar" href="@Url.Action("Index", "AdminFactura")" class="btn btn-danger"><i class="icon-prev"></i>Regresar</a>
-                <input type="submit" id="btnSubmit" class="btn btn-success" value="Enviar factura por email" />
+                <a id="regresar" href="@Url.Action("Index", "AdminFactura")" class="btn btn-danger formCancel"><i class="icon-prev"></i>Regresar</a>
+                <input type="submit" id="btnSubmit" class="btn btn-success formOk" value="Enviar factura por email" />
             </div>
         </form>
     </div>
