@@ -151,6 +151,7 @@
                             <th> Producto / Servicio </th>
                             <th> Unidad de medida </th>
                             <th> Precio unitario </th>
+                            <th> Descuento del boleto </th>
                             <th> Nombre del impuesto </th>
                             <th> Porcentaje del impuesto </th>
                             <th> Importe del impuesto </th>
@@ -166,10 +167,11 @@
                                 <td> @item.ClaveProducto_Generico </td>
                                 <td> @item.ClaveUnidad_Generico </td>
                                 <td> @item.PrecioUnitario </td>
+                                <td> @item.Descuento </td>
                                 <td> @item.Impuestos[0].Nombre  </td>
                                 <td> @item.Impuestos[0].TasaOCuota</td>
                                 <td> @item.Impuestos[0].Importe  </td>
-                                <td> @(item.PrecioUnitario + @item.Impuestos[0].Importe)</td>
+                                <td> @(item.PrecioUnitario + @item.Impuestos[0].Importe - item.Descuento)</td>
                             </tr>
                         }
                     </tbody>
@@ -215,7 +217,11 @@
                            var value = '$ ' + row[4].replace(',', '.');
                            return value;
                        }
-                   },
+                    },
+                    {
+                        "targets": [5],
+                        render: $.fn.dataTable.render.number(',', '.', 2, '$')
+                    },
                    {
                        "targets": [6],
                        render: function (data, type, row) {
@@ -232,9 +238,18 @@
                    },
                    {
                        "targets": [8],
-                       render: $.fn.dataTable.render.number(',', '.', 2, '$')
+                       render: function (data, type, row) {
+                           var value = '$ ' + row[8].replace(',', '.');
+                           return value;
+                       }
 
-                   }
+                    }
+                    ,
+                    {
+                        "targets": [9],
+                        render: $.fn.dataTable.render.number(',', '.', 2, '$')
+
+                    }
                ]
             });
     });

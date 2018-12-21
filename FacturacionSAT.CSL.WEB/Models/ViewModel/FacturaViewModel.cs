@@ -47,6 +47,7 @@ namespace FacturacionSAT.CSL.WEB.Models.ViewModel
         public string RFCEmisor { get; set; }
 
         public string NombreEmisor { get; set; }
+        [Display(Name = "Regimen Fiscal")]
         public string RegimenFiscal { get; set; }
         public string RegimenFiscal_Generico { get; set; }
 

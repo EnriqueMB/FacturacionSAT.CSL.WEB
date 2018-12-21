@@ -96,6 +96,7 @@ namespace FacturacionSAT.CSL.WEB.Controllers
                             oFactura.Conceptos[i].Impuestos[0].Importe = oComprobante.Conceptos[i].Impuestos.Traslados[0].Importe;
                             oFactura.Conceptos[i].Impuestos[0].Clave_Impuesto = oComprobante.Conceptos[i].Impuestos.Traslados[0].Impuesto;
                             oFactura.Conceptos[i].Impuestos[0].TipoFactor = oComprobante.Conceptos[i].Impuestos.Traslados[0].TipoFactor;
+                            oFactura.Conceptos[i].Descuento = oComprobante.Conceptos[i].Descuento;
                         }
                         return View(oFactura);
                     }
